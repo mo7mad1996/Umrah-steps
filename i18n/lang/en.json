@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "hotels": "Hotels",
+    "contact": "Contact",
+    "services": "Our Services"
+  },
+  "home": {
+    "title": "Home",
+    "subtitle": "Your faithful companion on the Hajj and Umrah journey",
+    "description": "We provide the best transportation services and hotel bookings for pilgrims with the highest standards of quality and comfort",
+
+    "swiper": {
+      "headline": "Explore Stays, About Comfort, Your Stay, Our Priority",
+      "about_us": "Khatwat Al-Mu'tamir is a trusted platform connecting travelers with top hotels across the country",
+      "explore_card": "Explore the perfect destination for comfort, relaxation, and luxury. Where hospitality meets excellence in every stay."
+    },
+
+    "hotels": {
+      "title": "Explore Best Hotels",
+      "description": "Best hotels at competitive prices close to the Holy Mosques"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Our mission is serving the guests of Allah",
+    "description": "Khatwat Al-Mu'tamir is a leading company in Hajj and Umrah services, striving to provide the best services to pilgrims through a specialized team with extensive experience in this field.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To facilitate the Hajj and Umrah journey and provide distinguished services worthy of Allah's guests"
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To be the first choice for pilgrims in the Kingdom of Saudi Arabia"
+    }
+  },
+  "hotels": {
+    "title": "Hotels",
+    "subtitle": "Choose from the best hotels",
+    "search": "Search for hotel",
+    "book": "Book Now",
+    "rating": "Rating",
+    "distance": "Distance from Haram"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are here to serve you",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours"
+    }
+  },
+  "footer": {
+    "description": "Khatwat Al-Mu'tamir - Your faithful companion on the Hajj and Umrah journey",
+    "rights": "All rights reserved"
+  },
+
+  "dashboard": {
+    "destination": "Destination",
+    "arrival_date": "Arrival Date",
+    "return_date": "Return Date",
+    "number_of_people": "Number of People",
+    "number_of_rooms": "Number of Rooms"
+  },
+
+  "$vuetify": {
+    "datePicker": {
+      "header": "Select Date",
+      "title": "Select Date",
+      "ariaLabel": {
+        "selectYear": "Select year",
+        "previousMonth": "Previous month",
+        "nextMonth": "Next month",
+        "selectDate": "Select date",
+        "currentDate": "Today"
+      }
+    }
+  },
+
+  "site_name": "Khatwat Al-Mu'tamir",
+  "select": "Select one",
+  "save": "Save",
+  "more": "More",
+  "search": "Search",
+  "no_data": "No Data Found"
+}

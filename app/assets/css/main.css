@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+.font-cairo {
+  font-family: Cairo, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.blockScrollX {
+  overflow-x: hidden !important;
+}
