@@ -7,6 +7,8 @@
 
     <v-main class="bg-neutral-50 dark:!bg-zinc-950">
       <slot />
+
+      <LayoutFooter />
     </v-main>
   </v-app>
 </template>
