@@ -10,6 +10,7 @@
           <NuxtImg
             src="/logo/horizontal.png"
             height="60"
+            class="h-16"
             :alt="$t('site_name')"
           />
         </NuxtLink>
