@@ -282,7 +282,7 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const showBackToTop = ref(false);
 
 const scrollToTop = () => {
