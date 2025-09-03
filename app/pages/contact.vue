@@ -219,7 +219,7 @@
 </template>
 
 <script setup>
-const { initMap, addMarker } = useGoogleMaps();
+// const { initMap, addMarker } = useGoogleMaps();
 
 const form = ref({
   name: "",
@@ -268,17 +268,16 @@ const submitForm = async () => {
 
 onMounted(async () => {
   // Initialize contact map
-  const makkahCenter = { lat: 21.4225, lng: 39.8262 };
-  const map = await initMap("contact-map", makkahCenter, 13);
-
-  if (map) {
-    addMarker(map, makkahCenter, "خطوات المعتمر - مكة المكرمة");
-  }
+  // const makkahCenter = { lat: 21.4225, lng: 39.8262 };
+  // const map = await initMap("contact-map", makkahCenter, 13);
+  // if (map) {
+  //   addMarker(map, makkahCenter, "خطوات المعتمر - مكة المكرمة");
+  // }
 });
 
 // SEO
 useHead({
-  title: "اتصل بنا - خطوات المعتمر",
+  title: "اتصل بنا",
   meta: [
     {
       name: "description",

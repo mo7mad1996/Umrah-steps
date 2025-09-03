@@ -11,6 +11,7 @@ export default {
     "./nuxt.config.{js,ts}",
     "./app/*.vue",
   ],
+
   theme: {
     extend: {
       transitionDuration: {

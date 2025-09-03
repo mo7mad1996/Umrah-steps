@@ -29,5 +29,8 @@
     "vue-router": "^4.5.1",
     "vue-tel-input": "^9.5.0",
     "vuetify-nuxt-module": "^0.18.7"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.91.0"
   }
 }

@@ -25,13 +25,10 @@
               '!h-1/2 bg-white/2 p-3 backdrop-blur-lg ': active,
             }"
           >
-          <div class="hue-rotate-90">
-
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam
             officia magnam qui accusantium laboriosam, dolores voluptatem
             inventore in amet ullam harum repellendus quo aliquam aperiam. Ipsum
             expedita dicta adipisci nihil.
-          </div>
           </p>
         </div>
       </div>

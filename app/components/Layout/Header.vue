@@ -1,7 +1,7 @@
 <template>
   <div class="fixed w-full z-50">
     <header
-      class="container ltr:bg-gradient-to-tr backdrop-blur-sm rtl:bg-gradient-to-tl from-goldContrast dark:from-goldContrast-dark to-primary/80 mx-auto dark:to-primary-dark my-4 p-2 rounded-lg shadow-xl transition-colors duration-300"
+      class="container ltr:bg-gradient-to-tr backdrop-blur-sm rtl:bg-gradient-to-tl from-goldContrast to-primary/80 mx-auto dark:!to-primary-dark dark:!from-amber-950 my-4 p-2 rounded-lg shadow-xl transition-colors duration-300"
     >
       <div
         class="flex gap-5 items-stretch justify-between ltr:flex-row-reverse"
@@ -20,7 +20,7 @@
               <NuxtLink
                 :to="link.to"
                 :title="link.title"
-                exactActiveClass="!text-yellow-300  after:w-full font-bold "
+                exactActiveClass="!text-yellow-300   after:w-full font-bold "
                 class="text-white px-4 flex flex-col gap-1 items-center justify-center py-1 h-full hover:!text-yellow-300 after:w-0 after:h-1 after:bg-yellow-300 after:block after:absolute relative after:bottom-0 after:rounded-t-full after:transition-all after:duration-0-300"
               >
                 {{ $t(link.title) }}
