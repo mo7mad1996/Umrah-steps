@@ -3,7 +3,7 @@
     <div class="relative">
       <NuxtImg
         :src="src"
-        class="mask w-screen h-screen object-cover object-center"
+        class="mask w-screen min-h-96 h-screen object-cover object-center"
       />
     </div>
   </div>
@@ -17,6 +17,6 @@ defineProps<{
 
 <style lang="scss" scoped>
 .mask {
-  mask-image: linear-gradient(black, transparent 50%);
+  mask-image: linear-gradient(black 150px, transparent 600px);
 }
 </style>

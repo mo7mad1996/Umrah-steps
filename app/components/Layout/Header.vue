@@ -34,17 +34,17 @@
           variant="plain"
           class="text-white has-[ul]:!overflow-x-visible has-[ul]:!overflow-y-visible !h-auto ltr:flex-row-reverse"
         >
-          <v-btn @click="dark = !!((+dark + 1) % 2)">
+          <v-btn @click="dark = !dark">
             <transition name="dark">
               <Icon
-                class="text-2xl"
-                name="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"
                 v-if="dark"
+                class="text-2xl"
+                name="line-md:sunny-filled-loop-to-moon-filled-loop-transition"
               ></Icon>
               <Icon
-                class="text-2xl"
-                name="line-md:moon-filled-to-sunny-filled-transition"
                 v-else
+                name="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
+                class="text-2xl"
               ></Icon>
             </transition>
           </v-btn>

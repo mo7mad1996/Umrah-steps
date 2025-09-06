@@ -1,5 +1,5 @@
 <template>
-  <main class="pb-12 p-4">
+  <main class="">
     <PagesHomeHero />
     <PagesHomeSwiper />
     <PagesHomeHotels />

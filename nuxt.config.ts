@@ -5,6 +5,11 @@ export default defineNuxtConfig({
 
   vite: {
     mode: "development",
+    server: {
+      hmr: {
+        timeout: 40,
+      },
+    },
   },
   css: ["~/assets/css/main.css"],
 

@@ -1,10 +1,12 @@
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <LayoutPageBorders>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </LayoutPageBorders>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { localeProperties, locale, t } = useI18n();
 
 watch(
