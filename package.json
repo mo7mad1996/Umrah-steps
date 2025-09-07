@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "engines": {
-    "node": ">=22.0.0"
+    "node": "22.x"
   },
   "type": "module",
   "private": true,
@@ -36,6 +36,9 @@
   "devDependencies": {
     "@iconify-json/line-md": "^1.2.11",
     "@iconify-json/lucide": "^1.2.66",
+    "@iconify-json/material-symbols": "^1.2.34",
+    "i": "^0.3.7",
+    "npm": "^11.6.0",
     "sass-embedded": "^1.91.0"
   }
 }

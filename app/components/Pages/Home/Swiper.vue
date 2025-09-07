@@ -38,7 +38,6 @@
           :modules="[Navigation]"
           :autoplay="true"
           ref="swiperRef"
-          :space-between="30"
           :slides-per-view="2"
           @slideChange="swiperRef?.updateSlides"
           @swiper="onSwiper"

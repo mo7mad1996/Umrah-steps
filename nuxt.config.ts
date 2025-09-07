@@ -64,7 +64,7 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "موقع خطوات المعتمر يقدم خدمات التوصيل وحجز الفنادق للحجاج والمعتمرين",
+            "موقع حجوزات المعتمر يقدم خدمات التوصيل وحجز الفنادق للمعتمرين",
         },
         {
           name: "google-site-verification",

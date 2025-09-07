@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="data"
-    class="flex flex-col transition-all duration-300"
+    class="flex flex-col transition-all duration-300 p-1"
     :style="{ scale }"
   >
     <GlobalHotelsItem :hotel="data" />

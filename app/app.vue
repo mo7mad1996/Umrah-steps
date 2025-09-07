@@ -22,6 +22,6 @@ watch(
         [title, t("site_name")].filter((i) => i).join(" ⁘ "),
     });
   },
-  { immediate: true }
+  { immediate: true , }
 );
 </script>

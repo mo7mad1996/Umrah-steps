@@ -271,7 +271,7 @@ onMounted(async () => {
   // const makkahCenter = { lat: 21.4225, lng: 39.8262 };
   // const map = await initMap("contact-map", makkahCenter, 13);
   // if (map) {
-  //   addMarker(map, makkahCenter, "خطوات المعتمر - مكة المكرمة");
+  //   addMarker(map, makkahCenter, "حجوزات المعتمر - مكة المكرمة");
   // }
 });
 
@@ -281,7 +281,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "تواصل مع فريق خطوات المعتمر للاستفسار عن خدمات الحج والعمرة",
+      content: "تواصل مع فريق حجوزات المعتمر للاستفسار عن خدمات الحج والعمرة",
     },
   ],
 });
