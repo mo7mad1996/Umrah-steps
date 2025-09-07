@@ -4,35 +4,7 @@
     class="flex flex-col transition-all duration-300"
     :style="{ scale }"
   >
-    <div class="rounded-3xl overflow-hidden flex-1 relative">
-      <NuxtImg
-        class="w-full block object-cover transition-all duration-500 h-96"
-        :src="data.img"
-        :alt="data.name[locale]"
-      />
-
-      <div class="absolute top-0 inset-0 p-4">
-        <div class="flex justify-between flex-col h-full">
-          <h2
-            class="backdrop-blur-md px-4 py-2 w-fit rounded-full text-harmony1-dark bg-white/20 border !border-harmony1-dark border-opacity-100"
-          >
-            {{ data.name[locale] }}
-          </h2>
-
-          <p
-            class="h-0 transition-all duration-500 overflow-hidden text-lg font-bold"
-            :class="{
-              '!h-1/2 bg-white/2 p-3 backdrop-blur-lg ': active,
-            }"
-          >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam
-            officia magnam qui accusantium laboriosam, dolores voluptatem
-            inventore in amet ullam harum repellendus quo aliquam aperiam. Ipsum
-            expedita dicta adipisci nihil.
-          </p>
-        </div>
-      </div>
-    </div>
+    <GlobalHotelsItem :hotel="data" />
   </div>
 </template>
 
@@ -74,6 +46,7 @@ swiper.value.on("afterInit", forceScale);
 // swiper.value.on("slideNextTransitionEnd", forceScale);
 
 const data = {
+  id:1,
   img: "https://tomschneider.co.uk/cdn/shop/files/Dune_Bed_large_walnut_DU0601_orbitbedside_tables_tom_schneider_4_1600x.jpg",
   name: {
     ar: "فندق المسافر",

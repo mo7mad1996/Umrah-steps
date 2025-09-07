@@ -5,11 +5,6 @@ export default defineNuxtConfig({
 
   vite: {
     mode: "development",
-    server: {
-      hmr: {
-        timeout: 40,
-      },
-    },
   },
   css: ["~/assets/css/main.css"],
 
@@ -70,6 +65,10 @@ export default defineNuxtConfig({
           name: "description",
           content:
             "موقع خطوات المعتمر يقدم خدمات التوصيل وحجز الفنادق للحجاج والمعتمرين",
+        },
+        {
+          name: "google-site-verification",
+          content: "luNweKGQ9McJMXvwDKrRjTYa1MM3t6NQfqNq7FpMsG",
         },
       ],
       link: [

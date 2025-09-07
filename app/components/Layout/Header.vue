@@ -6,6 +6,7 @@
       <div
         class="flex gap-5 items-stretch justify-between ltr:flex-row-reverse"
       >
+        <!-- this is a comment -->
         <NuxtLink to="/" class="block">
           <NuxtImg
             src="/logo/horizontal.png"
@@ -72,6 +73,7 @@
         </v-btn-group>
       </div>
     </header>
+    {{ x }}
   </div>
 </template>
 
@@ -83,11 +85,13 @@ const links = [
   { to: "/about", title: "nav.about" },
   { to: "/contact", title: "nav.contact" },
 ];
+let x = 1;
 
+// this is comment
 const locale = ref(l.value);
 const changeLang = ({ value }: any) => setLocale(value);
 
-const dark = useCookie("dark", {
+const dark = useCookie<boolean>("dark", {
   default: () => false,
   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 356), // 1 year
 });

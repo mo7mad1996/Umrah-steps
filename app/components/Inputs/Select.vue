@@ -16,7 +16,7 @@
                 v-if="selected"
                 class="dark:!text-white text-black font-semibold"
               >
-                {{ mappedList.find((i) => i.value == selected)?.title }}
+                {{ mappedList.find((i) => JSON.stringify(i.value) == JSON.stringify(selected))?.title }}
               </span>
               <span v-else class="text-gray-400">
                 {{ placeholder || $t("select") }}
