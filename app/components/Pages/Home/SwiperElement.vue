@@ -10,15 +10,20 @@
 
 <script setup lang="ts">
 import type { Swiper } from "swiper/types";
+import type { Hotel } from "~/types/Hotel";
 import { useSwiperSlide, useSwiper } from "swiper/vue";
-const { locale } = useI18n();
 
+// config
+const { locale } = useI18n();
+const props = defineProps<{ data: Hotel }>();
 const swiper = useSwiper();
 const slide = useSwiperSlide();
-const scale = ref(0.8);
 
+// data
+const scale = ref(0.8);
 const active = computed(() => scale.value > 0.8);
 
+// methods
 const changeScale = (c: Swiper) => {
   const { isNext, isActive, isPrev, isVisible } = slide.value;
 
@@ -34,29 +39,10 @@ const forceScale = () => {
   if (isActive) scale.value = 1;
   else scale.value = 0.8;
 };
+
+// events
 swiper.value.on("slideNextTransitionStart", changeScale);
 swiper.value.on("slidePrevTransitionStart", changeScale);
-// swiper.value.on("beforeSlideChangeStart", changeScale);
-// swiper.value.on("navigationShow", changeScale);
 
-// swiper.value.on("activeIndexChange", forceScale);
-// swiper.value.on("init", forceScale);
 swiper.value.on("afterInit", forceScale);
-// swiper.value.on("slidePrevTransitionEnd", forceScale);
-// swiper.value.on("slideNextTransitionEnd", forceScale);
-
-const data = {
-  id:1,
-  img: "https://tomschneider.co.uk/cdn/shop/files/Dune_Bed_large_walnut_DU0601_orbitbedside_tables_tom_schneider_4_1600x.jpg",
-  name: {
-    ar: "فندق المسافر",
-    en: "Travel hotel",
-  },
-  location: {
-    name: {
-      ar: "مصر",
-      en: "Egypt",
-    },
-  },
-};
 </script>

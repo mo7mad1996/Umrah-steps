@@ -73,7 +73,6 @@
         </v-btn-group>
       </div>
     </header>
-    {{ x }}
   </div>
 </template>
 
@@ -85,9 +84,7 @@ const links = [
   { to: "/about", title: "nav.about" },
   { to: "/contact", title: "nav.contact" },
 ];
-let x = 1;
 
-// this is comment
 const locale = ref(l.value);
 const changeLang = ({ value }: any) => setLocale(value);
 
@@ -101,6 +98,7 @@ const dark = useCookie<boolean>("dark", {
 .dark-enter-active,
 .dark-leave-active {
   transition: 0.5s ease !important;
+
   @apply h-full absolute;
 }
 

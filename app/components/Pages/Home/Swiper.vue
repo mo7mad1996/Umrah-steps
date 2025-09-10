@@ -16,9 +16,7 @@
           to="/about"
           class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white my-28 flex items-center p-px"
         >
-          <div class="px-5 text-xl">
-            {{ $t("more") }}
-          </div>
+          <div class="px-5 text-xl">{{ $t("more") }}</div>
 
           <span
             class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-3xl"
@@ -31,6 +29,7 @@
         </NuxtLink>
       </div>
 
+      <!-- swiper -->
       <div class="col-span-2">
         <Swiper
           :dir="localeProperties.dir"
@@ -47,25 +46,12 @@
           }"
           :loop="true"
         >
-          <SwiperSlide v-for="n in 5" :key="n">
-            <PagesHomeSwiperElement />
+          <SwiperSlide v-for="(hotel, n) in hotels" :key="n">
+            <PagesHomeSwiperElement :data="hotel" />
           </SwiperSlide>
         </Swiper>
-        <!-- 
-          effect="creative"
-         :creative-effect="{
-            limitProgress: 2,
-            perspective: true,
-            prev: {
-              translate: ['-200%', 0, 0],
-              scale: 1.2,
-            },
-            next: {
-              translate: ['100%', 0, 0],
-              scale: 0.7,
-            },
-          }"
-           -->
+
+        <!-- buttons -->
         <div
           class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2"
         >
@@ -87,18 +73,24 @@
 </template>
 
 <script setup lang="ts">
+import type { Swiper as SwiperType } from "swiper/types";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import type { Swiper as SwiperType } from "swiper/types";
 
+// setup
 const { locale, localeProperties } = useI18n();
+const { data: hotels } = useHotels(5);
+
+// data
 const swiperRef = ref<SwiperType>();
 
+// methods
 const onSwiper = (swiper: SwiperType) => {
   swiperRef.value = swiper;
 };
 
+// watch
 watch(
   locale,
   () => {
@@ -107,8 +99,6 @@ watch(
     swiperRef.value?.updateSlidesClasses();
     swiperRef.value?.update();
   },
-  {
-    immediate: true,
-  }
+  { immediate: true }
 );
 </script>

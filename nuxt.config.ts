@@ -86,4 +86,12 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
+  runtimeConfig: {
+    baseUrl: process.env.NUXT_API_URL,
+    db_uri: process.env.NUXT_DB_URI,
+
+    public: {
+      baseUrl: process.env.NUXT_API_URL,
+    },
+  },
 });
