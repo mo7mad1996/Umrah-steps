@@ -66,8 +66,8 @@
             prevEl: '.prev2',
           }"
         >
-          <SwiperSlide v-for="n in 15" :key="n">
-            <PagesHomeHotelsElement />
+          <SwiperSlide v-for="(hotel, n) in hotels" :key="n">
+            <GlobalHotelsItem :hotel="hotel" />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -92,12 +92,14 @@
 </template>
 
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation } from "swiper/modules";
-import { Form } from "vee-validate";
-import type { Swiper as SwiperType } from "swiper/types";
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation } from "swiper/modules"
+import { Form } from "vee-validate"
+import type { Swiper as SwiperType } from "swiper/types"
 
-const { localeProperties } = useI18n();
-const swiperRef = ref<SwiperType>();
-const onSwiper = (s: SwiperType) => (swiperRef.value = s);
+const { data: hotels } = useHotels()
+
+const { localeProperties } = useI18n()
+const swiperRef = ref<SwiperType>()
+const onSwiper = (s: SwiperType) => (swiperRef.value = s)
 </script>

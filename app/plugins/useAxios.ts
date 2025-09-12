@@ -1,13 +1,14 @@
-import axios from "axios";
+import axios from "axios"
 
 export default defineNuxtPlugin(() => {
   // env
-  const { baseUrl, icon } = useRuntimeConfig();
-  console.log(baseUrl, icon);
-  const api = axios.create({
-    baseURL: baseUrl,
-    headers: {},
-  });
+  const config = useRuntimeConfig()
 
-  return { provide: { axios: api } };
-});
+  const api = axios.create({
+    baseURL: config.baseUrl ?? config.public.baseUrl,
+    headers: {},
+  })
+
+  return { provide: { axios: api } }
+})
+

@@ -1,6 +1,6 @@
 export type Query = {
-  page?: number;
-  per_page?: number;
-  includs?: string;
-  query?: string;
-};
+  page?: number
+  per_page?: number
+  includes?: string
+  query?: string
+}

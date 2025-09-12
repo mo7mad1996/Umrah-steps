@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const { localeProperties, locale, t } = useI18n();
+const { localeProperties, locale, t } = useI18n()
 
 watch(
   locale,
@@ -20,8 +20,23 @@ watch(
       },
       titleTemplate: (title) =>
         [title, t("site_name")].filter((i) => i).join(" ⁘ "),
-    });
+    })
   },
-  { immediate: true , }
-);
+  { immediate: true }
+)
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s;
+}
+.page-enter-from {
+  opacity: 0.4;
+  transform: perspective(1000px) translateZ(50px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: perspective(1000px) translateZ(-50px);
+}
+</style>
