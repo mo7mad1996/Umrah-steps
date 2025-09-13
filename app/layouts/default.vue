@@ -5,14 +5,16 @@
   <LayoutHeader />
   <v-app class="font-cairo" :theme="dark ? 'dark' : 'light'" :class="{ dark }">
     <div>
-      <v-main class="bg-neutral-50 dark:!bg-zinc-950">
-        <slot />
+      <v-main class="bg-neutral-50 dark:!bg-zinc-950 min-h-dvh flex flex-col">
+        <div class="flex-1">
+          <slot />
+        </div>
+        <LayoutFooter />
       </v-main>
-      <LayoutFooter />
     </div>
   </v-app>
 </template>
 
 <script setup>
-const dark = useCookie("dark");
+const dark = useCookie("dark")
 </script>

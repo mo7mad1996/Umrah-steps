@@ -1,5 +1,5 @@
 <template>
-  <section class="text-white py-24 mt-20 relative">
+  <section class="text-black dark:text-white py-24 mt-20 relative">
     <div class="container mx-auto px-6">
       <div class="text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">
@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  title: string;
-  subTitle?: string;
-}>();
+  title: string
+  subTitle?: string
+}>()
 </script>

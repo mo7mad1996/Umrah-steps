@@ -20,7 +20,7 @@
 
       <!-- Star Rating -->
       <InputsSelect
-        v-model="filters.rating"
+        v-model="filters.rate"
         :items="[
           { value: [0, 5], title: 'لا يشترط' },
           { value: [3, 5], title: '3 نجوم فأكثر' },
@@ -64,11 +64,10 @@
 <script setup lang="ts">
 const props = defineProps<{
   filters: {
-    price: number[];
-    rating: number[];
-    distance: number[];
-
-    viewMode: "list" | "grid";
-  };
-}>();
+    price: number[]
+    rate: number[]
+    distance: number[]
+    viewMode: "list" | "grid"
+  }
+}>()
 </script>

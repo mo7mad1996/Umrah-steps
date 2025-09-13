@@ -11,12 +11,12 @@
 
 <script setup lang="ts">
 defineProps<{
-  src: string;
-}>();
+  src: string
+}>()
 </script>
 
 <style lang="scss" scoped>
 .mask {
-  mask-image: linear-gradient(black 150px, transparent 600px);
+  mask-image: linear-gradient(#000000b3 150px, transparent 600px);
 }
 </style>

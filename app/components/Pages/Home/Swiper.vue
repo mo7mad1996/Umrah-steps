@@ -2,7 +2,15 @@
   <div class="container mx-auto">
     <h1 class="text-6xl text-center my-32">{{ $t("home.swiper.headline") }}</h1>
 
-    <section class="grid grid-cols-3">
+    <div class="flex gap-4 col-span-2" v-if="status == 'pending'">
+      <div
+        class="bg-gray-300 animate-pulse h-full flex-1 rounded-3xl"
+        v-for="n in 3"
+        :key="n"
+      ></div>
+    </div>
+
+    <section class="grid grid-cols-2 md:grid-cols-3" v-if="status == 'success'">
       <div class="px-4">
         <div class="border px-6 py-2 rounded-full text-sm w-fit">
           {{ $t("nav.about") }}
@@ -30,21 +38,25 @@
       </div>
 
       <!-- swiper -->
-      <div class="col-span-2">
+      <div class="md:col-span-2">
         <Swiper
+          class="items-stretch"
+          auto-height
           :dir="localeProperties.dir"
           :key="localeProperties.dir"
           :modules="[Navigation]"
           :autoplay="true"
           ref="swiperRef"
-          :slides-per-view="2"
-          @slideChange="swiperRef?.updateSlides"
           @swiper="onSwiper"
+          :breakpoints="{
+            640: { slidesPerView: Math.min(length, 1) }, // sm
+            768: { slidesPerView: Math.min(length, 2) }, // md
+          }"
           :navigation="{
             nextEl: '.next',
             prevEl: '.prev',
           }"
-          :loop="true"
+          :loop="length > 2"
         >
           <SwiperSlide v-for="(hotel, n) in hotels" :key="n">
             <PagesHomeSwiperElement :data="hotel" />
@@ -68,37 +80,55 @@
         </div>
       </div>
     </section>
+
+    <GlobalError
+      class="col-span-2"
+      :error="error"
+      :status="status"
+      :refresh="refresh"
+    />
     <hr class="container mx-auto my-20" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Swiper as SwiperType } from "swiper/types";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
+import type { Swiper as SwiperType } from "swiper/types"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation } from "swiper/modules"
+import "swiper/css"
 
 // setup
-const { locale, localeProperties } = useI18n();
-const { data: hotels } = useHotels(5);
+const { locale, localeProperties } = useI18n()
+const { data: hotels, status, error, refresh } = useHotels(5)
 
 // data
-const swiperRef = ref<SwiperType>();
+const swiperRef = ref<SwiperType>()
+const length = computed(() => hotels.value?.length || 0)
 
 // methods
 const onSwiper = (swiper: SwiperType) => {
-  swiperRef.value = swiper;
-};
+  swiperRef.value = swiper
 
+  update()
+}
+
+const update = () => {
+  swiperRef.value?.navigation?.init()
+  swiperRef.value?.navigation?.update()
+  swiperRef.value?.updateSlidesClasses()
+  swiperRef.value?.updateSlides()
+  swiperRef.value?.update()
+}
+
+onMounted(update)
 // watch
 watch(
   locale,
   () => {
-    if (!swiperRef.value?.updateSlides) return;
-    swiperRef.value?.updateSlides();
-    swiperRef.value?.updateSlidesClasses();
-    swiperRef.value?.update();
+    if (!swiperRef.value?.updateSlides) return
+
+    update()
   },
   { immediate: true }
-);
+)
 </script>

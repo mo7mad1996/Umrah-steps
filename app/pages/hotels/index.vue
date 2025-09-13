@@ -174,10 +174,10 @@
 <script setup lang="ts">
 const filters = reactive({
   price: [0, Infinity],
-  rating: [0, 5],
+  rate: [0, 5],
   distance: [0, Infinity],
   viewMode: "grid" as "list" | "grid",
-});
+})
 
 // Sample hotel data
 const hotels = ref([
@@ -202,7 +202,7 @@ const hotels = ref([
     image: "https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg",
     features: ["أسعار اقتصادية", "نظافة عالية", "خدمة ودودة"],
   },
-]);
+])
 
 // SEO
 useHead({
@@ -215,7 +215,7 @@ useHead({
         "اكتشف أفضل الفنادق في مكة المكرمة والمدينة المنورة مع حجوزات المعتمر",
     },
   ],
-});
+})
 </script>
 
 <style scoped>

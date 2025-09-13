@@ -2,10 +2,12 @@ import { Query } from "~/types/Query"
 import { HotelService } from "../services/hotel"
 import { Hotel_DB_Schema } from "~/types/hotel"
 
+const hotelService = new HotelService()
+
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery<Query>(event)
-    const hotelService = new HotelService()
+    const cookies = parseCookies(event)
 
     switch (event.method) {
       case "GET":
@@ -17,12 +19,11 @@ export default defineEventHandler(async (event) => {
 
       default:
         throw createError({
-          message: "method is not allow.",
+          message: "method is not allowed.",
           status: 405,
         })
     }
-  } catch (err) {
-    console.error(err)
+  } catch (err: any) {
     return err
   }
 })

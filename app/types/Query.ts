@@ -2,5 +2,6 @@ export type Query = {
   page?: number
   per_page?: number
   includes?: string
-  query?: string
+  query?: any
+  lang?: string
 }

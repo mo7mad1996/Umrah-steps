@@ -5,7 +5,7 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
 
   const api = axios.create({
-    baseURL: config.baseUrl ?? config.public.baseUrl,
+    baseURL: config.public.baseUrl,
     headers: {},
   })
 

@@ -8,7 +8,7 @@
       class="object-cover w-full h-full absolute inset-0"
     />
 
-    <div class="block rounded-3xl relative">
+    <div class="block rounded-3xl relative flex-1">
       <div
         class="flex justify-between items-center py-3 px-5 text-2xl"
         @click.prevent
@@ -54,34 +54,35 @@
     <div
       class="relative transition-all translate-y-full group-hover:translate-y-0 bg-white backdrop-blur-sm custume-br"
     >
-      <h3 v-if="hotel.name">{{ hotel.name }}</h3>
-      <p class="p-8" v-if="hotel.description">{{ hotel.description }}</p>
+      <h3 v-if="hotel.name" class="px-8 py-2 text-2xl">{{ hotel.name }}</h3>
+      <p class="px-8 py-2 opacity-70" v-if="hotel.description">
+        {{ hotel.description }}
+      </p>
     </div>
   </NuxtLink>
 </template>
 
 <script lang="ts" setup>
-import type { Hotel } from "~/types/Hotel";
+import type { Hotel } from "~/types/hotel"
 
-const props = defineProps<{
-  hotel: Hotel;
-}>();
+const props = defineProps<{ hotel: Hotel }>()
 
 const is_fav = computed({
   set(v: boolean) {
-    if (v) favorites.value.unshift(props.hotel.id);
-    else favorites.value = favorites.value.filter((i) => (i = !props.hotel.id));
+    if (v) favorites.value.unshift(props.hotel.id)
+    else favorites.value = favorites.value.filter((i) => (i = !props.hotel.id))
   },
 
   get() {
-    return favorites.value.includes(props.hotel.id);
+    return favorites.value.includes(props.hotel.id)
   },
-});
+})
 const favorites = useCookie<any[]>("favourite", {
   default() {
-    return [];
+    return []
   },
-});
+  maxAge: 60 * 60 * 24 * 365, // 1 year
+})
 </script>
 
 <style scoped lang="scss">

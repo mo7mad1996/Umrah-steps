@@ -42,51 +42,52 @@
       </div>
 
       <!-- slider -->
+      <template v-if="status == 'success'">
+        <div class="mt-12">
+          <Swiper
+            v-if="status == 'success'"
+            :dir="localeProperties.dir"
+            :key="localeProperties.dir"
+            :modules="[Navigation]"
+            :autoplay="true"
+            :slides-per-view="Math.min(length, 2)"
+            :slides-per-group="1"
+            :breakpoints="{
+              640: { slidesPerView: Math.min(length, 1) }, // sm
+              768: { slidesPerView: Math.min(length, 2) }, // md
+              1024: { slidesPerView: Math.min(length, 3) }, // lg
+            }"
+            ref="swiperRef"
+            :space-between="30"
+            @swiper="onSwiper"
+            :navigation="{
+              nextEl: '.next2',
+              prevEl: '.prev2',
+            }"
+          >
+            <SwiperSlide v-for="(hotel, n) in hotels" :key="n">
+              <GlobalHotelsItem :hotel="hotel" />
+            </SwiperSlide>
+          </Swiper>
+        </div>
 
-      <div class="mt-12">
-        <Swiper
-          :dir="localeProperties.dir"
-          :key="localeProperties.dir"
-          :modules="[Navigation]"
-          :autoplay="true"
-          :slides-per-view="2"
-          :slides-per-group="1"
-          :breakpoints="{
-            640: { slidesPerView: 1 }, // sm
-            768: { slidesPerView: 2 }, // md
-            1024: { slidesPerView: 3 }, // lg
-            1280: { slidesPerView: 3 }, // xl
-          }"
-          ref="swiperRef"
-          :space-between="30"
-          @slideChange="swiperRef?.updateSlides"
-          @swiper="onSwiper"
-          :navigation="{
-            nextEl: '.next2',
-            prevEl: '.prev2',
-          }"
+        <!-- slider buttons -->
+        <div
+          class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2"
         >
-          <SwiperSlide v-for="(hotel, n) in hotels" :key="n">
-            <GlobalHotelsItem :hotel="hotel" />
-          </SwiperSlide>
-        </Swiper>
-      </div>
-
-      <!-- slider buttons -->
-      <div
-        class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2"
-      >
-        <button
-          class="prev2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black"
-        >
-          <Icon name="material-symbols:arrow-left-alt-rounded"></Icon>
-        </button>
-        <button
-          class="next2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black"
-        >
-          <Icon name="material-symbols:arrow-right-alt-rounded"></Icon>
-        </button>
-      </div>
+          <button
+            class="prev2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black"
+          >
+            <Icon name="material-symbols:arrow-left-alt-rounded"></Icon>
+          </button>
+          <button
+            class="next2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black"
+          >
+            <Icon name="material-symbols:arrow-right-alt-rounded"></Icon>
+          </button>
+        </div>
+      </template>
+      <GlobalError :error="error" :status="status" :refresh="refresh" />
     </div>
   </div>
 </template>
@@ -97,9 +98,24 @@ import { Navigation } from "swiper/modules"
 import { Form } from "vee-validate"
 import type { Swiper as SwiperType } from "swiper/types"
 
-const { data: hotels } = useHotels()
+const { data: hotels, error, refresh, status } = useHotels()
+const length = computed(() => hotels.value?.length || 0)
 
 const { localeProperties } = useI18n()
 const swiperRef = ref<SwiperType>()
-const onSwiper = (s: SwiperType) => (swiperRef.value = s)
+const onSwiper = (s: SwiperType) => {
+  swiperRef.value = s
+
+  update()
+}
+
+const update = () => {
+  swiperRef.value?.navigation?.init()
+  swiperRef.value?.navigation?.update()
+  swiperRef.value?.updateSlidesClasses()
+  swiperRef.value?.updateSlides()
+  swiperRef.value?.update()
+}
+
+onMounted(update)
 </script>

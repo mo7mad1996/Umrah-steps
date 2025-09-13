@@ -283,24 +283,24 @@
 </template>
 
 <script setup lang="ts">
-const showBackToTop = ref(false);
+const showBackToTop = ref(false)
 
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
-  });
-};
+  })
+}
 
 const handleScroll = () => {
-  showBackToTop.value = window.scrollY > 300;
-};
+  showBackToTop.value = window.scrollY > 300
+}
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
+  window.addEventListener("scroll", handleScroll)
+})
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
+  window.removeEventListener("scroll", handleScroll)
+})
 </script>

@@ -10,10 +10,9 @@ const langSchema = new mongoose.Schema(
   },
   { _id: false }
 )
+
 const locationSchema = new mongoose.Schema(
-  {
-    city: { type: langSchema, required: [true, required_error] },
-  },
+  { city: { type: langSchema, required: [true, required_error] } },
   { _id: false }
 )
 
@@ -23,13 +22,25 @@ const hotelSchema = new mongoose.Schema(
     name: { type: langSchema, required: true },
     description: { type: langSchema, required: true },
     location: { type: locationSchema, required: true },
-    img: { type: String, default: "/logo/vertical.png" },
+    img: { type: String, default: "/logo/light.png" },
     rate: { type: Number, required: [true, "Rate is required"] },
   },
   {
     timestamps: true,
+    methods: {
+      lang(lang: "ar" | "en") {
+        return {
+          ...this.toJSON(),
+          name: this.name[lang],
+          description: this.description[lang],
+          location: {
+            city: this.location.city[lang],
+          },
+        }
+      },
+    },
     toJSON: {
-      transform: (doc, ret: any) => {
+      transform(doc: any, ret: any, c) {
         ret.id = ret._id.toString()
         delete ret._id
         delete ret.__v
