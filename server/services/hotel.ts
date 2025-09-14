@@ -28,8 +28,12 @@ export class HotelService {
   }
 
   async create(body: Hotel_DB_Schema) {
-    const hotel = await Hotel.create(body)
-    await hotel.save()
-    return hotel
+    try {
+      const hotel = await Hotel.create(body)
+      await hotel.save()
+      return hotel
+    } catch (err) {
+      return err
+    }
   }
 }

@@ -46,17 +46,20 @@
   </div>
 </template>
 
-<script setup>
-import { Field, ErrorMessage } from "vee-validate";
+<script setup lang="ts">
+import { Field, ErrorMessage } from "vee-validate"
 
-const props = defineProps({
-  rules: { type: String, default: "password" },
-  type: { type: String, default: "password" },
-  name: { type: String, default: "password" },
-  placeholder: { type: String, required: false },
-});
+const props = withDefaults(
+  defineProps<{
+    rules?: string
+    type?: string
+    name?: string
+    placeholder?: string
+  }>(),
+  { rules: "password", type: "password", name: "password" }
+)
 
-const modelValue = defineModel();
+const modelValue = defineModel<string>()
 
-const show = ref(false);
+const show = ref(false)
 </script>

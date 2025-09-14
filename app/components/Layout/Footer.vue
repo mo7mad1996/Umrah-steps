@@ -144,18 +144,6 @@
                   name="mdi:chevron-left"
                   class="text-sm group-hover:translate-x-1 transition-transform rtl:rotate-180"
                 />
-                برامج الحج
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
-              >
-                <Icon
-                  name="mdi:chevron-left"
-                  class="text-sm group-hover:translate-x-1 transition-transform rtl:rotate-180"
-                />
                 برامج العمرة
               </a>
             </li>

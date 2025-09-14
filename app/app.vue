@@ -1,23 +1,25 @@
 <template>
-  <LayoutPageBorders>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </LayoutPageBorders>
+  <Html
+    :dir="localeProperties.dir"
+    :lang="localeProperties.code"
+    :class="`${localeProperties.dir} ${dark && 'dark'}`"
+  >
+    <LayoutPageBorders>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </LayoutPageBorders>
+  </Html>
 </template>
 
 <script setup lang="ts">
 const { localeProperties, locale, t } = useI18n()
 
+const dark = useCookie("dark")
 watch(
   locale,
   () => {
     useHead({
-      htmlAttrs: {
-        dir: localeProperties.value.dir,
-        lang: localeProperties.value.code,
-        class: localeProperties.value.dir,
-      },
       titleTemplate: (title) =>
         [title, t("site_name")].filter((i) => i).join(" ⁘ "),
     })

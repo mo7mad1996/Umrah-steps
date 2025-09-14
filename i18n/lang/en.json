@@ -87,6 +87,14 @@
     }
   },
 
+  "auth": {
+    "login": "Login",
+    "description": "Welcome back",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password"
+  },
+
   "site_name": "Khatwat Al-Mu'tamir",
   "select": "Select one",
   "save": "Save",

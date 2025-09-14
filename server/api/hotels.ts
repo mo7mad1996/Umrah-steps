@@ -7,7 +7,6 @@ const hotelService = new HotelService()
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery<Query>(event)
-    const cookies = parseCookies(event)
 
     switch (event.method) {
       case "GET":

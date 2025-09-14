@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const positions = ["top-left", "top-right", "bottom-left", "bottom-right"];
+const positions = ["top-left", "top-right", "bottom-left", "bottom-right"]
 
 const getStyle = (p: string) => {
   return [
@@ -18,8 +18,8 @@ const getStyle = (p: string) => {
       .split("-")
       .map((i) => i + ": 0px")
       .join("; "),
-  ].join("; ");
-};
+  ].join("; ")
+}
 </script>
 
 <style lang="scss" scoped>

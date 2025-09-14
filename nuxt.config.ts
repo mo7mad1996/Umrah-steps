@@ -3,15 +3,6 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
 
-  nitro: {
-    devServer: {
-      timeout: 60000
-    }
-  },
-
-  vite: {
-    mode: "development",
-  },
   css: ["~/assets/css/main.css"],
 
   components: [
@@ -40,6 +31,7 @@ export default defineNuxtConfig({
     strategy: "no_prefix",
     autoDeclare: true,
     langDir: "lang",
+
     defaultLocale: "ar",
   },
 
@@ -100,5 +92,10 @@ export default defineNuxtConfig({
     public: {
       baseUrl: process.env.NUXT_API_URL,
     },
+  },
+
+  vite: {
+    mode: "development",
+    build: { sourcemap: false },
   },
 })

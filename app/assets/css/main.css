@@ -8,3 +8,7 @@
 .blockScrollX {
   overflow-x: hidden !important;
 }
+
+[role="alert"] {
+  @apply text-red-600 text-sm mt-1 ps-2;
+}

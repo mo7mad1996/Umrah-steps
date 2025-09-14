@@ -19,7 +19,5 @@ export async function connectDB() {
   }
 }
 
-export default defineNitroPlugin((nitroApp) => {
-  connectDB()
-})
+export default defineNitroPlugin(connectDB)
 
