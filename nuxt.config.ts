@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
 
+  nitro: {
+    devServer: {
+      timeout: 60000
+    }
+  },
+
   vite: {
     mode: "development",
   },
