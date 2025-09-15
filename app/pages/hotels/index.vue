@@ -205,17 +205,7 @@ const hotels = ref([
 ])
 
 // SEO
-useHead({
-  title: " حجوزات المعتمر",
-
-  meta: [
-    {
-      name: "description",
-      content:
-        "اكتشف أفضل الفنادق في مكة المكرمة والمدينة المنورة مع حجوزات المعتمر",
-    },
-  ],
-})
+usePageTitle("hotels.title")
 </script>
 
 <style scoped>

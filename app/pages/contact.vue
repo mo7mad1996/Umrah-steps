@@ -226,28 +226,28 @@ const form = ref({
   email: "",
   phone: "",
   message: "",
-});
+})
 
-const loading = ref(false);
-const contactForm = ref();
+const loading = ref(false)
+const contactForm = ref()
 
 const rules = {
   required: (value) => !!value || "هذا الحقل مطلوب",
   email: (value) => {
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(value) || "البريد الإلكتروني غير صحيح";
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return pattern.test(value) || "البريد الإلكتروني غير صحيح"
   },
-};
+}
 
 const submitForm = async () => {
-  const { valid } = await contactForm.value.validate();
-  if (!valid) return;
+  const { valid } = await contactForm.value.validate()
+  if (!valid) return
 
-  loading.value = true;
+  loading.value = true
 
   try {
     // محاكاة إرسال الرسالة
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000))
 
     // Reset form
     form.value = {
@@ -255,16 +255,16 @@ const submitForm = async () => {
       email: "",
       phone: "",
       message: "",
-    };
+    }
 
     // Show success message
-    $toast.success("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً");
+    $toast.success("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً")
   } catch (error) {
-    $toast.error("حدث خطأ في إرسال الرسالة. حاول مرة أخرى");
+    $toast.error("حدث خطأ في إرسال الرسالة. حاول مرة أخرى")
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 onMounted(async () => {
   // Initialize contact map
@@ -273,16 +273,8 @@ onMounted(async () => {
   // if (map) {
   //   addMarker(map, makkahCenter, "حجوزات المعتمر - مكة المكرمة");
   // }
-});
+})
 
 // SEO
-useHead({
-  title: "اتصل بنا",
-  meta: [
-    {
-      name: "description",
-      content: "تواصل مع فريق حجوزات المعتمر للاستفسار عن خدمات الحج والعمرة",
-    },
-  ],
-});
+usePageTitle("contact.title")
 </script>

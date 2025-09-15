@@ -6,12 +6,6 @@
   </main>
 </template>
 
-<script setup>
-const { t, locale } = useI18n()
-
-watch(locale, () => {
-  useHead({
-    title: t("home.title"),
-  })
-})
+<script setup lang="ts">
+usePageTitle("home.title")
 </script>
