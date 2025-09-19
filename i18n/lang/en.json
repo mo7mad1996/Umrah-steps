@@ -25,7 +25,14 @@
   "about": {
     "title": "About Us",
     "subtitle": "Our mission is serving the guests of Allah",
+    "who_we_are": "Who We Are?",
     "description": "Khatwat Al-Mu'tamir is a leading company in Hajj and Umrah services, striving to provide the best services to pilgrims through a specialized team with extensive experience in this field.",
+    "detailed_description": "We believe that serving Allah's guests is a great honor, so we always strive to provide the best of our services and facilities to make the Hajj and Umrah journey a distinctive and comfortable spiritual experience.",
+    "features": {
+      "experience": "More than 15 years of experience serving pilgrims",
+      "team": "Specialized team trained to the highest level",
+      "support": "24/7 customer service available"
+    },
     "mission": {
       "title": "Our Mission",
       "text": "To facilitate the Hajj and Umrah journey and provide distinguished services worthy of Allah's guests"
@@ -33,6 +40,39 @@
     "vision": {
       "title": "Our Vision",
       "text": "To be the first choice for pilgrims in the Kingdom of Saudi Arabia"
+    },
+    "stats": {
+      "title": "Our Achievements in Numbers",
+      "clients": "Satisfied Clients",
+      "hotels": "Partner Hotels",
+      "vehicles": "Available Vehicles",
+      "rating": "Customer Rating"
+    },
+    "services": {
+      "title": "Our Services",
+      "description": "We provide a comprehensive range of services to ensure a comfortable and blessed journey",
+      "hotels": {
+        "title": "Hotel Booking",
+        "description": "Best hotels at competitive prices close to the Holy Mosques"
+      },
+      "transport": {
+        "title": "Transportation Services",
+        "description": "Safe and comfortable transportation to and from the airport and Holy Mosques"
+      },
+      "guidance": {
+        "title": "Guidance and Direction",
+        "description": "Specialized team to guide and direct you throughout your blessed journey"
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "Specialized team with extensive experience in serving Allah's guests"
+    },
+    "cta": {
+      "title": "Are you ready to start your blessed journey?",
+      "description": "Contact us today and get the best offers and services for Hajj and Umrah journey",
+      "contact": "Contact Us",
+      "explore": "Explore Hotels"
     }
   },
   "hotels": {
@@ -48,10 +88,16 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "We are here to serve you",
+    "methods": {
+      "title": "Contact Methods",
+      "description": "Choose the most suitable way to contact us"
+    },
     "form": {
+      "title": "Send us a message",
       "name": "Name",
       "email": "Email",
       "phone": "Phone Number",
+      "subject": "Subject",
       "message": "Message",
       "send": "Send Message"
     },
@@ -60,6 +106,20 @@
       "phone": "Phone",
       "email": "Email",
       "hours": "Working Hours"
+    },
+    "quick_links": {
+      "title": "Quick Links"
+    },
+    "social": {
+      "title": "Follow Us"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Answers to the most common questions"
+    },
+    "map": {
+      "title": "Our Location on Map",
+      "placeholder": "Interactive Map - Coming Soon"
     }
   },
   "footer": {
