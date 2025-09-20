@@ -42,7 +42,9 @@
     "search": "البحث عن فندق",
     "book": "احجز الآن",
     "rating": "التقييم",
-    "distance": "المسافة من الحرم"
+    "distance": "المسافة من الحرم",
+    "priceRange": "نطاق السعر",
+    "viewMode": "عرض"
   },
   "contact": {
     "title": "اتصل بنا",
@@ -71,7 +73,19 @@
     "arrival_date": "تاريخ الوصول",
     "return_date": "تاريخ العودة",
     "number_of_people": "عدد الأفراد",
-    "number_of_rooms": "عدد الغرف"
+    "number_of_rooms": "عدد الغرف",
+    "home": "لوحة التحكم",
+
+    "site": "الموقع",
+    "hotels": "الفنادق",
+    "transports": "المواصلات",
+    "site_settings": "إعدادات الموقع",
+    "profile_settings": "إعدادات المستخدم",
+    "logout": "تسجيل خروج",
+
+    "hotel": {
+      "add": "اضافة فندق"
+    }
   },
 
   "$vuetify": {
@@ -89,6 +103,7 @@
   },
 
   "auth": {
+    "title": "تسجيل الدخول",
     "login": "تسجيل الدخول",
     "description": "مرحبا بعدوتك",
     "logout": "تسجيل خروج",
@@ -96,9 +111,12 @@
     "password": "كلمة المرور"
   },
 
+  "global": { "error": "خطأ", "reload": "اعادة التحميل" },
+
   "site_name": "حجوزات المعتمر",
   "select": "اختر",
   "more": "المزيد",
+  "add": "اضافة",
   "save": "حفظ",
   "search": "بحث",
   "no_data": "لا توجد بيانات"

@@ -35,7 +35,7 @@
           showFlags: true,
           showDialCodeInSelection: true,
           showSearchBox: true,
-          searchBoxPlaceholder: `${$t('global.search')}...`,
+          searchBoxPlaceholder: `${$t('search')}...`,
           tabindex: 1,
         }"
         mode="international"
@@ -77,7 +77,7 @@ watch(
     if (oldValue != v)
       if (typeof oldValue == typeof v || v) mobile.setValue(v, true);
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const country_codeValue = computed(() => {

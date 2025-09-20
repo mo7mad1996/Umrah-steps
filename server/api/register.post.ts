@@ -1,6 +1,9 @@
-import { UserService } from "../services/user"
+import { UserService } from "../services/user";
 
-const userService = new UserService()
+const userService = new UserService();
 export default defineEventHandler(async (event) => {
-  return userService.register(await readBody(event))
-})
+  const body = await readBody(event);
+
+  console.log(body, typeof body);
+  return userService.register(body);
+});

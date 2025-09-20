@@ -6,17 +6,23 @@
   >
     <NuxtRouteAnnouncer />
     <LayoutPageBorders>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
+      <v-locale-provider :rtl="locale == 'ar'">
+        <v-app :theme="dark ? 'dark' : 'light'">
+          <v-main class="flex flex-col min-h-screen bg-neutral-100 font-cairo">
+            <NuxtLayout>
+              <NuxtPage />
+            </NuxtLayout>
+          </v-main>
+        </v-app>
+      </v-locale-provider>
     </LayoutPageBorders>
   </Html>
 </template>
 
 <script setup lang="ts">
-const { localeProperties, locale, t } = useI18n()
-const { message } = useRouteAnnouncer()
-const dark = useCookie("dark")
+const { localeProperties, locale, t } = useI18n();
+const { message } = useRouteAnnouncer();
+const dark = useCookie("dark");
 
 watch(
   [locale, message],
@@ -24,10 +30,10 @@ watch(
     useHead({
       titleTemplate: (title) =>
         [title, t("site_name")].filter((i) => i).join(" ⁘ "),
-    })
+    });
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 </script>
 
 <style>

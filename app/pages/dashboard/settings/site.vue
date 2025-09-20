@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-usePageTitle("dashboard.home");
+usePageTitle("dashboard.site_settings");
 definePageMeta({
   layout: "dashboard",
   middleware: "auth",

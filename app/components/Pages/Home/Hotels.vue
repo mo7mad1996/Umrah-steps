@@ -93,29 +93,29 @@
 </template>
 
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from "swiper/vue"
-import { Navigation } from "swiper/modules"
-import { Form } from "vee-validate"
-import type { Swiper as SwiperType } from "swiper/types"
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation } from "swiper/modules";
+import { Form } from "vee-validate";
+import type { Swiper as SwiperType } from "swiper/types";
 
-const { data: hotels, error, refresh, status } = useHotels()
-const length = computed(() => hotels.value?.length || 0)
+const { data: hotels, error, refresh, status } = useHotels();
+const length = computed(() => hotels.value?.length || 0);
 
-const { localeProperties } = useI18n()
-const swiperRef = ref<SwiperType>()
+const { localeProperties } = useI18n();
+const swiperRef = ref<SwiperType>();
 const onSwiper = (s: SwiperType) => {
-  swiperRef.value = s
+  swiperRef.value = s;
 
-  update()
-}
+  update();
+};
 
 const update = () => {
-  swiperRef.value?.navigation?.init()
-  swiperRef.value?.navigation?.update()
-  swiperRef.value?.updateSlidesClasses()
-  swiperRef.value?.updateSlides()
-  swiperRef.value?.update()
-}
+  swiperRef.value?.navigation?.init();
+  swiperRef.value?.navigation?.update();
+  swiperRef.value?.updateSlidesClasses();
+  swiperRef.value?.updateSlides();
+  swiperRef.value?.update();
+};
 
-onMounted(update)
+onMounted(update);
 </script>

@@ -16,7 +16,11 @@
                 v-if="selected"
                 class="dark:!text-white text-black font-semibold"
               >
-                {{ mappedList.find((i) => JSON.stringify(i.value) == JSON.stringify(selected))?.title }}
+                {{
+                  mappedList.find(
+                    (i) => JSON.stringify(i.value) == JSON.stringify(selected),
+                  )?.title
+                }}
               </span>
               <span v-else class="text-gray-400">
                 {{ placeholder || $t("select") }}
@@ -159,7 +163,7 @@ watch(
       if (Array.isArray(v)) storedItems.value = [...storedItems.value, ...v];
     }
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 );
 
 watch(
@@ -168,7 +172,7 @@ watch(
     if (oldValue != v)
       if (typeof oldValue == typeof v || v) select.setValue(v, true);
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -178,6 +182,6 @@ watch(
       $initPerfectScrollbar(v);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>

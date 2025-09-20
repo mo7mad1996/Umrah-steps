@@ -1,6 +1,7 @@
+dashboard
 <template>
   <div
-    class="empty bg-neutral-50 dark:!bg-stone-800 min-h-dvh flex flex-col items-center justify-center"
+    class="empty bg-neutral-200 dark:!bg-stone-800 min-h-dvh flex flex-col items-center justify-center"
   >
     <slot />
   </div>

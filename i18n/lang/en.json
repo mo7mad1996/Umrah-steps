@@ -41,7 +41,9 @@
     "search": "Search for hotel",
     "book": "Book Now",
     "rating": "Rating",
-    "distance": "Distance from Haram"
+    "distance": "Distance from Haram",
+    "priceRange": "Price Range",
+    "viewMode": "View mode"
   },
   "contact": {
     "title": "Contact Us",
@@ -70,7 +72,19 @@
     "arrival_date": "Arrival Date",
     "return_date": "Return Date",
     "number_of_people": "Number of People",
-    "number_of_rooms": "Number of Rooms"
+    "number_of_rooms": "Number of Rooms",
+
+    "home": "Dashboard",
+    "site": "Site",
+    "hotels": "Hotels",
+    "transports": "Transports",
+    "site_settings": "Site Settings",
+    "profile_settings": "Profile Settings",
+    "logout": "Logout",
+
+    "hotel": {
+      "add": "Add a new hotel"
+    }
   },
 
   "$vuetify": {
@@ -88,6 +102,7 @@
   },
 
   "auth": {
+    "title": "Login",
     "login": "Login",
     "description": "Welcome back",
     "logout": "Logout",
@@ -95,8 +110,11 @@
     "password": "Password"
   },
 
+  "global": { "error": "Error", "reload": "Reload" },
+
   "site_name": "Khatwat Al-Mu'tamir",
   "select": "Select one",
+  "add": "Add",
   "save": "Save",
   "more": "More",
   "search": "Search",

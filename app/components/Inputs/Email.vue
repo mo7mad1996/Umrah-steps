@@ -32,6 +32,7 @@
         v-model="modelValue"
         inputmode="email"
         autocomplete="email"
+        :autofocus="autofocus"
       />
     </div>
 
@@ -49,6 +50,7 @@ const props = defineProps({
   customClass: { type: String, required: false },
   placeholder: { type: String, required: false },
   disabled: { type: null, default: false },
+  autofocus: { type: Boolean, default: false },
 });
 
 const modelValue = defineModel();

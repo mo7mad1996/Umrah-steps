@@ -9,7 +9,7 @@
       size="100"
     />
     <h3 class="text-lg text-red-600 font-bold mb-2">
-      {{ $t("global_dashboard.error") }}
+      {{ $t("global.error") }}
     </h3>
     <p class="text-sm text-zinc-700 my-4">{{ error?.message }}</p>
     <button
@@ -39,5 +39,5 @@ const props = defineProps({
     type: Function,
     required: false,
   },
-})
+});
 </script>
