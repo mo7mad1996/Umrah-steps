@@ -441,28 +441,17 @@ const fetchTransports = async () => {
     loading.value = true;
     // Mock data for now - replace with actual API call
     transports.value = [
-      {
-        _id: "1",
-        name: "حافلة القاهرة - الإسكندرية",
-        type: "bus",
-        description: "حافلة مكيفة مريحة",
-        price: 150,
-        status: "active",
-        image:
-          "https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg",
-        createdAt: new Date(),
-      },
-      {
-        _id: "2",
-        name: "تاكسي المطار",
-        type: "taxi",
-        description: "خدمة تاكسي سريعة للمطار",
-        price: 200,
-        status: "active",
-        image:
-          "https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg",
-        createdAt: new Date(),
-      },
+      // {
+      //   _id: "1",
+      //   name: "حافلة القاهرة - الإسكندرية",
+      //   type: "bus",
+      //   description: "حافلة مكيفة مريحة",
+      //   price: 150,
+      //   status: "active",
+      //   image:
+      //     "https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg",
+      //   createdAt: new Date(),
+      // },
     ];
   } catch (error) {
     console.error("Error fetching transports:", error);

@@ -6,13 +6,9 @@
         disabled && '!bg-neutral-200 cursor-not-allowed'
       }`"
     >
+      <!-- icons -->
       <img :icon="icon" v-if="img" width="22" :alt="name" />
-      <v-icon
-        :icon="icon"
-        v-if="icon"
-        color="#929A9F"
-        class="dark:!text-white"
-      />
+      <Icon :name="icon" v-if="icon" class="text-[#929A9F]" />
       <slot name="icon" />
 
       <Field

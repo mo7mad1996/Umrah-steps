@@ -84,4 +84,82 @@ const country_codeValue = computed(() => {
   return country_code.value?.value || undefined;
 });
 </script>
-r
+
+<style lang="scss">
+.v-window .vue-tel-input .vti__dropdown-list {
+  height: 150px;
+}
+
+*:has(> .vti__input.vti__search_box) {
+  @apply sticky top-0 p-1;
+}
+.vti__input.vti__search_box {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 10px;
+  padding: 0.2em 1em;
+
+  @apply bg-white dark:!bg-gray-700 border !border-gray-200 dark:!border-gray-600 dark:text-blue-400;
+}
+
+.vue-tel-input {
+  border: none !important;
+  @apply flex gap-2 relative;
+
+  &:focus-within {
+    box-shadow: none !important;
+    border-color: #e0e0e0;
+  }
+
+  input.vti__input.vti__phone {
+    @apply flex-1 p-2 px-2 md:!px-4 !border !border-solid !border-gray-200  rounded-2xl outline-none bg-white max-md:placeholder:text-sm max-md:placeholder:rtl:text-right  dark:!border-gray-600  dark:!bg-gray-700;
+  }
+
+  .vti__dropdown {
+    @apply p-0 text-sm items-stretch static;
+  }
+  .vti__dropdown .vti__selection {
+    @apply py-2 px-1  md:!px-4 rounded-2xl border h-full !border-gray-200 flex items-center gap-1 md:gap-2 text-neutral-400 bg-white  dark:!border-gray-600  dark:!bg-gray-700 dark:text-white;
+
+    & .vti__country-code,
+    & .vti__dropdown-arrow {
+      color: inherit;
+    }
+  }
+
+  .vti__dropdown-list {
+    &.below {
+      top: 100%;
+      width: 100%;
+      left: 0;
+    }
+    &.above {
+      bottom: 100%;
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &.disabled {
+    .vti__input.vti__phone,
+    .vti__dropdown .vti__selection {
+      @apply bg-neutral-200 cursor-not-allowed;
+    }
+  }
+}
+
+.vti__dropdown:hover,
+.vti__dropdown.open {
+  background-color: transparent !important;
+}
+
+// vue tel input
+.vue-tel-input {
+  direction: ltr !important;
+
+  &:not(::placeholder) {
+    direction: unset !important   ;
+  }
+}
+</style>

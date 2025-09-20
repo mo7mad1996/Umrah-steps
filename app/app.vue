@@ -8,7 +8,9 @@
     <LayoutPageBorders>
       <v-locale-provider :rtl="locale == 'ar'">
         <v-app :theme="dark ? 'dark' : 'light'">
-          <v-main class="flex flex-col min-h-screen bg-neutral-100 font-cairo">
+          <v-main
+            class="flex flex-col min-h-screen bg-neutral-100 dark:bg-zinc-700 font-cairo"
+          >
             <NuxtLayout>
               <NuxtPage />
             </NuxtLayout>
@@ -37,6 +39,10 @@ watch(
 </script>
 
 <style>
+html.dark {
+  background-color: #24252b;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.3s;

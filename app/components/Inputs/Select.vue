@@ -9,7 +9,7 @@
             :class="customClass"
           >
             <slot name="icon" />
-            <v-icon :icon="icon" v-if="icon" />
+            <Icon :name="icon" v-if="icon" class="text-[#929A9F]" />
 
             <span class="flex-1">
               <span

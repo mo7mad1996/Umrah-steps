@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex gap-2 md:gap-4 border !border-gray-200 p-2 px-4 rounded-2xl items-center bg-white"
+      class="flex gap-2 md:gap-4 border !border-gray-200 dark:!border-gray-600 p-2 px-4 rounded-2xl items-center bg-white dark:!bg-gray-700"
       :class="`${customClass} ${
         disabled && '!bg-neutral-200 cursor-not-allowed'
       }`"
@@ -22,7 +22,7 @@
       </svg>
 
       <Field
-        class="flex-1 outline-none max-md:placeholder:text-sm"
+        class="flex-1 w-0 text-sm outline-none max-md:placeholder:text-sm dark:text-white"
         :rules="rules"
         :name="name"
         :disabled="disabled"

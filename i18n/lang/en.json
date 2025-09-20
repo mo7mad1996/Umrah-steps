@@ -87,9 +87,9 @@
   },
   "contact": {
     "title": "Contact Us",
-    "subtitle": "We are here to serve you",
+    "subtitle": "Choose the most suitable way to contact us",
     "methods": {
-      "title": "Contact Methods",
+      "title": "We are here to serve you",
       "description": "Choose the most suitable way to contact us"
     },
     "form": {
@@ -167,7 +167,11 @@
     "description": "Welcome back",
     "logout": "Logout",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+
+    "validation": {
+      "phone": "Please Enter valid Phone Number"
+    }
   },
 
   "global": { "error": "Error", "reload": "Reload" },

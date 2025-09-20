@@ -1,6 +1,9 @@
+@import "vue-tel-input/vue-tel-input.css";
+
 * {
   box-sizing: border-box !important;
 }
+
 .font-cairo {
   font-family: Cairo, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
