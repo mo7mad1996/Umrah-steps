@@ -1,33 +1,35 @@
 <template>
-  <div class="container mx-auto">
-    <h1 class="text-6xl text-center my-32">{{ $t("home.swiper.headline") }}</h1>
+  <div class="container mx-auto px-4 md:px-6">
+    <h1 class="text-2xl md:text-4xl lg:text-6xl text-center my-16 md:my-24 lg:my-32 leading-tight">
+      {{ $t("home.swiper.headline") }}
+    </h1>
 
-    <div class="flex gap-4 col-span-2" v-if="status == 'pending'">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" v-if="status == 'pending'">
       <div
-        class="bg-gray-300 animate-pulse h-full flex-1 rounded-3xl"
+        class="bg-gray-300 animate-pulse h-64 md:h-80 rounded-3xl"
         v-for="n in 3"
         :key="n"
       ></div>
     </div>
 
-    <section class="grid grid-cols-2 md:grid-cols-3" v-if="status == 'success'">
-      <div class="px-4">
-        <div class="border px-6 py-2 rounded-full text-sm w-fit">
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8" v-if="status == 'success'">
+      <div class="lg:col-span-1 px-2 md:px-4">
+        <div class="border px-4 md:px-6 py-2 rounded-full text-xs md:text-sm w-fit">
           {{ $t("nav.about") }}
         </div>
 
-        <p class="text-3xl my-6 leading-relaxed">
+        <p class="text-xl md:text-2xl lg:text-3xl my-4 md:my-6 leading-relaxed">
           {{ $t("home.swiper.about_us") }}
         </p>
 
         <NuxtLink
           to="/about"
-          class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white my-28 flex items-center p-px"
+          class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white my-8 md:my-16 lg:my-28 flex items-center p-px hover:scale-105 transition-transform"
         >
-          <div class="px-5 text-xl">{{ $t("more") }}</div>
+          <div class="px-4 md:px-5 text-base md:text-xl">{{ $t("more") }}</div>
 
           <span
-            class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-3xl"
+            class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-xl md:text-3xl"
           >
             <Icon
               name="material-symbols:arrow-outward"
@@ -38,7 +40,7 @@
       </div>
 
       <!-- swiper -->
-      <div class="md:col-span-2">
+      <div class="lg:col-span-2">
         <Swiper
           class="items-stretch"
           auto-height
@@ -49,8 +51,9 @@
           ref="swiperRef"
           @swiper="onSwiper"
           :breakpoints="{
-            640: { slidesPerView: Math.min(length, 1) }, // sm
-            768: { slidesPerView: Math.min(length, 2) }, // md
+            320: { slidesPerView: Math.min(length, 1), spaceBetween: 15 },
+            640: { slidesPerView: Math.min(length, 1), spaceBetween: 20 },
+            768: { slidesPerView: Math.min(length, 2), spaceBetween: 25 },
           }"
           :navigation="{
             nextEl: '.next',
@@ -65,15 +68,15 @@
 
         <!-- buttons -->
         <div
-          class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2"
+          class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2 mt-4"
         >
           <button
-            class="prev backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black"
+            class="prev backdrop-blur-sm p-2 text-lg md:text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black hover:scale-110 transition-transform"
           >
             <Icon name="material-symbols:arrow-left-alt-rounded"></Icon>
           </button>
           <button
-            class="next backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black"
+            class="next backdrop-blur-sm p-2 text-lg md:text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black hover:scale-110 transition-transform"
           >
             <Icon name="material-symbols:arrow-right-alt-rounded"></Icon>
           </button>
@@ -87,7 +90,7 @@
       :status="status"
       :refresh="refresh"
     />
-    <hr class="container mx-auto my-20" />
+    <hr class="container mx-auto my-12 md:my-20" />
   </div>
 </template>
 

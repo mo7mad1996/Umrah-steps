@@ -1,19 +1,19 @@
 <template>
   <div class="pb-20">
     <div
-      class="rounded-3xl bg-violet-100 dark:!bg-neutral-800 p-12 container mx-auto"
+      class="rounded-3xl bg-violet-100 dark:!bg-neutral-800 p-6 md:p-12 container mx-auto"
     >
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         <div>
-          <h1 class="text-yellow-800 dark:!text-yellow-300 text-3xl">
+          <h1 class="text-yellow-800 dark:!text-yellow-300 text-2xl md:text-3xl font-bold">
             {{ $t("home.hotels.title") }}
           </h1>
-          <p class="opacity-90 text-sm text-yellow-800 dark:!text-yellow-300">
+          <p class="opacity-90 text-sm md:text-base text-yellow-800 dark:!text-yellow-300 mt-2">
             {{ $t("home.hotels.description") }}
           </p>
         </div>
 
-        <div class="flex gap-4 items-start">
+        <div class="flex flex-col sm:flex-row gap-4 items-start">
           <Form class="flex-1">
             <InputsText
               icon="mdi-magnify"
@@ -23,14 +23,14 @@
 
           <NuxtLink
             to="/hotels"
-            class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white flex items-center p-px"
+            class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white flex items-center p-px hover:scale-105 transition-transform"
           >
-            <div class="px-5">
+            <div class="px-4 md:px-5 text-sm md:text-base">
               {{ $t("more") }}
             </div>
 
             <span
-              class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-2xl"
+              class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-xl md:text-2xl"
             >
               <Icon
                 name="material-symbols:arrow-outward"
@@ -43,7 +43,7 @@
 
       <!-- slider -->
       <template v-if="status == 'success'">
-        <div class="mt-12">
+        <div class="mt-8 md:mt-12">
           <Swiper
             v-if="status == 'success'"
             :dir="localeProperties.dir"
@@ -53,12 +53,12 @@
             :slides-per-view="Math.min(length, 2)"
             :slides-per-group="1"
             :breakpoints="{
-              640: { slidesPerView: Math.min(length, 1) }, // sm
-              768: { slidesPerView: Math.min(length, 2) }, // md
-              1024: { slidesPerView: Math.min(length, 3) }, // lg
+              320: { slidesPerView: Math.min(length, 1), spaceBetween: 15 },
+              768: { slidesPerView: Math.min(length, 2), spaceBetween: 20 },
+              1024: { slidesPerView: Math.min(length, 3), spaceBetween: 30 },
             }"
             ref="swiperRef"
-            :space-between="30"
+            :space-between="20"
             @swiper="onSwiper"
             :navigation="{
               nextEl: '.next2',
@@ -73,15 +73,15 @@
 
         <!-- slider buttons -->
         <div
-          class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2"
+          class="flex gap-2 items-center ms-auto w-fit rtl:flex-row-reverse p-2 mt-4"
         >
           <button
-            class="prev2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black"
+            class="prev2 backdrop-blur-sm p-2 text-lg md:text-xl border rounded-full aspect-square text-black bg-white border-opacity-100 grid place-content-center border-black hover:scale-110 transition-transform"
           >
             <Icon name="material-symbols:arrow-left-alt-rounded"></Icon>
           </button>
           <button
-            class="next2 backdrop-blur-sm p-2 text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black"
+            class="next2 backdrop-blur-sm p-2 text-lg md:text-xl border rounded-full aspect-square text-white bg-black border-opacity-100 grid place-content-center border-black hover:scale-110 transition-transform"
           >
             <Icon name="material-symbols:arrow-right-alt-rounded"></Icon>
           </button>

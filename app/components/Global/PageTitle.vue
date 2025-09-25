@@ -1,12 +1,12 @@
 <template>
-  <section class="text-black dark:!text-white py-24 mt-20 relative">
-    <div class="container mx-auto px-6">
+  <section class="text-black dark:!text-white py-16 md:py-24 mt-16 md:mt-20 relative">
+    <div class="container mx-auto px-4 md:px-6">
       <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
           {{ title }}
         </h1>
 
-        <p class="text-xl opacity-90" v-if="subTitle">
+        <p class="text-base md:text-xl opacity-90 max-w-2xl mx-auto" v-if="subTitle">
           {{ subTitle }}
         </p>
       </div>

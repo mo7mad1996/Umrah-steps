@@ -1,21 +1,21 @@
 <template>
   <NuxtLink
     :to="`/hotels/${hotel.id}`"
-    class="flex flex-col relative shadow group rounded-xl h-full overflow-hidden bg-white *:!transition-all border-white border-8"
+    class="flex flex-col relative shadow group rounded-xl h-full min-h-[300px] md:min-h-[400px] overflow-hidden bg-white *:!transition-all border-white border-4 md:border-8 hover:shadow-xl transition-all duration-300"
   >
     <NuxtImg
       :src="hotel.img || '/logo/vertical.png'"
-      class="object-cover w-full h-full absolute inset-0"
+      class="object-cover w-full h-full absolute inset-0 group-hover:scale-105 transition-transform duration-500"
     />
 
     <div class="block rounded-3xl relative flex-1">
       <div
-        class="flex justify-between items-center py-3 px-5 text-2xl"
+        class="flex justify-between items-center py-2 md:py-3 px-3 md:px-5 text-lg md:text-2xl"
         @click.prevent
       >
         <div class="flex items-center gap-2">
           <button
-            class="aspect-square w-9 rounded-full backdrop-blur-md flex items-center justify-center transition"
+            class="aspect-square w-8 md:w-9 rounded-full backdrop-blur-md flex items-center justify-center transition hover:scale-110"
             :class="{
               'text-red-400 hover:bg-red-200/50': is_fav,
               'text-primary hover:bg-emerald-100/50': !is_fav,
@@ -29,14 +29,14 @@
           </button>
         </div>
         <div>
-          <div class="flex gap-2">
+          <div class="flex gap-1 md:gap-2 items-center text-sm md:text-base">
             <Icon name="material-symbols-light:location-on" />
 
             <span>{{ hotel.location.city }}</span>
           </div>
-          <div class="flex gap-0">
+          <div class="flex gap-0 justify-end">
             <Icon
-              class=""
+              class="text-yellow-400 text-sm md:text-base"
               name="ic:baseline-star-border"
               v-for="i in hotel.rate"
               :key="i"
@@ -52,10 +52,10 @@
     </div>
 
     <div
-      class="relative transition-all translate-y-full group-hover:translate-y-0 bg-white backdrop-blur-sm custume-br"
+      class="relative transition-all translate-y-full group-hover:translate-y-0 bg-white/95 backdrop-blur-sm custume-br p-4 md:p-6"
     >
-      <h3 v-if="hotel.name" class="px-8 py-2 text-2xl">{{ hotel.name }}</h3>
-      <p class="px-8 py-2 opacity-70" v-if="hotel.description">
+      <h3 v-if="hotel.name" class="text-lg md:text-xl font-semibold mb-2">{{ hotel.name }}</h3>
+      <p class="opacity-70 text-sm md:text-base line-clamp-3" v-if="hotel.description">
         {{ hotel.description }}
       </p>
     </div>

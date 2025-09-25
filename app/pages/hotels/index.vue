@@ -10,74 +10,145 @@
     />
 
     <!-- Search Form Section -->
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-6">
       <GlobalHotelsFormSearch />
     </div>
 
-    <section class="py-8">
-      <div class="container mx-auto px-6">
+    <section class="py-6 md:py-8">
+      <div class="container mx-auto px-4 md:px-6">
         <!-- Filters Section -->
         <PagesHotelsFilters :filters="filters" />
 
         <!-- Results Count -->
-        <div class="mb-6">
-          <p class="text-gray-600 dark:text-gray-400">
+        <div class="mb-4 md:mb-6">
+          <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
             تم العثور على
-            <!-- <span class="font-semibold text-primary">{{ hotels.length }}</span> -->
+            <span class="font-semibold text-primary">{{ filteredHotels.length }}</span>
             فندق
           </p>
         </div>
 
         <!-- Hotels Grid/List -->
         <div
-          v-if="false"
+          v-if="status === 'success' && filteredHotels.length > 0"
           :class="{
-            'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6':
+            'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6':
               filters.viewMode === 'grid',
-            'space-y-6': filters.viewMode === 'list',
+            'space-y-4 md:space-y-6': filters.viewMode === 'list',
           }"
         >
-          <!-- <div
-            v-for="hotel in hotels"
+          <div
+            v-for="hotel in paginatedHotels"
             :key="hotel.id"
             :class="
               filters.viewMode === 'grid'
                 ? 'hotel-card-grid'
                 : 'hotel-card-list'
             "
-            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
           >
             <GlobalHotelsItem :hotel="hotel" />
-          </div> -->
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="status === 'pending'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          <div v-for="i in 8" :key="i" class="bg-gray-200 dark:bg-gray-700 rounded-xl h-64 md:h-80 animate-pulse"></div>
+        </div>
+
+        <!-- No Results -->
+        <div v-if="status === 'success' && filteredHotels.length === 0" class="text-center py-12">
+          <div class="text-gray-400 mb-4">
+            <Icon name="mdi:hotel-off" class="text-6xl" />
+          </div>
+          <h3 class="text-lg font-medium text-gray-600 dark:text-gray-400 mb-2">لا توجد فنادق</h3>
+          <p class="text-gray-500 dark:text-gray-500">جرب تغيير معايير البحث</p>
         </div>
 
         <!-- Load More Button -->
-        <div class="text-center mt-12">
+        <div v-if="status === 'success' && filteredHotels.length > 0 && hasMoreResults" class="text-center mt-8 md:mt-12">
           <button
-            class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl"
+            @click="loadMore"
+            :disabled="loading"
+            class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl disabled:opacity-50"
           >
-            <Icon name="mdi:reload" />
-
-            تحميل المزيد من الفنادق
+            <Icon name="mdi:reload" :class="{ 'animate-spin': loading }" />
+            <span class="text-sm md:text-base">
+              {{ loading ? 'جاري التحميل...' : 'تحميل المزيد من الفنادق' }}
+            </span>
           </button>
         </div>
-        {{ x }}
       </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Hotel } from "~/types/hotel";
+
+// Reactive data
 const filters = reactive({
   price: [0, Infinity],
   rate: [0, 5],
   distance: [0, Infinity],
   viewMode: "grid" as "list" | "grid",
+  search: "",
 });
 
 const page = ref(1);
-// Sample hotel data
-const x = computed(() => useHotels(12, page.value, filters));
+const itemsPerPage = 12;
+const displayedItems = ref(itemsPerPage);
+const loading = ref(false);
+
+// Fetch hotels data
+const { data: hotels, status, error, refresh } = useHotels(100); // Fetch more items for client-side filtering
+
+// Computed properties
+const filteredHotels = computed(() => {
+  if (!hotels.value) return [];
+  
+  return hotels.value.filter((hotel: Hotel) => {
+    // Price filter
+    const price = 500; // Mock price - you should add price to hotel data
+    const priceMatch = price >= filters.price[0] && price <= filters.price[1];
+    
+    // Rating filter
+    const ratingMatch = hotel.rate >= filters.rate[0] && hotel.rate <= filters.rate[1];
+    
+    // Distance filter (mock implementation)
+    const distance = 800; // Mock distance - you should add distance to hotel data
+    const distanceMatch = distance >= filters.distance[0] && distance <= filters.distance[1];
+    
+    // Search filter
+    const searchMatch = !filters.search || 
+      hotel.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+      hotel.description.toLowerCase().includes(filters.search.toLowerCase()) ||
+      hotel.location.city.toLowerCase().includes(filters.search.toLowerCase());
+    
+    return priceMatch && ratingMatch && distanceMatch && searchMatch;
+  });
+});
+
+const paginatedHotels = computed(() => {
+  return filteredHotels.value.slice(0, displayedItems.value);
+});
+
+const hasMoreResults = computed(() => {
+  return displayedItems.value < filteredHotels.value.length;
+});
+
+// Methods
+const loadMore = () => {
+  loading.value = true;
+  setTimeout(() => {
+    displayedItems.value += itemsPerPage;
+    loading.value = false;
+  }, 500);
+};
+
+// Watch for filter changes to reset pagination
+watch(filters, () => {
+  displayedItems.value = itemsPerPage;
+}, { deep: true });
 
 // SEO
 usePageTitle("hotels.title");
@@ -89,7 +160,7 @@ usePageTitle("hotels.title");
 }
 
 .hotel-card-list {
-  @apply flex flex-row;
+  @apply flex flex-col sm:flex-row;
 }
 
 /* Smooth transitions for all interactive elements */
@@ -103,7 +174,7 @@ select,
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hotel-card-list {
-    @apply flex-col;
+    @apply flex-col space-y-4;
   }
 
   .hotel-card-list .w-80 {

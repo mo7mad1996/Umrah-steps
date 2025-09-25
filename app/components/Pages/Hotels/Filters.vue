@@ -1,16 +1,16 @@
 <template>
   <!-- Filters Section -->
-  <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-    <div class="flex flex-wrap items-center gap-4">
+  <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 md:gap-6 mb-6 md:mb-8">
+    <div class="w-full lg:flex-1">
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+        <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-white mb-4">
           تصفية النتائج:
         </h3>
 
-        <div class="flex gap-4 items-center">
-          <div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="min-w-0">
             <!-- Price Range -->
-            <span class="text-sm my-5 block text-gray-600 dark:text-gray-400">
+            <span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
               {{ $t("hotels.priceRange") }}:
             </span>
             <InputsSelect
@@ -25,8 +25,8 @@
           </div>
 
           <!-- Star Rating -->
-          <div>
-            <span class="text-sm my-5 block text-gray-600 dark:text-gray-400">
+          <div class="min-w-0">
+            <span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
               {{ $t("hotels.rating") }}:
             </span>
             <InputsSelect
@@ -42,8 +42,8 @@
 
           <!-- Distance -->
 
-          <div>
-            <span class="text-sm my-5 block text-gray-600 dark:text-gray-400">
+          <div class="min-w-0">
+            <span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
               {{ $t("hotels.distance") }}:
             </span>
             <InputsSelect
@@ -61,13 +61,13 @@
     </div>
 
     <!-- here we are -->
-    <div>
-      <span class="text-sm my-5 block text-gray-600 dark:text-gray-400">
+    <div class="w-full lg:w-auto">
+      <span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
         {{ $t("hotels.viewMode") }}:
       </span>
 
       <InputsRadio
-        class="dark:!bg-transparent"
+        class="dark:!bg-transparent w-full lg:w-auto"
         activeClass="dark:!bg-transparent dark:!border-gold dark:border  dark:text-yellow-400 dark:hover:!bg-white/20"
         itemClass="dark:text-gray-600/80 dark:hover:!bg-white/20"
         v-model="filters.viewMode"
