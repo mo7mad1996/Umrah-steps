@@ -1,15 +1,15 @@
 <template>
-  <div class="h-full">
-    <div class="grid grid-cols-12 gap-4 min-h-dvh">
-      <!-- Sidebar (Large Screens) -->
-      <div class="lg:col-span-3 xl:col-span-2 h-dvh sticky top-0">
-        <LayoutDashboardSidebar />
-      </div>
+	<div class="relative h-dvh p-2 bg-gray-200">
+		<div class="flex h-full">
+			<!-- Sidebar (Large Screens) -->
+			<div class="sticky top-0 p-2">
+				<LayoutDashboardSidebar />
+			</div>
 
-      <!-- Main Content -->
-      <section class="p-2 md:p-6 col-span-12 lg:col-span-9 xl:col-span-10">
-        <slot />
-      </section>
-    </div>
-  </div>
+			<!-- Main Content -->
+			<section class="flex-1">
+				<slot />
+			</section>
+		</div>
+	</div>
 </template>

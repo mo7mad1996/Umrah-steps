@@ -41,8 +41,8 @@
 				<div class="mt-8 md:mt-12">
 					<Swiper
 						v-if="status == 'success'"
-						:dir="localeProperties.dir"
-						:key="localeProperties.dir"
+						:dir="localeProperties?.dir"
+						:key="localeProperties?.dir"
 						:modules="[Navigation]"
 						:autoplay="true"
 						:slides-per-view="Math.min(length, 2)"

@@ -40,8 +40,8 @@
 				<Swiper
 					class="items-stretch"
 					auto-height
-					:dir="localeProperties.dir"
-					:key="localeProperties.dir"
+					:dir="localeProperties?.dir"
+					:key="localeProperties?.dir"
 					:modules="[Navigation]"
 					:autoplay="true"
 					ref="swiperRef"
