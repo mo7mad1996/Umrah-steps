@@ -11,7 +11,7 @@
 						<NuxtImg
 							src="/logo/horizontal.png"
 							height="60"
-							:alt="$t('site_name')"
+							:alt="$t('global.site_name')"
 							class="mb-4 h-12 md:h-16"
 						/>
 						<p class="text-white/80 leading-relaxed text-sm md:text-base">

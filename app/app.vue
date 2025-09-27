@@ -5,7 +5,6 @@
 		:class="`${localeProperties?.dir} ${dark && 'dark'}`"
 	>
 		<NuxtRouteAnnouncer />
-		<pre>{{ localeProperties }}</pre>
 		<LayoutPageBorders>
 			<v-locale-provider :rtl="locale == 'ar'">
 				<v-app :theme="dark ? 'dark' : 'light'">

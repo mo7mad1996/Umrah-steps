@@ -22,7 +22,7 @@
 					to="/about"
 					class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white my-8 md:my-16 lg:my-28 flex items-center p-px hover:scale-105 transition-transform"
 				>
-					<div class="px-4 md:px-5 text-base md:text-xl">{{ $t("more") }}</div>
+					<div class="px-4 md:px-5 text-base md:text-xl">{{ $t("global.more") }}</div>
 
 					<span
 						class="dark:!bg-black bg-white grid place-content-center p-1.5 rounded-full text-xl md:text-3xl"

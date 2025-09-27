@@ -1,0 +1,13 @@
+{
+	"datePicker": {
+		"header": "اختر التاريخ",
+		"title": "اختر التاريخ",
+		"ariaLabel": {
+			"selectYear": "اختر السنة",
+			"previousMonth": "الشهر السابق",
+			"nextMonth": "الشهر التالي",
+			"selectDate": "اختر التاريخ",
+			"currentDate": "اليوم"
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"destination": "الوجهة",
+	"arrival_date": "تاريخ الوصول",
+	"return_date": "تاريخ العودة",
+	"number_of_people": "عدد الأفراد",
+	"number_of_rooms": "عدد الغرف",
+	"home": "لوحة التحكم",
+
+	"site": "الموقع",
+	"hotels": "الفنادق",
+	"transports": "المواصلات",
+	"site_settings": "إعدادات الموقع",
+	"profile_settings": "إعدادات المستخدم",
+	"logout": "تسجيل خروج",
+
+	"hotel": {
+		"add": "اضافة فندق",
+
+		"name": {
+			"global": "اسم الفندق",
+			"ar": "الاسم بالعربي",
+			"en": "الاسم بالانجليزي"
+		}
+	}
+}

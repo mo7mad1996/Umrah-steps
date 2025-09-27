@@ -1,0 +1,19 @@
+{
+	"destination": "Destination",
+	"arrival_date": "Arrival Date",
+	"return_date": "Return Date",
+	"number_of_people": "Number of People",
+	"number_of_rooms": "Number of Rooms",
+
+	"home": "Dashboard",
+	"site": "Site",
+	"hotels": "Hotels",
+	"transports": "Transports",
+	"site_settings": "Site Settings",
+	"profile_settings": "Profile Settings",
+	"logout": "Logout",
+
+	"hotel": {
+		"add": "Add a new hotel"
+	}
+}

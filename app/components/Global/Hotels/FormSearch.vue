@@ -76,7 +76,7 @@
 				</div>
 
 				<div class="pt-2 md:pt-4 col-span-1 md:col-span-2 lg:col-span-1">
-					<InputsSubmit :text="$t('search')" />
+					<InputsSubmit :text="$t('global.search')" />
 				</div>
 			</div>
 		</Form>

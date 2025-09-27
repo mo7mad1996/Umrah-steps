@@ -1,0 +1,37 @@
+{
+	"title": "Contact Us",
+	"subtitle": "Choose the most suitable way to contact us",
+	"methods": {
+		"title": "We are here to serve you",
+		"description": "Choose the most suitable way to contact us"
+	},
+	"form": {
+		"title": "Send us a message",
+		"name": "Name",
+		"email": "Email",
+		"phone": "Phone Number",
+		"subject": "Subject",
+		"message": "Message",
+		"send": "Send Message"
+	},
+	"info": {
+		"address": "Address",
+		"phone": "Phone",
+		"email": "Email",
+		"hours": "Working Hours"
+	},
+	"quick_links": {
+		"title": "Quick Links"
+	},
+	"social": {
+		"title": "Follow Us"
+	},
+	"faq": {
+		"title": "Frequently Asked Questions",
+		"description": "Answers to the most common questions"
+	},
+	"map": {
+		"title": "Our Location on Map",
+		"placeholder": "Interactive Map - Coming Soon"
+	}
+}

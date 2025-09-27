@@ -35,7 +35,7 @@
           showFlags: true,
           showDialCodeInSelection: true,
           showSearchBox: true,
-          searchBoxPlaceholder: `${$t('search')}...`,
+          searchBoxPlaceholder: `${$t('global.search')}...`,
           tabindex: 1,
         }"
         mode="international"

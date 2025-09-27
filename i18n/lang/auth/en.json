@@ -1,0 +1,12 @@
+{
+	"title": "Login",
+	"login": "Login",
+	"description": "Welcome back",
+	"logout": "Logout",
+	"email": "Email",
+	"password": "Password",
+
+	"validation": {
+		"phone": "Please Enter valid Phone Number"
+	}
+}

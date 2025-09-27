@@ -1,0 +1,14 @@
+{
+	"datePicker": {
+		"header": "Select Date",
+		"title": "Select Date",
+
+		"ariaLabel": {
+			"selectYear": "Select year",
+			"previousMonth": "Previous month",
+			"nextMonth": "Next month",
+			"selectDate": "Select date",
+			"currentDate": "Today"
+		}
+	}
+}

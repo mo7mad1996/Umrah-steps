@@ -13,7 +13,7 @@
 
 				<div class="flex flex-col sm:flex-row gap-4 items-start">
 					<Form class="flex-1">
-						<InputsText icon="mdi-magnify" :placeholder="`${$t('search')}...`" />
+						<InputsText icon="mdi-magnify" :placeholder="`${$t('global.search')}...`" />
 					</Form>
 
 					<NuxtLink
@@ -21,7 +21,7 @@
 						class="border rounded-full w-fit border-black text-white bg-black dark:!text-black dark:!bg-white flex items-center p-px hover:scale-105 transition-transform"
 					>
 						<div class="px-4 md:px-5 text-sm md:text-base">
-							{{ $t("more") }}
+							{{ $t("global.more") }}
 						</div>
 
 						<span

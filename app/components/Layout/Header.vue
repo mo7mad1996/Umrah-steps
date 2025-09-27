@@ -10,7 +10,7 @@
 						src="/logo/horizontal.png"
 						height="60"
 						class="h-12 md:h-16"
-						:alt="$t('site_name')"
+						:alt="$t('global.site_name')"
 					/>
 				</NuxtLink>
 
