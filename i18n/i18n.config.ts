@@ -1,14 +1,12 @@
+import ar from './lang/ar.json'
+import en from './lang/en.json'
+
 export default defineI18nConfig(() => ({
-	legacy: false,
-	messages: {
-		ar: {
-			nav: require("./lang/nav/ar.json"),
-			home: require("./lang/home/en.json"),
-	
-		},
-		en: {
-			nav: require("./lang/nav/en.json"),
-      			home: require("./lang/home/en.json"),
-		},
-	},
-}));
+  legacy: false,
+  locale: 'ar',
+  fallbackLocale: 'ar',
+  messages: {
+    ar,
+    en
+  }
+}))
