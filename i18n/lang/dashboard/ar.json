@@ -21,5 +21,32 @@
 			"ar": "الاسم بالعربي",
 			"en": "الاسم بالانجليزي"
 		}
+	},
+
+	"profile": {
+		"title": "الملف الشخصي",
+		"personal_info": "المعلومات الشخصية",
+		"account_settings": "إعدادات الحساب",
+		"security": "الأمان",
+		"name": "الاسم الكامل",
+		"email": "البريد الإلكتروني",
+		"phone": "رقم الهاتف",
+		"role": "الدور",
+		"current_password": "كلمة المرور الحالية",
+		"new_password": "كلمة المرور الجديدة",
+		"confirm_password": "تأكيد كلمة المرور",
+		"change_password": "تغيير كلمة المرور",
+		"update_profile": "تحديث الملف الشخصي",
+		"account_created": "تاريخ إنشاء الحساب",
+		"last_login": "آخر تسجيل دخول",
+		"language": "اللغة",
+		"theme": "المظهر",
+		"notifications": "الإشعارات",
+		"email_notifications": "إشعارات البريد الإلكتروني",
+		"sms_notifications": "إشعارات الرسائل النصية",
+		"success_update": "تم تحديث الملف الشخصي بنجاح",
+		"success_password": "تم تغيير كلمة المرور بنجاح",
+		"error_current_password": "كلمة المرور الحالية غير صحيحة",
+		"error_password_match": "كلمة المرور الجديدة وتأكيدها غير متطابقتين"
 	}
 }

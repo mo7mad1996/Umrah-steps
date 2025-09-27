@@ -1,18 +1,10 @@
 export default defineI18nConfig(() => ({
-	// modules
-	// i18n: {
-	// 	locales: [
-	// 		{ code: "ar", file: "ar.json", dir: "rtl", name: "العربية" },
-	// 		{ code: "en", file: "en.json", dir: "ltr", name: "English" },
-	// 	],
-	// 	strategy: "no_prefix",
-	// 	autoDeclare: true,
-	// 	langDir: "lang",
-
 	legacy: false,
+	locale: 'ar',
+	fallbackLocale: 'ar',
 	messages: {
 		ar: {
-			global: require("./lang/global/ar.json"),
+			...require("./lang/global/ar.json"),
 			nav: require("./lang/nav/ar.json"),
 			home: require("./lang/home/ar.json"),
 			auth: require("./lang/auth/ar.json"),
@@ -24,7 +16,7 @@ export default defineI18nConfig(() => ({
 			$vuetify: require("./lang/vuetify/ar.json"),
 		},
 		en: {
-			global: require("./lang/global/en.json"),
+			...require("./lang/global/en.json"),
 			nav: require("./lang/nav/en.json"),
 			home: require("./lang/home/en.json"),
 			hotels: require("./lang/hotels/en.json"),

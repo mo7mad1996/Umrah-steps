@@ -10,7 +10,9 @@ const message = "بيانات الدخول غير صالحه";
 // User schema
 const userSchema = new mongoose.Schema<User_DB_Schema & default_schema>(
   {
+    name: { type: String, required: [true, required_error] },
     email: { type: String, required: [true, required_error], unique: true },
+    phone: { type: String },
     password: { type: String, required: [true, required_error] },
     role: { type: String, enum: ["user", "admin"], default: "user" },
   },

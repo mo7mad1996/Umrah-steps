@@ -4,6 +4,8 @@ export type User_credentials = {
 }
 
 export type User_DB_Schema = User_credentials & {
+  name: string
+  phone?: string
   role: "user" | "admin"
 }
 
