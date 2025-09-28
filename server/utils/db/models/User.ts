@@ -7,8 +7,13 @@ import jwt from "jsonwebtoken";
 const required_error = "هذا الحقل مطلوب";
 const message = "بيانات الدخول غير صالحه";
 
+type methods = {
+	checkPassword(password: string): Promise<boolean>;
+	login(password: string): Promise<any>;
+};
+
 // User schema
-const userSchema = new mongoose.Schema<User_DB_Schema & default_schema>(
+const userSchema = new mongoose.Schema<User_DB_Schema & default_schema & methods>(
 	{
 		name: { type: String },
 		email: { type: String, required: [true, required_error], unique: true },
@@ -19,8 +24,11 @@ const userSchema = new mongoose.Schema<User_DB_Schema & default_schema>(
 	},
 	{
 		methods: {
+			checkPassword(password: string) {
+				return bcrypt.compare(password, this.password);
+			},
 			async login(password: string) {
-				const isValid = await bcrypt.compare(password, this.password);
+				const isValid = await this.checkPassword(password);
 				if (!isValid) throw createError({ message, status: 401 });
 
 				this.lastLogin = new Date();
@@ -44,6 +52,17 @@ const userSchema = new mongoose.Schema<User_DB_Schema & default_schema>(
 	},
 );
 
+userSchema.pre("findOneAndUpdate", async function (next) {
+	// hash password before saving
+	// @ts-expect-error
+	if (this._update.password) {
+		const salt = await bcrypt.genSalt(10);
+		// @ts-expect-error
+		const hashed = await bcrypt.hash(this._update.password, salt);
+		// @ts-expect-error
+		this._update.password = hashed;
+	}
+});
 userSchema.pre("save", async function (next) {
 	// hash password before saving
 	if (this.isModified("password")) {

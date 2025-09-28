@@ -25,7 +25,7 @@
 									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 										{{ $t("dashboard.profile.language") }}
 									</label>
-									<InputsSelect v-model="locale" :items="langs" @update="(v) => setLocale(v)" />
+									<InputsSelect v-model="lang" :items="langs" />
 								</div>
 							</div>
 						</div>
@@ -116,7 +116,7 @@
 							{{ $t("dashboard.profile.security") }}
 						</h3>
 
-						<Form @submit.prevent="changePassword" class="space-y-4">
+						<Form @submit="changePassword" class="space-y-4">
 							<InputsPassword
 								v-model="passwordForm.currentPassword"
 								name="currentPassword"
@@ -133,7 +133,7 @@
 							<InputsPassword
 								v-model="passwordForm.confirmPassword"
 								name="confirmPassword"
-								rules="required|min:6"
+								rules="confirmed:@newPassword"
 								:placeholder="$t('dashboard.profile.confirm_password')"
 							/>
 
@@ -158,6 +158,15 @@ const { locale, setLocale, locales } = useI18n();
 const langs = computed(() => {
 	const i = locales.value || [];
 	return i.map((i) => ({ title: i.name, value: i.code }));
+});
+
+const lang = computed({
+	get() {
+		return locale.value;
+	},
+	set(v: "ar" | "en") {
+		setLocale(v);
+	},
 });
 
 const user = useCookie("user", {
@@ -188,7 +197,7 @@ const updateProfile = async (data: any) => {
 	try {
 		profileLoading.value = true;
 
-		await useApi().post("/me", data);
+		await useApi().patch("/me", data);
 
 		// Update user cookie
 		user.value = { ...user.value, ...data };
@@ -210,7 +219,7 @@ const changePassword = async (data: any) => {
 			throw new Error($t("dashboard.profile.error_password_match"));
 
 		// Mock API call - replace with actual API
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await useApi().post("/me", data);
 
 		// Reset form
 		Object.assign(passwordForm, {
@@ -221,7 +230,9 @@ const changePassword = async (data: any) => {
 
 		useToast().success($t("dashboard.profile.success_password"));
 	} catch (error: any) {
-		useToast().error(error.message || "حدث خطأ أثناء تغيير كلمة المرور");
+		useToast().error(
+			error.response.data.message || error.message || "حدث خطأ أثناء تغيير كلمة المرور",
+		);
 	} finally {
 		passwordLoading.value = false;
 	}

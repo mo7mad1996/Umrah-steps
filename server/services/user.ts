@@ -1,6 +1,5 @@
 import { User_DB_Schema, User_credentials } from "~/types/user";
 import User from "../utils/db/models/User";
-import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 export class UserService {
@@ -16,8 +15,6 @@ export class UserService {
 	async register(payload: User_DB_Schema) {
 		try {
 			const exists = await User.exists({ email: payload.email });
-
-			console.log("here", mongoose.models.User);
 
 			if (exists)
 				return createError({
@@ -46,9 +43,20 @@ export class UserService {
 		}
 	}
 
-	async update(payload: User_DB_Schema, _id: string) {
+	async update(payload: User_DB_Schema | { password: string }, _id: string) {
 		try {
 			return await User.findOneAndUpdate({ _id }, payload, { new: true });
+		} catch (err) {
+			return err;
+		}
+	}
+
+	async updatePassword({ currentPassword, newPassword }: any, u: any) {
+		try {
+			const valid = await u.checkPassword(currentPassword);
+			if (!valid) throw createError({ message: "كلمة المرور غير صحيحه", status: 400 });
+
+			return await this.update({ password: newPassword }, u.id);
 		} catch (err) {
 			return err;
 		}

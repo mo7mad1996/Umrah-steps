@@ -11,8 +11,11 @@ export default defineEventHandler(async (event) => {
 		switch (event.method) {
 			case "GET":
 				return user;
-
 			case "POST":
+				const payload = await readBody(event);
+				return await userService.updatePassword(payload, user);
+
+			case "PATCH":
 				const body = await readBody(event);
 				return await userService.update(body, user.id);
 

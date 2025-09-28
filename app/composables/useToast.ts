@@ -5,8 +5,6 @@ export const useToast = function () {
 	const dark = useCookie("dark");
 	const locale = useCookie("i18n_redirected");
 
-	console.log(locale.value);
-
 	updateGlobalOptions({
 		position: $toast.POSITION.BOTTOM_CENTER,
 

@@ -14,7 +14,7 @@
 					/>
 				</NuxtLink>
 
-				<nav class="-my-1 md:-my-2 hidden sm:block">
+				<nav class="-my-1 md:-my-2 hidden md:block">
 					<ul class="flex mx-auto w-fit h-full gap-1 md:gap-2">
 						<li v-for="(link, n) in links" :key="n">
 							<NuxtLink
@@ -73,7 +73,7 @@
 					<v-btn
 						@click="showMobileMenu = !showMobileMenu"
 						size="small"
-						class="min-w-0 p-2 sm:hidden"
+						class="min-w-0 p-2 md:!hidden"
 					>
 						<Icon name="mdi:menu" class="text-lg" />
 					</v-btn>
@@ -81,7 +81,7 @@
 			</div>
 
 			<!-- Mobile Navigation -->
-			<nav v-if="showMobileMenu" class="sm:hidden mt-4 pt-4 border-t border-white/20">
+			<nav v-if="showMobileMenu" class="md:!hidden mt-4 pt-4 border-t border-white/20">
 				<ul class="flex flex-col gap-2">
 					<li v-for="(link, n) in links" :key="n">
 						<NuxtLink

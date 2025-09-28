@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="min-h-full flex flex-col py-6 p-1 md:px-2 bg-white dark:!bg-gray-800 shadow-xl md:rounded-lg"
+		class="h-full flex flex-col py-6 p-1 md:px-2 bg-white overflow-auto dark:!bg-gray-800 shadow-xl md:rounded-lg"
 	>
 		<div>
 			<NuxtImg src="/logo/horizontal.png" class="h-16 hidden md:block" />
