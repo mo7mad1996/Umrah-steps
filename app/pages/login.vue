@@ -7,7 +7,7 @@
 				<NuxtImg
 					src="/logo/vertical.png"
 					alt="Almotamer logo"
-					class="aspect-square object-contain w-20 block"
+					class="aspect-square object-contain w-12 md:w-20 block"
 				/>
 			</nuxtLink>
 			<div class="flex flex-col dark:text-white">
@@ -63,6 +63,7 @@ const onSubmit: any = async (payload: User_credentials) => {
 		const res = await useApi().post("/login", payload);
 
 		const { user, token } = res.data;
+
 		u.value = user;
 		t.value = token;
 

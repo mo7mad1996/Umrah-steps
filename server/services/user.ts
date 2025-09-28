@@ -1,39 +1,56 @@
 import { User_DB_Schema, User_credentials } from "~/types/user";
 import User from "../utils/db/models/User";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 export class UserService {
-  async register(payload: User_DB_Schema) {
-    try {
-      const exists = await User.exists({ email: payload.email });
+	async getUserFromToken(token: string) {
+		try {
+			const payload: any = jwt.verify(token, process.env.JWT_SECRET || "Hello world");
+			return await User.findOne({ _id: payload.id });
+		} catch {
+			return null;
+		}
+	}
 
-      console.log("here", mongoose.models.User);
+	async register(payload: User_DB_Schema) {
+		try {
+			const exists = await User.exists({ email: payload.email });
 
-      if (exists)
-        return createError({
-          message: "البريد الالكتروني مستخدم من قبل",
-          status: 400,
-        });
+			console.log("here", mongoose.models.User);
 
-      const user = await User.create(payload);
+			if (exists)
+				return createError({
+					message: "البريد الالكتروني مستخدم من قبل",
+					status: 400,
+				});
 
-      return user.login(payload.password);
-    } catch (err) {
-      console.error(err);
-      return err;
-    }
-  }
+			const user = await User.create(payload);
 
-  async login(credentials: User_credentials) {
-    try {
-      const user = await User.findOne({ email: credentials.email });
+			return user.login(payload.password);
+		} catch (err) {
+			console.error(err);
+			return err;
+		}
+	}
 
-      if (!user)
-        throw createError({ message: "بيانات الدخول غير صالحه", status: 401 });
+	async login(credentials: User_credentials) {
+		try {
+			const user = await User.findOne({ email: credentials.email });
 
-      return user.login(credentials.password);
-    } catch (err) {
-      return err;
-    }
-  }
+			if (!user) throw createError({ message: "بيانات الدخول غير صالحه", status: 401 });
+
+			return user.login(credentials.password);
+		} catch (err) {
+			return err;
+		}
+	}
+
+	async update(payload: User_DB_Schema, _id: string) {
+		try {
+			return await User.findOneAndUpdate({ _id }, payload, { new: true });
+		} catch (err) {
+			return err;
+		}
+	}
 }

@@ -1,26 +1,52 @@
 <template>
-	<LayoutDashboardContent>
-		<template #header>
-			<LazyLayoutDashboardPageTitle :title="$t('dashboard.profile.title')" />
-		</template>
+	<div>
+		<LazyLayoutDashboardContent>
+			<template #header>
+				<LazyLayoutDashboardPageTitle
+					:title="$t('global.settings')"
+					:subTitle="$t('dashboard.profile.title')"
+				/>
+			</template>
 
-		<template>
-			<div class="space-y-6">
-				<!-- Personal Information Section -->
-				<div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-					<h3
-						class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-					>
-						<Icon name="mdi:account" class="text-primary" />
-						{{ $t("dashboard.profile.personal_info") }}
-					</h3>
+			<template v-slot="">
+				<div class="space-y-12">
+					<!-- Account Settings Section -->
+					<section>
+						<h3
+							class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+						>
+							<Icon name="mdi:cog" />
+							{{ $t("dashboard.profile.account_settings") }}
+						</h3>
 
-					<Form @submit="updateProfile" class="space-y-4">
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div class="space-y-4">
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div>
+									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+										{{ $t("dashboard.profile.language") }}
+									</label>
+									<InputsSelect v-model="locale" :items="langs" @update="(v) => setLocale(v)" />
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<hr />
+
+					<!-- Personal Information Section -->
+					<section class="">
+						<h3
+							class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+						>
+							<Icon name="mdi:account" />
+							{{ $t("dashboard.profile.personal_info") }}
+						</h3>
+
+						<Form @submit="updateProfile" class="gap-4 grid md:grid-cols-2">
 							<InputsText
+								class="md:col-span-2"
 								v-model="profileForm.name"
 								name="name"
-								rules="required"
 								:placeholder="$t('dashboard.profile.name')"
 								icon="mdi:account"
 							/>
@@ -29,26 +55,14 @@
 								name="email"
 								rules="required|email"
 								:placeholder="$t('dashboard.profile.email')"
-								:disabled="true"
 							/>
-						</div>
-
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<InputsPhone
 								v-model="profileForm.phone"
+								rules=""
 								name="phone"
 								:placeholder="$t('dashboard.profile.phone')"
 							/>
-							<InputsText
-								v-model="profileForm.role"
-								name="role"
-								:placeholder="$t('dashboard.profile.role')"
-								icon="mdi:shield-account"
-								:disabled="true"
-							/>
-						</div>
 
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
 								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 									{{ $t("dashboard.profile.account_created") }}
@@ -72,97 +86,44 @@
 								<div
 									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
 								>
-									الآن
+									<NuxtTime
+										:datetime="user.lastLogin"
+										day="numeric"
+										month="long"
+										year="numeric"
+										relative
+										:locale="locale"
+									/>
 								</div>
 							</div>
-						</div>
 
-						<div class="flex justify-end">
 							<InputsSubmit
+								class="md:col-span-2"
 								:text="$t('dashboard.profile.update_profile')"
 								:isLoading="profileLoading"
 							/>
-						</div>
-					</Form>
-				</div>
+						</Form>
+					</section>
 
-				<!-- Account Settings Section -->
-				<div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-					<h3
-						class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-					>
-						<Icon name="mdi:cog" class="text-primary" />
-						{{ $t("dashboard.profile.account_settings") }}
-					</h3>
+					<hr />
 
-					<div class="space-y-4">
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-							<div>
-								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-									{{ $t("dashboard.profile.language") }}
-								</label>
-								<InputsSelect
-									v-model="settingsForm.language"
-									:items="[
-										{ value: 'ar', title: 'العربية' },
-										{ value: 'en', title: 'English' },
-									]"
-									@update="changeLanguage"
-								/>
-							</div>
-							<div>
-								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-									{{ $t("dashboard.profile.theme") }}
-								</label>
-								<InputsSelect
-									v-model="settingsForm.theme"
-									:items="[
-										{ value: false, title: 'فاتح / Light' },
-										{ value: true, title: 'داكن / Dark' },
-									]"
-									@update="changeTheme"
-								/>
-							</div>
-						</div>
+					<!-- Security Section -->
+					<section>
+						<h3
+							class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+						>
+							<Icon name="mdi:shield-lock" class="text-primary" />
+							{{ $t("dashboard.profile.security") }}
+						</h3>
 
-						<div class="space-y-3">
-							<h4 class="text-md font-medium text-gray-900 dark:text-white">
-								{{ $t("dashboard.profile.notifications") }}
-							</h4>
-							<div class="space-y-2">
-								<InputsCheckbox
-									v-model="settingsForm.emailNotifications"
-									name="emailNotifications"
-									:title="$t('dashboard.profile.email_notifications')"
-								/>
-								<InputsCheckbox
-									v-model="settingsForm.smsNotifications"
-									name="smsNotifications"
-									:title="$t('dashboard.profile.sms_notifications')"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
+						<Form @submit.prevent="changePassword" class="space-y-4">
+							<InputsPassword
+								v-model="passwordForm.currentPassword"
+								name="currentPassword"
+								rules="required"
+								:placeholder="$t('dashboard.profile.current_password')"
+							/>
 
-				<!-- Security Section -->
-				<div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-					<h3
-						class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-					>
-						<Icon name="mdi:shield-lock" class="text-primary" />
-						{{ $t("dashboard.profile.security") }}
-					</h3>
-
-					<Form @submit="changePassword" class="space-y-4">
-						<InputsPassword
-							v-model="passwordForm.currentPassword"
-							name="currentPassword"
-							rules="required"
-							:placeholder="$t('dashboard.profile.current_password')"
-						/>
-
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<InputsPassword
 								v-model="passwordForm.newPassword"
 								name="newPassword"
@@ -175,50 +136,47 @@
 								rules="required|min:6"
 								:placeholder="$t('dashboard.profile.confirm_password')"
 							/>
-						</div>
 
-						<div class="flex justify-end">
 							<InputsSubmit
 								:text="$t('dashboard.profile.change_password')"
 								:isLoading="passwordLoading"
 							/>
-						</div>
-					</Form>
+						</Form>
+					</section>
 				</div>
-			</div>
-		</template>
-	</LayoutDashboardContent>
+			</template>
+		</LazyLayoutDashboardContent>
+	</div>
 </template>
 
 <script setup lang="ts">
+import { usePageTitle } from "#imports";
 import { Form } from "vee-validate";
 
-const { locale, setLocale } = useI18n();
+const { locale, setLocale, locales } = useI18n();
+
+const langs = computed(() => {
+	const i = locales.value || [];
+	return i.map((i) => ({ title: i.name, value: i.code }));
+});
+
 const user = useCookie("user", {
 	decode: (u) => JSON.parse(atob(u)),
+	encode: (u) => btoa(JSON.stringify(u)),
 	default: () => ({}),
 });
-const dark = useCookie("dark", { default: () => false });
 
 // Form data
 const profileForm = reactive({
 	name: user.value?.name || "",
 	email: user.value?.email || "",
 	phone: user.value?.phone || "",
-	role: user.value?.role || "user",
 });
 
 const passwordForm = reactive({
 	currentPassword: "",
 	newPassword: "",
 	confirmPassword: "",
-});
-
-const settingsForm = reactive({
-	language: locale.value,
-	theme: dark.value,
-	emailNotifications: true,
-	smsNotifications: false,
 });
 
 // Loading states
@@ -230,8 +188,7 @@ const updateProfile = async (data: any) => {
 	try {
 		profileLoading.value = true;
 
-		// Mock API call - replace with actual API
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await useApi().post("/me", data);
 
 		// Update user cookie
 		user.value = { ...user.value, ...data };
@@ -249,9 +206,8 @@ const changePassword = async (data: any) => {
 		passwordLoading.value = true;
 
 		// Validate password confirmation
-		if (data.newPassword !== data.confirmPassword) {
+		if (data.newPassword !== data.confirmPassword)
 			throw new Error($t("dashboard.profile.error_password_match"));
-		}
 
 		// Mock API call - replace with actual API
 		await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -269,16 +225,6 @@ const changePassword = async (data: any) => {
 	} finally {
 		passwordLoading.value = false;
 	}
-};
-
-const changeLanguage = ({ value }: any) => {
-	setLocale(value);
-	settingsForm.language = value;
-};
-
-const changeTheme = ({ value }: any) => {
-	dark.value = value;
-	settingsForm.theme = value;
 };
 
 // Metadata
