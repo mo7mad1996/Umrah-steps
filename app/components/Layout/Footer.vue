@@ -197,7 +197,7 @@
 			<div class="container mx-auto px-4 md:px-6 py-4 md:py-6">
 				<div class="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
 					<div class="text-white/80 text-xs md:text-sm text-center md:text-right">
-						© {{ new Date().getFullYear() }} {{ $t("site_name") }}.
+						© {{ new Date().getFullYear() }} {{ $t("global.site_name") }}.
 						{{ $t("footer.rights") }}
 					</div>
 

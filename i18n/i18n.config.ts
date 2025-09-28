@@ -1,31 +1,54 @@
+import navAr from "./lang/nav/ar.json";
+import navEn from "./lang/nav/en.json";
+import homeAr from "./lang/home/ar.json";
+import homeEn from "./lang/home/en.json";
+import authAr from "./lang/auth/ar.json";
+import authEn from "./lang/auth/en.json";
+import hotelsAr from "./lang/hotels/ar.json";
+import hotelsEn from "./lang/hotels/en.json";
+import contactAr from "./lang/contact/ar.json";
+import contactEn from "./lang/contact/en.json";
+import aboutAr from "./lang/about/ar.json";
+import aboutEn from "./lang/about/en.json";
+import footerAr from "./lang/footer/ar.json";
+import footerEn from "./lang/footer/en.json";
+import dashboardAr from "./lang/dashboard/ar.json";
+import dashboardEn from "./lang/dashboard/en.json";
+import vuetifyAr from "./lang/vuetify/ar.json";
+import vuetifyEn from "./lang/vuetify/en.json";
+import globalAr from "./lang/global/ar.json";
+import globalEn from "./lang/global/en.json";
+
 export default defineI18nConfig(() => ({
 	legacy: false,
-	locale: 'ar',
-	fallbackLocale: 'ar',
+	locale: "ar",
+	fallbackLocale: "ar",
+	defaultLocale: "ar",
+
 	messages: {
 		ar: {
-			...require("./lang/global/ar.json"),
-			nav: require("./lang/nav/ar.json"),
-			home: require("./lang/home/ar.json"),
-			auth: require("./lang/auth/ar.json"),
-			hotels: require("./lang/hotels/ar.json"),
-			contact: require("./lang/contact/ar.json"),
-			about: require("./lang/about/ar.json"),
-			footer: require("./lang/footer/ar.json"),
-			dashboard: require("./lang/dashboard/ar.json"),
-			$vuetify: require("./lang/vuetify/ar.json"),
+			nav: navAr,
+			home: homeAr,
+			auth: authAr,
+			hotels: hotelsAr,
+			contact: contactAr,
+			about: aboutAr,
+			footer: footerAr,
+			dashboard: dashboardAr,
+			$vuetify: vuetifyAr,
+			global: globalAr,
 		},
 		en: {
-			...require("./lang/global/en.json"),
-			nav: require("./lang/nav/en.json"),
-			home: require("./lang/home/en.json"),
-			hotels: require("./lang/hotels/en.json"),
-			auth: require("./lang/auth/en.json"),
-			contact: require("./lang/contact/en.json"),
-			dashboard: require("./lang/dashboard/en.json"),
-			about: require("./lang/about/en.json"),
-			footer: require("./lang/footer/en.json"),
-			$vuetify: require("./lang/vuetify/en.json"),
+			nav: navEn,
+			home: homeEn,
+			hotels: hotelsEn,
+			auth: authEn,
+			contact: contactEn,
+			about: aboutEn,
+			dashboard: dashboardEn,
+			footer: footerEn,
+			$vuetify: vuetifyEn,
+			global: globalEn,
 		},
 	},
 }));

@@ -28,7 +28,7 @@ watch(
 	[locale, message],
 	() => {
 		useHead({
-			titleTemplate: (title) => [title, t("site_name")].filter((i) => i).join(" ⁘ "),
+			titleTemplate: (title) => [title, t("global.site_name")].filter((i) => i).join(" ⁘ "),
 		});
 	},
 	{ immediate: true },

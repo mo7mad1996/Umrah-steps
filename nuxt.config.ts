@@ -21,14 +21,16 @@ export default defineNuxtConfig({
 
 	// modules
 	i18n: {
-		vueI18n: "./i18n/i18n.config.ts",
 		strategy: "no_prefix",
-		defaultLocale: 'ar',
+
+		defaultLocale: "ar",
 		detectBrowserLanguage: {
 			useCookie: true,
-			cookieKey: 'i18n_redirected',
-			redirectOn: 'root',
+			alwaysRedirect: false,
+			fallbackLocale: "ar",
 		},
+
+		vueI18n: "~~/i18n/i18n.config.ts",
 
 		locales: [
 			{ code: "ar", language: "ar-EG", dir: "rtl", name: "العربية" },
