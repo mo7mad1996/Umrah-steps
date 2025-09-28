@@ -8,5 +8,7 @@
 	"no_data": "No Data Found",
 	"settings": "Settings",
 	"error": "Error",
-	"reload": "Reload"
+	"reload": "Reload",
+	"back": "Back",
+	"cancel": "Cancel"
 }

@@ -7,7 +7,7 @@
 					:buttons="[
 						{
 							text: $t('dashboard.hotel.add'),
-							to: '/hotels/add',
+							to: '/dashboard/hotels/add',
 							icon: 'material-symbols:add',
 						},
 					]"
