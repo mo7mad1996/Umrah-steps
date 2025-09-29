@@ -7,14 +7,16 @@
 					:buttons="[
 						{
 							text: $t('dashboard.hotel.add'),
-							to: '/hotels/add',
+							to: '/dashboard/hotels/add',
 							icon: 'material-symbols:add',
 						},
 					]"
 				/>
 			</template>
 
-			<template v-slot="p"> </template>
+			<template v-slot="p">
+				<pre>{{ p }}</pre>
+			</template>
 		</LazyLayoutDashboardContent>
 	</div>
 </template>

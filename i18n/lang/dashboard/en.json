@@ -14,7 +14,72 @@
 	"logout": "Logout",
 
 	"hotel": {
-		"add": "Add a new hotel"
+		"add": "Add a new hotel",
+		"create": "Create Hotel",
+		"basic_info": "Basic Information",
+		"description_section": "Description",
+		"location_section": "Location",
+		"amenities_section": "Amenities & Services",
+		"pricing_section": "Pricing",
+		"contact_section": "Contact Information",
+		"image": "Hotel Image",
+		"image_placeholder": "Hotel image URL",
+		"rating": "Rating",
+		"star": "star",
+		"stars": "stars",
+		"status": "Status",
+		"status_active": "Active",
+		"status_inactive": "Inactive",
+		"success_created": "Hotel created successfully",
+		"error_creating": "Error creating hotel",
+
+		"name": {
+			"global": "Hotel Name",
+			"ar": "Name in Arabic",
+			"en": "Name in English"
+		},
+
+		"description": {
+			"ar": "Description in Arabic",
+			"en": "Description in English"
+		},
+
+		"description_placeholder": {
+			"ar": "Enter hotel description in Arabic",
+			"en": "Enter hotel description in English"
+		},
+
+		"city": {
+			"ar": "City in Arabic",
+			"en": "City in English"
+		},
+
+		"address": {
+			"ar": "Address in Arabic",
+			"en": "Address in English"
+		},
+
+		"amenities": {
+			"wifi": "Free WiFi",
+			"parking": "Parking",
+			"pool": "Swimming Pool",
+			"gym": "Fitness Center",
+			"restaurant": "Restaurant",
+			"spa": "Spa",
+			"room_service": "Room Service",
+			"laundry": "Laundry Service"
+		},
+
+		"min_price": "Minimum Price",
+		"max_price": "Maximum Price",
+		"currency": "Currency",
+		"currency_sar": "Saudi Riyal",
+		"currency_usd": "US Dollar",
+		"currency_eur": "Euro",
+		"phone": "Phone Number",
+		"email": "Email",
+		"website": "Website",
+		"manager": "Manager Name"
 	},
 
 	"profile": {

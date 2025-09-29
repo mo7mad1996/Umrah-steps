@@ -15,12 +15,71 @@
 
 	"hotel": {
 		"add": "اضافة فندق",
+		"create": "إنشاء فندق",
+		"basic_info": "المعلومات الأساسية",
+		"description_section": "الوصف",
+		"location_section": "الموقع",
+		"amenities_section": "المرافق والخدمات",
+		"pricing_section": "الأسعار",
+		"contact_section": "معلومات الاتصال",
+		"image": "صورة الفندق",
+		"image_placeholder": "رابط صورة الفندق",
+		"rating": "التقييم",
+		"star": "نجمة",
+		"stars": "نجوم",
+		"status": "الحالة",
+		"status_active": "نشط",
+		"status_inactive": "غير نشط",
+		"success_created": "تم إنشاء الفندق بنجاح",
+		"error_creating": "حدث خطأ أثناء إنشاء الفندق",
 
 		"name": {
 			"global": "اسم الفندق",
 			"ar": "الاسم بالعربي",
 			"en": "الاسم بالانجليزي"
-		}
+		},
+
+		"description": {
+			"ar": "الوصف بالعربية",
+			"en": "الوصف بالإنجليزية"
+		},
+
+		"description_placeholder": {
+			"ar": "أدخل وصف الفندق بالعربية",
+			"en": "أدخل وصف الفندق بالإنجليزية"
+		},
+
+		"city": {
+			"ar": "المدينة بالعربية",
+			"en": "المدينة بالإنجليزية"
+		},
+
+		"address": {
+			"ar": "العنوان بالعربية",
+			"en": "العنوان بالإنجليزية"
+		},
+
+		"amenities": {
+			"wifi": "واي فاي مجاني",
+			"parking": "موقف سيارات",
+			"pool": "مسبح",
+			"gym": "صالة رياضية",
+			"restaurant": "مطعم",
+			"spa": "سبا",
+			"room_service": "خدمة الغرف",
+			"laundry": "خدمة الغسيل"
+		},
+
+		"min_price": "أقل سعر",
+		"max_price": "أعلى سعر",
+		"currency": "العملة",
+		"currency_sar": "ريال سعودي",
+		"currency_usd": "دولار أمريكي",
+		"currency_eur": "يورو",
+		"phone": "رقم الهاتف",
+		"email": "البريد الإلكتروني",
+		"website": "الموقع الإلكتروني",
+		"manager": "اسم المدير"
 	},
 
 	"profile": {
