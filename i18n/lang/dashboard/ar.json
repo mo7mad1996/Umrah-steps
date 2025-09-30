@@ -18,6 +18,11 @@
 	"hotel": {
 		"add": "اضافة فندق",
 		"create": "إنشاء فندق",
+		"name": "الاسم",
+		"location": "الموقع",
+		"rate": "التقييم",
+		"actions": "الإجراءات",
+		"no_more_results": "لا توجد فنادق أخرى للتحميل",
 		"basic_info": "المعلومات الأساسية",
 		"description_section": "الوصف",
 		"location_section": "الموقع",
@@ -81,7 +86,10 @@
 		"phone": "رقم الهاتف",
 		"email": "البريد الإلكتروني",
 		"website": "الموقع الإلكتروني",
-		"manager": "اسم المدير"
+		"manager": "اسم المدير",
+		"edit": "تعديل",
+		"delete": "حذف",
+		"view": "عرض"
 	},
 
 	"profile": {

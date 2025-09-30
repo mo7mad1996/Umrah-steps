@@ -1,5 +1,5 @@
 <template>
-	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950 relative">
+	<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative">
 		<!-- background -->
 		<GlobalImageMask src="/images/hotel2.jpeg" />
 
@@ -7,22 +7,54 @@
 		<GlobalPageTitle :title="$t('hotels.title')" :subTitle="$t('hotels.subtitle')" />
 
 		<!-- Search Form Section -->
-		<div class="container mx-auto px-4 md:px-6">
-			<GlobalHotelsFormSearch />
+		<div class="container mx-auto px-4 md:px-6 -mt-8 relative z-10">
+			<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+				<GlobalHotelsFormSearch />
+			</div>
 		</div>
 
-		<section class="py-6 md:py-8">
+		<section class="py-8 md:py-12">
 			<div class="container mx-auto px-4 md:px-6">
 				<!-- Filters Section -->
 				<PagesHotelsFilters :filters="filters" />
 
 				<!-- Results Count -->
-				<div class="mb-4 md:mb-6">
-					<p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
-						تم العثور على
-						<span class="font-semibold text-primary">{{ filteredHotels.length }}</span>
-						فندق
-					</p>
+				<div class="mb-6 md:mb-8">
+					<div
+						class="flex items-center justify-between bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm"
+					>
+						<p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+							تم العثور على
+							<span class="font-bold text-emerald-600 dark:text-emerald-400 text-lg mx-1">{{
+								filteredHotels.length
+							}}</span>
+							فندق
+						</p>
+						<div class="flex gap-2">
+							<button
+								@click="filters.viewMode = 'grid'"
+								:class="[
+									'p-2 rounded-lg transition-all',
+									filters.viewMode === 'grid'
+										? 'bg-emerald-600 text-white shadow-md'
+										: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600',
+								]"
+							>
+								<Icon name="mdi:view-grid" class="text-xl" />
+							</button>
+							<button
+								@click="filters.viewMode = 'list'"
+								:class="[
+									'p-2 rounded-lg transition-all',
+									filters.viewMode === 'list'
+										? 'bg-emerald-600 text-white shadow-md'
+										: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600',
+								]"
+							>
+								<Icon name="mdi:view-list" class="text-xl" />
+							</button>
+						</div>
+					</div>
 				</div>
 
 				<!-- Hotels Grid/List -->
@@ -67,14 +99,18 @@
 				<!-- Load More Button -->
 				<div
 					v-if="status === 'success' && filteredHotels.length > 0 && hasMoreResults"
-					class="text-center mt-8 md:mt-12"
+					class="text-center mt-10 md:mt-14"
 				>
 					<button
 						@click="loadMore"
 						:disabled="loading"
-						class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 mx-auto shadow-lg hover:shadow-xl disabled:opacity-50"
+						class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium px-8 md:px-10 py-3 md:py-4 rounded-full transition-all duration-300 flex items-center gap-3 mx-auto shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
 					>
-						<Icon name="mdi:reload" :class="{ 'animate-spin': loading }" />
+						<Icon
+							name="mdi:reload"
+							:class="{ 'animate-spin': loading }"
+							class="text-xl"
+						/>
 						<span class="text-sm md:text-base">
 							{{ loading ? "جاري التحميل..." : "تحميل المزيد من الفنادق" }}
 						</span>
@@ -109,7 +145,8 @@ const displayedItems = ref(itemsPerPage);
 const loading = ref(false);
 
 // Fetch hotels data
-const { data: hotels, status, error, refresh } = useHotels(100); // Fetch more items for client-side filtering
+const { data: hotels, status, error, refresh, per_page: hotelPerPage } = useHotels();
+hotelPerPage.value = 100; // Fetch more items for client-side filtering
 
 // Computed properties
 const filteredHotels = computed(() => {
