@@ -1,10 +1,10 @@
 <template>
 	<!-- From Uiverse.io by clarencedion -->
-	<div class="flex items-center justify-center min-h-screen">
+	<div class="flex items-center justify-center h-24">
 		<div class="relative">
 			<div class="relative w-32 h-32">
 				<div
-					class="absolute w-full h-full rounded-full border-[3px] border-gray-100/10 border-r-[#0ff] border-b-[#0ff] animate-spin"
+					class="absolute w-full h-full rounded-full border-2 border-gray-100/10 border-r-[#0ff] border-b-[#0ff] animate-spin"
 					style="animation-duration: 3s"
 				></div>
 
