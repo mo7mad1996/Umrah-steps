@@ -1,8 +1,7 @@
 import type { Hotel } from "~/types/hotel";
 
 export const useHotels = (per_page: number = 12, page: number = 1) => {
-	const { locale } = useI18n();
-
+	const locale = useCookie("i18n_redirected");
 	const { data, error, status, refresh } = useAsyncData<Hotel[]>(
 		`hotels-${per_page}`,
 		() =>

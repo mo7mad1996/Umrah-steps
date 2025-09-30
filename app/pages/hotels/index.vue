@@ -89,7 +89,13 @@
 import type { Hotel } from "~/types/hotel";
 
 // Reactive data
-const filters = reactive({
+const filters = reactive<{
+	price: [number, number];
+	rate: [number, number];
+	distance: [number, number];
+	viewMode: "list" | "grid";
+	search: string;
+}>({
 	price: [0, Infinity],
 	rate: [0, 5],
 	distance: [0, Infinity],

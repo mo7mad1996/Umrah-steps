@@ -38,26 +38,6 @@ export default defineNuxtConfig({
 		],
 	},
 
-	vuetify: {
-		vuetifyOptions: {
-			theme: {
-				themes: {
-					light: {
-						colors: {
-							primary: "#10B981",
-							secondary: "#F59E0B",
-							accent: "#1E40AF",
-							error: "#EF4444",
-							warning: "#F59E0B",
-							info: "#3B82F6",
-							success: "#10B981",
-						},
-					},
-				},
-			},
-		},
-	},
-
 	// application
 	app: {
 		head: {
@@ -72,6 +52,7 @@ export default defineNuxtConfig({
 				},
 				{ name: "theme-color", content: "#42045d", media: "(prefers-color-scheme: dark)" },
 				{ name: "theme-color", content: "#865bea", media: "(prefers-color-scheme: light)" },
+				// { name: "color-scheme", content: "dark light" },
 			],
 			link: [
 				{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -101,5 +82,17 @@ export default defineNuxtConfig({
 	vite: {
 		mode: "development",
 		build: { sourcemap: false },
+	},
+
+	logLevel: "info",
+
+	vuetify: {
+		vuetifyOptions: {
+			theme: {
+				scope: "global",
+
+				defaultTheme: "system",
+			},
+		},
 	},
 });

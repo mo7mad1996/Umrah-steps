@@ -13,6 +13,8 @@
 	"profile_settings": "Profile Settings",
 	"logout": "Logout",
 
+	"forceLogout": "You must log in again",
+
 	"hotel": {
 		"add": "Add a new hotel",
 		"create": "Create Hotel",

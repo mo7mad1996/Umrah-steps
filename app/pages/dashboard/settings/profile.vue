@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<LazyLayoutDashboardContent>
+		<LazyLayoutDashboardContent :data="user" :error="error" :status="status" :refresh="refresh">
 			<template #header>
 				<LazyLayoutDashboardPageTitle
 					:title="$t('global.settings')"
@@ -71,7 +71,7 @@
 									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
 								>
 									<NuxtTime
-										:datetime="user.createdAt"
+										:datetime="user?.createdAt as Date"
 										day="numeric"
 										month="long"
 										year="numeric"
@@ -87,7 +87,7 @@
 									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
 								>
 									<NuxtTime
-										:datetime="user.lastLogin"
+										:datetime="(user?.lastLogin as Date)"
 										day="numeric"
 										month="long"
 										year="numeric"
@@ -150,11 +150,13 @@
 </template>
 
 <script setup lang="ts">
-import { usePageTitle } from "#imports";
 import { Form } from "vee-validate";
 
+// init
 const { locale, setLocale, locales } = useI18n();
+const { data: user, refresh, status, error } = useUser();
 
+// data
 const langs = computed(() => {
 	const i = locales.value || [];
 	return i.map((i) => ({ title: i.name, value: i.code }));
@@ -167,12 +169,6 @@ const lang = computed({
 	set(v: "ar" | "en") {
 		setLocale(v);
 	},
-});
-
-const user = useCookie("user", {
-	decode: (u) => JSON.parse(atob(u)),
-	encode: (u) => btoa(JSON.stringify(u)),
-	default: () => ({}),
 });
 
 // Form data
@@ -200,7 +196,7 @@ const updateProfile = async (data: any) => {
 		await useApi().patch("/me", data);
 
 		// Update user cookie
-		user.value = { ...user.value, ...data };
+		refresh();
 
 		useToast().success($t("dashboard.profile.success_update"));
 	} catch (error: any) {

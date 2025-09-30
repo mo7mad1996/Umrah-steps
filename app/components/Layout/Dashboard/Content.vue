@@ -10,9 +10,7 @@
 
 				<!-- loader slot -->
 				<slot name="loader" v-if="status == 'pending'" v-bind="{ status }">
-					<div
-						class="mx-auto my-10 w-8 h-8 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"
-					></div>
+					<GlobalLoading />
 				</slot>
 
 				<GlobalNoData :status="status" :data="data || []" />

@@ -33,10 +33,10 @@
 					variant="plain"
 					class="text-white has-[ul]:!overflow-x-visible has-[ul]:!overflow-y-visible !h-auto ltr:flex-row-reverse gap-1"
 				>
-					<v-btn @click="dark = !dark" size="small" class="min-w-0 p-2">
+					<v-btn @click="() => theme.toggle()" size="small" class="min-w-0 p-2">
 						<transition name="dark">
 							<Icon
-								v-if="dark"
+								v-if="theme.name.value == 'light'"
 								class="text-lg md:text-2xl"
 								name="line-md:sunny-filled-loop-to-moon-filled-loop-transition"
 							></Icon>
@@ -51,9 +51,9 @@
 						@update="changeLang"
 						v-model="locale"
 						:items="
-							locales.map((locale) => ({
-								title: locale.name,
-								value: locale.code,
+							locales.map((p: any) => ({
+								title: p.name,
+								value: p.code,
 							}))
 						"
 						class="relative"
@@ -114,10 +114,7 @@ const links = [
 const locale = ref(l.value);
 const changeLang = ({ value }: any) => setLocale(value);
 
-const dark = useCookie<boolean>("dark", {
-	default: () => false,
-	expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 356), // 1 year
-});
+const theme = useTheme();
 
 // Close mobile menu when route changes
 const route = useRoute();

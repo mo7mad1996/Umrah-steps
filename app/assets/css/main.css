@@ -1,17 +1,53 @@
 @import "vue-tel-input/vue-tel-input.css";
 
 * {
-  box-sizing: border-box !important;
+	box-sizing: border-box !important;
 }
 
 .font-cairo {
-  font-family: Cairo, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: Cairo, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .blockScrollX {
-  overflow-x: hidden !important;
+	overflow-x: hidden !important;
 }
 
 [role="alert"] {
-  @apply text-red-600 text-sm mt-1 ps-2;
+	@apply text-red-600 text-sm mt-1 ps-2;
+}
+
+/* perfect scrollbar */
+.blockScrollX .ps__rail-x {
+	display: none !important;
+}
+.blockScrollY .ps__rail-y {
+	display: none !important;
+}
+.ps__rail-y {
+	right: auto !important;
+	left: 0px !important;
+	height: 100% !important;
+	position: relative !important;
+	background: transparent !important;
+	border-radius: 50px !important;
+	padding: 2px;
+
+	&:hover {
+		background: #9d9f9f22 !important;
+	}
+
+	.ps__thumb-y {
+		right: auto !important;
+		background: transparent !important;
+		left: 2px;
+
+		&::after {
+			content: "";
+			background-color: #9d9f9f67;
+			height: 100%;
+			width: 100%;
+			display: block;
+			border-radius: 10px;
+		}
+	}
 }

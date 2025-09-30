@@ -3,15 +3,16 @@ export type User_credentials = {
 	password: string;
 };
 
-export type User_DB_Schema = User_credentials & {
-	name: string;
-	lastLogin?: Date;
-	phone?: string;
-	role: "user" | "admin";
-};
+export type User_DB_Schema = User_credentials &
+	default_schema & {
+		name: string;
+		lastLogin?: string | Date;
+		phone?: string;
+		role: "user" | "admin";
+	};
 
 export type default_schema = {
 	id: string;
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt: string | Date;
+	updatedAt: string | Date;
 };

@@ -1,22 +1,23 @@
 import mongoose from "mongoose";
-const config = useRuntimeConfig();
 let conn: typeof mongoose | null = null;
 
 export async function connectDB() {
-  try {
-    if (conn) return conn;
-    console.log("❕ connecting...");
+	const config = useRuntimeConfig();
 
-    conn = await mongoose.connect(config.db_uri);
-    console.log("✔ database connected successful");
+	try {
+		if (conn) return conn;
+		console.log("❕ connecting...");
 
-    return conn;
-  } catch (err) {
-    console.error("❌ Error can not connect");
-    console.error(err);
+		conn = await mongoose.connect(config.db_uri);
+		console.log("✔ database connected successful");
 
-    setTimeout(connectDB, 10000);
-  }
+		return conn;
+	} catch (err) {
+		console.error("❌ Error can not connect");
+		console.error(err);
+
+		setTimeout(connectDB, 10000);
+	}
 }
 
 export default defineNitroPlugin(connectDB);

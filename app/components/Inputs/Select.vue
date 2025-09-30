@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<label v-if="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+			{{ title }}
+		</label>
 		<v-menu :content-class="menuClass" :attach="!dontAttach">
 			<template v-slot:activator="{ props, isActive }">
 				<slot name="activator" v-bind="props">
@@ -14,7 +17,8 @@
 						<span class="flex-1">
 							<span v-if="selected" class="dark:!text-white text-black font-semibold">
 								{{
-									mappedList.find((i) => JSON.stringify(i.value) == JSON.stringify(selected))?.title
+									mappedList.find((i: any) => JSON.stringify(i.value) == JSON.stringify(selected))
+										?.title
 								}}
 							</span>
 							<span v-else class="text-gray-400">
@@ -91,6 +95,7 @@ const props = defineProps({
 	menuClass: { type: String, default: "" },
 	itemClass: { type: String, default: "" },
 	activeClass: { type: String, default: "" },
+	title: { type: String, default: "" },
 	items: { type: Array, default: [] },
 	defaultValue: { type: null, default: undefined },
 	name: { type: String, default: "" },
@@ -165,11 +170,7 @@ watch(
 	{ immediate: true },
 );
 
-watch(
-	container,
-	(v) => {
-		if (v) $initPerfectScrollbar(v);
-	},
-	{ immediate: true },
-);
+watch(container, (v) => {
+	if (v) $initPerfectScrollbar(v);
+});
 </script>

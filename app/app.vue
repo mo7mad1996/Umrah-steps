@@ -1,28 +1,29 @@
 <template>
-	<Html
-		:dir="localeProperties?.dir"
-		:lang="localeProperties?.code"
-		:class="`${localeProperties?.dir} ${dark && 'dark'}`"
-	>
-		<NuxtRouteAnnouncer />
-		<LayoutPageBorders>
-			<v-locale-provider :rtl="locale == 'ar'">
-				<v-app :theme="dark ? 'dark' : 'light'">
+	<NuxtRouteAnnouncer />
+	<v-locale-provider :rtl="locale == 'ar'">
+		<Html
+			:dir="localeProperties?.dir"
+			:lang="localeProperties?.code"
+			:class="`${localeProperties?.dir} ${theme.name}`"
+		>
+			<LayoutPageBorders>
+				<v-app>
 					<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
 						<NuxtLayout>
 							<NuxtPage />
 						</NuxtLayout>
 					</v-main>
 				</v-app>
-			</v-locale-provider>
-		</LayoutPageBorders>
-	</Html>
+			</LayoutPageBorders>
+		</Html>
+	</v-locale-provider>
 </template>
 
 <script setup lang="ts">
 const { localeProperties, locale, t } = useI18n();
 const { message } = useRouteAnnouncer();
-const dark = useCookie("dark");
+
+const theme = useTheme();
 
 watch(
 	[locale, message],

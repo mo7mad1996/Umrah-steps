@@ -43,11 +43,6 @@
 <script setup lang="ts">
 import type { User_credentials } from "~/types/user";
 import { Form } from "vee-validate";
-const u = useCookie("user", {
-	maxAge: 60 * 60 * 24 * 7,
-	encode: (val) => btoa(JSON.stringify(val)),
-	decode: (val) => JSON.parse(atob(val)),
-});
 const t = useCookie("token", { maxAge: 60 * 60 * 24 * 7 });
 
 // data
@@ -62,9 +57,8 @@ const onSubmit: any = async (payload: User_credentials) => {
 		isLoading.value = true;
 		const res = await useApi().post("/login", payload);
 
-		const { user, token } = res.data;
+		const { token } = res.data;
 
-		u.value = user;
 		t.value = token;
 
 		await navigateTo("/dashboard");

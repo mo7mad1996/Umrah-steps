@@ -25,12 +25,12 @@
 			<v-spacer />
 
 			<button
-				@click="dark = !dark"
+				@click="() => theme.toggle()"
 				class="flex items-center justify-center p-2 hover:bg-primary/10 relative overflow-hidden rounded-lg"
 			>
 				<transition name="dark" mode="out-in">
 					<Icon
-						v-if="dark"
+						v-if="true"
 						class="text-lg md:text-2xl"
 						name="line-md:sunny-filled-loop-to-moon-filled-loop-transition"
 					></Icon>
@@ -49,15 +49,15 @@
 				<Icon name="material-symbols:power-settings-new-outline" class="text-2xl" />
 				<span class="hidden md:block">{{ $t("auth.logout") }}</span>
 			</li>
-			<h3 class="bold opacity-60 text-sm text-center hidden md:block">{{ user.email }}</h3>
+			<h3 class="bold opacity-60 text-sm text-center hidden md:block">{{ user?.email }}</h3>
 		</ul>
 	</div>
 </template>
 
 <script setup lang="ts">
-const user = useCookie("user", { decode: (u) => JSON.parse(atob(u)) });
+const { data: user } = useUser();
 const token = useCookie("token");
-const dark = useCookie("dark", { default: () => false });
+const theme = useTheme();
 
 const links = [
 	{
@@ -95,7 +95,6 @@ const links = [
 // logout methods
 const logout = () => {
 	token.value = undefined;
-	user.value = undefined;
 	navigateTo("/login");
 };
 </script>
