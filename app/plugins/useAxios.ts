@@ -14,10 +14,15 @@ export default defineNuxtPlugin((nuxtApp) => {
 	});
 
 	api.interceptors.request.use((config) => {
-		const token = useCookie("token").value;
+		if (import.meta.client) {
+			const token = document.cookie
+				.split('; ')
+				.find(row => row.startsWith('token='))
+				?.split('=')[1];
 
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
+			if (token) {
+				config.headers.Authorization = `Bearer ${token}`;
+			}
 		}
 
 		return config;
