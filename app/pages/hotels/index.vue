@@ -30,30 +30,7 @@
 							}}</span>
 							فندق
 						</p>
-						<div class="flex gap-2">
-							<button
-								@click="filters.viewMode = 'grid'"
-								:class="[
-									'p-2 rounded-lg transition-all',
-									filters.viewMode === 'grid'
-										? 'bg-emerald-600 text-white shadow-md'
-										: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600',
-								]"
-							>
-								<Icon name="mdi:view-grid" class="text-xl" />
-							</button>
-							<button
-								@click="filters.viewMode = 'list'"
-								:class="[
-									'p-2 rounded-lg transition-all',
-									filters.viewMode === 'list'
-										? 'bg-emerald-600 text-white shadow-md'
-										: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600',
-								]"
-							>
-								<Icon name="mdi:view-list" class="text-xl" />
-							</button>
-						</div>
+						
 					</div>
 				</div>
 
