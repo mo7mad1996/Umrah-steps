@@ -1,22 +1,24 @@
 <template>
-	<!-- From Uiverse.io by clarencedion -->
-	<div class="flex items-center justify-center h-24">
-		<div class="relative">
-			<div class="relative w-16 h-16">
-				<div
-					class="absolute w-full h-full rounded-full border-2 border-gray-100/10 border-r-[#0ff] border-b-[#0ff] animate-spin"
-					style="animation-duration: 3s"
-				></div>
-
-				<div
-					class="absolute w-full h-full rounded-full border-[3px] border-gray-100/10 border-t-[#0ff] animate-spin"
-					style="animation-duration: 2s; animation-direction: reverse"
-				></div>
-			</div>
-
-			<div
-				class="absolute inset-0 bg-gradient-to-tr from-[#0ff]/10 via-transparent to-[#0ff]/5 animate-pulse rounded-full blur-sm"
-			></div>
-		</div>
-	</div>
+	<div class="hint">Loading...</div>
 </template>
+
+<style scoped>
+.hint {
+	font-size: 22px;
+	font-weight: bold;
+	color: transparent;
+
+	background: linear-gradient(110deg, #92999e 20%, #ffffff 40%, #92999e 60%);
+	background-size: 200% 100%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	animation: shine 2.2s linear infinite;
+	letter-spacing: 0.4px;
+}
+
+@keyframes shine {
+	to {
+		background-position-x: -200%;
+	}
+}
+</style>
