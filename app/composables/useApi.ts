@@ -1,5 +1,9 @@
 export const useApi = () => {
-  const { $axios } = useNuxtApp();
+  const nuxtApp = useNuxtApp();
 
-  return $axios;
+  if (!nuxtApp.$axios) {
+    throw new Error('[useApi] axios instance is not available. Make sure the plugin is loaded.');
+  }
+
+  return nuxtApp.$axios;
 };

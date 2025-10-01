@@ -6,18 +6,26 @@ export async function connectDB() {
 
 	try {
 		if (conn) return conn;
-		console.log("❕ connecting...");
+
+		if (!config.db_uri) {
+			console.warn("⚠️  NUXT_DB_URI is not set. Database connection skipped.");
+			return null;
+		}
+
+		console.log("❕ Connecting to database...");
 
 		conn = await mongoose.connect(config.db_uri);
-		console.log("✔ database connected successful");
+		console.log("✔ Database connected successfully");
 
 		return conn;
 	} catch (err) {
-		console.error("❌ Error can not connect");
+		console.error("❌ Database connection error:");
 		console.error(err);
 
 		setTimeout(connectDB, 10000);
 	}
 }
 
-export default defineNitroPlugin(connectDB);
+export default defineNitroPlugin(async () => {
+	await connectDB();
+});

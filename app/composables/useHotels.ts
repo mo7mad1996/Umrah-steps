@@ -6,7 +6,7 @@ export const useHotels = () => {
 	const per_page = ref(12);
 
 	const { data, error, status, refresh } = useAsyncData<Hotel[]>(
-		() => `hotels-${per_page.value}-${page.value}`,
+		`hotels-${per_page.value}-${page.value}`,
 		() =>
 			useApi()
 				.get("/hotels", {
