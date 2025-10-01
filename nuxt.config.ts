@@ -90,8 +90,40 @@ export default defineNuxtConfig({
 		vuetifyOptions: {
 			theme: {
 				scope: "global",
-
 				defaultTheme: "system",
+
+				themes: {
+					light: {
+						colors: {
+							primary: "#865bea", // light mode
+							secondary: "#5beab2",
+
+							accent: "#1E40AF",
+							error: "#EF4444",
+							warning: "#F59E0B",
+							info: "#3B82F6",
+							success: "#10B981",
+						},
+					},
+
+					dark: {
+						colors: {
+							primary: "#42045d", // dark mode
+							secondary: "#045d42",
+
+							accent: "#2563EB", // darker accent
+							error: "#DC2626", // darker red
+							warning: "#D97706", // darker amber
+							info: "#2563EB", // darker blue
+							success: "#059669", // darker green
+						},
+					},
+				},
+			},
+
+			ssr: {
+				clientWidth: 800,
+				clientHeight: 600,
 			},
 		},
 	},

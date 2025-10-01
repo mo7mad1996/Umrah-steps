@@ -2,7 +2,7 @@
 	<v-btn
 		:disabled="isLoading"
 		:loading="isLoading"
-		color="#865bea"
+		color="primary"
 		class="mt-6 w-full"
 		type="submit"
 		size="large"
