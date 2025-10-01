@@ -50,9 +50,8 @@ export default defineNuxtConfig({
 					name: "google-site-verification",
 					content: "luNweKGQ9McJMXvwDKrRjTYa1MM3t6NQfqNq7FpMsGI",
 				},
-				{ name: "theme-color", content: "#42045d", media: "(prefers-color-scheme: dark)" },
-				{ name: "theme-color", content: "#865bea", media: "(prefers-color-scheme: light)" },
-				// { name: "color-scheme", content: "dark light" },
+				{ name: "theme-color", content: "#0284C7", media: "(prefers-color-scheme: dark)" },
+				{ name: "theme-color", content: "#0EA5E9", media: "(prefers-color-scheme: light)" },
 			],
 			link: [
 				{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -95,10 +94,10 @@ export default defineNuxtConfig({
 				themes: {
 					light: {
 						colors: {
-							primary: "#865bea", // light mode
-							secondary: "#5beab2",
+							primary: "#0EA5E9",
+							secondary: "#10B981",
 
-							accent: "#1E40AF",
+							accent: "#F59E0B",
 							error: "#EF4444",
 							warning: "#F59E0B",
 							info: "#3B82F6",
@@ -108,14 +107,14 @@ export default defineNuxtConfig({
 
 					dark: {
 						colors: {
-							primary: "#42045d", // dark mode
-							secondary: "#045d42",
+							primary: "#0284C7",
+							secondary: "#059669",
 
-							accent: "#2563EB", // darker accent
-							error: "#DC2626", // darker red
-							warning: "#D97706", // darker amber
-							info: "#2563EB", // darker blue
-							success: "#059669", // darker green
+							accent: "#D97706",
+							error: "#DC2626",
+							warning: "#D97706",
+							info: "#2563EB",
+							success: "#059669",
 						},
 					},
 				},
