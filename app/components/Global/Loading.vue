@@ -1,10 +1,10 @@
 <template>
-	<div class="hint text-center p-5 ltr">Loading...</div>
+	<div class="hint text-center p-5 ltr">{{ $t("global.loading") }}...</div>
 </template>
 
 <style scoped>
 .hint {
-	animation: shine 2.2s linear infinite;
+	animation: shine 4s linear infinite;
 	background: linear-gradient(110deg, #92999e 20%, #fff, #92999e 60%);
 	background-size: auto;
 	background-clip: border-box;
@@ -17,7 +17,6 @@
 	letter-spacing: 0.4px;
 	width: fit-content;
 	margin: 1em auto;
-	direction: ltr;
 }
 
 @keyframes shine {

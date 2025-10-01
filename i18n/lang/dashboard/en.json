@@ -18,7 +18,7 @@
 	"hotel": {
 		"add": "Add a new hotel",
 		"create": "Create Hotel",
-		"name": "Name",
+
 		"location": "Location",
 		"rate": "Rating",
 		"actions": "Actions",

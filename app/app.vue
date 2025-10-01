@@ -4,7 +4,7 @@
 		<Html
 			:dir="localeProperties?.dir"
 			:lang="localeProperties?.code"
-			:class="`${localeProperties?.dir} ${theme.name}`"
+			:class="`${localeProperties?.dir} ${theme.name.value}`"
 		>
 			<LayoutPageBorders>
 				<v-app>

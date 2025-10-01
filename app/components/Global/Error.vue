@@ -1,14 +1,13 @@
 <template>
 	<div
-		class="mx-auto max-w-4xl text-center bg-white border rounded-2xl p-12"
+		class="mx-auto max-w-4xl text-center bg-white dark:bg-gray-800 border rounded-2xl p-12"
 		v-if="error && status == 'error'"
 	>
 		<v-icon icon="mdi-alert-circle-outline" class="text-red-500 mb-3" size="100" />
-		<h3 class="text-lg text-red-600 font-bold mb-2">
+		<h3 class="text-lg text-red-600 dark:text-red-400 font-bold mb-2">
 			{{ $t("global.error") }}
 		</h3>
-		<p class="text-sm text-zinc-700 my-4">{{ error?.message }}</p>
-		<p>{{ error }}</p>
+		<p class="text-sm text-zinc-700 dark:text-zinc-400 my-4">{{ error?.message }}</p>
 		<button
 			v-if="refresh"
 			class="flex gap-2 items-center rounded-md bg-rose-50 hover:bg-rose-100 shadow px-4 py-2 mx-auto my-4"
