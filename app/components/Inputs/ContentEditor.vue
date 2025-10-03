@@ -61,32 +61,6 @@
         </button>
 
         <div class="spacer"></div>
-        <!-- text align -->
-        <button
-          @click="editor.chain().focus().setTextAlign('left').run()"
-          :class="{ 'is-active': editor.isActive({ textAlign: 'left' }) }"
-        >
-          <v-icon icon="mdi-format-align-left" />
-        </button>
-        <button
-          @click="editor.chain().focus().setTextAlign('center').run()"
-          :class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
-        >
-          <v-icon icon="mdi-format-align-center" />
-        </button>
-        <button
-          @click="editor.chain().focus().setTextAlign('right').run()"
-          :class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
-        >
-          <v-icon icon="mdi-format-align-right" />
-        </button>
-        <button
-          @click="editor.chain().focus().setTextAlign('justify').run()"
-          :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
-        >
-          <v-icon icon="mdi-format-align-justify" />
-        </button>
-        <div class="spacer"></div>
 
         <button
           v-for="level in 6"
@@ -181,16 +155,13 @@ const { value, setValue } = useField(props.name, props.rules);
 const modelValue = defineModel();
 
 const editor = useEditor({
-  extensions: [
-    TiptapStarterKit,
-    TiptapTextAlign.configure({
-      types: ["heading", "paragraph"],
-    }),
-    TiptapPlaceholder.configure({
-      placeholder: props.placeholder,
-    }),
-  ],
+  extensions: [TiptapStarterKit],
   content: modelValue.value || value.value || "",
+  editorProps: {
+    attributes: {
+      class: "prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none",
+    },
+  },
 });
 
 watch(
