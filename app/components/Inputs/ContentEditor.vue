@@ -154,10 +154,6 @@
 <script setup>
 import { useField, ErrorMessage } from "vee-validate";
 
-import Placeholder from "@tiptap/extension-placeholder";
-import TextAlign from "@tiptap/extension-text-align";
-// export { Image as TiptapImage } from '@tiptap/extension-image';
-
 const props = defineProps({
   title: {
     type: String,
@@ -187,11 +183,10 @@ const modelValue = defineModel();
 const editor = useEditor({
   extensions: [
     TiptapStarterKit,
-
-    TextAlign.configure({
+    TiptapTextAlign.configure({
       types: ["heading", "paragraph"],
     }),
-    Placeholder.configure({
+    TiptapPlaceholder.configure({
       placeholder: props.placeholder,
     }),
   ],

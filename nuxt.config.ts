@@ -19,6 +19,10 @@ export default defineNuxtConfig({
 		"@nuxtjs/robots",
 	],
 
+	tiptap: {
+		prefix: "Tiptap",
+	},
+
 	// modules
 	i18n: {
 		strategy: "no_prefix",

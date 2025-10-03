@@ -31,6 +31,7 @@ const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 		amenities: [{ type: mongoose.Schema.Types.ObjectId, ref: "Amenity" }],
 		location: { type: locationSchema, required: true },
 		img: { type: String, default: "/logo/light.png" },
+		images: [{ type: String }],
 		rate: { type: Number, required: [true, "Rate is required"] },
 	},
 	{
@@ -41,6 +42,7 @@ const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 					id: this._id.toString(),
 					name: this.name[lang],
 					img: this.img,
+					images: this.images || [],
 					status: this.status,
 					rate: this.rate,
 					price: this.price,

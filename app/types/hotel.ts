@@ -10,6 +10,7 @@ export interface IHotelRequest {
 	};
 	amenities: string[];
 	img?: string;
+	images?: string[];
 	rate: number;
 }
 
@@ -21,6 +22,7 @@ export interface IHotelResponse {
 	content: string;
 	location: { city: string; address: string };
 	img: string;
+	images: string[];
 	status: string;
 	rate: number;
 	amenities: IAmenity[];
@@ -37,6 +39,7 @@ export interface IHotelResponseWithMultiLang {
 		address: { ar: string; en: string };
 	};
 	img: string;
+	images: string[];
 	rate: number;
 	status: string;
 	price: number;
