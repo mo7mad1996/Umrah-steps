@@ -38,7 +38,8 @@
 		"status_active": "Active",
 		"status_inactive": "Inactive",
 		"success_created": "Hotel created successfully",
-		"error_creating": "Error creating hotel",
+		"success_update": "Hotel updated successfully",
+		"error": "Error with hotel",
 
 		"name": {
 			"global": "Hotel Name",

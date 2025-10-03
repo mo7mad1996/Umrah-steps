@@ -38,7 +38,8 @@
 		"status_active": "نشط",
 		"status_inactive": "غير نشط",
 		"success_created": "تم إنشاء الفندق بنجاح",
-		"error_creating": "حدث خطأ أثناء إنشاء الفندق",
+		"success_update": "تم تعديل الفندق بنجاح",
+		"error": "حدث خطأ أثناء إنشاء الفندق",
 
 		"name": {
 			"global": "اسم الفندق",

@@ -11,5 +11,6 @@
 	"error": "Error",
 	"reload": "Reload",
 	"back": "Back",
-	"cancel": "Cancel"
+	"cancel": "Cancel",
+	"icon": "Icon"
 }

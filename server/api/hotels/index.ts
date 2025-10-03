@@ -1,5 +1,5 @@
 import { Query } from "~/types/Query";
-import { HotelService } from "../services/hotel";
+import { HotelService } from "../../services/hotel";
 import { IHotelRequest } from "~/types/hotel";
 
 const hotelService = new HotelService();

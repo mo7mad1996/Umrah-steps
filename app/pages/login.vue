@@ -43,7 +43,6 @@
 <script setup lang="ts">
 import type { User_credentials } from "~/types/user";
 import { Form } from "vee-validate";
-const t = useCookie("token", { maxAge: 60 * 60 * 24 * 7 });
 
 // data
 const isLoading = ref(false);
@@ -58,10 +57,7 @@ const onSubmit: any = async (payload: User_credentials) => {
 		const res = await useApi().post("/login", payload);
 
 		const { token } = res.data;
-
-		t.value = token;
-
-		await navigateTo("/dashboard");
+		if (token) await navigateTo("/dashboard");
 	} catch (err: any) {
 		useToast().error(err?.response?.data?.message || err.message || "An error occurred");
 	} finally {

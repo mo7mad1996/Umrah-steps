@@ -23,6 +23,7 @@
 				v-model="modelValue"
 				:inputmode="inputmode"
 				:disabled="disabled"
+				@keydown="inputCheck"
 			/>
 		</div>
 
@@ -47,4 +48,15 @@ const props = defineProps({
 });
 
 const modelValue = defineModel();
+
+const inputCheck = (e) => {
+	const regx = /[^\d.]/g;
+
+	if (
+		props.type === "number" &&
+		regx.test(e.key) &&
+		!["backspace", "arrowleft", "arrowright"].includes(e.key.toLowerCase())
+	)
+		return e.preventDefault();
+};
 </script>

@@ -1,6 +1,6 @@
 <template>
-	<div class="relative h-dvh w-dvw box-border md:p-2 bg-gray-200 dark:bg-stone-900 overflow-hidden">
-		<div class="flex h-full w-full" ref="PerfectScroll">
+	<div class="relative h-dvh w-dvw box-border bg-gray-200 dark:bg-stone-900 overflow-hidden">
+		<div class="flex h-full w-full mb-2" ref="PerfectScroll">
 			<!-- Sidebar (Large Screens) -->
 			<div class="sticky top-0 md:p-2">
 				<LayoutDashboardSidebar />
@@ -18,7 +18,11 @@
 const PerfectScroll = ref<HTMLElement>();
 
 const { $initPerfectScrollbar }: any = useNuxtApp();
-watch(PerfectScroll, (v) => {
-	if (v) $initPerfectScrollbar(v);
-});
+watch(
+	PerfectScroll,
+	(v) => {
+		if (v) $initPerfectScrollbar(v);
+	},
+	{ immediate: true },
+);
 </script>

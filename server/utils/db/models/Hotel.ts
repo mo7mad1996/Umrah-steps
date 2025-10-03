@@ -13,7 +13,10 @@ const langSchema = new mongoose.Schema(
 );
 
 const locationSchema = new mongoose.Schema(
-	{ city: { type: langSchema, required: [true, required_error] } },
+	{
+		city: { type: langSchema, required: [true, required_error] },
+		address: { type: langSchema, required: false, default: "" },
+	},
 	{ _id: false },
 );
 
@@ -23,7 +26,9 @@ const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 		name: { type: langSchema, required: true },
 		description: { type: langSchema, required: true },
 		content: { type: langSchema, required: true },
-
+		status: { type: String, default: "active" },
+		price: { type: Number, required: true },
+		amenities: [{ type: mongoose.Schema.Types.ObjectId, ref: "Amenity" }],
 		location: { type: locationSchema, required: true },
 		img: { type: String, default: "/logo/light.png" },
 		rate: { type: Number, required: [true, "Rate is required"] },
@@ -36,13 +41,17 @@ const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 					id: this._id.toString(),
 					name: this.name[lang],
 					img: this.img,
+					status: this.status,
 					rate: this.rate,
+					price: this.price,
+					amenities: this.amenities,
 					content: this.content[lang],
 					createdAt: this.createdAt,
 					updatedAt: this.updatedAt,
 					description: this.description[lang],
 					location: {
 						city: this.location.city[lang],
+						address: this.location.address[lang],
 					},
 				};
 			},

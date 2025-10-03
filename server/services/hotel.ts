@@ -41,4 +41,33 @@ export class HotelService {
 			return err;
 		}
 	}
+
+	async update(id: string, body: IHotelRequest) {
+		try {
+			const hotel = await Hotel.findOneAndUpdate({ _id: id }, body, { new: true });
+
+			return hotel;
+		} catch (err) {
+			return err;
+		}
+	}
+
+	async delete(id: string) {
+		try {
+			const hotel = await Hotel.findOneAndDelete({ _id: id });
+			return hotel;
+		} catch (err) {
+			return err;
+		}
+	}
+
+	async get(id: string, query: Query, lang: "ar" | "en") {
+		try {
+			const hotel = await Hotel.findOne({ _id: id });
+			if (query.useLang == "true") return hotel.lang(lang);
+			return hotel;
+		} catch (err) {
+			return err;
+		}
+	}
 }
