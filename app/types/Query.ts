@@ -1,7 +1,7 @@
 export type Query = {
-  page?: number
-  per_page?: number
-  includes?: string
-  query?: any
-  lang?: string
-}
+	page?: number;
+	per_page?: number;
+	includes?: string;
+	query?: any;
+	useLang?: string;
+};

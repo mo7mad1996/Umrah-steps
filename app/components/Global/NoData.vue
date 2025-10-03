@@ -5,12 +5,7 @@
 	>
 		<div class="select-none">
 			<div class="image flex justify-center">
-				<img
-					loading="lazy"
-					src="~/assets/images/no-data.png"
-					width="150"
-					alt="orphans society image"
-				/>
+				<img loading="lazy" src="~/assets/images/no-data.png" width="150" alt="No data image" />
 			</div>
 			<h6 class="text-center">{{ $t("global.no_data") }}</h6>
 		</div>
@@ -18,14 +13,5 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-	status: {
-		type: String,
-		required: true,
-	},
-	data: {
-		type: null,
-		required: true,
-	},
-});
+const props = defineProps<{ status: string; data: any[] | null }>();
 </script>

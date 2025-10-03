@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { IHotelResponse, IHotelResponseWithMultiLang } from "~/types/hotel";
 
 const required_error = "هذا الحقل مطلوب";
 
@@ -17,7 +18,7 @@ const locationSchema = new mongoose.Schema(
 );
 
 // Hotel schema
-const hotelSchema = new mongoose.Schema(
+const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 	{
 		name: { type: langSchema, required: true },
 		description: { type: langSchema, required: true },
@@ -30,10 +31,15 @@ const hotelSchema = new mongoose.Schema(
 	{
 		timestamps: true,
 		methods: {
-			lang(lang: "ar" | "en") {
+			lang(lang: "ar" | "en"): IHotelResponse {
 				return {
-					...this.toJSON(),
+					id: this._id.toString(),
 					name: this.name[lang],
+					img: this.img,
+					rate: this.rate,
+					content: this.content[lang],
+					createdAt: this.createdAt,
+					updatedAt: this.updatedAt,
 					description: this.description[lang],
 					location: {
 						city: this.location.city[lang],
@@ -46,6 +52,8 @@ const hotelSchema = new mongoose.Schema(
 				ret.id = ret._id.toString();
 				delete ret._id;
 				delete ret.__v;
+
+				return ret;
 			},
 		},
 	},

@@ -29,7 +29,7 @@ export default {
 					dark: "#4B6B9C", // Dark mode
 				},
 				secondary: {
-					// y
+					// yellow
 					DEFAULT: "#F6CF63", // Light mode
 					dark: "#EAB308", // Dark mode
 				},

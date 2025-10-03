@@ -1,5 +1,6 @@
 export const useApi = () => {
 	const nuxtApp = useNuxtApp();
+	const token = useCookie("token");
 
 	if (!nuxtApp.$axios)
 		throw new Error("[useApi] axios instance is not available. Make sure the plugin is loaded.");
@@ -9,10 +10,12 @@ export const useApi = () => {
 		(error) => {
 			if (error.response?.status === 401) {
 				// nuxtApp.$router.push("/login");
+				token.value = undefined;
 				navigateTo("/login");
 			}
 
-			return Promise.reject(error);
+			console.error(error);
+			return error;
 		},
 	);
 

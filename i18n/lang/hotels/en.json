@@ -6,5 +6,7 @@
 	"rating": "Rating",
 	"distance": "Distance from Haram",
 	"priceRange": "Price Range",
-	"viewMode": "View mode"
+	"viewMode": "View mode",
+	"got": "We found",
+	"hotels": "hotels"
 }

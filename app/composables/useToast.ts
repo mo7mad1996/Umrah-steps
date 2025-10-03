@@ -1,11 +1,12 @@
+import { createError } from "#app";
 import { updateGlobalOptions } from "vue3-toastify";
 
 export const useToast = function () {
 	const { $toast } = useNuxtApp();
+	if (!$toast)
+		return createError("toast instance is not available. Make sure the plugin is loaded.");
 
-	if (!$toast) throw new Error("toast instance is not available. Make sure the plugin is loaded.");
-	const theme = useTheme();
-	const { locale } = useI18n();
+	// const { locale } = useI18n();
 
 	updateGlobalOptions({
 		position: $toast.POSITION.BOTTOM_CENTER,
@@ -18,8 +19,8 @@ export const useToast = function () {
 		toastClassName: "dark:!bg-black/90 !bg-white/90 rounded-lg shadow-lg",
 		containerClassName: "!p-1 ",
 
-		theme: theme.name.value as "dark" | "light",
-		rtl: locale.value === "ar",
+		// theme: theme.name.value as "dark" | "light",
+		// rtl: locale.value === "ar",
 		autoClose: 2600,
 	});
 

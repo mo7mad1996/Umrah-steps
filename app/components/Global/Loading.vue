@@ -4,24 +4,26 @@
 
 <style scoped>
 .hint {
-	animation: shine 4s linear infinite;
-	background: linear-gradient(110deg, #92999e 20%, #fff, #92999e 60%);
+	animation: shine 2s linear infinite;
+	background: linear-gradient(70deg, #7b7b7bc0 30%, #7b7b7b21, #7b7b7bc0 70%);
+
+	@apply text-black/15 dark:text-white/10;
 	background-size: auto;
 	background-clip: border-box;
 	background-clip: text;
 	-webkit-background-clip: text;
-	background-size: 400% 100%;
-	color: transparent;
+	background-size: 200% 200%;
 	font-size: 22px;
 	font-weight: 700;
 	letter-spacing: 0.4px;
 	width: fit-content;
 	margin: 1em auto;
+	background-position-x: 200%;
 }
 
 @keyframes shine {
 	to {
-		background-position-x: -400%;
+		background-position-x: -200%;
 	}
 }
 </style>

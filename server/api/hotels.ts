@@ -1,29 +1,29 @@
-import { Query } from "~/types/Query"
-import { HotelService } from "../services/hotel"
-import { Hotel_DB_Schema } from "~/types/hotel"
+import { Query } from "~/types/Query";
+import { HotelService } from "../services/hotel";
+import { IHotelRequest } from "~/types/hotel";
 
-const hotelService = new HotelService()
+const hotelService = new HotelService();
 
 export default defineEventHandler(async (event) => {
-  try {
-    const query = getQuery<Query>(event)
+	try {
+		const query = getQuery<Query>(event);
+		const lang = (getCookie(event, "i18n_redirected") as "ar" | "en") || "ar";
 
-    switch (event.method) {
-      case "GET":
-        return await hotelService.list(query)
+		switch (event.method) {
+			case "GET":
+				return await hotelService.list(query, lang);
 
-      case "POST":
-        const body = await readBody(event)
-        return await hotelService.create(body as Hotel_DB_Schema)
+			case "POST":
+				const body: IHotelRequest = await readBody(event);
+				return await hotelService.create(body);
 
-      default:
-        throw createError({
-          message: "method is not allowed.",
-          status: 405,
-        })
-    }
-  } catch (err: any) {
-    return err
-  }
-})
-
+			default:
+				throw createError({
+					message: "method is not allowed.",
+					status: 405,
+				});
+		}
+	} catch (err: any) {
+		return err;
+	}
+});

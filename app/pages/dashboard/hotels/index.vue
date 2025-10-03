@@ -137,7 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Hotel } from "~/types/hotel";
+import type { IHotelResponse } from "~/types/hotel";
 
 usePageTitle("dashboard.hotels");
 definePageMeta({
@@ -146,7 +146,7 @@ definePageMeta({
 });
 
 const { data: hotels, error, status, refresh, page, per_page } = useHotels();
-const displayedHotels = ref<Hotel[]>([]);
+const displayedHotels = ref<IHotelResponse[]>([]);
 const loadingMore = ref(false);
 const loadMoreTrigger = ref<HTMLElement | null>(null);
 
@@ -182,28 +182,6 @@ const loadMore = async () => {
 
 	loadingMore.value = false;
 };
-
-// Intersection Observer for infinite scroll
-onMounted(() => {
-	if (!loadMoreTrigger.value) return;
-
-	const observer = new IntersectionObserver(
-		(entries) => {
-			if (entries[0].isIntersecting && hasMore.value && !loadingMore.value) {
-				loadMore();
-			}
-		},
-		{
-			rootMargin: "100px",
-		},
-	);
-
-	observer.observe(loadMoreTrigger.value);
-
-	onUnmounted(() => {
-		observer.disconnect();
-	});
-});
 
 // Actions
 const editHotel = (id: string) => {

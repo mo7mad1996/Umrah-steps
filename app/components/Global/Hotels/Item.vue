@@ -63,9 +63,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { Hotel } from "~/types/hotel";
+import type { IHotelResponse } from "~/types/hotel";
 
-const props = defineProps<{ hotel: Hotel }>();
+const props = defineProps<{ hotel: IHotelResponse }>();
 
 const is_fav = computed({
 	set(v: boolean) {
