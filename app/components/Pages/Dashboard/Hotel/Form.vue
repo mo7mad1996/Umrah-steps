@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { IHotelRequest, IHotelResponseWithMultiLang } from "~/types/hotel";
 import { Form } from "vee-validate";
-const { locale } = useI18n();
+const { locale, t: $t } = useI18n();
+const toast = useToast();
 const props = defineProps<{
 	isEdit?: boolean;
 	initialData?: IHotelResponseWithMultiLang;
@@ -51,16 +52,16 @@ const onSubmit = async (data: IHotelRequest) => {
 		let response = null;
 		if (props.isEdit) {
 			response = await useApi().patch(`/hotels/${route.params.id}`, data);
-			useToast().success($t("dashboard.hotel.success_updated"));
+			toast.success($t("dashboard.hotel.success_updated"));
 		} else {
 			response = await useApi().post("/hotels", data);
-			useToast().success($t("dashboard.hotel.success_created"));
+			toast.success($t("dashboard.hotel.success_created"));
 		}
 
 		router.push("/dashboard/hotels");
 	} catch (error: any) {
 		console.error("Error", error);
-		useToast().error(
+		toast.error(
 			error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"),
 		);
 	} finally {
@@ -72,14 +73,14 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 	try {
 		isLoadingAmenity.value = true;
 		const response = await useApi().post("/amenity", data);
-		useToast().success($t("dashboard.hotel.success_created"));
+		toast.success($t("dashboard.hotel.success_created"));
 		resetForm();
 
 		console.log(response);
 		refreshAmenity();
 	} catch (error: any) {
 		console.error("Error", error);
-		useToast().error(
+		toast.error(
 			error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"),
 		);
 	} finally {

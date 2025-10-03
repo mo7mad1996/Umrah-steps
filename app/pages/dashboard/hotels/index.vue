@@ -167,6 +167,8 @@ definePageMeta({
 	middleware: "auth",
 });
 
+const { t: $t } = useI18n();
+const toast = useToast();
 const { data: hotels, error, status, refresh, page, per_page, finished } = useHotels();
 
 const deleteDialog = ref(false);
@@ -188,13 +190,13 @@ const deleteHotel = async () => {
 	try {
 		isDeleting.value = true;
 		await useApi().delete(`/hotels/${hotelToDelete.value.id}`);
-		useToast().success($t("dashboard.hotel.success_deleted"));
+		toast.success($t("dashboard.hotel.success_deleted"));
 		deleteDialog.value = false;
 		hotelToDelete.value = null;
 		await refresh();
 	} catch (error: any) {
 		console.error("Error deleting hotel:", error);
-		useToast().error(
+		toast.error(
 			error?.response?.data?.message || error?.message || $t("dashboard.hotel.delete_error"),
 		);
 	} finally {

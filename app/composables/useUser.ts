@@ -2,6 +2,7 @@ import type { User_DB_Schema } from "~/types/user";
 
 export const useUser = () => {
 	const { t } = useI18n();
+	const toast = process.client ? useToast() : null;
 
 	const { data, error, status, refresh } = useAsyncData(
 		`me`,
@@ -15,12 +16,12 @@ export const useUser = () => {
 	);
 
 	watch(error, (val) => {
-		if (val && process.client) {
+		if (val && process.client && toast) {
 			console.error(val);
 			const token = useCookie("token");
 			token.value = undefined;
 			navigateTo("/login");
-			useToast().error(t("dashboard.forceLogout"));
+			toast.error(t("dashboard.forceLogout"));
 		}
 	});
 
