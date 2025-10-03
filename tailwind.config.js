@@ -12,6 +12,8 @@ export default {
 		"./app/*.vue",
 	],
 
+	important: false,
+
 	theme: {
 		extend: {
 			transitionDuration: {
@@ -23,24 +25,25 @@ export default {
 			colors: {
 				// base color
 				primary: {
-					DEFAULT: "#865bea", // light mode
-					dark: "#42045d", // dark mode
+					DEFAULT: "#6D8BBE", // Light mode
+					dark: "#4B6B9C", // Dark mode
 				},
-				harmony1: {
-					DEFAULT: "#5beab2",
-					dark: "#045d42",
+				secondary: {
+					// y
+					DEFAULT: "#F6CF63", // Light mode
+					dark: "#EAB308", // Dark mode
 				},
-				harmony2: {
-					DEFAULT: "#ea865b",
-					dark: "#5d2104",
+				accent: {
+					DEFAULT: "#F18E51", // Light mode
+					dark: "#D97706", // Dark mode
 				},
-				gold: {
-					DEFAULT: "#ad8b30",
-					dark: "#3a2c0a",
+				background: {
+					DEFAULT: "#FDF9F8", // Light mode
+					dark: "#111827", // Dark mode
 				},
-				goldContrast: {
-					DEFAULT: "#306aad",
-					dark: "#0a1e3a",
+				surface: {
+					DEFAULT: "#322E2A", // Light mode (charcoal)
+					dark: "#1F2937", // Dark mode (dark gray)
 				},
 			},
 		},

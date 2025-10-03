@@ -1,5 +1,7 @@
 <template>
-	<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative">
+	<div
+		class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative"
+	>
 		<!-- background -->
 		<GlobalImageMask src="/images/hotel2.jpeg" />
 
@@ -25,12 +27,11 @@
 					>
 						<p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
 							تم العثور على
-							<span class="font-bold text-emerald-600 dark:text-emerald-400 text-lg mx-1">{{
-								filteredHotels.length
-							}}</span>
+							<span class="font-bold text-emerald-600 dark:text-emerald-400 text-lg mx-1">
+								{{ filteredHotels.length }}
+							</span>
 							فندق
 						</p>
-						
 					</div>
 				</div>
 
@@ -67,7 +68,7 @@
 				<!-- No Results -->
 				<div v-if="status === 'success' && filteredHotels.length === 0" class="text-center py-12">
 					<div class="text-gray-400 mb-4">
-						<Icon name="mdi:hotel-off" class="text-6xl" />
+						<Icon name="mdi:car-multiple" class="text-6xl" />
 					</div>
 					<h3 class="text-lg font-medium text-gray-600 dark:text-gray-400 mb-2">لا توجد فنادق</h3>
 					<p class="text-gray-500 dark:text-gray-500">جرب تغيير معايير البحث</p>
@@ -83,11 +84,7 @@
 						:disabled="loading"
 						class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium px-8 md:px-10 py-3 md:py-4 rounded-full transition-all duration-300 flex items-center gap-3 mx-auto shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
 					>
-						<Icon
-							name="mdi:reload"
-							:class="{ 'animate-spin': loading }"
-							class="text-xl"
-						/>
+						<Icon name="mdi:reload" :class="{ 'animate-spin': loading }" class="text-xl" />
 						<span class="text-sm md:text-base">
 							{{ loading ? "جاري التحميل..." : "تحميل المزيد من الفنادق" }}
 						</span>

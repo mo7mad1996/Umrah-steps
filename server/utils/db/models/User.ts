@@ -31,13 +31,15 @@ const userSchema = new mongoose.Schema<User_DB_Schema & default_schema & methods
 				const isValid = await this.checkPassword(password);
 				if (!isValid) throw createError({ message, status: 401 });
 
-				this.lastLogin = new Date();
-				await this.save();
-
-				return {
+				const response = {
 					user: this.toJSON(),
 					token: generateJWT(this.toJSON()),
 				};
+
+				this.lastLogin = new Date();
+				await this.save();
+
+				return response;
 			},
 		},
 		timestamps: true,

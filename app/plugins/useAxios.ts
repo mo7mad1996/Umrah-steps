@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default defineNuxtPlugin((nuxtApp) => {
 	const config = useRuntimeConfig();
+	console.clear();
 
 	const baseURL = config.public.baseUrl || "/api";
 
@@ -30,13 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 	api.interceptors.response.use(
 		(response) => response,
-		(error) => {
-			if (error.response.status === 401 && process.client) {
-				nuxtApp.$router.push("/login");
-			}
-			console.error("[Axios Error]", error.message, error.response?.data);
-			return Promise.reject(error);
-		},
+		(error) => Promise.reject(error),
 	);
 
 	return { provide: { axios: api } };

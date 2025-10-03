@@ -219,8 +219,8 @@
 		<!-- Floating Back to Top Button -->
 		<button
 			@click="scrollToTop"
-			v-show="showBackToTop"
-			class="fixed bottom-4 md:bottom-6 ltr:right-4 ltr:md:right-6 rtl:left-4 rtl:md:left-6 w-10 h-10 md:w-12 md:h-12 bg-secondary hover:bg-secondary/90 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-50"
+			:class="{ 'opacity-0 pointer-events-none': !showBackToTop }"
+			class="fixed bottom-4 md:bottom-6 ltr:right-4 ltr:md:right-6 rtl:left-4 rtl:md:left-6 w-10 h-10 md:w-12 md:h-12 bg-primary-dark hover:bg-primary/90 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 focus-within:scale-110 z-50"
 		>
 			<Icon name="mdi:chevron-up" class="text-lg md:text-xl text-white" />
 		</button>

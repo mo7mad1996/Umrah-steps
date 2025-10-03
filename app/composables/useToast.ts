@@ -2,6 +2,8 @@ import { updateGlobalOptions } from "vue3-toastify";
 
 export const useToast = function () {
 	const { $toast } = useNuxtApp();
+
+	if (!$toast) throw new Error("toast instance is not available. Make sure the plugin is loaded.");
 	const theme = useTheme();
 	const { locale } = useI18n();
 

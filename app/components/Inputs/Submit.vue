@@ -3,7 +3,7 @@
 		:disabled="isLoading"
 		:loading="isLoading"
 		color="primary"
-		class="mt-6 w-full"
+		class="mt-6 w-full block"
 		type="submit"
 		size="large"
 	>

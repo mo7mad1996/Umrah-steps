@@ -34,7 +34,6 @@ export class UserService {
 	async login(credentials: User_credentials) {
 		try {
 			const user = await User.findOne({ email: credentials.email });
-			console.log(user);
 			if (!user) throw createError({ message: "بيانات الدخول غير صالحه", status: 401 });
 
 			return user.login(credentials.password);

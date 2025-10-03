@@ -1,5 +1,9 @@
 @import "vue-tel-input/vue-tel-input.css";
 
+html.dark {
+	color-scheme: dark;
+}
+
 * {
 	box-sizing: border-box !important;
 }
