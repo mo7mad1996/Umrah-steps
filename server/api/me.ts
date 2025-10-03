@@ -4,7 +4,7 @@ const userService = new UserService();
 
 export default defineEventHandler(async (event) => {
 	try {
-		const token = getRequestHeader(event, "Authorization")?.replace("Bearer ", "") ?? "";
+		const token = getCookie(event, "token")?.replace("Bearer ", "") ?? "";
 		const user = await userService.getUserFromToken(token);
 		if (!user) return createError({ message: "Unauthorized", status: 401 });
 

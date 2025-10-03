@@ -2,14 +2,11 @@
 	<div
 		class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative"
 	>
-		<!-- background -->
 		<GlobalImageMask src="/images/hotel2.jpeg" />
-
-		<!-- Page Header -->
 		<GlobalPageTitle :title="$t('hotels.title')" :subTitle="$t('hotels.subtitle')" />
 
-		<!-- Search Form Section -->
 		<div class="container mx-auto px-4 md:px-6 -mt-8 relative z-10">
+			<!-- Search Form Section -->
 			<GlobalHotelsFormSearch />
 		</div>
 
@@ -18,17 +15,13 @@
 			<PagesHotelsFilters :filters="filters" />
 
 			<!-- Results Count -->
-			<div
-				class="mb-6 md:mb-8 flex items-center justify-between bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm"
-			>
-				<p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
-					{{ $t("hotels.got") }}
-					<span class="font-bold text-emerald-600 dark:text-emerald-400 text-lg mx-1">
-						{{ count }}
-					</span>
-					{{ $t("hotels.hotel") }}
-				</p>
-			</div>
+			<p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+				{{ $t("hotels.got") }}
+				<span class="font-bold text-emerald-600 dark:text-emerald-400 text-lg mx-1">
+					{{ count }}
+				</span>
+				{{ $t("hotels.hotels") }}
+			</p>
 
 			<div :class="filters.viewMode === 'grid' ? 'hotel-card-grid' : 'hotel-card-list'">
 				<GlobalHotelsItem :hotel="hotel" v-for="hotel in hotels" :key="hotel.id" />
@@ -38,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHotels, usePageTitle } from "#imports";
+
 // Reactive data
 const filters = reactive({
 	price: [0, Infinity],
@@ -48,7 +43,7 @@ const filters = reactive({
 });
 
 // Fetch hotels data
-const { data: hotels, status, error, refresh, page, count } = useHotels();
+const { data: hotels, status, error, refresh, page, count, finished } = useHotels();
 
 // SEO
 usePageTitle("hotels.title");

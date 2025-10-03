@@ -7,5 +7,7 @@
 </template>
 
 <script setup lang="ts">
+import { usePageTitle } from "#imports";
+
 usePageTitle("home.title");
 </script>

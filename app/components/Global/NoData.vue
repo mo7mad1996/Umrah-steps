@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="(status == 'success' && Array.isArray(data) && data.length == 0) || !data"
-		class="flex justify-center items-center py-12 bg-white rounded dark:!bg-gray-700 dark:!text-white/80"
+		class="flex justify-center items-center py-12 dark:!text-white/80"
 	>
 		<div class="select-none">
 			<div class="image flex justify-center">

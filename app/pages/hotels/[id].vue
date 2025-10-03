@@ -1,3 +1,4 @@
+
 <template>
   <div>
     {{ route.params.id }}
