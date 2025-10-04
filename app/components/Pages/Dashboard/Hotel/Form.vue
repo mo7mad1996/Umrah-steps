@@ -112,7 +112,7 @@ const removeAdditionalImage = (index: number) => {
 </script>
 
 <template>
-	<Form @submit="(data) => onSubmit(data as IHotelRequest)" class="space-y-8">
+	<Form @submit="(data: IHotelRequest) => onSubmit(data )" class="space-y-8">
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
 				<Icon name="mdi:information" />
