@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import type { IHotelRequest, IHotelResponseWithMultiLang } from "~/types/hotel";
+import type { IHotelRequest } from "~/types/hotel";
 import { Form } from "vee-validate";
 const { locale, t: $t } = useI18n();
 const toast = useToast();
-const props = defineProps<{
-	isEdit?: boolean;
-	initialData?: IHotelResponseWithMultiLang;
-}>();
+const props = defineProps<{ isEdit?: boolean }>();
 
 const route = useRoute();
 const router = useRouter();
+const { data: amenities, refresh: refreshAmenity } = useAmenity();
 
 // Form data
 const form = reactive<IHotelRequest>({
@@ -45,6 +43,11 @@ const form = reactive<IHotelRequest>({
 const isLoading = ref(false);
 const isLoadingAmenity = ref(false);
 
+const mainImageFile = ref<File | null>(null);
+const additionalImagesFiles = ref<File[]>([]);
+const imageUrls = ref<string[]>([]);
+
+// methods
 const onSubmit = async (data: IHotelRequest) => {
 	try {
 		isLoading.value = true;
@@ -61,9 +64,7 @@ const onSubmit = async (data: IHotelRequest) => {
 		router.push("/dashboard/hotels");
 	} catch (error: any) {
 		console.error("Error", error);
-		toast.error(
-			error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"),
-		);
+		toast.error(error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"));
 	} finally {
 		isLoading.value = false;
 	}
@@ -80,19 +81,11 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		refreshAmenity();
 	} catch (error: any) {
 		console.error("Error", error);
-		toast.error(
-			error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"),
-		);
+		toast.error(error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"));
 	} finally {
 		isLoadingAmenity.value = false;
 	}
 };
-
-const { data: amenities, refresh: refreshAmenity } = useAmenity();
-
-const mainImageFile = ref<File | null>(null);
-const additionalImagesFiles = ref<File[]>([]);
-const imageUrls = ref<string[]>([]);
 
 const handleMainImageUpload = (event: Event) => {
 	const target = event.target as HTMLInputElement;
@@ -116,27 +109,6 @@ const removeAdditionalImage = (index: number) => {
 	additionalImagesFiles.value.splice(index, 1);
 	form.images = imageUrls.value;
 };
-
-onMounted(() => {
-	if (props.isEdit && props.initialData) {
-		Object.assign(form, {
-			name: props.initialData.name,
-			description: props.initialData.description,
-			content: props.initialData.content,
-			location: props.initialData.location,
-			img: props.initialData.img,
-			images: props.initialData.images || [],
-			rate: props.initialData.rate,
-			status: props.initialData.status,
-			amenities: props.initialData.amenities.map((a: any) => a.id || a),
-			price: props.initialData.price,
-		});
-
-		if (props.initialData.images && props.initialData.images.length > 0) {
-			imageUrls.value = [...props.initialData.images];
-		}
-	}
-});
 </script>
 
 <template>
@@ -185,8 +157,8 @@ onMounted(() => {
 				/>
 			</div>
 		</section>
-
-		<div class="grid md:grid-cols-2 gap-6">
+		<hr />
+		<div class="grid md:grid-cols-3 gap-6">
 			<InputsSelect
 				v-model="form.rate"
 				name="rate"
@@ -215,7 +187,18 @@ onMounted(() => {
 				]"
 				icon="mdi:check-circle"
 			/>
+
+			<InputsText
+				:title="$t('dashboard.hotel.min_price')"
+				v-model="form.price"
+				name="price"
+				type="number"
+				rules="required"
+				:placeholder="$t('dashboard.hotel.min_price')"
+				icon="mdi:currency-usd"
+			/>
 		</div>
+		<hr />
 
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
@@ -240,7 +223,6 @@ onMounted(() => {
 					icon="mdi:city"
 				/>
 
-				<!-- Address  -->
 				<InputsText
 					v-model="form.location.address.ar"
 					name="location.address.ar"
@@ -256,17 +238,18 @@ onMounted(() => {
 				/>
 			</div>
 		</section>
+		<hr />
 
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
 				<Icon name="mdi:star-box" />
 				{{ $t("dashboard.hotel.amenities_section") }}
 
-				<v-dialog max-width="500">
+				<v-dialog attach max-width="500">
 					<template v-slot:activator="{ props: activatorProps }">
 						<button
 							v-bind="activatorProps"
-							class="bg-primary dark:bg-primary-dark text-white rounded shadow-lg px-3 hover:brightness-90 flex items-center py-2"
+							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
 						>
 							<Icon name="mdi:plus" />
 						</button>
@@ -278,6 +261,9 @@ onMounted(() => {
 								<div
 									class="bg-white dark:!bg-gray-800 p-4 shadow-xl rounded-2xl flex flex-col gap-4"
 								>
+									<h3 class="text-xl py-5 font-semibold text-inherit dark:text-white/40">
+										{{ $t("dashboard.hotel.add_amenity") }}
+									</h3>
 									<InputsText
 										name="ar"
 										rules="required"
@@ -301,7 +287,7 @@ onMounted(() => {
 									<div class="flex justify-end gap-2 items-stretch">
 										<button
 											@click.prevent.stop="isActive.value = false"
-											class="flex items-center justify-center text-red-500 rounded border px-4 hover:bg-red-100 !border-red-500 bg-red-100/40"
+											class="flex items-center justify-center text-red-600 rounded px-6 shadow bg-red-100 dark:bg-red-100/5 hover:bg-red-100 bg-red-100/40"
 										>
 											{{ $t("global.cancel") }}
 										</button>
@@ -322,26 +308,8 @@ onMounted(() => {
 					:key="amenity.id"
 					v-model="form.amenities"
 					:value="amenity.id"
-					name="amenities"
+					:name="amenity.id"
 					:title="amenity[locale]"
-				/>
-			</div>
-		</section>
-
-		<section>
-			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-				<Icon name="mdi:currency-usd" class="text-primary" />
-				{{ $t("dashboard.hotel.pricing_section") }}
-			</h3>
-
-			<div class="grid md:grid-cols-3 gap-6">
-				<InputsText
-					v-model="form.price"
-					name="price"
-					type="number"
-					rules="required"
-					:placeholder="$t('dashboard.hotel.min_price')"
-					icon="mdi:currency-usd"
 				/>
 			</div>
 		</section>
@@ -353,6 +321,11 @@ onMounted(() => {
 			</h3>
 
 			<div class="space-y-6">
+				{{ $t("dashboard.hotel.image_hint") }}
+
+				<InputsFile accept="image/*" name="img" :title="$t('dashboard.hotel.main_image')" />
+				<InputsFile accept="image/*" multiple name="img" />
+				--------------------------------------------------------
 				<div>
 					<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 						{{ $t("dashboard.hotel.main_image") }}
@@ -412,9 +385,22 @@ onMounted(() => {
 				</div>
 			</div>
 		</section>
+		<hr />
 
-		<InputsContentEditor v-model="form.content.ar" name="content.ar" />
-		<InputsContentEditor v-model="form.content.en" name="content.en" />
-		<InputsSubmit :text="$t('dashboard.hotel.create')" :isLoading="isLoading" />
+		<section class="flex flex-col gap-6">
+			<InputsContentEditor
+				v-model="form.content.ar"
+				name="content.ar"
+				:placeholder="$t('dashboard.hotel.content.ar')"
+				:title="$t('dashboard.hotel.content.ar')"
+			/>
+			<InputsContentEditor
+				v-model="form.content.en"
+				name="content.en"
+				:placeholder="$t('dashboard.hotel.content.en')"
+				:title="$t('dashboard.hotel.content.en')"
+			/>
+		</section>
+		<InputsSubmit :isLoading="isLoading" />
 	</Form>
 </template>

@@ -19,10 +19,11 @@ import vuetifyEn from "./lang/vuetify/en.json";
 import globalAr from "./lang/global/ar.json";
 import globalEn from "./lang/global/en.json";
 
-export default defineI18nConfig(() => ({
+export default {
 	legacy: false,
 	locale: "ar",
 	fallbackLocale: "ar",
+	compositionOnly: true, // ✅ تأكيد إضافي
 	// defaultLocale: "ar",
 
 	messages: {
@@ -51,4 +52,4 @@ export default defineI18nConfig(() => ({
 			global: globalEn,
 		},
 	},
-}));
+};

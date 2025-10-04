@@ -94,7 +94,7 @@ const country_codeValue = computed(() => {
 	border-radius: 10px;
 	padding: 0.2em 1em;
 
-	@apply bg-white dark:!bg-gray-700 border !border-gray-200 dark:!border-gray-600 dark:text-blue-400;
+	@apply bg-white dark:!bg-gray-700 border !border-gray-200 dark:!border-gray-600 dark:!text-blue-400;
 }
 
 .vue-tel-input {
@@ -114,7 +114,7 @@ const country_codeValue = computed(() => {
 		@apply p-0 text-sm items-stretch static;
 	}
 	.vti__dropdown .vti__selection {
-		@apply py-2 px-1  md:!px-4 rounded-2xl border h-full !border-gray-200 flex items-center gap-1 md:gap-2 text-neutral-400 bg-white  dark:!border-gray-600  dark:!bg-gray-700 dark:text-white;
+		@apply py-2 px-1  md:!px-4 rounded-2xl border h-full !border-gray-200 flex items-center gap-1 md:gap-2 text-neutral-400 bg-white  dark:!border-gray-600  dark:!bg-gray-700 dark:!text-white;
 
 		& .vti__country-code,
 		& .vti__dropdown-arrow {

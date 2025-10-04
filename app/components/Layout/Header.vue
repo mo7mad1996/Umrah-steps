@@ -57,10 +57,10 @@
 							}))
 						"
 						class="relative"
-						menuClass="top-full !bg-goldContrast dark:!bg-goldContrast-dark text-white py-1 min-w-32"
+						menuClass="top-full !bg-surface dark:!bg-surface-dark text-white py-1 min-w-32"
 						customClass="!bg-transparent !rounded-none text-white min-w-0"
 						itemClass="group-hover:!bg-white/20 !text-white"
-						activeClass="!bg-harmony1/10 rounded text-blue-400 after:w-2 after:aspect-square after:bg-harmony1  after:block after:rounded flex items-center gap-2 justify-between"
+						activeClass="!bg-accent/10 rounded text-blue-400 after:w-2 after:aspect-square after:bg-secondary-dark  after:block after:rounded flex items-center gap-2 justify-between"
 					>
 						<template #activator="props">
 							<v-btn v-bind="props" class="!h-full relative min-w-0 p-2" size="small">

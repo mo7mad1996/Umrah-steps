@@ -30,11 +30,10 @@ export const useHotels = (query: any = undefined) => {
 	watch(
 		data,
 		(d) => {
-			if (d) {
-				if (d.length < per_page.value) finished.value = true;
+			if (!Array.isArray(d)) return; // ✅ prevent null destructure
 
-				hotels.value = [...hotels.value, ...d];
-			}
+			if (d.length < per_page.value) finished.value = true;
+			hotels.value = [...hotels.value, ...d];
 		},
 		{ immediate: true },
 	);

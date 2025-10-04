@@ -29,6 +29,7 @@ definePageMeta({
 
 const {
 	data: hotel,
+
 	pending,
 	error,
 } = await useFetch<IHotelResponseWithMultiLang>(`/api/hotels/${route.params.id}`);

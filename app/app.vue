@@ -1,11 +1,11 @@
 <template>
 	<NuxtRouteAnnouncer />
-	<v-locale-provider :rtl="locale == 'ar'">
-		<Html
-			:dir="localeProperties?.dir"
-			:lang="localeProperties?.code"
-			:class="`${localeProperties?.dir} ${theme.name.value}`"
-		>
+	<v-theme-provider
+		:theme="cookie_theme"
+		with-background
+		:class="`${localeProperties?.dir} ${theme.name.value}`"
+	>
+		<Html :dir="localeProperties?.dir" :lang="localeProperties?.code">
 			<LayoutPageBorders>
 				<v-app>
 					<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
@@ -16,7 +16,7 @@
 				</v-app>
 			</LayoutPageBorders>
 		</Html>
-	</v-locale-provider>
+	</v-theme-provider>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +24,18 @@ const { localeProperties, locale, t } = useI18n();
 const { message } = useRouteAnnouncer();
 
 const theme = useTheme();
+
+const cookie_theme = useCookie<string | undefined>("theme");
+onMounted(() => {
+	if (cookie_theme.value) theme.change(cookie_theme.value);
+});
+
+watch(
+	() => theme.name.value,
+	(v) => {
+		cookie_theme.value = v;
+	},
+);
 
 watch(
 	[locale, message],

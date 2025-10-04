@@ -44,8 +44,6 @@
 import type { User_credentials } from "~/types/user";
 import { Form } from "vee-validate";
 
-const toast = useToast();
-
 // data
 const isLoading = ref(false);
 const credentials = ref<User_credentials>({
@@ -57,11 +55,9 @@ const onSubmit: any = async (payload: User_credentials) => {
 	try {
 		isLoading.value = true;
 		const res = await useApi().post("/login", payload);
-
-		const { token } = res.data;
-		if (token) await navigateTo("/dashboard");
+		await navigateTo("/dashboard");
 	} catch (err: any) {
-		toast.error(err?.response?.data?.message || err.message || "An error occurred");
+		useToast().error(err?.response?.data?.message || err.message || "An error occurred");
 	} finally {
 		isLoading.value = false;
 	}

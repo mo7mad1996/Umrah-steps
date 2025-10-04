@@ -48,7 +48,9 @@
 							<div class="text-3xl font-bold text-blue-600 dark:text-blue-400">
 								${{ hotel.price }}
 							</div>
-							<div class="text-sm text-gray-500 dark:text-gray-400">{{ $t("hotels.per_night") }}</div>
+							<div class="text-sm text-gray-500 dark:text-gray-400">
+								{{ $t("hotels.per_night") }}
+							</div>
 						</div>
 					</div>
 
@@ -66,7 +68,11 @@
 								:key="index"
 								class="relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer"
 							>
-								<NuxtImg :src="image" :alt="`${hotel.name} - Image ${index + 1}`" class="w-full h-full object-cover" />
+								<NuxtImg
+									:src="image"
+									:alt="`${hotel.name} - Image ${index + 1}`"
+									class="w-full h-full object-cover"
+								/>
 							</div>
 						</div>
 					</div>

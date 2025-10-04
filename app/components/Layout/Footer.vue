@@ -231,10 +231,11 @@
 const showBackToTop = ref(false);
 
 const scrollToTop = () => {
-	window.scrollTo({
-		top: 0,
-		behavior: "smooth",
-	});
+	if (import.meta.client)
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
 };
 
 const handleScroll = () => {
@@ -242,10 +243,10 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-	window.addEventListener("scroll", handleScroll);
+	if (import.meta.client) window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-	window.removeEventListener("scroll", handleScroll);
+	if (import.meta.client) window.removeEventListener("scroll", handleScroll);
 });
 </script>

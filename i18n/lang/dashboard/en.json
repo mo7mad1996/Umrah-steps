@@ -18,6 +18,16 @@
 	"hotel": {
 		"add": "Add a new hotel",
 		"create": "Create Hotel",
+		"main_image": "Main Image",
+		"image_hint": "Upload your main image",
+		"additional_images": "Additional Images",
+		"multiple_images_hint": "You can select multiple images",
+		"images_section": "Images Section",
+
+		"content": {
+			"ar": "Content in Arabic",
+			"en": "Content in English"
+		},
 
 		"location": "Location",
 		"rate": "Rating",
@@ -78,7 +88,8 @@
 			"laundry": "Laundry Service"
 		},
 
-		"min_price": "Minimum Price",
+		"add_amenity": "Add Amenities",
+		"min_price": "Price for 1 Night",
 		"max_price": "Maximum Price",
 		"currency": "Currency",
 		"currency_sar": "Saudi Riyal",

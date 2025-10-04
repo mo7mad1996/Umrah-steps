@@ -17,16 +17,16 @@ export default defineNuxtConfig({
 		"nuxt-tiptap-editor",
 		"@nuxtjs/sitemap",
 		"@nuxtjs/robots",
+		"nuxt-file-storage",
 	],
 
 	tiptap: {
-		prefix: "Tiptap",
+		prefix: "Tiptap", //prefix for Tiptap imports, composables not included
 	},
 
 	// modules
 	i18n: {
 		strategy: "no_prefix",
-
 		defaultLocale: "ar",
 		detectBrowserLanguage: {
 			useCookie: true,
@@ -85,6 +85,10 @@ export default defineNuxtConfig({
 	vite: {
 		mode: "development",
 		build: { sourcemap: false },
+	},
+
+	fileStorage: {
+		mount: process.env.NUXT_MOUNT,
 	},
 
 	logLevel: "info",

@@ -12,6 +12,7 @@
 				<NuxtLink
 					:to="link.to"
 					class="flex items-center gap-4 p-2 max-lg:justify-center rounded hover:bg-primary/10"
+					:exact="false"
 					active-class="after:w-2 after:h-2 after:bg-indigo-400 after:rotate-45 after:hidden md:after:block text-indigo-500  !bg-primary/20 shadow"
 				>
 					<Icon :name="link.icon" class="text-2xl" />

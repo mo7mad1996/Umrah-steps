@@ -4,13 +4,15 @@
 			v-model="modelValue"
 			class="checkbox"
 			:id="id || name"
-			color="#596DE7"
 			:ripple="false"
 			:true-value="value || 'yes'"
 			:false-value="value ? undefined : 'no'"
 		>
 			<template v-slot:label>
-				<label :for="id || name" class="text-sm h-full w-full items-center flex cursor-pointer">
+				<label
+					:for="id || name"
+					class="text-sm h-full w-full items-center flex cursor-pointer dark:text-white"
+				>
 					{{ title }}
 				</label>
 			</template>

@@ -12,6 +12,9 @@ html.dark {
 	font-family: Cairo, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+hr {
+	@apply dark:border-gray-100/20;
+}
 .blockScrollX {
 	overflow-x: hidden !important;
 }
