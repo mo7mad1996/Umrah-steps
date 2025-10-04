@@ -153,7 +153,7 @@
 import { Form } from "vee-validate";
 
 // init
-const { locale, setLocale, locales } = useI18n();
+const { locale, setLocale, locales, t } = useI18n();
 const { data: user, refresh, status, error } = useUser();
 const toast = useToast();
 
@@ -199,7 +199,7 @@ const updateProfile = async (data: any) => {
 		// Update user cookie
 		refresh();
 
-		toast.success($t("dashboard.profile.success_update"));
+		toast.success(t("dashboard.profile.success_update"));
 	} catch (error: any) {
 		toast.error(error.message || "حدث خطأ أثناء التحديث");
 	} finally {
@@ -213,7 +213,7 @@ const changePassword = async (data: any) => {
 
 		// Validate password confirmation
 		if (data.newPassword !== data.confirmPassword)
-			throw new Error($t("dashboard.profile.error_password_match"));
+			throw new Error(t("dashboard.profile.error_password_match"));
 
 		// Mock API call - replace with actual API
 		await useApi().post("/me", data);
@@ -225,7 +225,7 @@ const changePassword = async (data: any) => {
 			confirmPassword: "",
 		});
 
-		toast.success($t("dashboard.profile.success_password"));
+		toast.success(t("dashboard.profile.success_password"));
 	} catch (error: any) {
 		toast.error(error.response.data.message || error.message || "حدث خطأ أثناء تغيير كلمة المرور");
 	} finally {

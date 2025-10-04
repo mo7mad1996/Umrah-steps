@@ -1,7 +1,7 @@
 {
 	"name": "nuxt-app",
 	"engines": {
-		"": "22.x"
+		"node": "22.x"
 	},
 	"type": "module",
 	"private": true,

@@ -1,9 +1,8 @@
 import { Query } from "~/types/Query";
-import { HotelService } from "../../services/hotel";
 import { IHotelRequest } from "~/types/hotel";
+import { HotelService } from "~~/server/services/hotel";
 
 const hotelService = new HotelService();
-
 export default defineEventHandler(async (event) => {
 	try {
 		const query = getQuery<Query>(event);

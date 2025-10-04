@@ -1,6 +1,5 @@
-import { useApi, useI18n } from "#imports";
-import { ref } from "vue";
-import type { IHotelListResponse, IHotelResponse } from "~/types/hotel";
+import { useI18n } from "#imports";
+import type { IHotelResponse } from "~/types/hotel";
 
 export const useHotels = (query: any = undefined) => {
 	const { locale } = useI18n();
@@ -17,12 +16,11 @@ export const useHotels = (query: any = undefined) => {
 				.get("/hotels", {
 					params: { page: page.value, per_page: per_page.value, useLang: "true", ...query },
 				})
-				.then(({ data }: { data: IHotelListResponse }) => {
-					const d = data.data;
-					count.value = data.count;
-					return d as IHotelResponse[];
+				.then((res: any) => {
+					const d = res.data?.data as IHotelResponse[];
+					count.value = res.data.count as number;
+					return d || [];
 				}),
-
 		{ watch: [locale, page, per_page] },
 	);
 
@@ -30,13 +28,21 @@ export const useHotels = (query: any = undefined) => {
 	watch(
 		data,
 		(d) => {
-			if (!Array.isArray(d)) return; // ✅ prevent null destructure
-
+			if (!d || !Array.isArray(d)) return; // ✅ prevent null destructure
 			if (d.length < per_page.value) finished.value = true;
 			hotels.value = [...hotels.value, ...d];
 		},
 		{ immediate: true },
 	);
 
-	return { data: hotels, error, status, refresh, page, per_page, count, finished };
+	return {
+		data: hotels.value,
+		error: null,
+		status: "success",
+		refresh: () => {},
+		page,
+		per_page,
+		count,
+		finished,
+	};
 };

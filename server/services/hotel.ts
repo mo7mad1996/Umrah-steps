@@ -25,7 +25,6 @@ export class HotelService {
 			let res: IHotelListResponse = { data, count };
 
 			if (params.useLang == "true") res = { data: data.map((hotel) => hotel.lang(lang)), count };
-
 			return res;
 		} catch (err) {
 			return err;

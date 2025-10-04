@@ -15,7 +15,7 @@
 			</template>
 
 			<template v-slot="{}">
-				<GlobalInfinityTable
+				<!-- <GlobalInfinityTable
 					:data="hotels"
 					:error="error"
 					:status="status"
@@ -24,7 +24,8 @@
 					:finished="finished"
 					:headers="headers"
 				>
-				</GlobalInfinityTable>
+				</GlobalInfinityTable> -->
+				<pre>{{ hotels }}</pre>
 			</template>
 		</LayoutDashboardContent>
 	</div>
@@ -37,20 +38,21 @@ definePageMeta({
 	middleware: "auth",
 });
 
+const { data: hotels, error, status, refresh, page, finished } = useHotels();
+
 // const { t } = useI18n();
 // const toast = useToast();
-const { data: hotels, error, status, refresh, page, finished } = useHotels();
 
 // const deleteDialog = ref(false);
 // const hotelToDelete = ref<IHotelResponse | null>(null);
 // const isDeleting = ref(false);
 
-const headers: { title: string; key: string }[] = [
-	{
-		title: "global.name",
-		key: "name",
-	},
-];
+// const headers: { title: string; key: string }[] = [
+// 	{
+// 		title: "global.name",
+// 		key: "name",
+// 	},
+// ];
 
 // const confirmDelete = (hotel: IHotelResponse) => {
 // 	hotelToDelete.value = hotel;
@@ -63,7 +65,6 @@ const headers: { title: string; key: string }[] = [
 // 	try {
 // 		isDeleting.value = true;
 // 		await useApi().delete(`/hotels/${hotelToDelete.value.id}`);
-// 		toast.success(t("dashboard.hotel.success_deleted"));
 // 		deleteDialog.value = false;
 // 		hotelToDelete.value = null;
 // 		await refresh();

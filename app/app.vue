@@ -1,22 +1,24 @@
 <template>
 	<NuxtRouteAnnouncer />
-	<v-theme-provider
-		:theme="cookie_theme"
-		with-background
-		:class="`${localeProperties?.dir} ${theme.name.value}`"
-	>
-		<Html :dir="localeProperties?.dir" :lang="localeProperties?.code">
-			<LayoutPageBorders>
-				<v-app>
-					<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
-						<NuxtLayout>
-							<NuxtPage />
-						</NuxtLayout>
-					</v-main>
-				</v-app>
-			</LayoutPageBorders>
-		</Html>
-	</v-theme-provider>
+	<v-locale-provider :rtl="locale == 'ar'">
+		<v-theme-provider
+			:theme="cookie_theme"
+			with-background
+			:class="`${localeProperties?.dir} ${theme.name.value}`"
+		>
+			<Html :dir="localeProperties?.dir" :lang="localeProperties?.code">
+				<LayoutPageBorders>
+					<v-app>
+						<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
+							<NuxtLayout>
+								<NuxtPage />
+							</NuxtLayout>
+						</v-main>
+					</v-app>
+				</LayoutPageBorders>
+			</Html>
+		</v-theme-provider>
+	</v-locale-provider>
 </template>
 
 <script setup lang="ts">
