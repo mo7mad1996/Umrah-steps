@@ -119,8 +119,6 @@
 </template>
 
 <script setup lang="ts">
-import type { IHotelResponse } from "~/types/hotel";
-
 const route = useRoute();
 const router = useRouter();
 const { locale } = useI18n();

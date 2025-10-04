@@ -140,7 +140,7 @@ const removeAdditionalImage = (index: number) => {
 
 				<InputsTextarea
 					v-model="form.description.ar"
-					name="description_ar"
+					name="description.ar"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.description_placeholder.ar')"
 					:title="$t('dashboard.hotel.description.ar')"
@@ -149,7 +149,7 @@ const removeAdditionalImage = (index: number) => {
 
 				<InputsTextarea
 					v-model="form.description.en"
-					name="description_en"
+					name="description.en"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.description_placeholder.en')"
 					:title="$t('dashboard.hotel.description.en')"

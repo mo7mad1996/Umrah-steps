@@ -1,5 +1,3 @@
-import { useApi, useI18n } from "#imports";
-import { ref } from "vue";
 import type { IAmenity } from "~/types/hotel";
 
 export const useAmenity = (query: any = undefined) => {

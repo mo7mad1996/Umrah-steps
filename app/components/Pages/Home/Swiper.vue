@@ -88,7 +88,6 @@ import type { Swiper as SwiperType } from "swiper/types";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import { useI18n, useHotels } from "#imports";
 
 // setup
 const { locale, localeProperties } = useI18n();

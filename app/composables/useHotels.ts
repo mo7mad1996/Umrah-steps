@@ -1,4 +1,3 @@
-import { useI18n } from "#imports";
 import type { IHotelResponse } from "~/types/hotel";
 
 export const useHotels = (query: any = undefined) => {

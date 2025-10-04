@@ -90,7 +90,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation } from "swiper/modules";
 import { Form } from "vee-validate";
 import type { Swiper as SwiperType } from "swiper/types";
-import { useHotels, useI18n } from "#imports";
 
 const { data: hotels, error, refresh, status } = useHotels();
 const length = computed(() => hotels.value?.length || 0);

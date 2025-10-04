@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import { useHotels, usePageTitle } from "#imports";
-
 // Reactive data
 const filters = reactive({
 	price: [0, Infinity],
