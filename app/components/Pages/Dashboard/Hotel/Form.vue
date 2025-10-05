@@ -83,10 +83,6 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		v-slot="{ initialValues }"
 		class="space-y-8"
 	>
-		<div class="flex">
-			<pre>{{ status }}</pre>
-			<pre>{{ initialValues }}</pre>
-		</div>
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
 				<Icon name="mdi:information" />
