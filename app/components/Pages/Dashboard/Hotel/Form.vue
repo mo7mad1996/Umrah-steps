@@ -9,48 +9,35 @@ const route = useRoute();
 const router = useRouter();
 const { data: amenities, refresh: refreshAmenity } = useAmenity();
 
-// Form data
-const form = reactive<IHotelRequest>({
-	name: {
-		ar: "",
-		en: "",
-	},
-	description: {
-		ar: "",
-		en: "",
-	},
-	content: {
-		ar: "",
-		en: "",
-	},
-	location: {
-		city: {
-			ar: "",
-			en: "",
-		},
-		address: {
-			ar: "",
-			en: "",
-		},
-	},
-	img: "/logo/vertical.png",
-	images: [],
-	rate: 5,
-	status: "active",
-	amenities: [],
-	price: 0,
-});
+const id = route.params.id as string;
+
 const isLoading = ref(false);
 const isLoadingAmenity = ref(false);
+const mainImageRef = ref<any>();
+const imagesRef = ref<any>();
 
-const mainImageFile = ref<File | null>(null);
-const additionalImagesFiles = ref<File[]>([]);
-const imageUrls = ref<string[]>([]);
+const { data: hotel, status } = useAsyncData(id, () =>
+	id
+		? useApi()
+				.get(`/hotels/${id}`)
+				.then(({ data }) => data)
+		: Promise.reject(undefined),
+);
 
 // methods
+const uploadImages = async (files: any): Promise<string[]> => {
+	return await useApi().post("files", { files });
+};
+
 const onSubmit = async (data: IHotelRequest) => {
 	try {
 		isLoading.value = true;
+
+		const img = (await uploadImages(mainImageRef.value?.files()))[0] || data.img;
+		const images = await uploadImages(imagesRef.value?.files());
+
+		data.img = img;
+		data.images?.concat(...images);
 
 		let response = null;
 		if (props.isEdit) {
@@ -86,33 +73,20 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		isLoadingAmenity.value = false;
 	}
 };
-
-const handleMainImageUpload = (event: Event) => {
-	const target = event.target as HTMLInputElement;
-	if (target.files && target.files[0]) {
-		mainImageFile.value = target.files[0];
-		form.img = URL.createObjectURL(target.files[0]);
-	}
-};
-
-const handleAdditionalImagesUpload = (event: Event) => {
-	const target = event.target as HTMLInputElement;
-	if (target.files) {
-		additionalImagesFiles.value = Array.from(target.files);
-		imageUrls.value = Array.from(target.files).map((file) => URL.createObjectURL(file));
-		form.images = imageUrls.value;
-	}
-};
-
-const removeAdditionalImage = (index: number) => {
-	imageUrls.value.splice(index, 1);
-	additionalImagesFiles.value.splice(index, 1);
-	form.images = imageUrls.value;
-};
 </script>
 
 <template>
-	<Form @submit="(data: IHotelRequest) => onSubmit(data )" class="space-y-8">
+	<Form
+		@submit="(data: IHotelRequest) => onSubmit(data )"
+		:initial-values="hotel"
+		:data-allow-mismatch="true"
+		v-slot="{ initialValues }"
+		class="space-y-8"
+	>
+		<div class="flex">
+			<pre>{{ status }}</pre>
+			<pre>{{ initialValues }}</pre>
+		</div>
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
 				<Icon name="mdi:information" />
@@ -121,8 +95,7 @@ const removeAdditionalImage = (index: number) => {
 
 			<div class="grid md:grid-cols-2 gap-6">
 				<InputsText
-					v-model="form.name.ar"
-					name="name_ar"
+					name="name.ar"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.name.ar')"
 					:title="$t('dashboard.hotel.name.ar')"
@@ -130,8 +103,7 @@ const removeAdditionalImage = (index: number) => {
 				/>
 
 				<InputsText
-					v-model="form.name.en"
-					name="name_en"
+					name="name.en"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.name.en')"
 					:title="$t('dashboard.hotel.name.en')"
@@ -139,7 +111,6 @@ const removeAdditionalImage = (index: number) => {
 				/>
 
 				<InputsTextarea
-					v-model="form.description.ar"
 					name="description.ar"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.description_placeholder.ar')"
@@ -148,7 +119,6 @@ const removeAdditionalImage = (index: number) => {
 				/>
 
 				<InputsTextarea
-					v-model="form.description.en"
 					name="description.en"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.description_placeholder.en')"
@@ -160,7 +130,6 @@ const removeAdditionalImage = (index: number) => {
 		<hr />
 		<div class="grid md:grid-cols-3 gap-6">
 			<InputsSelect
-				v-model="form.rate"
 				name="rate"
 				rules="required"
 				:title="$t('dashboard.hotel.rating')"
@@ -177,7 +146,6 @@ const removeAdditionalImage = (index: number) => {
 
 			<InputsSelect
 				:title="$t('dashboard.hotel.status')"
-				v-model="form.status"
 				name="status"
 				rules="required"
 				:placeholder="$t('dashboard.hotel.status')"
@@ -190,7 +158,6 @@ const removeAdditionalImage = (index: number) => {
 
 			<InputsText
 				:title="$t('dashboard.hotel.min_price')"
-				v-model="form.price"
 				name="price"
 				type="number"
 				rules="required"
@@ -208,7 +175,6 @@ const removeAdditionalImage = (index: number) => {
 
 			<div class="grid md:grid-cols-2 gap-6">
 				<InputsText
-					v-model="form.location.city.ar"
 					name="location.city.ar"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.city.ar')"
@@ -216,7 +182,6 @@ const removeAdditionalImage = (index: number) => {
 				/>
 
 				<InputsText
-					v-model="form.location.city.en"
 					name="location.city.en"
 					rules="required"
 					:placeholder="$t('dashboard.hotel.city.en')"
@@ -224,17 +189,17 @@ const removeAdditionalImage = (index: number) => {
 				/>
 
 				<InputsText
-					v-model="form.location.address.ar"
 					name="location.address.ar"
 					:placeholder="$t('dashboard.hotel.address.ar')"
 					icon="mdi:map-marker"
+					rules="required"
 				/>
 
 				<InputsText
-					v-model="form.location.address.en"
 					name="location.address.en"
 					:placeholder="$t('dashboard.hotel.address.en')"
 					icon="mdi:map-marker"
+					rules="required"
 				/>
 			</div>
 		</section>
@@ -306,7 +271,6 @@ const removeAdditionalImage = (index: number) => {
 				<InputsCheckbox
 					v-for="amenity in amenities"
 					:key="amenity.id"
-					v-model="form.amenities"
 					:value="amenity.id"
 					:name="amenity.id"
 					:title="amenity[locale]"
@@ -320,82 +284,31 @@ const removeAdditionalImage = (index: number) => {
 				{{ $t("dashboard.hotel.images_section") }}
 			</h3>
 
-			<div class="space-y-6">
-				{{ $t("dashboard.hotel.image_hint") }}
-
-				<InputsFile accept="image/*" name="img" :title="$t('dashboard.hotel.main_image')" />
-				<InputsFile accept="image/*" multiple name="img" />
-				--------------------------------------------------------
-				<div>
-					<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-						{{ $t("dashboard.hotel.main_image") }}
-					</label>
-					<div class="flex items-center gap-4">
-						<div
-							v-if="form.img"
-							class="relative w-32 h-32 rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700"
-						>
-							<NuxtImg :src="form.img" alt="Main Image" class="w-full h-full object-cover" />
-						</div>
-						<div class="flex-1">
-							<input
-								type="file"
-								accept="image/*"
-								@change="handleMainImageUpload"
-								class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300"
-							/>
-							<p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-								{{ $t("dashboard.hotel.image_hint") }}
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-						{{ $t("dashboard.hotel.additional_images") }}
-					</label>
-					<input
-						type="file"
-						accept="image/*"
-						multiple
-						@change="handleAdditionalImagesUpload"
-						class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300"
-					/>
-					<p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-						{{ $t("dashboard.hotel.multiple_images_hint") }}
-					</p>
-
-					<div v-if="imageUrls.length > 0" class="grid grid-cols-4 gap-4 mt-4">
-						<div
-							v-for="(url, index) in imageUrls"
-							:key="index"
-							class="relative group rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 aspect-square"
-						>
-							<NuxtImg :src="url" alt="Additional Image" class="w-full h-full object-cover" />
-							<button
-								@click="removeAdditionalImage(index)"
-								type="button"
-								class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-							>
-								<Icon name="mdi:close" class="text-xl" />
-							</button>
-						</div>
-					</div>
-				</div>
+			<div class="grid md:grid-cols-2 gap-4">
+				<InputsFile
+					ref="mainImageRef"
+					accept="image/*"
+					name="img"
+					:title="$t('dashboard.hotel.main_image')"
+				/>
+				<InputsFile
+					ref="imagesRef"
+					accept="image/*"
+					multiple
+					name="images"
+					:title="$t('dashboard.hotel.additional_images')"
+				/>
 			</div>
 		</section>
 		<hr />
 
 		<section class="flex flex-col gap-6">
 			<InputsContentEditor
-				v-model="form.content.ar"
 				name="content.ar"
 				:placeholder="$t('dashboard.hotel.content.ar')"
 				:title="$t('dashboard.hotel.content.ar')"
 			/>
 			<InputsContentEditor
-				v-model="form.content.en"
 				name="content.en"
 				:placeholder="$t('dashboard.hotel.content.en')"
 				:title="$t('dashboard.hotel.content.en')"

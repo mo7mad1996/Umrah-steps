@@ -19,9 +19,6 @@ export default {
 			transitionDuration: {
 				DEFAULT: "300ms",
 			},
-			screens: {
-				xs: "475px",
-			},
 			colors: {
 				// base color
 				primary: {

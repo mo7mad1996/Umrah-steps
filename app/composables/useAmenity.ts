@@ -1,7 +1,8 @@
 import type { IAmenity } from "~/types/hotel";
 
 export const useAmenity = (query: any = undefined) => {
-	const { locale } = useI18n();
+	const { $i18n } = useNuxtApp();
+
 	const page = ref(1);
 	const per_page = ref(query?.per_page || 1000);
 
@@ -17,7 +18,7 @@ export const useAmenity = (query: any = undefined) => {
 					return data;
 				}),
 
-		{ watch: [locale, page, per_page] },
+		{ watch: [() => $i18n.locale.value, page, per_page] },
 	);
 
 	return { data, error, status, refresh };

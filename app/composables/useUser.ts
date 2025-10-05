@@ -1,8 +1,9 @@
 import type { User_DB_Schema } from "~/types/user";
 
 export const useUser = () => {
-	const { t } = useI18n();
-	const toast = process.client ? useToast() : null;
+	const { $i18n } = useNuxtApp();
+
+	const toast = useToast();
 
 	const { data, error, status, refresh } = useAsyncData(
 		`me`,
@@ -21,7 +22,7 @@ export const useUser = () => {
 			const token = useCookie("token");
 			token.value = undefined;
 			navigateTo("/login");
-			toast.error(t("dashboard.forceLogout"));
+			toast.error($i18n.t("dashboard.forceLogout"));
 		}
 	});
 

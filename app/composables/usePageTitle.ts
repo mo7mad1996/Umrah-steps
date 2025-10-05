@@ -1,10 +1,10 @@
 export const usePageTitle = (title: string) => {
-	const { locale, t } = useI18n();
+	const { $i18n } = useNuxtApp();
 
 	watch(
-		locale,
+		() => $i18n.locale.value,
 		() => {
-			useHead({ title: t(title) });
+			useHead({ title: $i18n.t(title) });
 		},
 		{ immediate: true },
 	);

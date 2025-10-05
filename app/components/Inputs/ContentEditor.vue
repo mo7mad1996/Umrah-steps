@@ -171,9 +171,7 @@ watch(
 		setValue(v, true);
 		modelValue.value = v;
 	},
-	{
-		immediate: true,
-	},
+	{ immediate: true },
 );
 </script>
 
@@ -184,7 +182,7 @@ watch(
 
 	.tools {
 		@apply shadow rounded-md bg-white dark:bg-gray-800 flex gap-1 flex-wrap items-center w-fit mx-auto my-2 justify-center max-w-[90%];
-		@apply overflow-hidden p-1;
+		@apply overflow-hidden p-1 sticky top-0;
 
 		.spacer {
 			@apply h-5 bg-neutral-400 dark:bg-neutral-200/20 opacity-80 w-px;

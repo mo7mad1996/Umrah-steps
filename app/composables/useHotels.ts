@@ -1,15 +1,16 @@
 import type { IHotelResponse } from "~/types/hotel";
 
 export const useHotels = (query: any = {}) => {
-	const { locale } = useI18n();
+	const { $i18n } = useNuxtApp();
+
 	const page = ref(1);
 	const per_page = ref(query?.per_page || 12);
 	const count = ref(0);
 	const finished = ref(false);
 	const hotels = ref<IHotelResponse[]>([]);
 
-	const queryKey = computed(() =>
-		`hotels-${locale.value}-${page.value}-${per_page.value}-${JSON.stringify(query)}`
+	const queryKey = computed(
+		() => `hotels-${$i18n.locale.value}-${page.value}-${per_page.value}-${JSON.stringify(query)}`,
 	);
 
 	const { data, error, status, refresh } = useAsyncData(
@@ -21,7 +22,7 @@ export const useHotels = (query: any = {}) => {
 						page: page.value,
 						per_page: per_page.value,
 						useLang: "true",
-						...query
+						...query,
 					},
 				})
 				.then((res: any) => {
@@ -35,10 +36,7 @@ export const useHotels = (query: any = {}) => {
 					finished.value = true;
 					return [];
 				}),
-		{
-			watch: [locale, page, per_page],
-			server: false,
-		}
+		{ watch: [() => $i18n.locale, page, per_page] },
 	);
 
 	watch(
@@ -52,7 +50,7 @@ export const useHotels = (query: any = {}) => {
 				hotels.value = [...hotels.value, ...newData];
 			}
 		},
-		{ immediate: true }
+		{ immediate: true },
 	);
 
 	const resetAndRefresh = async () => {

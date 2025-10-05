@@ -1,12 +1,12 @@
 <template>
 	<NuxtRouteAnnouncer />
 	<v-locale-provider :rtl="locale == 'ar'">
-		<v-theme-provider
-			:theme="cookie_theme"
-			with-background
-			:class="`${localeProperties?.dir} ${theme.name.value}`"
-		>
-			<Html :dir="localeProperties?.dir" :lang="localeProperties?.code">
+		<v-theme-provider :theme="cookie_theme" with-background>
+			<Html
+				:dir="localeProperties?.dir"
+				:lang="localeProperties?.code"
+				:class="`${localeProperties?.dir} ${theme.name.value}`"
+			>
 				<LayoutPageBorders>
 					<v-app>
 						<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">

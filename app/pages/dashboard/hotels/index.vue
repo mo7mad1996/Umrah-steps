@@ -15,7 +15,7 @@
 			</template>
 
 			<template v-slot="{}">
-				<!-- <GlobalInfinityTable
+				<GlobalInfinityTable
 					:data="hotels"
 					:error="error"
 					:status="status"
@@ -23,9 +23,8 @@
 					:page="page"
 					:finished="finished"
 					:headers="headers"
-				>
-				</GlobalInfinityTable> -->
-				<pre>{{ hotels }}</pre>
+					:to="(item: any) => `/dashboard/hotels/${item.id}/edit`"
+				/>
 			</template>
 		</LayoutDashboardContent>
 	</div>
@@ -40,38 +39,14 @@ definePageMeta({
 
 const { data: hotels, error, status, refresh, page, finished } = useHotels();
 
-// const { t } = useI18n();
-// const toast = useToast();
-
-// const deleteDialog = ref(false);
-// const hotelToDelete = ref<IHotelResponse | null>(null);
-// const isDeleting = ref(false);
-
-// const headers: { title: string; key: string }[] = [
-// 	{
-// 		title: "global.name",
-// 		key: "name",
-// 	},
-// ];
-
-// const confirmDelete = (hotel: IHotelResponse) => {
-// 	hotelToDelete.value = hotel;
-// 	deleteDialog.value = true;
-// };
-
-// const deleteHotel = async () => {
-// 	if (!hotelToDelete.value) return;
-
-// 	try {
-// 		isDeleting.value = true;
-// 		await useApi().delete(`/hotels/${hotelToDelete.value.id}`);
-// 		deleteDialog.value = false;
-// 		hotelToDelete.value = null;
-// 		await refresh();
-// 	} catch (error: any) {
-// 		console.error("Error deleting hotel:", error);
-// 	} finally {
-// 		isDeleting.value = false;
-// 	}
-// };
+const headers: { title: string; key: string }[] = [
+	{
+		title: "home.hotel.name",
+		key: "name",
+	},
+	{
+		title: "home.hotel.price",
+		key: "status",
+	},
+];
 </script>

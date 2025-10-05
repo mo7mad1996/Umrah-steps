@@ -122,14 +122,11 @@
 const route = useRoute();
 const router = useRouter();
 const { locale } = useI18n();
+const id = route.params.id as string;
 
-const {
-	data: hotel,
-	pending,
-	error,
-} = await useFetch<IHotelResponse>(`/api/hotels/${route.params.id}`, {
-	query: { useLang: "true" },
-});
+const { data: hotel } = useAsyncData(id, () =>
+	useApi().get(`/hotels/${id}`, { params: { useLang: "true" } }),
+);
 
 usePageTitle("hotels.hotel_details");
 </script>
