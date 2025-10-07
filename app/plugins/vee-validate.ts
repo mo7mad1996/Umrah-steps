@@ -40,6 +40,7 @@ function getMessage(locale: string, ruleName: string, field: string) {
 }
 
 export default defineNuxtPlugin(() => {
+	console.clear();
 	let currentLocale: CookieRef<string | null | undefined>;
 	let locale: CookieRef<string | null | undefined> | string;
 

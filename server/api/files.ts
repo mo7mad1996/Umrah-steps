@@ -2,22 +2,28 @@ import { ServerFile } from "nuxt-file-storage";
 
 export default defineEventHandler(async (event) => {
 	try {
-		const query: { path: string; file: string } = getQuery(event);
+		const query: { path?: string; file: string } = getQuery(event);
+		const { mount } = useRuntimeConfig(event);
 
 		switch (event.method) {
 			case "GET":
-				if (query.path) return await getFilesLocally(query.path);
+				if (query.path) return getFileLocally(query.path);
 				return await getFilesLocally();
 
 			case "POST":
 				const { files } = await readBody<{ files: ServerFile[] }>(event);
 				const result = [];
 				for (const file of files) {
-					const x = await storeFileLocally(file, 8);
+					const x = await storeFileLocally(file, 18, query.path);
 
-					console.log(x);
-					result.push(x);
+					result.push(
+						[mount, (query.path || "").replace(/^\/+|\/+$/g, ""), x]
+							.join("/")
+							.replace("./public", ""),
+					);
 				}
+
+				// fullPath
 				return result;
 
 			case "DELETE":

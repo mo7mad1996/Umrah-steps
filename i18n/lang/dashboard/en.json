@@ -17,6 +17,8 @@
 
 	"hotel": {
 		"add": "Add a new hotel",
+		"success_updated": "Hotel updated successfully",
+
 		"create": "Create Hotel",
 		"main_image": "Main Image",
 		"image_hint": "Upload your main image",

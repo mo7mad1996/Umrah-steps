@@ -1,9 +1,9 @@
 import type { User_DB_Schema } from "~/types/user";
 
 export const useUser = () => {
-	const { $i18n } = useNuxtApp();
+	const { $i18n, $toast } = useNuxtApp();
 
-	const toast = useToast();
+	const toast = $toast;
 
 	const { data, error, status, refresh } = useAsyncData(
 		`me`,
@@ -17,7 +17,7 @@ export const useUser = () => {
 	);
 
 	watch(error, (val) => {
-		if (val && process.client && toast) {
+		if (val && import.meta.client && toast) {
 			console.error(val);
 			const token = useCookie("token");
 			token.value = undefined;

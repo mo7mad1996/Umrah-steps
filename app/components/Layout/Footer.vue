@@ -229,13 +229,12 @@
 
 <script setup lang="ts">
 const showBackToTop = ref(false);
+const goto = useGoTo({
+	duration: 500,
+});
 
 const scrollToTop = () => {
-	if (import.meta.client)
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+	goto(0);
 };
 
 const handleScroll = () => {

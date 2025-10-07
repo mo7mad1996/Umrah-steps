@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<LayoutDashboardContent>
+		<LayoutDashboardContent :data="hotels">
 			<template #header>
 				<LayoutDashboardPageTitle
 					:title="$t('dashboard.hotels')"
@@ -16,6 +16,7 @@
 
 			<template v-slot="{}">
 				<GlobalInfinityTable
+					v-if="hotels"
 					:data="hotels"
 					:error="error"
 					:status="status"
@@ -24,7 +25,11 @@
 					:finished="finished"
 					:headers="headers"
 					:to="(item: any) => `/dashboard/hotels/${item.id}/edit`"
-				/>
+				>
+					<template #actions="{ item }">
+						{{ item }}
+					</template>
+				</GlobalInfinityTable>
 			</template>
 		</LayoutDashboardContent>
 	</div>
@@ -41,12 +46,20 @@ const { data: hotels, error, status, refresh, page, finished } = useHotels();
 
 const headers: { title: string; key: string }[] = [
 	{
-		title: "home.hotel.name",
+		title: "dashboard.hotel.name.global",
 		key: "name",
 	},
 	{
-		title: "home.hotel.price",
+		title: "dashboard.hotel.status",
 		key: "status",
+	},
+	{
+		title: "dashboard.hotel.min_price",
+		key: "price",
+	},
+	{
+		title: "dashboard.actions",
+		key: "actions",
 	},
 ];
 </script>

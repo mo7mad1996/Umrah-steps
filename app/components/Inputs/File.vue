@@ -7,7 +7,6 @@
 	>
 		<!-- files -->
 		<div
-			v-if="files.length"
 			class="gap-2 flex flex-wrap w-full bg-neutral-100 dark:!bg-gray-800/50 p-2 rounded-lg"
 			:class="{
 				'justify-center': !multiple,
@@ -21,15 +20,8 @@
 			>
 				<div class="flex-shrink-0 rounded flex flex-col items-center justify-center">
 					<img
-						v-if="preview.type.split('/')[0] === 'image'"
-						:alt="preview.name"
-						:src="preview.content"
+						:src="preview.content?.toString()"
 						class="h-32 w-32 rounded aspect-square object-cover block"
-					/>
-					<Icon
-						v-else
-						:name="'bi:filetype-' + preview.type.split('/')[1]"
-						class="w-16 h-16 object-cover text-gray-100 dark:text-gray-400"
 					/>
 				</div>
 
@@ -38,13 +30,12 @@
 						<p class="text-sm font-medium truncate max-w-28 text-blue-500 dark:text-blue-700">
 							{{ preview.name }}
 						</p>
-						<p class="text-xs opacity-40 max-w-28">{{ formatFileSize(preview.size) }}</p>
 					</div>
 					<button
-						@click="removeFile(index)"
+						@click="files.splice(index, 1)"
 						type="button"
 						class=""
-						:aria-label="`حذف ${preview.name}`"
+						:aria-label="`حذف ${preview}`"
 					>
 						<Icon name="material-symbols:scan-delete" class="text-md" />
 					</button>
@@ -57,8 +48,6 @@
 				' border-2 border-dashed rounded-lg transition-all duration-200',
 				isDragging
 					? 'border-blue-500 bg-blue-50  dark:bg-blue-100/10'
-					: field.error
-					? 'border-red-400'
 					: 'border-gray-300 hover:border-gray-400 bg-gray-50 dark:bg-white/10 dark:!border-gray-500',
 			]"
 		>
@@ -79,12 +68,13 @@
 				</p>
 			</label>
 		</div>
+
 		<ErrorMessage :name="name" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ErrorMessage, useFieldArray } from "vee-validate";
+import { ErrorMessage } from "vee-validate";
 const inputRef = ref<HTMLInputElement>();
 interface Props {
 	title?: string;
@@ -92,6 +82,7 @@ interface Props {
 	rules?: string;
 	accept?: string;
 	multiple?: boolean;
+	path?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -108,11 +99,11 @@ const { handleFileInput, files } = useFileStorage({
 
 const isDragging = ref(false);
 
-const field = useFieldArray(props.name || "file");
-const modelValue = defineModel<string[] | null>();
+const modelValue = defineModel<string[]>();
 
-const removeFile = (index: number) => {
-	files.value.splice(index, 1);
+const removeFile = async (file: string) => {
+	modelValue.value = (modelValue.value || []).filter((i) => i != file);
+	await useApi().delete("files", { params: { file } });
 };
 
 const handleDrop = (event: DragEvent) => {
@@ -143,22 +134,20 @@ const handleDrop = (event: DragEvent) => {
 	});
 
 	if (fileArray.length === 0) return;
-
 	handleFileInput({
 		target: { files: props.multiple ? fileArray : [fileArray[0]] },
 	});
 };
 
-const formatFileSize = (bytes: number = 0): string => {
-	if (bytes === 0) return "0 Bytes";
-
-	return new Intl.NumberFormat(`${locale.value}-EG`, {
-		style: "unit",
-		unit: "megabyte",
-		maximumSignificantDigits: 2,
-	}).format(bytes / 1024);
+const uploadFiles = async (): Promise<any> => {
+	return await $fetch("/api/files?path=" + props.path, {
+		method: "POST",
+		body: {
+			files: files.value,
+		},
+	});
 };
 
-defineExpose({ files: () => files.value });
+defineExpose({ files, uploadFiles });
 defineOptions({ inheritAttrs: false });
 </script>

@@ -13,31 +13,32 @@ const id = route.params.id as string;
 
 const isLoading = ref(false);
 const isLoadingAmenity = ref(false);
-const mainImageRef = ref<any>();
-const imagesRef = ref<any>();
+const hotel = ref<IHotelRequest | undefined>();
 
-const { data: hotel, status } = useAsyncData(id, () =>
-	id
-		? useApi()
-				.get(`/hotels/${id}`)
-				.then(({ data }) => data)
-		: Promise.reject(undefined),
-);
+const mainImage = ref();
+const images = ref();
 
-// methods
-const uploadImages = async (files: any): Promise<string[]> => {
-	return await useApi().post("files", { files });
+onMounted(() => {
+	if (props.isEdit && id) getHotelData();
+});
+const getHotelData = () => {
+	useApi()
+		.get(`/hotels/${id}`)
+		.then((res) => (hotel.value = res.data))
+		.catch((error) => console.error(error));
 };
 
-const onSubmit = async (data: IHotelRequest) => {
+// methods
+const onSubmit = async (data: any) => {
 	try {
 		isLoading.value = true;
 
-		const img = (await uploadImages(mainImageRef.value?.files()))[0] || data.img;
-		const images = await uploadImages(imagesRef.value?.files());
-
-		data.img = img;
-		data.images?.concat(...images);
+		if (mainImage.value.files.length) {
+			data.img = (await mainImage.value?.uploadFiles?.call())[0];
+		}
+		if (images.value.files.length) {
+			data.images = [...data.images, ...(await images.value?.uploadFiles?.call())];
+		}
 
 		let response = null;
 		if (props.isEdit) {
@@ -51,7 +52,6 @@ const onSubmit = async (data: IHotelRequest) => {
 		router.push("/dashboard/hotels");
 	} catch (error: any) {
 		console.error("Error", error);
-		toast.error(error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"));
 	} finally {
 		isLoading.value = false;
 	}
@@ -64,11 +64,9 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		toast.success($t("dashboard.hotel.success_created"));
 		resetForm();
 
-		console.log(response);
 		refreshAmenity();
 	} catch (error: any) {
 		console.error("Error", error);
-		toast.error(error?.response?.data?.message || error?.message || $t("dashboard.hotel.error"));
 	} finally {
 		isLoadingAmenity.value = false;
 	}
@@ -77,10 +75,11 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 
 <template>
 	<Form
-		@submit="(data: IHotelRequest) => onSubmit(data )"
+		v-if="!id || hotel"
+		v-bind="{ onSubmit }"
 		:initial-values="hotel"
+		v-slot="{ values }"
 		:data-allow-mismatch="true"
-		v-slot="{ initialValues }"
 		class="space-y-8"
 	>
 		<section>
@@ -123,7 +122,9 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				/>
 			</div>
 		</section>
+
 		<hr />
+
 		<div class="grid md:grid-cols-3 gap-6">
 			<InputsSelect
 				name="rate"
@@ -161,6 +162,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				icon="mdi:currency-usd"
 			/>
 		</div>
+
 		<hr />
 
 		<section>
@@ -199,6 +201,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				/>
 			</div>
 		</section>
+
 		<hr />
 
 		<section>
@@ -282,14 +285,16 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 
 			<div class="grid md:grid-cols-2 gap-4">
 				<InputsFile
-					ref="mainImageRef"
+					ref="mainImage"
+					path="hotels"
 					accept="image/*"
 					name="img"
 					:title="$t('dashboard.hotel.main_image')"
 				/>
 				<InputsFile
-					ref="imagesRef"
+					ref="images"
 					accept="image/*"
+					path="hotels"
 					multiple
 					name="images"
 					:title="$t('dashboard.hotel.additional_images')"

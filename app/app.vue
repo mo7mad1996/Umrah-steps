@@ -22,12 +22,14 @@
 </template>
 
 <script setup lang="ts">
+import { updateGlobalOptions, globalOptions } from "vue3-toastify";
+
 const { localeProperties, locale, t } = useI18n();
+const { current } = useLocale();
+const cookie_theme = useCookie<string | undefined>("theme");
+const theme = useTheme();
 const { message } = useRouteAnnouncer();
 
-const theme = useTheme();
-
-const cookie_theme = useCookie<string | undefined>("theme");
 onMounted(() => {
 	if (cookie_theme.value) theme.change(cookie_theme.value);
 });
@@ -41,13 +43,22 @@ watch(
 
 watch(
 	[locale, message],
-	() => {
+	(v) => {
 		useHead({
 			titleTemplate: (title) => [title, t("global.site_name")].filter((i) => i).join(" ⁘ "),
 		});
+		current.value = locale.value;
 	},
 	{ immediate: true },
 );
+
+watch([locale, () => theme.name.value as "dark" | "light"], ([l, v]) => {
+	updateGlobalOptions({
+		...globalOptions,
+		theme: v,
+		rtl: l == "ar",
+	});
+});
 </script>
 
 <style>

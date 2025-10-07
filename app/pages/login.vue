@@ -56,8 +56,6 @@ const onSubmit: any = async (payload: User_credentials) => {
 		isLoading.value = true;
 		const res = await useApi().post("/login", payload);
 		await navigateTo("/dashboard");
-	} catch (err: any) {
-		useToast().error(err?.response?.data?.message || err.message || "An error occurred");
 	} finally {
 		isLoading.value = false;
 	}

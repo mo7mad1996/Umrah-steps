@@ -6,7 +6,7 @@
 			</template>
 
 			<template v-slot="{}">
-				<PagesDashboardHotelForm :is-edit="true" />
+				<PagesDashboardHotelForm is-edit />
 			</template>
 		</LayoutDashboardContent>
 	</div>
