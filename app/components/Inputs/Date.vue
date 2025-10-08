@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<h3 class="text-sm md:text-base mb-2" v-if="title">{{ title }}</h3>
+		<h3 class="text-sm md:text-base mb-2 text-gray-700 dark:text-gray-300" v-if="title">
+			{{ title }}
+		</h3>
 
 		<v-menu v-model="isOpen" :close-on-content-click="false">
 			<template v-slot:activator="{ props }">
