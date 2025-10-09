@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-between items-center mb-4 md:mb-8 p-2 gap-4 md:p-4">
+	<div class="flex justify-between items-center mb-4 md:mb-8 p-2 gap-4 md:p-4 dark:text-gray-100">
 		<div>
 			<h1 class="md:text-2xl font-bold">{{ title || subTitle }}</h1>
 			<h1 class="opacity-60 text-sm" v-if="subTitle && title">
