@@ -20,7 +20,7 @@
 							'text-red-400 hover:bg-red-200/50': is_fav,
 							'text-primary hover:bg-emerald-100/50': !is_fav,
 						}"
-						@click="is_fav = !is_fav"
+						@click="handleFavoriteClick"
 					>
 						<Transition name="fav">
 							<Icon v-if="is_fav" name="solar:heart-bold" />
@@ -66,23 +66,22 @@
 import type { IHotelResponse } from "~/types/hotel";
 
 const props = defineProps<{ hotel: IHotelResponse }>();
+const { toggleFavorite, isFavorite } = useFavorites();
+const { showToast } = useToast();
+const { t } = useI18n();
 
-const is_fav = computed({
-	set(v: boolean) {
-		if (v) favorites.value.unshift(props.hotel.id);
-		else favorites.value = favorites.value.filter((i) => (i = !props.hotel.id));
-	},
+const is_fav = computed(() => isFavorite(props.hotel.id));
 
-	get() {
-		return favorites.value.includes(props.hotel.id);
-	},
-});
-const favorites = useCookie<any[]>("favourite", {
-	default() {
-		return [];
-	},
-	maxAge: 60 * 60 * 24 * 365, // 1 year
-});
+const handleFavoriteClick = (event: Event) => {
+	event.preventDefault();
+	event.stopPropagation();
+	const added = toggleFavorite(props.hotel.id);
+	if (added) {
+		showToast(t('favorites.added'), 'success');
+	} else {
+		showToast(t('favorites.removed'), 'info');
+	}
+};
 </script>
 
 <style scoped lang="scss">

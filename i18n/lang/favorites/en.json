@@ -1,0 +1,13 @@
+{
+  "title": "Favorites",
+  "empty": "No hotels in favorites",
+  "browse_hotels": "Browse Hotels",
+  "count": "{count} hotel(s) in favorites",
+  "clear_all": "Clear All",
+  "confirm_clear": "Do you want to remove all hotels from favorites?",
+  "confirm_clear_message": "You won't be able to revert this action",
+  "cleared": "All hotels removed from favorites",
+  "added": "Hotel added to favorites",
+  "removed": "Hotel removed from favorites",
+  "error": "Error loading favorites"
+}
