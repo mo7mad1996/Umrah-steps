@@ -1,5 +1,4 @@
 export const useCity = () => {
-  const { $axios } = useNuxtApp();
   const { locale } = useI18n();
 
   const cities = ref<any[]>([]);
@@ -10,9 +9,9 @@ export const useCity = () => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await $axios.get('/api/cities');
-      if (response.data.success) {
-        cities.value = response.data.data;
+      const response = await useApi().get('/cities');
+      if (response.success) {
+        cities.value = response.data;
       }
     } catch (err: any) {
       error.value = err.message;
@@ -24,9 +23,9 @@ export const useCity = () => {
 
   const getCityById = async (id: string) => {
     try {
-      const response = await $axios.get(`/api/cities/${id}`);
-      if (response.data.success) {
-        return response.data.data;
+      const response = await useApi().get(`/cities/${id}`);
+      if (response.success) {
+        return response.data;
       }
     } catch (err: any) {
       error.value = err.message;
@@ -36,10 +35,10 @@ export const useCity = () => {
 
   const createCity = async (data: any) => {
     try {
-      const response = await $axios.post('/api/cities', data);
-      if (response.data.success) {
-        cities.value.push(response.data.data);
-        return response.data.data;
+      const response = await useApi().post('/cities', data);
+      if (response.success) {
+        cities.value.push(response.data);
+        return response.data;
       }
     } catch (err: any) {
       error.value = err.message;
@@ -49,13 +48,13 @@ export const useCity = () => {
 
   const updateCity = async (id: string, data: any) => {
     try {
-      const response = await $axios.put(`/api/cities/${id}`, data);
-      if (response.data.success) {
+      const response = await useApi().put(`/cities/${id}`, data);
+      if (response.success) {
         const index = cities.value.findIndex((c) => c._id === id);
         if (index !== -1) {
-          cities.value[index] = response.data.data;
+          cities.value[index] = response.data;
         }
-        return response.data.data;
+        return response.data;
       }
     } catch (err: any) {
       error.value = err.message;
@@ -65,8 +64,8 @@ export const useCity = () => {
 
   const deleteCity = async (id: string) => {
     try {
-      const response = await $axios.delete(`/api/cities/${id}`);
-      if (response.data.success) {
+      const response = await useApi().delete(`/cities/${id}`);
+      if (response.success) {
         cities.value = cities.value.filter((c) => c._id !== id);
         return true;
       }

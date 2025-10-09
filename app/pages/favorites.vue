@@ -69,7 +69,6 @@ definePageMeta({
 const { t } = useI18n();
 const { favorites, clearFavorites } = useFavorites();
 const { showToast } = useToast();
-const { $axios } = useNuxtApp();
 
 usePageTitle(t('favorites.title'));
 
@@ -86,12 +85,12 @@ const fetchFavoriteHotels = async () => {
   loading.value = true;
   try {
     const requests = favorites.value.map((id) =>
-      $axios.get(`/api/hotels/${id}?useLang=true`)
+      useApi().get(`/hotels/${id}?useLang=true`)
     );
     const responses = await Promise.allSettled(requests);
 
     favoriteHotels.value = responses
-      .filter((result) => result.status === 'fulfilled' && result.value.data)
+      .filter((result: any) => result.status === 'fulfilled' && result.value.data)
       .map((result: any) => result.value.data);
   } catch (error) {
     console.error('Error fetching favorite hotels:', error);

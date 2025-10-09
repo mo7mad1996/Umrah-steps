@@ -6,7 +6,7 @@
       </v-card-title>
 
       <v-card-text class="pt-4">
-        <v-form ref="formRef">
+        <Form @submit="handleSubmit" ref="formRef">
           <div class="space-y-4">
             <InputsText
               v-model="form.name.ar"
@@ -23,33 +23,36 @@
               rules="required"
             />
           </div>
-        </v-form>
-      </v-card-text>
 
-      <v-card-actions class="px-6 pb-4">
-        <v-spacer />
-        <v-btn
-          variant="text"
-          @click="handleCancel"
-          :disabled="loading"
-          class="dark:text-gray-300"
-        >
-          {{ $t('global.cancel') }}
-        </v-btn>
-        <v-btn
-          color="primary"
-          variant="flat"
-          @click="handleSubmit"
-          :loading="loading"
-        >
-          {{ $t('global.save') }}
-        </v-btn>
-      </v-card-actions>
+          <v-card-actions class="px-0 pb-0 pt-4">
+            <v-spacer />
+            <v-btn
+              variant="text"
+              @click="handleCancel"
+              :disabled="loading"
+              class="dark:text-gray-300"
+              type="button"
+            >
+              {{ $t('global.cancel') }}
+            </v-btn>
+            <v-btn
+              color="primary"
+              variant="flat"
+              type="submit"
+              :loading="loading"
+            >
+              {{ $t('global.save') }}
+            </v-btn>
+          </v-card-actions>
+        </Form>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
+import { Form } from 'vee-validate';
+
 interface Props {
   modelValue: boolean;
   city?: any;
@@ -99,10 +102,7 @@ const handleCancel = () => {
   dialog.value = false;
 };
 
-const handleSubmit = async () => {
-  const { valid } = await formRef.value.validate();
-  if (!valid) return;
-
+const handleSubmit = async (values: any) => {
   loading.value = true;
   try {
     let savedCity;

@@ -10,7 +10,8 @@
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"test": "echo \"No tests specified\" && exit 0"
 	},
 	"dependencies": {
 		"@nuxt/icon": "^2.0.0",
