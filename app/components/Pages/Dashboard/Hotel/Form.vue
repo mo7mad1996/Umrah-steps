@@ -8,6 +8,19 @@ const props = defineProps<{ isEdit?: boolean }>();
 const route = useRoute();
 const router = useRouter();
 const { data: amenities, refresh: refreshAmenity } = useAmenity();
+const { cities, fetchCities, getCitiesForSelect } = useCity();
+
+const citiesForSelect = computed(() => getCitiesForSelect.value);
+const cityDialogOpen = ref(false);
+
+onMounted(() => {
+	fetchCities();
+	if (props.isEdit && id) getHotelData();
+});
+
+const onCitySaved = () => {
+	fetchCities();
+};
 
 const id = route.params.id as string;
 
@@ -18,9 +31,6 @@ const hotel = ref<IHotelRequest | undefined>();
 const mainImage = ref();
 const images = ref();
 
-onMounted(() => {
-	if (props.isEdit && id) getHotelData();
-});
 const getHotelData = () => {
 	useApi()
 		.get(`/hotels/${id}`)
@@ -169,26 +179,31 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
 				<Icon name="mdi:map-marker" />
 				{{ $t("dashboard.hotel.location_section") }}
+
+				<button
+					@click="cityDialogOpen = true"
+					class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
+				>
+					<Icon name="mdi:plus" />
+				</button>
 			</h3>
 
 			<div class="grid md:grid-cols-2 gap-6">
-				<InputsText
-					name="location.city.ar"
+				<InputsSelect
+					name="location.city"
 					rules="required"
-					:placeholder="$t('dashboard.hotel.city.ar')"
+					:title="$t('dashboard.hotel.city')"
+					:placeholder="$t('dashboard.hotel.city_placeholder')"
+					:items="citiesForSelect"
 					icon="mdi:city"
 				/>
 
-				<InputsText
-					name="location.city.en"
-					rules="required"
-					:placeholder="$t('dashboard.hotel.city.en')"
-					icon="mdi:city"
-				/>
+				<div></div>
 
 				<InputsText
 					name="location.address.ar"
 					:placeholder="$t('dashboard.hotel.address.ar')"
+					:title="$t('dashboard.hotel.address.ar')"
 					icon="mdi:map-marker"
 					rules="required"
 				/>
@@ -196,6 +211,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				<InputsText
 					name="location.address.en"
 					:placeholder="$t('dashboard.hotel.address.en')"
+					:title="$t('dashboard.hotel.address.en')"
 					icon="mdi:map-marker"
 					rules="required"
 				/>
@@ -317,4 +333,6 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		</section>
 		<InputsSubmit :isLoading="isLoading" />
 	</Form>
+
+	<GlobalCityDialog v-model="cityDialogOpen" @saved="onCitySaved" />
 </template>

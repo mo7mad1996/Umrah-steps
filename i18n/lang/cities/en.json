@@ -1,0 +1,14 @@
+{
+  "title": "Cities",
+  "add_city": "Add City",
+  "edit_city": "Edit City",
+  "name_ar": "City Name (Arabic)",
+  "name_en": "City Name (English)",
+  "created": "City created successfully",
+  "updated": "City updated successfully",
+  "deleted": "City deleted successfully",
+  "error": "An error occurred",
+  "confirm_delete": "Are you sure you want to delete this city?",
+  "confirm_delete_message": "You won't be able to revert this action",
+  "no_cities": "No cities found"
+}

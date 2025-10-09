@@ -14,7 +14,7 @@ const langSchema = new mongoose.Schema(
 
 const locationSchema = new mongoose.Schema(
 	{
-		city: { type: langSchema, required: [true, required_error] },
+		city: { type: mongoose.Schema.Types.ObjectId, ref: "City", required: [true, required_error] },
 		address: { type: langSchema, required: false, default: "" },
 	},
 	{ _id: false },

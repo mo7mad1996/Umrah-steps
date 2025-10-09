@@ -7,14 +7,9 @@
 				<InputsSelect
 					:title="$t('dashboard.destination')"
 					icon="bi:flag-fill"
-					:items="[
-						{ value: 1, title: 'مكة المكرمة' },
-						{ value: 2, title: 'المدينة المنورة' },
-						{ value: 3, title: 'الرياض' },
-						{ value: 4, title: 'جدة' },
-						{ value: 5, title: 'الطائف' },
-					]"
+					:items="citiesForSelect"
 					:placeholder="$t('dashboard.destination')"
+					name="city"
 				/>
 
 				<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4">
@@ -55,6 +50,14 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Form } from "vee-validate";
+
+const { cities, fetchCities, getCitiesForSelect } = useCity();
+
+const citiesForSelect = computed(() => getCitiesForSelect.value);
+
+onMounted(() => {
+  fetchCities();
+});
 </script>

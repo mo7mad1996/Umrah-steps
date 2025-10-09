@@ -69,10 +69,8 @@
 			"en": "Enter hotel description in English"
 		},
 
-		"city": {
-			"ar": "City in Arabic",
-			"en": "City in English"
-		},
+		"city": "City",
+		"city_placeholder": "Select City",
 
 		"address": {
 			"ar": "Address in Arabic",
