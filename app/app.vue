@@ -10,6 +10,7 @@
 				<LayoutPageBorders>
 					<v-app>
 						<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
+							<SpeedInsights />
 							<NuxtLayout>
 								<NuxtPage />
 							</NuxtLayout>
