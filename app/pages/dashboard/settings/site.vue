@@ -6,35 +6,35 @@
       <v-tabs v-model="activeTab" class="border-b dark:border-gray-700">
         <v-tab value="home">
           <Icon name="mdi:home" class="me-2" />
-          {{ $t('pages.home') }}
+          {{ $t('nav.home') }}
         </v-tab>
         <v-tab value="hotels">
           <Icon name="mdi:hotel" class="me-2" />
-          {{ $t('pages.hotels') }}
+          {{ $t('nav.hotels') }}
         </v-tab>
         <v-tab value="about">
           <Icon name="mdi:information" class="me-2" />
-          {{ $t('pages.about') }}
+          {{ $t('nav.about') }}
         </v-tab>
         <v-tab value="contact">
           <Icon name="mdi:email" class="me-2" />
-          {{ $t('pages.contact') }}
+          {{ $t('nav.contact') }}
         </v-tab>
       </v-tabs>
 
       <v-card-text class="pa-6">
         <v-window v-model="activeTab">
           <v-window-item value="home">
-            <PageContentForm page="home" />
+            <PagesDashboardPageContentForm page="home" />
           </v-window-item>
           <v-window-item value="hotels">
-            <PageContentForm page="hotels" />
+            <PagesDashboardPageContentForm page="hotels" />
           </v-window-item>
           <v-window-item value="about">
-            <PageContentForm page="about" />
+            <PagesDashboardPageContentForm page="about" />
           </v-window-item>
           <v-window-item value="contact">
-            <PageContentForm page="contact" />
+            <PagesDashboardPageContentForm page="contact" />
           </v-window-item>
         </v-window>
       </v-card-text>

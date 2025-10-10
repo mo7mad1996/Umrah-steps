@@ -11,37 +11,37 @@
           <div class="grid md:grid-cols-2 gap-4">
             <InputsText
               v-model="form.seo.title.ar"
-              :label="$t('site_settings.seo_title_ar')"
+              :title="$t('site_settings.seo_title_ar')"
               name="seo.title.ar"
               icon="mdi:format-title"
             />
             <InputsText
               v-model="form.seo.title.en"
-              :label="$t('site_settings.seo_title_en')"
+              :title="$t('site_settings.seo_title_en')"
               name="seo.title.en"
               icon="mdi:format-title"
             />
             <InputsTextarea
               v-model="form.seo.description.ar"
-              :label="$t('site_settings.seo_description_ar')"
+              :title="$t('site_settings.seo_description_ar')"
               name="seo.description.ar"
               :rows="3"
             />
             <InputsTextarea
               v-model="form.seo.description.en"
-              :label="$t('site_settings.seo_description_en')"
+              :title="$t('site_settings.seo_description_en')"
               name="seo.description.en"
               :rows="3"
             />
             <InputsText
               v-model="form.seo.keywords.ar"
-              :label="$t('site_settings.seo_keywords_ar')"
+              :title="$t('site_settings.seo_keywords_ar')"
               name="seo.keywords.ar"
               icon="mdi:tag"
             />
             <InputsText
               v-model="form.seo.keywords.en"
-              :label="$t('site_settings.seo_keywords_en')"
+              :title="$t('site_settings.seo_keywords_en')"
               name="seo.keywords.en"
               icon="mdi:tag"
             />
@@ -58,25 +58,25 @@
           <div class="grid md:grid-cols-2 gap-4">
             <InputsText
               v-model="form.content.heading.ar"
-              :label="$t('site_settings.heading_ar')"
+              :title="$t('site_settings.heading_ar')"
               name="content.heading.ar"
               icon="mdi:format-header-1"
             />
             <InputsText
               v-model="form.content.heading.en"
-              :label="$t('site_settings.heading_en')"
+              :title="$t('site_settings.heading_en')"
               name="content.heading.en"
               icon="mdi:format-header-1"
             />
             <InputsText
               v-model="form.content.subheading.ar"
-              :label="$t('site_settings.subheading_ar')"
+              :title="$t('site_settings.subheading_ar')"
               name="content.subheading.ar"
               icon="mdi:format-header-2"
             />
             <InputsText
               v-model="form.content.subheading.en"
-              :label="$t('site_settings.subheading_en')"
+              :title="$t('site_settings.subheading_en')"
               name="content.subheading.en"
               icon="mdi:format-header-2"
             />
@@ -85,13 +85,13 @@
           <div class="grid md:grid-cols-2 gap-4 mt-4">
             <InputsTextarea
               v-model="form.content.body.ar"
-              :label="$t('site_settings.body_ar')"
+              :title="$t('site_settings.body_ar')"
               name="content.body.ar"
               :rows="6"
             />
             <InputsTextarea
               v-model="form.content.body.en"
-              :label="$t('site_settings.body_en')"
+              :title="$t('site_settings.body_en')"
               name="content.body.en"
               :rows="6"
             />
@@ -129,6 +129,7 @@
             variant="outlined"
             @click="loadPageContent"
             :disabled="submitting"
+            class="dark:text-white"
           >
             {{ $t('global.reset') }}
           </v-btn>
