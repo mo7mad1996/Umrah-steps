@@ -281,7 +281,6 @@ const createCity = async (data: any) => {
 			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 				<template v-for="amenity in amenities" :key="amenity.id">
 					<Field type="checkbox" name="amenities" v-slot="{ field, setValue }">
-						<pre>{{ values.amenities }}</pre>
 						<InputsCheckbox
 							v-bind="field"
 							:value="amenity.id"

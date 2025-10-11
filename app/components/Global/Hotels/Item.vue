@@ -31,8 +31,6 @@
 				<div>
 					<div class="flex gap-1 md:gap-2 items-center text-sm md:text-base">
 						<Icon name="material-symbols-light:location-on" />
-
-						<pre>{{ hotel.location.address }}</pre>
 					</div>
 					<div class="flex gap-0 justify-end">
 						<Icon
