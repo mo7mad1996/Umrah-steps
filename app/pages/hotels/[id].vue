@@ -12,16 +12,40 @@
 				class="w-full md:!w-3/4 mx-auto relative z-10 aspect-video block rounded-2xl shadow-2xl"
 			/>
 
-			<section class="md:grid-cols-2 grid my-12">
-				<div>
-					<h3>{{ $t("dashboard.hotel.description_section") }}</h3>
-					<p class="opacity-70 text-ellipsis overflow-hidden my-24">{{ hotel.description }}</p>
+			<div class="flex flex-col gap-2 w-fit text-md max-md:text-sm z-50 my-4 mx-auto">
+				<div
+					class="cursor-default flex items-center justify-between w-full rounded-lg bg-slate-700 dark:bg-slate-900 px-4 py-1"
+				>
+					<div class="flex gap-2 items-center">
+						<div
+							class="text-emerald-500 dark:bg-white/5 backdrop-blur-xl p-2 rounded-lg flex justify-center items-center"
+						>
+							<Icon name="material-symbols:location-on-outline" class="text-3xl" />
+						</div>
+						<div>
+							<p class="text-white">{{ hotel.location.city }}</p>
+							<p class="text-gray-500 p-1">{{ hotel.location.address }}</p>
+						</div>
+					</div>
 				</div>
-				<div>
-					<h3>{{ $t("dashboard.hotel.min_price") }}</h3>
-					<div class="text-3xl text-center my-24">
+			</div>
+
+			<section class="gap-2 md:grid-cols-2 grid my-12">
+				<div class="p-6 bg-white dark:!bg-neutral-100/10 shadow-xl rounded-lg">
+					<h3 class="text-xl opacity-70 dark:text-gray-400">
+						{{ $t("dashboard.hotel.description_section") }}
+					</h3>
+					<p class="opacity-70 text-ellipsis overflow-hidden my-6 dark:text-gray-50">
+						{{ hotel.description }}
+					</p>
+				</div>
+				<div class="p-6 bg-white dark:!bg-neutral-100/10 shadow-xl rounded-lg">
+					<h3 class="text-xl opacity-70 dark:text-gray-400">
+						{{ $t("dashboard.hotel.min_price") }}
+					</h3>
+					<div class="text-3xl text-center my-24 dark:text-gray-50">
 						{{
-							new Intl.NumberFormat(locale, { style: "currency", currency: "SAR" }).format(
+							new Intl.NumberFormat(`${locale}-SA`, { style: "currency", currency: "SAR" }).format(
 								hotel.price,
 							)
 						}}
@@ -40,10 +64,18 @@
 					</div>
 				</div>
 			</section>
-			<section
-				class="my-24 p-6 rounded bg-neutral-200 dark:bg-neutral-100/30"
-				v-html="hotel.content"
-			></section>
+
+			<section class="p-6 rounded-lg flex gap-6 justify-center wrap">
+				<div
+					v-for="amenity in hotel.amenities"
+					:key="amenity.id"
+					class="flex items-center rounded-3xl p-1 px-4 gap-3 bg-indigo-600/10 dark:bg-indigo-100/70 text-indigo-600"
+				>
+					<Icon :name="amenity.icon" class="text-xl font-bold" />
+					<span>{{ amenity[locale] }}</span>
+				</div>
+			</section>
+			<section class="p-6 bg-white dark:!bg-neutral-100/10 mb-24" v-html="hotel.content"></section>
 		</div>
 	</div>
 </template>

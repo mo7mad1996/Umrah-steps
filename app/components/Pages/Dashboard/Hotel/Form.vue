@@ -184,6 +184,7 @@ const createCity = async (data: any) => {
 					<template #btn="a">
 						<button
 							v-bind="a"
+							type="button"
 							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
 						>
 							<Icon name="mdi:plus" />
@@ -250,6 +251,7 @@ const createCity = async (data: any) => {
 				<GlobalFormDialog :title="$t('dashboard.hotel.add_amenity')" @submit="AddAmenity">
 					<template #btn="activatorProps">
 						<button
+							type="button"
 							v-bind="activatorProps"
 							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
 						>

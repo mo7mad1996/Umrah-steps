@@ -24,6 +24,7 @@ export class AmenityService {
 
 	async create(body: IAmenity) {
 		try {
+			// @ts-ignore
 			delete body.id;
 
 			const amenity = await Amenity.create(body);

@@ -33,7 +33,7 @@
 							<v-icon icon="mdi-window-close"></v-icon>
 						</button>
 					</template>
-					<div v-else>
+					<div v-else class="text-neutral-700 dark:text-neutral-300">
 						{{ $t("$vuetify.datePicker.header") }}
 					</div>
 				</div>
