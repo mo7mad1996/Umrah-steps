@@ -1,45 +1,41 @@
-import { ServerFile } from "nuxt-file-storage";
+import { put, del, list } from "@vercel/blob";
 
 export default defineEventHandler(async (event) => {
 	try {
-		const query: { path?: string; file: string } = getQuery(event);
-		const { mount } = useRuntimeConfig(event);
+		const query = getQuery(event) as { path?: string; file?: string };
+		const { files } =
+			event.method === "POST"
+				? await readBody<{ files: { name: string; data: string }[] }>(event)
+				: { files: [] };
 
 		switch (event.method) {
-			case "GET":
-				if (query.path) return getFileLocally(query.path);
-				return await getFilesLocally();
+			case "GET": {
+				const blobs = await list();
+				return blobs.blobs.map((b) => b.url);
+			}
 
-			case "POST":
-				const { files } = await readBody<{ files: ServerFile[] }>(event);
-				const result = [];
+			case "POST": {
+				const result: string[] = [];
 				for (const file of files) {
-					const x = await storeFileLocally(file, 18, query.path);
-
-					result.push(
-						[mount, (query.path || "").replace(/^\/+|\/+$/g, ""), x]
-							.join("/")
-							.replace("./public", ""),
-					);
+					// decode base64 to buffer
+					const buffer = Buffer.from(file.data.split(",")[1], "base64");
+					const blob = await put(`${query.path || ""}/${file.name}`, buffer, { access: "public" });
+					result.push(blob.url);
 				}
-
-				// fullPath
 				return result;
+			}
 
-			case "DELETE":
-				if (query.file) return await deleteFile(query.file);
-				throw createError({
-					message: "file query is required.",
-					status: 400,
-				});
+			case "DELETE": {
+				if (!query.file) throw createError({ status: 400, message: "file query is required." });
+
+				await del(query.file);
+				return { success: true };
+			}
 
 			default:
-				throw createError({
-					message: "method is not allowed.",
-					status: 405,
-				});
+				throw createError({ status: 405, message: "method not allowed" });
 		}
 	} catch (err: any) {
-		return err;
+		return { error: err.message || err.toString() };
 	}
 });
