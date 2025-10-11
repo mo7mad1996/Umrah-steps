@@ -37,6 +37,6 @@ export default defineEventHandler(async (event) => {
 				throw createError({ status: 405, message: "method not allowed" });
 		}
 	} catch (err: any) {
-		return { error: err.message || err.toString() };
+		throw createError(err.message);
 	}
 });

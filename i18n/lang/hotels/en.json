@@ -11,6 +11,7 @@
 	"hotels": "hotels",
 	"active": "Active",
 	"inactive": "Inactive",
+	"hotel_details": "Hotel Details",
 
 	"cities": {
 		"add": "Add City",

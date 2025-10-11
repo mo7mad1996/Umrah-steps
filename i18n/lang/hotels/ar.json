@@ -11,6 +11,7 @@
 	"hotels": "فندق",
 	"active": "نشط",
 	"inactive": "غير نشط",
+	"hotel_details": "تفاصيل الفندق",
 
 	"cities": {
 		"add": "اضافة مدينة",

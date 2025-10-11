@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import type { IHotelRequest } from "~/types/hotel";
-import { Form } from "vee-validate";
-import { onMounted } from "vue";
+import { Form, Field } from "vee-validate";
+
 const { locale, t: $t } = useI18n();
 const toast = useToast();
 const props = defineProps<{ isEdit?: boolean }>();
-
 const route = useRoute();
 const router = useRouter();
-const { data: amenities, refresh: refreshAmenity } = useAmenity();
 
+const { data: amenities, refresh: refreshAmenity } = useAmenity();
 const cityDialogOpen = ref(false);
 
 onMounted(() => {
@@ -27,7 +26,9 @@ const images = ref();
 
 const getHotelData = () => {
 	useApi()
-		.get(`/hotels/${id}`)
+		.get(`/hotels/${id}`, {
+			params: {},
+		})
 		.then((res) => (hotel.value = res.data))
 		.catch((error) => console.error(error));
 };
@@ -191,13 +192,13 @@ const createCity = async (data: any) => {
 
 					<InputsText
 						:title="$t('hotels.cities.name_ar')"
-						name="name.ar"
+						name="ar"
 						icon="mdi:city"
 						rules="required"
 					/>
 					<InputsText
 						:title="$t('hotels.cities.name_en')"
-						name="name.en"
+						name="en"
 						icon="mdi:city"
 						rules="required"
 					/>
@@ -211,7 +212,7 @@ const createCity = async (data: any) => {
 				:items="
 					(cities || []).map((c: any) => ({
 						value: c._id,
-						title: c.name[locale],
+						title: c[locale],
 					}))
 				"
 				:status="citiesStatus"
@@ -278,13 +279,17 @@ const createCity = async (data: any) => {
 			</h3>
 
 			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-				<InputsCheckbox
-					v-for="amenity in amenities"
-					:key="amenity.id"
-					:value="amenity.id"
-					:name="amenity.id"
-					:title="amenity[locale]"
-				/>
+				<template v-for="amenity in amenities" :key="amenity.id">
+					<Field type="checkbox" name="amenities" v-slot="{ field, setValue }">
+						<pre>{{ values.amenities }}</pre>
+						<InputsCheckbox
+							v-bind="field"
+							:value="amenity.id"
+							:id="amenity.id"
+							:title="amenity[locale]"
+						/>
+					</Field>
+				</template>
 			</div>
 		</section>
 

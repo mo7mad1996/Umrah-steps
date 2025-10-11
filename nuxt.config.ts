@@ -97,6 +97,9 @@ export default defineNuxtConfig({
 		mode: "development",
 		build: { sourcemap: false },
 	},
+	image: {
+		domains: ["vercel-storage.com"],
+	},
 
 	fileStorage: {
 		mount: process.env.NUXT_MOUNT,

@@ -7,14 +7,14 @@
 			:ripple="false"
 			:true-value="value || 'yes'"
 			:false-value="value ? undefined : 'no'"
+			color="primary"
 		>
 			<template v-slot:label>
-				<label
-					:for="id || name"
-					class="text-sm h-full w-full items-center flex cursor-pointer dark:text-white"
+				<div
+					class="text-sm h-full w-full items-center !flex-1 cursor-pointer dark:!text-white p-2 flex"
 				>
 					{{ title }}
-				</label>
+				</div>
 			</template>
 		</v-checkbox>
 
@@ -42,7 +42,10 @@ if (typeof field.value.value != "undefined") modelValue.value = field.value.valu
 watch(
 	modelValue,
 	(v, oldValue) => {
-		if (oldValue != v) if (typeof oldValue == typeof v || v) field.setValue(v, true);
+		if (oldValue != v)
+			if (typeof oldValue == typeof v || v) {
+				field.setValue(v, true);
+			}
 	},
 	{ immediate: true },
 );

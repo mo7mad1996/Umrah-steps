@@ -13,8 +13,8 @@ export class HotelService {
 			// query
 			const [data, count]: [IHotelResponseWithMultiLang[], number] = await Promise.all([
 				Hotel.find({ ...query })
-					.populate('location.city')
-					.populate('amenities')
+					.populate("location.city")
+					.populate("amenities")
 					.sort({ createdAt: "descending" })
 					.skip(per_page * (page - 1))
 					.limit(per_page)
@@ -65,8 +65,8 @@ export class HotelService {
 	async get(id: string, query: Query, lang: "ar" | "en") {
 		try {
 			const hotel = await Hotel.findOne({ _id: id })
-				.populate('location.city')
-				.populate('amenities');
+				.populate(query.includes || "")
+				.exec();
 			if (query.useLang == "true") return hotel.lang(lang);
 			return hotel;
 		} catch (err) {
