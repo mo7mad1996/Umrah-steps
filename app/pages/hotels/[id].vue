@@ -12,6 +12,8 @@
 				class="w-full md:!w-3/4 mx-auto relative z-10 aspect-video block rounded-2xl shadow-2xl"
 			/>
 
+			<!-- ok here -->
+
 			<div class="flex flex-col gap-2 w-fit text-md max-md:text-sm z-50 my-4 mx-auto">
 				<div
 					class="cursor-default flex items-center justify-between w-full rounded-lg bg-slate-700 dark:bg-slate-900 px-4 py-1"
