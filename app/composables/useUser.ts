@@ -11,9 +11,7 @@ export const useUser = () => {
 			useApi()
 				.get("/me")
 				.then((r) => r.data as User_DB_Schema),
-		{
-			server: false,
-		},
+		{ server: false },
 	);
 
 	watch(error, (val) => {
@@ -26,5 +24,5 @@ export const useUser = () => {
 		}
 	});
 
-	return { data, error, status, refresh };
+	return { data: data, error, status, refresh };
 };

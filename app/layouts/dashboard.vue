@@ -16,12 +16,20 @@
 
 <script setup lang="ts">
 const PerfectScroll = ref<HTMLElement>();
-
 const { $initPerfectScrollbar }: any = useNuxtApp();
+const router = useRoute();
+
 watch(
 	PerfectScroll,
 	(v) => {
 		if (v) $initPerfectScrollbar(v);
+	},
+	{ immediate: true },
+);
+watch(
+	() => router.path,
+	() => {
+		PerfectScroll.value?.scrollTo(0, 0);
 	},
 	{ immediate: true },
 );

@@ -9,7 +9,6 @@
 	"site": "الموقع",
 	"hotels": "الفنادق",
 	"transports": "المواصلات",
-	"site_settings": "إعدادات الموقع",
 	"profile_settings": "إعدادات المستخدم",
 	"logout": "تسجيل خروج",
 
@@ -75,7 +74,7 @@
 		},
 
 		"add_amenity": "اضافة مرافق",
-		"min_price": "الليله سعر",
+		"min_price": " سعر الليله",
 		"max_price": "أعلى سعر",
 		"currency": "العملة",
 		"currency_sar": "ريال سعودي",
@@ -115,5 +114,29 @@
 		"success_password": "تم تغيير كلمة المرور بنجاح",
 		"error_current_password": "كلمة المرور الحالية غير صحيحة",
 		"error_password_match": "كلمة المرور الجديدة وتأكيدها غير متطابقتين"
+	},
+
+	"site_settings": {
+		"title": "إعدادات الموقع",
+
+		"seo_section": "إعدادات SEO",
+		"seo_title_ar": "عنوان الصفحة (عربي)",
+		"seo_title_en": "عنوان الصفحة (إنجليزي)",
+		"seo_description_ar": "وصف الصفحة (عربي)",
+		"seo_description_en": "وصف الصفحة (إنجليزي)",
+		"seo_keywords_ar": "الكلمات المفتاحية (عربي)",
+		"seo_keywords_en": "الكلمات المفتاحية (إنجليزي)",
+		"content_section": "محتوى الصفحة",
+		"heading_ar": "العنوان الرئيسي (عربي)",
+		"heading_en": "العنوان الرئيسي (إنجليزي)",
+		"subheading_ar": "العنوان الفرعي (عربي)",
+		"subheading_en": "العنوان الفرعي (إنجليزي)",
+		"body_ar": "النص الأساسي (عربي)",
+		"body_en": "النص الأساسي (إنجليزي)",
+		"images_section": "الصور",
+		"main_image": "الصورة الرئيسية",
+		"additional_images": "صور إضافية",
+		"success_update": "تم تحديث محتوى الصفحة بنجاح",
+		"error": "حدث خطأ أثناء تحديث المحتوى"
 	}
 }

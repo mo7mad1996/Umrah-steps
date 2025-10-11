@@ -9,7 +9,6 @@
 	"site": "Site",
 	"hotels": "Hotels",
 	"transports": "Transports",
-	"site_settings": "Site Settings",
 	"profile_settings": "Profile Settings",
 	"logout": "Logout",
 
@@ -129,5 +128,27 @@
 		"success_password": "Password changed successfully",
 		"error_current_password": "Current password is incorrect",
 		"error_password_match": "New password and confirmation do not match"
+	},
+	"site_settings": {
+		"title": "Site settings",
+		"seo_section": "SEO Settings",
+		"seo_title_ar": "Page Title (Arabic)",
+		"seo_title_en": "Page Title (English)",
+		"seo_description_ar": "Page Description (Arabic)",
+		"seo_description_en": "Page Description (English)",
+		"seo_keywords_ar": "Keywords (Arabic)",
+		"seo_keywords_en": "Keywords (English)",
+		"content_section": "Page Content",
+		"heading_ar": "Main Heading (Arabic)",
+		"heading_en": "Main Heading (English)",
+		"subheading_ar": "Subheading (Arabic)",
+		"subheading_en": "Subheading (English)",
+		"body_ar": "Body Text (Arabic)",
+		"body_en": "Body Text (English)",
+		"images_section": "Images",
+		"main_image": "Main Image",
+		"additional_images": "Additional Images",
+		"success_update": "Page content updated successfully",
+		"error": "Error updating content"
 	}
 }

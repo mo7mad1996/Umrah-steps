@@ -8,5 +8,13 @@
 	"priceRange": "Price Range",
 	"viewMode": "View mode",
 	"got": "We found",
-	"hotels": "hotels"
+	"hotels": "hotels",
+	"active": "Active",
+	"inactive": "Inactive",
+
+	"cities": {
+		"add": "Add City",
+		"name_en": "City Name (English)",
+		"name_ar": "City Name (Arabic)"
+	}
 }

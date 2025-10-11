@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { updateGlobalOptions, globalOptions } from "vue3-toastify";
+import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 
 const { localeProperties, locale, t } = useI18n();
 const { current } = useLocale();

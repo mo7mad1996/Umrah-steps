@@ -52,7 +52,6 @@ const hotelSchema = new mongoose.Schema<IHotelResponseWithMultiLang>(
 					updatedAt: this.updatedAt,
 					description: this.description[lang],
 					location: {
-						city: this.location.city[lang],
 						address: this.location.address[lang],
 					},
 				};

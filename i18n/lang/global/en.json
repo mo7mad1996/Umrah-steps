@@ -3,6 +3,8 @@
 	"select": "Select one",
 	"add": "Add",
 	"save": "Save",
+	"delete_question": "Are you sure you want to delete",
+	"confirm": "Confirm",
 	"more": "More",
 	"search": "Search",
 	"loading": "Loading",

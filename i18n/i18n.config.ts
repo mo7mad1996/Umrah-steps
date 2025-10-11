@@ -18,6 +18,8 @@ import vuetifyAr from "./lang/vuetify/ar.json";
 import vuetifyEn from "./lang/vuetify/en.json";
 import globalAr from "./lang/global/ar.json";
 import globalEn from "./lang/global/en.json";
+import favoritesAr from "./lang/favorites/ar.json";
+import favoritesEn from "./lang/favorites/en.json";
 
 export default {
 	legacy: false,
@@ -38,8 +40,10 @@ export default {
 			dashboard: dashboardAr,
 			$vuetify: vuetifyAr,
 			global: globalAr,
+			favorites: favoritesAr,
 		},
 		en: {
+			favorites: favoritesEn,
 			nav: navEn,
 			home: homeEn,
 			hotels: hotelsEn,

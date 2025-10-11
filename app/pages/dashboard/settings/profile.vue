@@ -34,76 +34,78 @@
 					<hr />
 
 					<!-- Personal Information Section -->
-					<section class="">
-						<h3
-							class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-						>
-							<Icon name="mdi:account" />
-							{{ $t("dashboard.profile.personal_info") }}
-						</h3>
+					<ClientOnly>
+						<section v-if="user" class="">
+							<h3
+								class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+							>
+								<Icon name="mdi:account" />
+								{{ $t("dashboard.profile.personal_info") }}
+							</h3>
 
-						<Form @submit="updateProfile" class="gap-4 grid md:grid-cols-2">
-							<InputsText
-								class="md:col-span-2"
-								v-model="profileForm.name"
-								name="name"
-								:placeholder="$t('dashboard.profile.name')"
-								icon="mdi:account"
-							/>
-							<InputsEmail
-								v-model="profileForm.email"
-								name="email"
-								rules="required|email"
-								:placeholder="$t('dashboard.profile.email')"
-							/>
-							<InputsPhone
-								v-model="profileForm.phone"
-								rules=""
-								name="phone"
-								:placeholder="$t('dashboard.profile.phone')"
-							/>
+							<Form @submit="updateProfile" class="gap-4 grid md:grid-cols-2">
+								<InputsText
+									class="md:col-span-2"
+									v-model="profileForm.name"
+									name="name"
+									:placeholder="$t('dashboard.profile.name')"
+									icon="mdi:account"
+								/>
+								<InputsEmail
+									v-model="profileForm.email"
+									name="email"
+									rules="required|email"
+									:placeholder="$t('dashboard.profile.email')"
+								/>
+								<InputsPhone
+									v-model="profileForm.phone"
+									rules=""
+									name="phone"
+									:placeholder="$t('dashboard.profile.phone')"
+								/>
 
-							<div>
-								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-									{{ $t("dashboard.profile.account_created") }}
-								</label>
-								<div
-									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
-								>
-									<NuxtTime
-										:datetime="user?.createdAt as Date"
-										day="numeric"
-										month="long"
-										year="numeric"
-										:locale="locale"
-									/>
+								<div>
+									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+										{{ $t("dashboard.profile.account_created") }}
+									</label>
+									<div
+										class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
+									>
+										<NuxtTime
+											:datetime="user?.createdAt as Date"
+											day="numeric"
+											month="long"
+											year="numeric"
+											:locale="locale"
+										/>
+									</div>
 								</div>
-							</div>
-							<div>
-								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-									{{ $t("dashboard.profile.last_login") }}
-								</label>
-								<div
-									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
-								>
-									<NuxtTime
-										:datetime="(user?.lastLogin as Date)"
-										day="numeric"
-										month="long"
-										year="numeric"
-										relative
-										:locale="locale"
-									/>
+								<div>
+									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+										{{ $t("dashboard.profile.last_login") }}
+									</label>
+									<div
+										class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
+									>
+										<NuxtTime
+											:datetime="(user?.lastLogin as Date)"
+											day="numeric"
+											month="long"
+											year="numeric"
+											relative
+											:locale="locale"
+										/>
+									</div>
 								</div>
-							</div>
 
-							<InputsSubmit
-								class="md:col-span-2"
-								:text="$t('dashboard.profile.update_profile')"
-								:isLoading="profileLoading"
-							/>
-						</Form>
-					</section>
+								<InputsSubmit
+									class="md:col-span-2"
+									:text="$t('dashboard.profile.update_profile')"
+									:isLoading="profileLoading"
+								/>
+							</Form>
+						</section>
+					</ClientOnly>
 
 					<hr />
 

@@ -20,7 +20,7 @@ export interface IHotelResponse {
 	description: string;
 	price: number;
 	content: string;
-	location: { city: string; address: string };
+	location: { address: string };
 	img: string;
 	images: string[];
 	status: string;

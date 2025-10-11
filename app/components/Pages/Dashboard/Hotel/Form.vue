@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IHotelRequest } from "~/types/hotel";
 import { Form } from "vee-validate";
+import { onMounted } from "vue";
 const { locale, t: $t } = useI18n();
 const toast = useToast();
 const props = defineProps<{ isEdit?: boolean }>();
@@ -8,19 +9,12 @@ const props = defineProps<{ isEdit?: boolean }>();
 const route = useRoute();
 const router = useRouter();
 const { data: amenities, refresh: refreshAmenity } = useAmenity();
-const { cities, fetchCities, getCitiesForSelect } = useCity();
 
-const citiesForSelect = computed(() => getCitiesForSelect.value);
 const cityDialogOpen = ref(false);
 
 onMounted(() => {
-	fetchCities();
 	if (props.isEdit && id) getHotelData();
 });
-
-const onCitySaved = () => {
-	fetchCities();
-};
 
 const id = route.params.id as string;
 
@@ -43,12 +37,10 @@ const onSubmit = async (data: any) => {
 	try {
 		isLoading.value = true;
 
-		if (mainImage.value.files.length) {
-			data.img = (await mainImage.value?.uploadFiles?.call())[0];
-		}
-		if (images.value.files.length) {
+		if (mainImage.value.files.length) data.img = (await mainImage.value?.uploadFiles?.call())[0];
+
+		if (images.value.files.length)
 			data.images = [...data.images, ...(await images.value?.uploadFiles?.call())];
-		}
 
 		let response = null;
 		if (props.isEdit) {
@@ -67,19 +59,24 @@ const onSubmit = async (data: any) => {
 	}
 };
 
+const { refresh: refreshCities, cities, status: citiesStatus } = useCity();
 const AddAmenity = async (data: any, { resetForm }: any) => {
 	try {
 		isLoadingAmenity.value = true;
 		const response = await useApi().post("/amenity", data);
 		toast.success($t("dashboard.hotel.success_created"));
-		resetForm();
 
+		resetForm();
 		refreshAmenity();
 	} catch (error: any) {
 		console.error("Error", error);
 	} finally {
 		isLoadingAmenity.value = false;
 	}
+};
+const createCity = async (data: any) => {
+	await useApi().post("/cities", data);
+	refreshCities();
 };
 </script>
 
@@ -135,7 +132,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 
 		<hr />
 
-		<div class="grid md:grid-cols-3 gap-6">
+		<section class="grid md:grid-cols-3 gap-6">
 			<InputsSelect
 				name="rate"
 				rules="required"
@@ -148,6 +145,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 					{ value: 4, title: '4 ' + $t('dashboard.hotel.stars') },
 					{ value: 5, title: '5 ' + $t('dashboard.hotel.stars') },
 				]"
+				:default-value="5"
 				icon="mdi:star"
 			/>
 
@@ -160,6 +158,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 					{ value: 'active', title: $t('dashboard.hotel.status_active') },
 					{ value: 'inactive', title: $t('dashboard.hotel.status_inactive') },
 				]"
+				default-value="active"
 				icon="mdi:check-circle"
 			/>
 
@@ -171,7 +170,7 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				:placeholder="$t('dashboard.hotel.min_price')"
 				icon="mdi:currency-usd"
 			/>
-		</div>
+		</section>
 
 		<hr />
 
@@ -180,26 +179,46 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 				<Icon name="mdi:map-marker" />
 				{{ $t("dashboard.hotel.location_section") }}
 
-				<button
-					@click="cityDialogOpen = true"
-					class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
-				>
-					<Icon name="mdi:plus" />
-				</button>
+				<GlobalFormDialog :title="$t('hotels.cities.add')" @submit="createCity">
+					<template #btn="a">
+						<button
+							v-bind="a"
+							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
+						>
+							<Icon name="mdi:plus" />
+						</button>
+					</template>
+
+					<InputsText
+						:title="$t('hotels.cities.name_ar')"
+						name="name.ar"
+						icon="mdi:city"
+						rules="required"
+					/>
+					<InputsText
+						:title="$t('hotels.cities.name_en')"
+						name="name.en"
+						icon="mdi:city"
+						rules="required"
+					/>
+				</GlobalFormDialog>
 			</h3>
 
+			<InputsSelect
+				name="location.city"
+				rules="required"
+				:title="$t('dashboard.hotel.city')"
+				:items="
+					(cities || []).map((c: any) => ({
+						value: c._id,
+						title: c.name[locale],
+					}))
+				"
+				:status="citiesStatus"
+				:placeholder="$t('dashboard.hotel.city_placeholder')"
+				icon="mdi:city"
+			/>
 			<div class="grid md:grid-cols-2 gap-6">
-				<InputsSelect
-					name="location.city"
-					rules="required"
-					:title="$t('dashboard.hotel.city')"
-					:placeholder="$t('dashboard.hotel.city_placeholder')"
-					:items="citiesForSelect"
-					icon="mdi:city"
-				/>
-
-				<div></div>
-
 				<InputsText
 					name="location.address.ar"
 					:placeholder="$t('dashboard.hotel.address.ar')"
@@ -222,11 +241,13 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 
 		<section>
 			<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-				<Icon name="mdi:star-box" />
-				{{ $t("dashboard.hotel.amenities_section") }}
+				<span>
+					<Icon name="mdi:star-box" />
+					{{ $t("dashboard.hotel.amenities_section") }}
+				</span>
 
-				<v-dialog attach max-width="500">
-					<template v-slot:activator="{ props: activatorProps }">
+				<GlobalFormDialog :title="$t('dashboard.hotel.add_amenity')" @submit="AddAmenity">
+					<template #btn="activatorProps">
 						<button
 							v-bind="activatorProps"
 							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
@@ -235,51 +256,25 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 						</button>
 					</template>
 
-					<template #default="{ isActive }">
-						<section class="p-1">
-							<Form v-bind="{ onSubmit: AddAmenity }">
-								<div
-									class="bg-white dark:!bg-gray-800 p-4 shadow-xl rounded-2xl flex flex-col gap-4"
-								>
-									<h3 class="text-xl py-5 font-semibold text-inherit dark:text-white/40">
-										{{ $t("dashboard.hotel.add_amenity") }}
-									</h3>
-									<InputsText
-										name="ar"
-										rules="required"
-										:placeholder="$t('dashboard.hotel.name.ar')"
-										icon="ooui:bold-arab-dad"
-									/>
-									<InputsText
-										name="en"
-										rules="required"
-										:placeholder="$t('dashboard.hotel.name.en')"
-										icon="ri:english-input"
-									/>
-									<InputsText
-										icon="line-md:iconify2"
-										name="icon"
-										rules="required"
-										:placeholder="$t('global.icon')"
-									/>
-
-									<hr />
-									<div class="flex justify-end gap-2 items-stretch">
-										<button
-											@click.prevent.stop="isActive.value = false"
-											class="flex items-center justify-center text-red-600 rounded px-6 shadow bg-red-100 dark:bg-red-100/5 hover:bg-red-100 bg-red-100/40"
-										>
-											{{ $t("global.cancel") }}
-										</button>
-										<InputsSubmit :isLoading="isLoadingAmenity" class="!w-fit !mt-0">
-											{{ $t("global.save") }}
-										</InputsSubmit>
-									</div>
-								</div>
-							</Form>
-						</section>
-					</template>
-				</v-dialog>
+					<InputsText
+						name="ar"
+						rules="required"
+						:placeholder="$t('dashboard.hotel.name.ar')"
+						icon="ooui:bold-arab-dad"
+					/>
+					<InputsText
+						name="en"
+						rules="required"
+						:placeholder="$t('dashboard.hotel.name.en')"
+						icon="ri:english-input"
+					/>
+					<InputsText
+						icon="line-md:iconify2"
+						name="icon"
+						rules="required"
+						:placeholder="$t('global.icon')"
+					/>
+				</GlobalFormDialog>
 			</h3>
 
 			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -333,6 +328,4 @@ const AddAmenity = async (data: any, { resetForm }: any) => {
 		</section>
 		<InputsSubmit :isLoading="isLoading" />
 	</Form>
-
-	<GlobalCityDialog v-model="cityDialogOpen" @saved="onCitySaved" />
 </template>

@@ -107,9 +107,9 @@ const showMobileMenu = ref(false);
 const links = [
 	{ to: "/", title: "nav.home" },
 	{ to: "/hotels", title: "nav.hotels" },
-	{ to: "/favorites", title: "nav.favorites" },
 	{ to: "/about", title: "nav.about" },
 	{ to: "/contact", title: "nav.contact" },
+	{ to: "/favorites", title: "nav.favorites" },
 ];
 
 const locale = ref(l.value);

@@ -1,73 +1,89 @@
 <template>
-  <v-dialog v-model="dialog" max-width="500" persistent>
-    <v-card class="dark:bg-gray-800">
-      <v-card-title class="text-h6 bg-red-50 dark:bg-red-900/20 dark:text-white">
-        <div class="flex items-center gap-2">
-          <Icon name="mdi:alert-circle" class="text-red-500" size="24" />
-          <span>{{ title }}</span>
-        </div>
-      </v-card-title>
+	<v-dialog v-model="dialog" max-width="500" attach>
+		<template v-slot:activator="{ props }">
+			<slot v-bind="props" />
+		</template>
 
-      <v-card-text class="pt-6 pb-4 dark:text-gray-200">
-        <p class="text-base">{{ message }}</p>
-      </v-card-text>
+		<div
+			class="p-6 py-2 rounded-xl bg-white dark:!bg-neutral-900/70 backdrop-blur-lg text-black dark:!text-white/80"
+		>
+			<h1 class="font-bold text-3xl flex items-center gap-5 py-3">
+				<Icon :name="icon" />
 
-      <v-card-actions class="px-6 pb-4">
-        <v-spacer />
-        <v-btn
-          variant="text"
-          @click="handleCancel"
-          :disabled="loading"
-          class="dark:text-gray-300"
-        >
-          {{ cancelText }}
-        </v-btn>
-        <v-btn
-          color="error"
-          variant="flat"
-          @click="handleConfirm"
-          :loading="loading"
-        >
-          {{ confirmText }}
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+				<span>
+					{{ title }}
+				</span>
+			</h1>
+
+			<p
+				v-if="content"
+				class="opacity-60 p-4 text-sm border !border-transparent !border-s-8 my-3 bg-primary/10 !border-s-primary"
+			>
+				{{ content }}
+			</p>
+			<hr />
+			<div @click.prevent.stop class="flex gap-3 p-3">
+				<v-spacer />
+
+				<InputsBtn
+					no-svg
+					:loading="loadingCancel"
+					:text="$t('global.cancel')"
+					@click="handleConfirm"
+					class="hover:!bg-green-200/20 !bg-green-100 hover:border !text-green-800 hover:underline"
+				/>
+
+				<InputsBtn
+					:loading="loading"
+					:text="$t('global.confirm')"
+					@click="handleConfirm"
+					class="!text-red-600 hover:!bg-red-400/50 !bg-red-300"
+				/>
+			</div>
+		</div>
+	</v-dialog>
 </template>
 
 <script setup lang="ts">
-interface Props {
-  modelValue: boolean;
-  title: string;
-  message: string;
-  confirmText?: string;
-  cancelText?: string;
-  loading?: boolean;
-}
+const emit = defineEmits(["confirm", "cancel"]);
 
-const props = withDefaults(defineProps<Props>(), {
-  confirmText: 'Confirm',
-  cancelText: 'Cancel',
-  loading: false,
-});
+const dialog = ref(false);
+const loading = ref(false);
+const loadingCancel = ref(false);
 
-const emit = defineEmits<{
-  'update:modelValue': [value: boolean];
-  'confirm': [];
-  'cancel': [];
-}>();
-
-const dialog = computed({
-  get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
-});
+const props = withDefaults(
+	defineProps<{
+		title: string;
+		content?: string;
+		icon?: string;
+	}>(),
+	{
+		icon: "i-heroicons-exclamation-triangle",
+	},
+);
 
 const handleConfirm = () => {
-  emit('confirm');
+	try {
+		loading.value = true;
+
+		emit("confirm");
+		dialog.value = false;
+	} catch (err) {
+		console.error(err);
+	} finally {
+		loading.value = false;
+	}
 };
 
 const handleCancel = () => {
-  emit('cancel');
-  dialog.value = false;
+	try {
+		loadingCancel.value = true;
+		emit("cancel");
+		dialog.value = false;
+	} catch (err) {
+		console.error(err);
+	} finally {
+		loadingCancel.value = false;
+	}
 };
 </script>

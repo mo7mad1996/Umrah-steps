@@ -7,7 +7,7 @@
 				<InputsSelect
 					:title="$t('dashboard.destination')"
 					icon="bi:flag-fill"
-					:items="citiesForSelect"
+					:fetch="useCity"
 					:placeholder="$t('dashboard.destination')"
 					name="city"
 				/>
@@ -52,12 +52,4 @@
 
 <script setup lang="ts">
 import { Form } from "vee-validate";
-
-const { cities, fetchCities, getCitiesForSelect } = useCity();
-
-const citiesForSelect = computed(() => getCitiesForSelect.value);
-
-onMounted(() => {
-  fetchCities();
-});
 </script>

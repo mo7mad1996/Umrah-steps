@@ -78,7 +78,7 @@ const links = [
 	},
 	{
 		icon: "ic:baseline-settings",
-		title: "dashboard.site_settings",
+		title: "dashboard.site_settings.title",
 		to: "/dashboard/settings/site",
 	},
 	{

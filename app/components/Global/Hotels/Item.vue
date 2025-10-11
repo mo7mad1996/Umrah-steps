@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink
 		:to="`/hotels/${hotel.id}`"
-		class="flex flex-col relative shadow group rounded-xl h-full min-h-[300px] md:min-h-[400px] overflow-hidden bg-white *:!transition-all border-white border-4 md:border-8 hover:shadow-xl transition-all duration-300"
+		class="flex flex-col relative shadow group rounded-xl h-full min-h-[300px] md:min-h-[400px] max-h-[700px] aspect-[2/3] overflow-hidden bg-white *:!transition-all border-white border-4 md:border-8 hover:shadow-xl transition-all duration-300"
 	>
 		<NuxtImg
 			:src="hotel.img || '/logo/vertical.png'"
@@ -32,7 +32,7 @@
 					<div class="flex gap-1 md:gap-2 items-center text-sm md:text-base">
 						<Icon name="material-symbols-light:location-on" />
 
-						<span>{{ hotel.location.city }}</span>
+						<pre>{{ hotel.location.address }}</pre>
 					</div>
 					<div class="flex gap-0 justify-end">
 						<Icon
@@ -67,20 +67,19 @@ import type { IHotelResponse } from "~/types/hotel";
 
 const props = defineProps<{ hotel: IHotelResponse }>();
 const { toggleFavorite, isFavorite } = useFavorites();
-const { showToast } = useToast();
+const showToast = useToast();
 const { t } = useI18n();
 
 const is_fav = computed(() => isFavorite(props.hotel.id));
+
+const loading = ref(false);
 
 const handleFavoriteClick = (event: Event) => {
 	event.preventDefault();
 	event.stopPropagation();
 	const added = toggleFavorite(props.hotel.id);
-	if (added) {
-		showToast(t('favorites.added'), 'success');
-	} else {
-		showToast(t('favorites.removed'), 'info');
-	}
+	if (added) showToast.success(t("favorites.added"));
+	else showToast.info(t("favorites.removed"));
 };
 </script>
 
