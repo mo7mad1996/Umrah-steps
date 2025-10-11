@@ -1,7 +1,6 @@
 import { defineRule, configure } from "vee-validate";
 import { all } from "@vee-validate/rules";
 import { useCookie } from "nuxt/app";
-import { type CookieRef } from "nuxt/app";
 
 interface validationMessages {
 	[rulName: string]: string;
@@ -40,8 +39,8 @@ function getMessage(locale: string, ruleName: string, field: string) {
 }
 
 export default defineNuxtPlugin(() => {
-	let currentLocale: CookieRef<string | null | undefined>;
-	let locale: CookieRef<string | null | undefined> | string;
+	const currentLocale = useCookie<string | null | undefined>("i18n_redirected");
+	const locale = currentLocale.value || "ar";
 
 	Object.entries(all).forEach(([ruleName, ruleFn]) => defineRule(ruleName, ruleFn));
 
@@ -49,9 +48,6 @@ export default defineNuxtPlugin(() => {
 	configure({
 		generateMessage: (ctx) => {
 			if (!ctx.rule) return `Field ${ctx.field} is invalid.`;
-
-			currentLocale = useCookie("i18n_redirected");
-			locale = currentLocale.value || "ar";
 
 			return getMessage(locale, ctx.rule.name, ctx.field);
 		},

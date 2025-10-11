@@ -3,10 +3,6 @@ import { put, del, list } from "@vercel/blob";
 export default defineEventHandler(async (event) => {
 	try {
 		const query = getQuery(event) as { path?: string; file?: string };
-		const { files } =
-			event.method === "POST"
-				? await readBody<{ files: { name: string; data: string }[] }>(event)
-				: { files: [] };
 
 		switch (event.method) {
 			case "GET": {
@@ -15,10 +11,15 @@ export default defineEventHandler(async (event) => {
 			}
 
 			case "POST": {
+				const { files } =
+					event.method === "POST"
+						? await readBody<{ files: { name: string; content: string }[] }>(event)
+						: { files: [] };
+
 				const result: string[] = [];
 				for (const file of files) {
 					// decode base64 to buffer
-					const buffer = Buffer.from(file.data.split(",")[1], "base64");
+					const buffer = Buffer.from(file.content.split(",")[1], "base64");
 					const blob = await put(`${query.path || ""}/${file.name}`, buffer, { access: "public" });
 					result.push(blob.url);
 				}
