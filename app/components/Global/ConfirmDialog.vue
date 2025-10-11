@@ -29,7 +29,7 @@
 					no-svg
 					:loading="loadingCancel"
 					:text="$t('global.cancel')"
-					@click="handleConfirm"
+					@click="handleCancel"
 					class="hover:!bg-green-200/20 !bg-green-100 hover:border !text-green-800 hover:underline"
 				/>
 
