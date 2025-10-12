@@ -4,6 +4,26 @@
 			{{ $t("dashboard.site_settings.contact.title") }}
 		</h3>
 
+		<!-- Main Phone Number -->
+		<div class="rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl">
+			<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+				<Icon name="solar:phone-bold" class="text-2xl text-purple-600" />
+				{{ $t("dashboard.site_settings.contact.main_phone") }}
+			</h4>
+			<Form @submit="updateMainPhone">
+				<div class="space-y-4">
+					<InputsText
+						name="mainPhone"
+						:title="$t('dashboard.site_settings.contact.main_phone')"
+						:placeholder="$t('dashboard.site_settings.contact.main_phone_placeholder')"
+						rules="required"
+						icon="solar:phone-bold"
+					/>
+					<InputsSubmit :title="$t('global.save')" class="w-full" />
+				</div>
+			</Form>
+		</div>
+
 		<!-- Hero Image Section -->
 		<div class="rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl">
 			<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -22,6 +42,125 @@
 				</div>
 			</Form>
 		</div>
+
+		<!-- Contact Info Section -->
+		<details open class="rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl">
+			<summary class="cursor-pointer text-gray-900 dark:text-white text-xl font-bold flex items-center justify-between mb-4">
+				<span class="flex items-center gap-2">
+					<Icon name="solar:phone-calling-bold" class="text-2xl text-purple-600" />
+					{{ $t("dashboard.site_settings.contact.contact_info.title") }}
+				</span>
+				<GlobalFormDialog
+					:title="$t('dashboard.site_settings.contact.contact_info.title')"
+					max-width="950"
+					@submit="addContactInfo"
+				>
+					<template #btn="props">
+						<button
+							v-bind="props"
+							type="button"
+							class="p-3 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:scale-105 transition-all"
+						>
+							<Icon name="mdi:plus" class="text-xl" />
+						</button>
+					</template>
+					<div class="grid md:grid-cols-2 gap-6 p-2">
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.name_ar')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.name_ar')"
+							name="name.ar"
+							rules="required"
+							icon="solar:user-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.name_en')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.name_en')"
+							name="name.en"
+							rules="required"
+							icon="solar:user-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.description_ar')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.description_ar')"
+							name="description.ar"
+							rules="required"
+							icon="solar:document-text-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.description_en')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.description_en')"
+							name="description.en"
+							rules="required"
+							icon="solar:document-text-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.url')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.url_placeholder')"
+							name="url"
+							rules="required"
+							icon="solar:link-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.icon')"
+							:placeholder="$t('dashboard.site_settings.contact.contact_info.icon_placeholder')"
+							name="icon"
+							rules="required"
+							icon="solar:star-bold"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.color')"
+							name="color"
+							type="color"
+							rules="required"
+						/>
+						<InputsText
+							:title="$t('dashboard.site_settings.contact.contact_info.order')"
+							name="order"
+							type="number"
+							icon="solar:sort-bold"
+						/>
+					</div>
+				</GlobalFormDialog>
+			</summary>
+
+			<GlobalInfinityTable
+				class="!h-64"
+				:finished="true"
+				:refresh="refreshContactInfo"
+				:data="contactInfos"
+				:error="contactInfoError"
+				:page="1"
+				:status="contactInfoStatus"
+				:headers="[
+					{ title: 'dashboard.site_settings.contact.contact_info.name_' + locale, key: 'name' },
+					{ title: 'dashboard.site_settings.contact.contact_info.url', key: 'url' },
+					{ title: '', key: 'action' },
+				]"
+			>
+				<template #action="{ row }">
+					<div
+						class="h-full flex items-center justify-end group-hover:!opacity-100 opacity-0"
+						@click.prevent.stop
+					>
+						<GlobalConfirmDialog
+							:title="$t('global.delete')"
+							:content="$t('global.delete_question')"
+							@confirm="() => deleteContactInfoItem(row.id)"
+						>
+							<template v-slot="props">
+								<button
+									@click.prevent.stop
+									v-bind="props"
+									class="aspect-square block h-full hover:bg-blue-600/10 rounded-full hover:shadow text-red-600"
+								>
+									<Icon name="material-symbols:delete-outline" class="h-full" />
+								</button>
+							</template>
+						</GlobalConfirmDialog>
+					</div>
+				</template>
+			</GlobalInfinityTable>
+		</details>
 
 		<!-- FAQs Section -->
 		<details open class="rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl">
@@ -297,6 +436,47 @@
 import { Form } from 'vee-validate';
 
 const { t, locale } = useI18n();
+
+// Update Main Phone
+const updateMainPhone = async (values: any) => {
+	try {
+		await useApi().put('/page-content/contact', {
+			content: {
+				mainPhone: values.mainPhone
+			}
+		});
+		useToast().success(t('dashboard.site_settings.success_update'));
+	} catch (error) {
+		useToast().error(t('dashboard.site_settings.error'));
+	}
+};
+
+// Contact Info
+const {
+	data: contactInfos,
+	status: contactInfoStatus,
+	error: contactInfoError,
+	refresh: refreshContactInfo,
+} = useAsyncData(
+	"contactInfo",
+	() =>
+		useApi()
+			.get("/contactInfo")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
+
+const deleteContactInfoItem = async (id: number) => {
+	await useApi().delete(`contactInfo?id=${id}`);
+	useToast().success(t("dashboard.site_settings.success_delete"));
+	await refreshContactInfo();
+};
+
+const addContactInfo = async (data: any) => {
+	await useApi().post("contactInfo", data);
+	await refreshContactInfo();
+	useToast().success(t("dashboard.site_settings.success_update"));
+};
 
 // Update Hero Image
 const updateHeroImage = async (values: any) => {

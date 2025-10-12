@@ -130,6 +130,21 @@
 		"contact": {
 			"title": "صفحة اتصل بنا",
 			"hero_image": "صورة الخلفية",
+			"main_phone": "رقم الهاتف الرئيسي",
+			"main_phone_placeholder": "+966 12 345 6789",
+			"contact_info": {
+				"title": "معلومات التواصل",
+				"name_ar": "الاسم (عربي)",
+				"name_en": "الاسم (إنجليزي)",
+				"description_ar": "الوصف (عربي)",
+				"description_en": "الوصف (إنجليزي)",
+				"url": "الرابط",
+				"url_placeholder": "https://wa.me/966551234567",
+				"icon": "الأيقونة",
+				"icon_placeholder": "mdi:whatsapp",
+				"color": "اللون",
+				"order": "الترتيب"
+			},
 			"faq": {
 				"title": "الاسئلة الشائعة",
 				"question": {
