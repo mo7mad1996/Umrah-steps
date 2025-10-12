@@ -23,7 +23,7 @@ import HomeForm from "~/components/Pages/Dashboard/PageContent/HomeForm.vue";
 import HotelsForm from "~/components/Pages/Dashboard/PageContent/HotelsForm.vue";
 import AboutForm from "~/components/Pages/Dashboard/PageContent/AboutForm.vue";
 import ContactForm from "~/components/Pages/Dashboard/PageContent/ContactForm.vue";
-import FavoritesForm from "~/components/Pages/Dashboard/PageContent/AboutForm.vue";
+import FavoritesForm from "~/components/Pages/Dashboard/PageContent/FavoritesForm.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -64,7 +64,7 @@ const tabs = [
 	{
 		title: "nav.favorites",
 		value: "favorites",
-		icon: "mdi:hart",
+		icon: "mdi:heart",
 		component: FavoritesForm,
 	},
 ];

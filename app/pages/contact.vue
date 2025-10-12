@@ -1,7 +1,7 @@
 <template>
 	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950">
-		<!-- Background Image -->
-		<GlobalImageMask src="/images/hotel.jpg" />
+		<!-- Dynamic Background Image -->
+		<GlobalImageMask :src="pageContent?.content?.image || '/images/hotel.jpg'" />
 
 		<!-- Page Header -->
 		<GlobalPageTitle :title="$t('contact.title')" :subTitle="$t('contact.subtitle')" />
@@ -64,7 +64,7 @@
 									class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
 								>
 									<Icon name="mdi:phone" />
-									اتصال طارئ
+									{{ $t("contact.emergency_call") }}
 								</a>
 							</div>
 						</div>
@@ -115,10 +115,17 @@
 </template>
 
 <script setup lang="ts">
-// SEO
 usePageTitle("contact.title");
 const { locale } = useI18n();
 
+// Get Page Content
+const { data: pageContent } = useAsyncData(
+	'contact-page-content',
+	() => useApi().get('/page-content/contact').then((d) => d.data),
+	{ watch: [locale] }
+);
+
+// Get Work Hours
 const {
 	data: workHours,
 	status: workHoursStatus,
