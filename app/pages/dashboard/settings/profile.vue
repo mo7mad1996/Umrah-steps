@@ -1,154 +1,152 @@
 <template>
-	<div>
-		<LazyLayoutDashboardContent :data="user" :error="error" :status="status" :refresh="refresh">
-			<template #header>
-				<LazyLayoutDashboardPageTitle
-					:title="$t('global.settings')"
-					:subTitle="$t('dashboard.profile.title')"
-				/>
-			</template>
+	<LazyLayoutDashboardContent :data="user" :error="error" :status="status" :refresh="refresh">
+		<template #header>
+			<LazyLayoutDashboardPageTitle
+				:title="$t('global.settings')"
+				:subTitle="$t('dashboard.profile.title')"
+			/>
+		</template>
 
-			<template v-slot="">
-				<div class="space-y-12">
-					<!-- Account Settings Section -->
-					<section>
-						<h3
-							class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-						>
-							<Icon name="mdi:cog" />
-							{{ $t("dashboard.profile.account_settings") }}
-						</h3>
+		<template v-slot="">
+			<div class="space-y-12">
+				<!-- Account Settings Section -->
+				<section>
+					<h3
+						class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+					>
+						<Icon name="mdi:cog" />
+						{{ $t("dashboard.profile.account_settings") }}
+					</h3>
 
-						<div class="space-y-4">
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-										{{ $t("dashboard.profile.language") }}
-									</label>
-									<InputsSelect v-model="lang" :items="langs" />
-								</div>
+					<div class="space-y-4">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div>
+								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+									{{ $t("dashboard.profile.language") }}
+								</label>
+								<InputsSelect v-model="lang" :items="langs" />
 							</div>
 						</div>
-					</section>
+					</div>
+				</section>
 
-					<hr />
+				<hr />
 
-					<!-- Personal Information Section -->
-					<ClientOnly>
-						<section v-if="user" class="">
-							<h3
-								class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-							>
-								<Icon name="mdi:account" />
-								{{ $t("dashboard.profile.personal_info") }}
-							</h3>
-
-							<Form @submit="updateProfile" class="gap-4 grid md:grid-cols-2">
-								<InputsText
-									class="md:col-span-2"
-									v-model="profileForm.name"
-									name="name"
-									:placeholder="$t('dashboard.profile.name')"
-									icon="mdi:account"
-								/>
-								<InputsEmail
-									v-model="profileForm.email"
-									name="email"
-									rules="required|email"
-									:placeholder="$t('dashboard.profile.email')"
-								/>
-								<InputsPhone
-									v-model="profileForm.phone"
-									rules=""
-									name="phone"
-									:placeholder="$t('dashboard.profile.phone')"
-								/>
-
-								<div>
-									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-										{{ $t("dashboard.profile.account_created") }}
-									</label>
-									<div
-										class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
-									>
-										<NuxtTime
-											:datetime="user?.createdAt as Date"
-											day="numeric"
-											month="long"
-											year="numeric"
-											:locale="locale"
-										/>
-									</div>
-								</div>
-								<div>
-									<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-										{{ $t("dashboard.profile.last_login") }}
-									</label>
-									<div
-										class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
-									>
-										<NuxtTime
-											:datetime="(user?.lastLogin as Date)"
-											day="numeric"
-											month="long"
-											year="numeric"
-											relative
-											:locale="locale"
-										/>
-									</div>
-								</div>
-
-								<InputsSubmit
-									class="md:col-span-2"
-									:text="$t('dashboard.profile.update_profile')"
-									:isLoading="profileLoading"
-								/>
-							</Form>
-						</section>
-					</ClientOnly>
-
-					<hr />
-
-					<!-- Security Section -->
-					<section>
+				<!-- Personal Information Section -->
+				<ClientOnly>
+					<section v-if="user" class="">
 						<h3
-							class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+							class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
 						>
-							<Icon name="mdi:shield-lock" class="text-primary" />
-							{{ $t("dashboard.profile.security") }}
+							<Icon name="mdi:account" />
+							{{ $t("dashboard.profile.personal_info") }}
 						</h3>
 
-						<Form @submit="changePassword" class="space-y-4">
-							<InputsPassword
-								v-model="passwordForm.currentPassword"
-								name="currentPassword"
-								rules="required"
-								:placeholder="$t('dashboard.profile.current_password')"
+						<Form @submit="updateProfile" class="gap-4 grid md:grid-cols-2">
+							<InputsText
+								class="md:col-span-2"
+								v-model="profileForm.name"
+								name="name"
+								:placeholder="$t('dashboard.profile.name')"
+								icon="mdi:account"
+							/>
+							<InputsEmail
+								v-model="profileForm.email"
+								name="email"
+								rules="required|email"
+								:placeholder="$t('dashboard.profile.email')"
+							/>
+							<InputsPhone
+								v-model="profileForm.phone"
+								rules=""
+								name="phone"
+								:placeholder="$t('dashboard.profile.phone')"
 							/>
 
-							<InputsPassword
-								v-model="passwordForm.newPassword"
-								name="newPassword"
-								rules="required|min:6"
-								:placeholder="$t('dashboard.profile.new_password')"
-							/>
-							<InputsPassword
-								v-model="passwordForm.confirmPassword"
-								name="confirmPassword"
-								rules="confirmed:@newPassword"
-								:placeholder="$t('dashboard.profile.confirm_password')"
-							/>
+							<div>
+								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+									{{ $t("dashboard.profile.account_created") }}
+								</label>
+								<div
+									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
+								>
+									<NuxtTime
+										:datetime="user?.createdAt as Date"
+										day="numeric"
+										month="long"
+										year="numeric"
+										:locale="locale"
+									/>
+								</div>
+							</div>
+							<div>
+								<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+									{{ $t("dashboard.profile.last_login") }}
+								</label>
+								<div
+									class="px-3 py-2 bg-gray-50 dark:bg-gray-700 rounded-md text-sm text-gray-600 dark:text-gray-400"
+								>
+									<NuxtTime
+										:datetime="(user?.lastLogin as Date)"
+										day="numeric"
+										month="long"
+										year="numeric"
+										relative
+										:locale="locale"
+									/>
+								</div>
+							</div>
 
 							<InputsSubmit
-								:text="$t('dashboard.profile.change_password')"
-								:isLoading="passwordLoading"
+								class="md:col-span-2"
+								:text="$t('dashboard.profile.update_profile')"
+								:isLoading="profileLoading"
 							/>
 						</Form>
 					</section>
-				</div>
-			</template>
-		</LazyLayoutDashboardContent>
-	</div>
+				</ClientOnly>
+
+				<hr />
+
+				<!-- Security Section -->
+				<section>
+					<h3
+						class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
+					>
+						<Icon name="mdi:shield-lock" class="text-primary" />
+						{{ $t("dashboard.profile.security") }}
+					</h3>
+
+					<Form @submit="changePassword" class="space-y-4">
+						<InputsPassword
+							v-model="passwordForm.currentPassword"
+							name="currentPassword"
+							rules="required"
+							:placeholder="$t('dashboard.profile.current_password')"
+						/>
+
+						<InputsPassword
+							v-model="passwordForm.newPassword"
+							name="newPassword"
+							rules="required|min:6"
+							:placeholder="$t('dashboard.profile.new_password')"
+						/>
+						<InputsPassword
+							v-model="passwordForm.confirmPassword"
+							name="confirmPassword"
+							rules="confirmed:@newPassword"
+							:placeholder="$t('dashboard.profile.confirm_password')"
+						/>
+
+						<InputsSubmit
+							:text="$t('dashboard.profile.change_password')"
+							:isLoading="passwordLoading"
+						/>
+					</Form>
+				</section>
+			</div>
+		</template>
+	</LazyLayoutDashboardContent>
 </template>
 
 <script setup lang="ts">

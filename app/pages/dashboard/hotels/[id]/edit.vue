@@ -1,15 +1,13 @@
 <template>
-	<div>
-		<LayoutDashboardContent>
-			<template #header>
-				<LayoutDashboardPageTitle :title="$t('dashboard.hotel.edit')" />
-			</template>
+	<LayoutDashboardContent>
+		<template #header>
+			<LayoutDashboardPageTitle :title="$t('dashboard.hotel.edit')" />
+		</template>
 
-			<template v-slot="{}">
-				<PagesDashboardHotelForm is-edit />
-			</template>
-		</LayoutDashboardContent>
-	</div>
+		<template v-slot="{}">
+			<PagesDashboardHotelForm is-edit />
+		</template>
+	</LayoutDashboardContent>
 </template>
 
 <script setup lang="ts">
