@@ -148,7 +148,26 @@
 		"images_section": "Images",
 		"main_image": "Main Image",
 		"additional_images": "Additional Images",
+		"success_delete": "deleted successfully",
 		"success_update": "Page content updated successfully",
-		"error": "Error updating content"
+		"error": "Error updating content",
+
+		"contact": {
+			"title": "Contact Us - page",
+			"faq": {
+				"title": "Frequently Asked Questions",
+				"question": {
+					"ar": "Question (Arabic)",
+					"en": "Question (English)"
+				},
+				"answer": {
+					"ar": "Answer (Arabic)",
+					"en": "Answer (English)"
+				}
+			},
+			"message": {
+				"title": "Messages"
+			}
+		}
 	}
 }

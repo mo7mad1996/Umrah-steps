@@ -20,7 +20,10 @@
 					<!-- Contact Information -->
 					<div class="space-y-6">
 						<!-- Office Hours -->
-						<div class="bg-white dark:!bg-gray-800 rounded-2xl p-6 shadow-lg">
+						<div
+							class="bg-white dark:!bg-gray-800 rounded-2xl p-6 shadow-lg"
+							v-if="'success' == workHoursStatus"
+						>
 							<h3
 								class="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
 							>
@@ -28,13 +31,9 @@
 								{{ $t("contact.info.hours") }}
 							</h3>
 							<div class="space-y-3 text-gray-600 dark:text-gray-400">
-								<div class="flex justify-between">
-									<span>السبت - الخميس</span>
-									<span>8:00 ص - 10:00 م</span>
-								</div>
-								<div class="flex justify-between">
-									<span>الجمعة</span>
-									<span>2:00 م - 10:00 م</span>
+								<div class="flex justify-between" v-for="h in workHours" :key="h.id">
+									<span>{{ h.day }}</span>
+									<span>{{ h.time }}</span>
 								</div>
 							</div>
 						</div>
@@ -118,16 +117,19 @@
 <script setup lang="ts">
 // SEO
 usePageTitle("contact.title");
+const { locale } = useI18n();
+
+const {
+	data: workHours,
+	status: workHoursStatus,
+	error: workHoursError,
+	refresh: refreshWorkHours,
+} = useAsyncData(
+	"workHours",
+	() =>
+		useApi()
+			.get("workHours")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
 </script>
-
-<style lang="scss">
-.between-lines {
-	@apply flex gap-6 md:gap-12 items-center;
-
-	&::after,
-	&::before {
-		content: "";
-		@apply flex-1 h-px bg-gray-500 block;
-	}
-}
-</style>

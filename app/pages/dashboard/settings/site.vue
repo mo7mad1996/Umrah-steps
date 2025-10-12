@@ -26,8 +26,16 @@ import ContactForm from "~/components/Pages/Dashboard/PageContent/ContactForm.vu
 import FavoritesForm from "~/components/Pages/Dashboard/PageContent/AboutForm.vue";
 
 const route = useRoute();
-const activeTab = ref(route.params.page || "home");
+const router = useRouter();
+const activeTab = ref(route.query.tab || "home");
 
+watch(activeTab, (v) =>
+	router.push({
+		query: {
+			tab: v,
+		},
+	}),
+);
 const tabs = [
 	{
 		title: "nav.home",

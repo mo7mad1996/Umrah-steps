@@ -58,3 +58,13 @@ hr {
 		}
 	}
 }
+
+.between-lines {
+	@apply flex gap-6 md:gap-12 items-center;
+
+	&::after,
+	&::before {
+		content: "";
+		@apply flex-1 h-px bg-gray-500 block;
+	}
+}

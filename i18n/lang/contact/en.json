@@ -12,7 +12,14 @@
 		"phone": "Phone Number",
 		"subject": "Subject",
 		"message": "Message",
-		"send": "Send Message"
+		"send": "Send Message",
+		"success": "Message sent successfully",
+		"subjects": {
+			"booking": "Booking Inquiry",
+			"complaint": "Complaint",
+			"suggestion": "Suggestion",
+			"other": "Other"
+		}
 	},
 	"info": {
 		"address": "Address",

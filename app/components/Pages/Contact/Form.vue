@@ -5,7 +5,7 @@
 				{{ $t("contact.form.title") }}
 			</h3>
 
-			<Form v-bind="{ onSubmit: submitForm }" class="space-y-6">
+			<Form v-bind="{ onSubmit }" class="space-y-6">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<InputsText
 						name="name"
@@ -27,10 +27,10 @@
 					rules="required"
 					:placeholder="$t('contact.form.subject')"
 					:items="[
-						{ value: 'booking', title: 'استفسار عن حجز' },
-						{ value: 'complaint', title: 'شكوى' },
-						{ value: 'suggestion', title: 'اقتراح' },
-						{ value: 'other', title: 'أخرى' },
+						{ value: 'booking', title: $t('contact.form.subjects.booking') },
+						{ value: 'complaint', title: $t('contact.form.subjects.complaint') },
+						{ value: 'suggestion', title: $t('contact.form.subjects.suggestion') },
+						{ value: 'other', title: $t('contact.form.subjects.other') },
 					]"
 					icon="lucide:badge-info"
 				/>
@@ -42,7 +42,7 @@
 					:rows="5"
 				/>
 
-				<InputsSubmit :text="$t('contact.form.send')" :isLoading="loading" />
+				<InputsSubmit :text="$t('contact.form.send')" :isLoading="loading" :disabled="loading" />
 			</Form>
 		</div>
 	</div>
@@ -50,12 +50,21 @@
 
 <script setup lang="ts">
 import { Form } from "vee-validate";
+const { t } = useI18n();
 
 // Form data
 const loading = ref(false);
 
 // Methods
-const submitForm = async (data: any) => {
-	loading.value = true;
+const onSubmit = async (data: any, { resetForm }: any) => {
+	try {
+		loading.value = true;
+		const res = await useApi().post("message", data);
+		useToast().success(t("contact.form.success"));
+	} catch (err) {
+		useToast().error(t("global.error"));
+	} finally {
+		loading.value = false;
+	}
 };
 </script>

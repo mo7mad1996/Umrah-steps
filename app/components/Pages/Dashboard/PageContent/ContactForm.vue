@@ -1,3 +1,364 @@
 <template>
-	<div>FavoritesForm</div>
+	<div>
+		<h3 class="between-lines text-gray-700 dark:text-gray-300 text-3xl my-6 text-center font-bold">
+			{{ $t("dashboard.site_settings.contact.title") }}
+		</h3>
+
+		<details>
+			<summary
+				class="cursor-pointer hover:bg-gray-500/10 p-2 text-gray-700 dark:text-gray-300 text-lg my-3 font-bold flex items-center"
+			>
+				<span>
+					{{ $t("dashboard.site_settings.contact.faq.title") }}
+				</span>
+				<GlobalFormDialog
+					:title="$t('dashboard.site_settings.contact.faq.title')"
+					max-width="950"
+					@submit="addFaq"
+				>
+					<template #btn="props">
+						<button
+							v-bind="props"
+							type="button"
+							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
+						>
+							<Icon name="mdi:plus" />
+						</button>
+					</template>
+					<div class="grid md:grid-cols-2 gap-6 p-2">
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.faq.question.ar')"
+							:placeholder="$t('dashboard.site_settings.contact.faq.question.ar')"
+							name="question.ar"
+							rules="required"
+							icon="material-symbols:question-mark-rounded"
+						/>
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.faq.question.en')"
+							:placeholder="$t('dashboard.site_settings.contact.faq.question.en')"
+							name="question.en"
+							rules="required"
+							icon="material-symbols:question-mark-rounded"
+						/>
+
+						<inputs-textarea
+							:rows="5"
+							name="answer.ar"
+							rules="required"
+							:title="$t('dashboard.site_settings.contact.faq.answer.ar')"
+							:placeholder="$t('dashboard.site_settings.contact.faq.answer.ar')"
+						/>
+
+						<inputs-textarea
+							:rows="5"
+							name="answer.en"
+							rules="required"
+							:title="$t('dashboard.site_settings.contact.faq.answer.en')"
+							:placeholder="$t('dashboard.site_settings.contact.faq.answer.en')"
+						/>
+					</div>
+				</GlobalFormDialog>
+			</summary>
+
+			<global-infinity-table
+				class="!h-64"
+				:finished="true"
+				:refresh="refreshFaq"
+				:data="faqs"
+				:error="faqsError"
+				:page="1"
+				:status="faqsStatus"
+				:headers="[
+					{ title: 'dashboard.site_settings.contact.faq.question.' + locale, key: 'question' },
+					{ title: 'dashboard.site_settings.contact.faq.answer.' + locale, key: 'answer' },
+					{ title: '', key: 'action' },
+				]"
+			>
+				<template #action="{ row }">
+					<div
+						class="h-full flex items-center justify-end group-hover:!opacity-100 opacity-0"
+						@click.prevent.stop
+					>
+						<GlobalConfirmDialog
+							:title="$t('global.delete')"
+							:content="$t('global.delete_question')"
+							@confirm="() => deleteQuestion(row.id)"
+						>
+							<template v-slot="props">
+								<button
+									@click.prevent.stop
+									v-bind="props"
+									class="aspect-square block h-full hover:bg-blue-600/10 rounded-full hover:shadow text-red-600"
+								>
+									<Icon name="material-symbols:delete-outline" class="h-full" />
+								</button>
+							</template>
+						</GlobalConfirmDialog>
+					</div>
+				</template>
+			</global-infinity-table>
+		</details>
+
+		<details>
+			<summary
+				class="cursor-pointer hover:bg-gray-500/10 p-2text-gray-700 dark:text-gray-300 text-lg my-3 font-bold flex items-center gap-3"
+			>
+				<span>
+					{{ $t("contact.info.hours") }}
+				</span>
+
+				<GlobalFormDialog @submit="addWorkHours" max-width="950" :title="$t('contact.info.hours')">
+					<template #btn="props">
+						<button
+							v-bind="props"
+							type="button"
+							class="rounded-full p-3 overflow-hidden after:absolute after:inset-6 hover:after:inset-0 after:transition-all relative after:backdrop-invert after:backdrop-hue-rotate-180 flex items-center hover:bg-slate-100/10"
+						>
+							<Icon name="mdi:plus" />
+						</button>
+					</template>
+
+					<div class="grid md:grid-cols-2 gap-6 p-2">
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.hours.title.ar')"
+							:placeholder="$t('dashboard.site_settings.contact.hours.title.ar')"
+							name="day.ar"
+							rules="required"
+							icon="tabler:clock-hour-4"
+						/>
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.hours.title.en')"
+							:placeholder="$t('dashboard.site_settings.contact.hours.title.en')"
+							name="day.en"
+							rules="required"
+							icon="tabler:clock-hour-4"
+						/>
+
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.hours.answer.ar')"
+							:placeholder="$t('dashboard.site_settings.contact.hours.answer.ar')"
+							name="time.ar"
+							rules="required"
+							icon="tabler:clock-hour-4"
+						/>
+						<inputs-text
+							:title="$t('dashboard.site_settings.contact.hours.answer.en')"
+							:placeholder="$t('dashboard.site_settings.contact.hours.answer.en')"
+							name="time.en"
+							rules="required"
+							icon="tabler:clock-hour-8"
+						/>
+					</div>
+				</GlobalFormDialog>
+			</summary>
+
+			<global-infinity-table
+				:finished="true"
+				:refresh="refreshWorkHours"
+				:data="workHours"
+				:error="workHoursError"
+				:page="1"
+				:status="workHoursStatus"
+				:headers="[
+					{ title: 'dashboard.site_settings.contact.hours.title.' + locale, key: 'day' },
+					{ title: 'dashboard.site_settings.contact.hours.answer.' + locale, key: 'time' },
+					{ title: '', key: 'action' },
+				]"
+			>
+				<template #action="{ row }">
+					<div
+						class="h-full flex items-center justify-end group-hover:!opacity-100 opacity-0"
+						@click.prevent.stop
+					>
+						<GlobalConfirmDialog
+							:title="$t('global.delete')"
+							:content="$t('global.delete_question')"
+							@confirm="() => deleteWorkHours(row.id)"
+						>
+							<template v-slot="props">
+								<button
+									@click.prevent.stop
+									v-bind="props"
+									class="aspect-square block h-full hover:bg-blue-600/10 rounded-full hover:shadow text-red-600"
+								>
+									<Icon name="material-symbols:delete-outline" class="h-full" />
+								</button>
+							</template>
+						</GlobalConfirmDialog>
+					</div>
+				</template>
+			</global-infinity-table>
+		</details>
+
+		<details>
+			<summary
+				class="cursor-pointer hover:bg-gray-500/10 p-2 text-gray-700 dark:text-gray-300 text-lg my-3 font-bold flex items-center gap-3"
+			>
+				<span>
+					{{ $t("dashboard.site_settings.contact.message.title") }}
+				</span>
+			</summary>
+
+			<global-infinity-table
+				class="max-h-22 overflow-auto"
+				:finished="true"
+				:refresh="refreshMessages"
+				:data="messages"
+				:error="messagesError"
+				:page="1"
+				:status="messagesStatus"
+				:headers="[]"
+			>
+				<template #default="{ item }">
+					<label
+						:class="color[item.subject as 'complaint' | 'booking'  | 'suggestion' | 'other']"
+						class="group cursor-pointer border-0 my-2 shadow !border-s-8 has-[:checked]:!bg-neutral-200 grid gap-4 md:grid-cols-4 p-2 px-4 hover:bg-gray-300/40 dark:hover:bg-gray-100/10"
+					>
+						<h1 class="flex items-center gap-2">
+							<GlobalConfirmDialog
+								:title="$t('global.delete')"
+								:content="$t('global.delete_question')"
+								@confirm="() => deleteMessages(item.id)"
+							>
+								<template v-slot="props">
+									<div
+										@click.prevent.stop
+										v-bind="props"
+										class="aspect-square w-8 flex items-center justify-center hover:bg-blue-600/10 rounded-full hover:shadow text-red-600"
+									>
+										<Icon name="material-symbols:delete-outline" />
+									</div>
+								</template>
+							</GlobalConfirmDialog>
+
+							<span>
+								{{ $t("contact.form.subjects." + item.subject) }}
+							</span>
+						</h1>
+						<div class="md:col-span-2">
+							<h3 class="text-lg font-semibold">{{ item.name }}</h3>
+							<div class="text-sm text-gray-500">
+								<a
+									:href="`mailto:${item.email}`"
+									class="rounded-lg hover:text-indigo-500 hover:underline px-2 py-1"
+									target="_blank"
+									>{{ item.email }}</a
+								>
+								-
+								<a
+									class="rounded-full hover:text-indigo-500 hover:underline px-2 py-1"
+									:href="`tel:${item.phone}`"
+									target="_blank"
+								>
+									{{ item.phone }}
+								</a>
+							</div>
+						</div>
+						<div class="text-sm text-gray-500 flex flex-col">
+							<nuxt-time :locale="locale" :datetime="item.createdAt" relative />
+							<nuxt-time
+								:locale="locale"
+								:datetime="item.createdAt"
+								hour="2-digit"
+								minute="2-digit"
+								hour12
+								day="2-digit"
+								year="numeric"
+								month="short"
+							/>
+						</div>
+						<pre
+							class="md:col-span-4 hidden has-[:checked]:block has-[:checked]:!bg-neutral-50 p-4 rounded shadow">{{ item.message }}<input class="hidden" type="checkbox" /></pre>
+					</label>
+				</template>
+			</global-infinity-table>
+		</details>
+	</div>
 </template>
+
+<script setup lang="ts">
+const { t, locale } = useI18n();
+
+// faqs
+const {
+	data: faqs,
+	status: faqsStatus,
+	error: faqsError,
+	refresh: refreshFaq,
+} = useAsyncData(
+	"faq",
+	() =>
+		useApi()
+			.get("/faqs")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
+
+const deleteQuestion = async (id: number) => {
+	await useApi().delete(`faqs?id=${id}`);
+	useToast().success(t("dashboard.site_settings.success_delete"));
+
+	await refreshFaq();
+};
+
+const addFaq = async (data: any) => {
+	await useApi().post("faqs", data);
+	await refreshFaq();
+
+	useToast().success(t("dashboard.site_settings.success_update"));
+};
+
+// Work Hours
+const {
+	data: workHours,
+	status: workHoursStatus,
+	error: workHoursError,
+	refresh: refreshWorkHours,
+} = useAsyncData(
+	"workHours",
+	() =>
+		useApi()
+			.get("workHours")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
+
+const deleteWorkHours = async (id: number) => {
+	await useApi().delete(`workHours?id=${id}`);
+	useToast().success(t("dashboard.site_settings.success_delete"));
+
+	await refreshWorkHours();
+};
+
+const addWorkHours = async (data: any) => {
+	await useApi().post("workHours", data);
+	await refreshWorkHours();
+
+	useToast().success(t("dashboard.site_settings.success_update"));
+};
+// Messages
+
+const color = {
+	booking: "!border-indigo-500",
+	complaint: "!border-rose-500",
+	suggestion: "!border-accent",
+	other: "!border-lime-500",
+};
+const {
+	data: messages,
+	status: messagesStatus,
+	error: messagesError,
+	refresh: refreshMessages,
+} = useAsyncData("messages", () =>
+	useApi()
+		.get("message")
+		.then((d) => d.data),
+);
+
+const deleteMessages = async (id: number) => {
+	await useApi().delete(`messages?id=${id}`);
+	useToast().success(t("dashboard.site_settings.success_delete"));
+
+	await refreshWorkHours();
+};
+</script>
