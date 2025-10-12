@@ -1,5 +1,11 @@
 <template>
-	<div class="min-h-screen py-8 md:py-12 dark:bg-gray-900">
+
+	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950">
+		<!-- Background Image -->
+		<GlobalImageMask src="/logo/light.png" />
+
+		<!-- Page Header -->
+		<GlobalPageTitle :title="$t('about.title')" :subTitle="$t('about.subtitle')" />k:bg-gray-900">
 		<div class="container mx-auto px-4">
 			<GlobalPageTitle :title="$t('favorites.title')" />
 
@@ -62,6 +68,7 @@
 			@confirm="handleClearAll"
 			@cancel="confirmClearDialog = false"
 		/>
+	</div>
 	</div>
 </template>
 
