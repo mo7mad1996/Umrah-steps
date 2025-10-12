@@ -9,7 +9,7 @@
 					<component
 						:is="to ? NuxtLink : 'div'"
 						:to="typeof to == 'function' ? to(item) : to"
-						class="p-2 px-4 hover:bg-gray-500/20 rounded before:bg-primary relative before:w-1 before:h-6 before:absolute before:top-1/2 before:-translate-y-1/2 before:right-0 before:rounded-l-xl before:hidden hover:before:block flex gap-1"
+						class="p-2 px-4 group hover:bg-gray-500/20 rounded before:bg-primary relative before:w-1 before:h-6 before:absolute before:top-1/2 before:-translate-y-1/2 before:right-0 before:rounded-l-xl before:hidden hover:before:block flex gap-1"
 					>
 						<div v-for="header in headers || []" :key="header.key" class="flex-1">
 							<slot :name="header.key" v-bind="{ row: item, item: item[header.key] }">

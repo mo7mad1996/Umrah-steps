@@ -118,21 +118,6 @@
 <script setup lang="ts">
 // SEO
 usePageTitle("contact.title");
-
-// useHead({
-//   meta: [
-//     {
-//       name: "description",
-//       content:
-//         "تواصل مع حجوزات المعتمر للحصول على أفضل خدمات الحج والعمرة. نحن هنا لخدمتكم على مدار الساعة",
-//     },
-//     {
-//       name: "keywords",
-//       content:
-//         "اتصل بنا, حجوزات المعتمر, خدمة العملاء, الحج, العمرة, مكة المكرمة",
-//     },
-//   ],
-// });
 </script>
 
 <style lang="scss">

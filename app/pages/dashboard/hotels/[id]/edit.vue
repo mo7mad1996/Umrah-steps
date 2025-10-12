@@ -13,9 +13,6 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
-const id: string = route.params.id as string;
-
 usePageTitle("dashboard.hotel.edit");
 definePageMeta({
 	layout: "dashboard",

@@ -130,6 +130,8 @@ const container = ref(null);
 const selected = defineModel();
 const page = ref(props.page || 1);
 
+if (select.value.value) selected.value = select.value.value;
+
 const meta = ref({ lastPage: 2 });
 const list = computed(() => props.items || []);
 if ("undefined" != typeof props.defaultValue) selected.value = props.defaultValue;

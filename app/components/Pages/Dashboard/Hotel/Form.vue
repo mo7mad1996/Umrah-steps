@@ -8,8 +8,7 @@ const props = defineProps<{ isEdit?: boolean }>();
 const route = useRoute();
 const router = useRouter();
 
-const { data: amenities, refresh: refreshAmenity } = useAmenity();
-const cityDialogOpen = ref(false);
+const { data: amenities, status: statusAmenity, refresh: refreshAmenity } = useAmenity();
 
 onMounted(() => {
 	if (props.isEdit && id) getHotelData();
@@ -41,7 +40,7 @@ const onSubmit = async (data: any) => {
 		if (mainImage.value.files.length) data.img = (await mainImage.value?.uploadFiles?.call())[0];
 
 		if (images.value.files.length)
-			data.images = [...data.images, ...(await images.value?.uploadFiles?.call())];
+			data.images = [...(data.images || []), ...(await images.value?.uploadFiles?.call())];
 
 		let response = null;
 		if (props.isEdit) {
@@ -220,7 +219,7 @@ const createCity = async (data: any) => {
 				:placeholder="$t('dashboard.hotel.city_placeholder')"
 				icon="mdi:city"
 			/>
-			<div class="grid md:grid-cols-2 gap-6">
+			<div class="grid md:grid-cols-2 gap-6 mt-6">
 				<InputsText
 					name="location.address.ar"
 					:placeholder="$t('dashboard.hotel.address.ar')"
@@ -247,7 +246,6 @@ const createCity = async (data: any) => {
 					<Icon name="mdi:star-box" />
 					{{ $t("dashboard.hotel.amenities_section") }}
 				</span>
-
 				<GlobalFormDialog :title="$t('dashboard.hotel.add_amenity')" @submit="AddAmenity">
 					<template #btn="activatorProps">
 						<button
@@ -280,7 +278,10 @@ const createCity = async (data: any) => {
 				</GlobalFormDialog>
 			</h3>
 
-			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+			<div
+				class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+				v-if="statusAmenity == 'success'"
+			>
 				<template v-for="amenity in amenities" :key="amenity.id">
 					<Field type="checkbox" name="amenities" v-slot="{ field, setValue }">
 						<InputsCheckbox

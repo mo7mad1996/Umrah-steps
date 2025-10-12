@@ -98,7 +98,7 @@ export default defineNuxtConfig({
 		build: { sourcemap: false },
 	},
 	image: {
-		domains: ["vercel-storage.com"],
+		domains: [process.env.BOLB_URL || ""],
 	},
 
 	fileStorage: {

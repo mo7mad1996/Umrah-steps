@@ -6,10 +6,10 @@
 		<div class="w-full lg:flex-1">
 			<div>
 				<h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-white mb-4">
-					تصفية النتائج:
+					{{ $t("hotels.results") }}:
 				</h3>
 
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+				<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 					<div class="min-w-0">
 						<!-- Price Range -->
 						<span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
@@ -43,7 +43,6 @@
 					</div>
 
 					<!-- Distance -->
-
 					<div class="min-w-0">
 						<span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
 							{{ $t("hotels.distance") }}:
@@ -58,27 +57,27 @@
 							]"
 						/>
 					</div>
+
+					<!-- here we are -->
+					<div class="w-full lg:w-auto">
+						<span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
+							{{ $t("hotels.viewMode") }}:
+						</span>
+
+						<InputsRadio
+							class="dark:!bg-transparent w-full lg:w-auto border !border-transparent"
+							activeClass="dark:!bg-transparent dark:!border-gold dark:border  dark:text-yellow-400 dark:hover:!bg-white/20"
+							itemClass="dark:text-gray-600/80 dark:hover:!bg-white/20"
+							v-model="filters.viewMode"
+							name="viewMode"
+							:data="[
+								{ icon: 'material-symbols:calendar-view-day', value: 'list' },
+								{ icon: 'mingcute:grid-fill', value: 'grid' },
+							]"
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- here we are -->
-		<div class="w-full lg:w-auto">
-			<span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
-				{{ $t("hotels.viewMode") }}:
-			</span>
-
-			<InputsRadio
-				class="dark:!bg-transparent w-full lg:w-auto"
-				activeClass="dark:!bg-transparent dark:!border-gold dark:border  dark:text-yellow-400 dark:hover:!bg-white/20"
-				itemClass="dark:text-gray-600/80 dark:hover:!bg-white/20"
-				v-model="filters.viewMode"
-				name="viewMode"
-				:data="[
-					{ icon: 'material-symbols:calendar-view-day', value: 'list' },
-					{ icon: 'mingcute:grid-fill', value: 'grid' },
-				]"
-			/>
 		</div>
 	</div>
 </template>

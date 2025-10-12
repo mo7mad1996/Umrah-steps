@@ -14,9 +14,7 @@ export const useAmenity = (query: any = undefined) => {
 				.get("/amenity", {
 					params: { page: page.value, per_page: per_page.value, ...query },
 				})
-				.then(({ data }: { data: IAmenity[] }) => {
-					return data;
-				}),
+				.then(({ data }: { data: IAmenity[] }) => data),
 
 		{ watch: [() => $i18n.locale.value, page, per_page] },
 	);

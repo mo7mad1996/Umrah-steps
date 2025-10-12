@@ -5,12 +5,14 @@
 		@dragover.prevent="isDragging = true"
 		@dragleave.prevent="isDragging = false"
 	>
+		<pre>{{}}</pre>
 		<!-- files -->
 		<div
 			class="gap-2 flex flex-wrap w-full bg-neutral-100 dark:!bg-gray-800/50 p-2 rounded-lg"
 			:class="{
 				'justify-center': !multiple,
 			}"
+			v-if="[field.value.value, files].flat().filter((f) => !!f).length"
 		>
 			<div
 				@click.prevent
@@ -31,10 +33,30 @@
 							{{ preview.name }}
 						</p>
 					</div>
+					<button @click="files.splice(index, 1)" type="button" :aria-label="`حذف ${preview}`">
+						<Icon name="material-symbols:scan-delete" class="text-md" />
+					</button>
+				</div>
+			</div>
+			<div
+				@click.prevent
+				v-for="(preview, index) in [field.value.value].flat().filter((f) => !!f)"
+				:key="index"
+				class="flex gap-2 p-2 shadow-lg bg-white dark:!bg-white/30 rounded-lg flex-col relative z-10"
+			>
+				<div class="flex-shrink-0 rounded flex flex-col items-center justify-center">
+					<img :src="`${preview}`" class="h-32 w-32 rounded aspect-square object-cover block" />
+				</div>
+
+				<div class="flex flex-1 w-full">
+					<div class="flex-1 min-w-0">
+						<p class="text-sm font-medium truncate max-w-28 text-blue-500 dark:text-blue-700">
+							{{ preview }}
+						</p>
+					</div>
 					<button
-						@click="files.splice(index, 1)"
+						@click="() => removeFile(`${preview}`)"
 						type="button"
-						class=""
 						:aria-label="`حذف ${preview}`"
 					>
 						<Icon name="material-symbols:scan-delete" class="text-md" />
@@ -68,13 +90,12 @@
 				</p>
 			</label>
 		</div>
-
 		<ErrorMessage :name="name" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ErrorMessage } from "vee-validate";
+import { ErrorMessage, useField } from "vee-validate";
 const inputRef = ref<HTMLInputElement>();
 interface Props {
 	title?: string;
@@ -86,23 +107,21 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	title: undefined,
-	name: undefined,
 	rules: "",
+	name: "files",
 	accept: "",
 	multiple: false,
 });
-const { locale } = useI18n();
 const { handleFileInput, files } = useFileStorage({
 	clearOldFiles: !props.multiple,
 });
 
 const isDragging = ref(false);
-
-const modelValue = defineModel<string[]>();
+const field = useField(props.name, props.rules);
 
 const removeFile = async (file: string) => {
-	modelValue.value = (modelValue.value || []).filter((i) => i != file);
+	const newArr = [field.value.value].flat().filter((f) => f !== file);
+	field.value.value = props.multiple ? newArr : newArr[0] || "";
 	await useApi().delete("files", { params: { file } });
 };
 

@@ -27,11 +27,20 @@
 					:to="(item: any) => `/dashboard/hotels/${item.id}/edit`"
 				>
 					<template #actions="{ row }">
-						<div class="h-full flex items-center justify-end" @click.prevent.stop>
+						<div
+							class="h-full flex items-center justify-end group-hover:!opacity-100 opacity-0"
+							@click.prevent.stop
+						>
 							<GlobalConfirmDialog
 								:title="$t('global.delete')"
 								:content="$t('global.delete_question')"
-								@confirm="() => deleteHotel(row.id)"
+								@confirm="
+									() =>
+										deleteHotel(
+											row.id,
+											[row.images, row.img].flat().filter((i) => !!i),
+										)
+								"
 							>
 								<template v-slot="props">
 									<button
@@ -78,8 +87,10 @@ const headers: { title: string; key: string }[] = [
 	},
 ];
 
-const deleteHotel = async (id: string) => {
+const deleteHotel = async (id: string, images: string[]) => {
 	try {
+		for (const image of images) await useApi().delete(`/files?file=${image}`);
+
 		await useApi().delete(`/hotels/${id}`);
 		await refresh();
 	} catch (err) {
