@@ -23,6 +23,6 @@ export default defineEventHandler(async (event) => {
 				});
 		}
 	} catch (err: any) {
-		return err;
+		throw createError({ message: err.message, status: 400 });
 	}
 });

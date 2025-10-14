@@ -1,6 +1,7 @@
 <template>
 	<ClientOnly>
 		<div
+			v-bind="$attrs"
 			v-if="data && data.length"
 			class="flex flex-col gap-1 p-1 shadow bg-background dark:!bg-background-dark"
 		>
@@ -65,4 +66,6 @@ watch(
 const getData = (visible: boolean) => {
 	if (visible) page.value += 1;
 };
+
+defineOptions({ inheritAttrs: false });
 </script>

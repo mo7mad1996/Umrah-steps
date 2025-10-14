@@ -60,7 +60,8 @@
 									{{ $t("nav.about") }}
 								</NuxtLink>
 								<a
-									href="tel:+966123456789"
+									v-if="globalData?.mainPhone"
+									:href="`tel:${globalData?.mainPhone}`"
 									class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
 								>
 									<Icon name="mdi:phone" />
@@ -69,38 +70,7 @@
 							</div>
 						</div>
 
-						<!-- Social Media -->
-						<div class="bg-white dark:!bg-gray-800 rounded-2xl p-6 shadow-lg">
-							<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
-								{{ $t("contact.social.title") }}
-							</h3>
-							<div class="flex gap-3">
-								<a
-									href="#"
-									class="w-12 h-12 bg-green-500/10 hover:bg-green-500 text-green-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-								>
-									<Icon name="mdi:whatsapp" class="text-xl" />
-								</a>
-								<a
-									href="#"
-									class="w-12 h-12 bg-blue-500/10 hover:bg-blue-500 text-blue-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-								>
-									<Icon name="mdi:facebook" class="text-xl" />
-								</a>
-								<a
-									href="#"
-									class="w-12 h-12 bg-sky-500/10 hover:bg-sky-500 text-sky-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-								>
-									<Icon name="mdi:twitter" class="text-xl" />
-								</a>
-								<a
-									href="#"
-									class="w-12 h-12 bg-pink-500/10 hover:bg-pink-500 text-pink-500 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-								>
-									<Icon name="mdi:instagram" class="text-xl" />
-								</a>
-							</div>
-						</div>
+						<LazyPagesContactSocialMedia />
 					</div>
 				</div>
 			</section>
@@ -115,28 +85,34 @@
 </template>
 
 <script setup lang="ts">
+import { useAsyncData } from "#app";
+
 usePageTitle("contact.title");
 const { locale } = useI18n();
 
 // Get Page Content
 const { data: pageContent } = useAsyncData(
-	'contact-page-content',
-	() => useApi().get('/page-content/contact').then((d) => d.data),
-	{ watch: [locale] }
+	"contact-page-content",
+	() =>
+		useApi()
+			.get("/page-content/contact")
+			.then((d) => d.data),
+	{ watch: [locale] },
 );
 
 // Get Work Hours
-const {
-	data: workHours,
-	status: workHoursStatus,
-	error: workHoursError,
-	refresh: refreshWorkHours,
-} = useAsyncData(
+const { data: workHours, status: workHoursStatus } = useAsyncData(
 	"workHours",
 	() =>
 		useApi()
 			.get("workHours")
 			.then((d) => d.data),
 	{ watch: [locale] },
+);
+
+const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
+	useApi()
+		.get("globalData")
+		.then((d) => d.data),
 );
 </script>

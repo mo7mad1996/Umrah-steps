@@ -1,4 +1,4 @@
-import { getQuery } from "#imports";
+import { createError, getQuery } from "#imports";
 import { FaqService } from "../services/faq";
 
 const faqService = new FaqService();
@@ -30,6 +30,6 @@ export default defineEventHandler(async (event) => {
 				});
 		}
 	} catch (err: any) {
-		return err;
+		throw createError(err);
 	}
 });

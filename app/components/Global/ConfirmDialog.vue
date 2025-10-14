@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="dialog" max-width="500" attach>
+	<v-dialog v-model="dialog" max-width="500">
 		<template v-slot:activator="{ props }">
 			<slot v-bind="props" />
 		</template>

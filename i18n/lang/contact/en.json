@@ -31,7 +31,19 @@
 		"title": "Quick Links"
 	},
 	"social": {
-		"title": "Follow Us"
+		"title": "Follow Us",
+		"social_media": "Social media",
+		"name": {
+			"ar": "Arabic Name",
+			"en": "English Name"
+		},
+		"description": {
+			"ar": "Arabic Description",
+			"en": "English Description"
+		},
+		"color": "Color",
+		"url": "URL",
+		"icon": "Icon"
 	},
 	"faq": {
 		"title": "Frequently Asked Questions",

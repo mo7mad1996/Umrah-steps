@@ -1,66 +1,24 @@
-import { getContactInfos, createContactInfo, deleteContactInfo } from '../services/contactInfo';
+import { getContactInfos, createContactInfo, deleteContactInfo } from "../services/contactInfo";
 
 export default defineEventHandler(async (event) => {
-  const method = event.method;
+	switch (event.method) {
+		case "GET":
+			return await getContactInfos();
 
-  if (method === 'GET') {
-    try {
-      const contactInfos = await getContactInfos();
-      return {
-        success: true,
-        data: contactInfos,
-      };
-    } catch (error: any) {
-      return {
-        success: false,
-        message: error.message,
-      };
-    }
-  }
+		case "POST":
+			const body = await readBody(event);
+			return await createContactInfo(body);
 
-  if (method === 'POST') {
-    try {
-      const body = await readBody(event);
-      const contactInfo = await createContactInfo(body);
-      return {
-        success: true,
-        data: contactInfo,
-      };
-    } catch (error: any) {
-      return {
-        success: false,
-        message: error.message,
-      };
-    }
-  }
+		case "DELETE":
+			const query = getQuery(event);
+			const id = query.id as string;
+			if (!id) throw createError({ status: 400, message: "id query is required." });
+			return await deleteContactInfo(id);
 
-  if (method === 'DELETE') {
-    try {
-      const query = getQuery(event);
-      const id = query.id as string;
-
-      if (!id) {
-        return {
-          success: false,
-          message: 'ID is required',
-        };
-      }
-
-      await deleteContactInfo(id);
-      return {
-        success: true,
-        message: 'Contact info deleted successfully',
-      };
-    } catch (error: any) {
-      return {
-        success: false,
-        message: error.message,
-      };
-    }
-  }
-
-  return {
-    success: false,
-    message: 'Method not allowed',
-  };
+		default:
+			throw createError({
+				message: "method is not allowed.",
+				status: 405,
+			});
+	}
 });

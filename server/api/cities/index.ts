@@ -1,30 +1,22 @@
 import { getCities, createCity } from "../../services/city";
 
 export default defineEventHandler(async (event) => {
-	const method = event.method;
+	try {
+		switch (event.method) {
+			case "GET":
+				return await getCities();
 
-	if (method === "GET") {
-		try {
-			const cities = await getCities();
-			return cities;
-		} catch (error: any) {
-			return {
-				success: false,
-				message: error.message,
-			};
-		}
-	}
+			case "POST":
+				const body = await readBody(event);
+				return await createCity(body);
 
-	if (method === "POST") {
-		try {
-			const body = await readBody(event);
-			const city = await createCity(body);
-			return city;
-		} catch (error: any) {
-			return {
-				success: false,
-				message: error.message,
-			};
+			default:
+				throw createError({
+					message: "method is not allowed.",
+					status: 405,
+				});
 		}
+	} catch (err: any) {
+		throw createError({ message: err.message, status: 400 });
 	}
 });
