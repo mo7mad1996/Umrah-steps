@@ -29,7 +29,7 @@ export const updatePageContent = async (page: string, data: any) => {
 export const getAllPagesContent = async () => {
 	try {
 		return await PageContent.find();
-	} catch (error) {
-		throw error;
+	} catch (error: any) {
+		throw createError({ message: error.message, status: 400 });
 	}
 };
