@@ -165,7 +165,12 @@
 			"main_phone": "Main Phone",
 			"main_email": "Main Email",
 			"main_data": "Global Data",
-
+			"heading_ar": "Heading in Arabic",
+			"heading_en": "Heading in English",
+			"subheading_ar": "Subheading in Arabic",
+			"subheading_en": "Subheading in English",
+			"body_ar": "Body content in Arabic",
+			"body_en": "Body content in English",
 			"faq": {
 				"title": "Frequently Asked Questions",
 				"question": {
