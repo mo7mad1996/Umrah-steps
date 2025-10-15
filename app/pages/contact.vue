@@ -85,8 +85,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncData } from "#app";
-
 usePageTitle("contact.title");
 const { locale } = useI18n();
 

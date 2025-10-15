@@ -127,10 +127,19 @@
 		"success_delete": "تم الحذف بنجاح",
 		"success_update": "تم تحديث محتوى الصفحة بنجاح",
 		"error": "حدث خطأ أثناء تحديث المحتوى",
+
+		"home": {
+			"title": "الصفحة الرئيسية"
+		},
+		"hotels": {
+			"title": "صفحة الفنادق"
+		},
 		"contact": {
 			"title": "صفحة اتصل بنا",
 			"hero_image": "صورة الخلفية",
 			"main_phone": "رقم الهاتف الرئيسي",
+			"main_email": "البريد الأساسي",
+			"main_data": "بيانات عامة",
 			"main_phone_placeholder": "+966 12 345 6789",
 			"contact_info": {
 				"title": "معلومات التواصل",
@@ -170,6 +179,7 @@
 				"title": "الرسائل"
 			}
 		},
+
 		"favorites": {
 			"title": "صفحة المفضلة",
 			"hero_image": "صورة الخلفية",

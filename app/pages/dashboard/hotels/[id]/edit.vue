@@ -4,7 +4,7 @@
 			<LayoutDashboardPageTitle :title="$t('dashboard.hotel.edit')" />
 		</template>
 
-		<template v-slot="{}">
+		<template v-slot="d">
 			<PagesDashboardHotelForm is-edit />
 		</template>
 	</LayoutDashboardContent>

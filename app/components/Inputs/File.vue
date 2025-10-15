@@ -5,7 +5,6 @@
 		@dragover.prevent="isDragging = true"
 		@dragleave.prevent="isDragging = false"
 	>
-		<pre>{{}}</pre>
 		<!-- files -->
 		<div
 			class="gap-2 flex flex-wrap w-full bg-neutral-100 dark:!bg-gray-800/50 p-2 rounded-lg"

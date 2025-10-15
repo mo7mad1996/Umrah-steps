@@ -3,13 +3,93 @@
 		<h3 class="between-lines text-gray-700 dark:text-gray-300 text-3xl my-6 text-center font-bold">
 			{{ $t("dashboard.site_settings.contact.title") }}
 		</h3>
+		<section class="grid md:grid-cols-2 gap-6" v-if="PageContentStatus == 'success'">
+			<!-- Hero Image Section -->
+			<div
+				class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl"
+			>
+				<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+					<Icon name="solar:gallery-bold" class="text-xl" />
+					{{ $t("dashboard.site_settings.favorites.hero_image") }}
+				</h4>
+				<Form
+					v-bind="{
+						onSubmit: async (d) => {
+							const url = await imgRef.uploadFiles?.call();
+							d.content.image = url[0];
+							await updatePageContent(d);
+						},
+						initialValues: pageContent,
+					}"
+				>
+					<div class="space-y-4">
+						<InputsFile
+							ref="imgRef"
+							name="content.image"
+							:title="$t('dashboard.site_settings.favorites.hero_image')"
+							accept="image/*"
+							path="backgrounds"
+						/>
+						<InputsSubmit :title="$t('global.save')" class="w-full" />
+					</div>
+				</Form>
+			</div>
 
+			<!-- SEO Settings -->
+			<div
+				class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl"
+			>
+				<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+					<Icon name="solar:search-bold" class="text-xl" />
+					{{ $t("dashboard.site_settings.favorites.seo_settings") }}
+				</h4>
+				<Form v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }">
+					<div class="grid md:grid-cols-2 gap-6">
+						<InputsText
+							name="seo.keywords.ar"
+							:title="$t('dashboard.site_settings.seo_keywords_ar')"
+							icon="material-symbols:keyboard-external-input-outline-rounded"
+						/>
+						<InputsText
+							name="seo.keywords.en"
+							:title="$t('dashboard.site_settings.seo_keywords_en')"
+							icon="material-symbols:keyboard-external-input-outline-rounded"
+						/>
+						<InputsText
+							name="seo.description.ar"
+							:title="$t('dashboard.site_settings.seo_description_ar')"
+							icon="material-symbols:chat-info"
+						/>
+						<InputsText
+							name="seo.description.en"
+							:title="$t('dashboard.site_settings.seo_description_en')"
+							icon="material-symbols:chat-info"
+						/>
+					</div>
+					<div class="mt-4">
+						<InputsSubmit :title="$t('global.save')" class="w-full" />
+					</div>
+				</Form>
+			</div>
+		</section>
 		<div class="grid md:grid-cols-2 gap-6">
 			<Form
-				v-bind="{ onSubmit: updateMainPhone }"
-				class="backdrop-blur-xl rounded-lg bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-2 shadow-xl"
+				v-if="globalDataStatus == 'success'"
+				v-slot="{ isSubmitting }"
+				v-bind="{ onSubmit: updateMainPhone, initialValues: globalData }"
+				class="backdrop-blur-xl rounded-lg bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-4 gap-4 flex flex-col shadow-xl"
 			>
-				<h3 class="text-gray-500 my-3 text-sm p-2">
+				<h2
+					class="block text-xl p-4 font-medium text-gray-700 dark:text-gray-300 mb-2 dark:bg-white/20"
+				>
+					{{ $t("dashboard.site_settings.contact.main_data") }}
+				</h2>
+				<InputsEmail
+					name="mainEmail"
+					:placeholder="$t('dashboard.site_settings.contact.main_email')"
+					:title="$t('dashboard.site_settings.contact.main_email')"
+				/>
+				<h3 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 					{{ $t("dashboard.site_settings.contact.main_phone") }}
 				</h3>
 				<InputsPhone
@@ -17,7 +97,20 @@
 					:placeholder="$t('dashboard.site_settings.contact.main_phone')"
 					rules="required"
 				/>
-				<InputsSubmit />
+
+				<InputsText
+					name="commercial_registration_link"
+					:title="$t('global.commercial_registration_link')"
+					:placeholder="$t('global.commercial_registration_link')"
+					icon="material-symbols:link-rounded"
+				/>
+
+				<InputsFile
+					accept="image/*"
+					name="commercial_registration"
+					:title="$t('global.commercial_registration')"
+				/>
+				<InputsSubmit :loading="isSubmitting" />
 			</Form>
 			<div
 				class="backdrop-blur-xl rounded-lg bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-2 shadow-xl"
@@ -382,8 +475,9 @@
 									:href="`mailto:${item.email}`"
 									class="rounded-lg hover:text-indigo-500 hover:underline px-2 py-1"
 									target="_blank"
-									>{{ item.email }}</a
 								>
+									{{ item.email }}
+								</a>
 								-
 								<a
 									class="rounded-full hover:text-indigo-500 hover:underline px-2 py-1"
@@ -432,6 +526,15 @@ const updateMainPhone = async (values: any) => {
 	}
 };
 
+// Global Data
+const { data: globalData, status: globalDataStatus } = useAsyncData(
+	"globalData",
+	() =>
+		useApi()
+			.get("/globalData")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
 // Contact Info
 const {
 	data: contactInfos,
@@ -458,6 +561,12 @@ const addContactInfo = async (data: any) => {
 	await contactInfosRefresh();
 	useToast().success(t("dashboard.site_settings.success_update"));
 };
+
+const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-contact", () =>
+	useApi()
+		.get("/page-content/contact")
+		.then((d) => d.data),
+);
 
 // faqs
 const {
@@ -503,7 +612,7 @@ const {
 			.then((d) => d.data),
 	{ watch: [locale] },
 );
-
+const imgRef = ref<any>();
 const deleteWorkHours = async (id: number) => {
 	await useApi().delete(`workHours?id=${id}`);
 	useToast().success(t("dashboard.site_settings.success_delete"));
@@ -530,14 +639,23 @@ const {
 	status: messagesStatus,
 	error: messagesError,
 	refresh: refreshMessages,
-} = useAsyncData("messages", () =>
+} = useAsyncData("message", () =>
 	useApi()
 		.get("message")
 		.then((d) => d.data),
 );
 
+const updatePageContent = async (values: any) => {
+	try {
+		await useApi().put("/page-content/contact", values);
+		useToast().success(t("dashboard.site_settings.success_update"));
+	} catch (error) {
+		useToast().error(t("dashboard.site_settings.error"));
+	}
+};
+
 const deleteMessages = async (id: number) => {
-	await useApi().delete(`messages?id=${id}`);
+	await useApi().delete(`message?id=${id}`);
 	useToast().success(t("dashboard.site_settings.success_delete"));
 
 	await refreshWorkHours();

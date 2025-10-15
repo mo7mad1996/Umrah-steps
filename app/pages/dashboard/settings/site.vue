@@ -4,7 +4,7 @@
 			<LayoutDashboardPageTitle :title="$t('dashboard.site_settings.title')" />
 		</template>
 
-		<v-tabs fixed-tabs v-model="activeTab">
+		<v-tabs fixed-tabs v-model="activeTab" class="dark:text-gray-300">
 			<v-tab v-for="t in tabs" :key="t.value" :value="t.value" :append-icon="t.icon">
 				{{ $t(t.title) }}
 			</v-tab>

@@ -152,8 +152,20 @@
 		"success_update": "Page content updated successfully",
 		"error": "Error updating content",
 
+		"home": {
+			"title": "Home - page"
+		},
+		"hotels": {
+			"title": "Hotels - page"
+		},
 		"contact": {
 			"title": "Contact Us - page",
+			"hero_image": "BackgroundImage",
+			"main_phone_placeholder": "+966 12 345 6789",
+			"main_phone": "Main Phone",
+			"main_email": "Main Email",
+			"main_data": "Global Data",
+
 			"faq": {
 				"title": "Frequently Asked Questions",
 				"question": {

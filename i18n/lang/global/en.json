@@ -14,5 +14,10 @@
 	"reload": "Reload",
 	"back": "Back",
 	"cancel": "Cancel",
-	"icon": "Icon"
+	"icon": "Icon",
+	"trusted": "Trusted by",
+
+	"trusted_by": "Trusted by the Ministry of Commerce and the Saudi Business Center",
+	"commercial_registration": "Commercial Registration",
+	"commercial_registration_link": "Commercial Registration Link"
 }

@@ -13,6 +13,13 @@
 					class="w-full md:!w-3/4 mx-auto relative z-10 aspect-video block rounded-2xl shadow-2xl"
 				/>
 
+				<div class="sticky top-32 bottom-4 z-50 grid container mx-auto my-4 md:grid-cols-4">
+					<InputsBtn
+						:text="$t('hotels.book')"
+						@click="goToWhatsapp"
+						icon="material-symbols:whatsapp"
+					/>
+				</div>
 				<!-- ok here -->
 
 				<div class="flex flex-col gap-2 w-fit text-md max-md:text-sm z-50 my-4 mx-auto">
@@ -90,7 +97,7 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const id = route.params.id as string;
 
 const {
@@ -107,5 +114,39 @@ const {
 	{ watch: [locale] },
 );
 
+// Global Data
+const { data: globalData, status: globalDataStatus } = useAsyncData(
+	"globalData",
+	() =>
+		useApi()
+			.get("/globalData")
+			.then((d) => d.data),
+	{ watch: [locale] },
+);
+
 usePageTitle("hotels.hotel_details");
+const goToWhatsapp = () => {
+	console.log(globalData?.value?.mainPhone, hotel.value.name);
+	if (!globalData?.value?.mainPhone || !hotel?.value?.name) {
+		console.error("Hotel data or phone number is missing");
+		return;
+	}
+
+	const text = `السلام عليكم
+	\n
+كنت أتصفح موقع ${t("global.siteName")} \n
+وأعجبني هذا الفندق:
+ ${hotel.value.name}
+\n
+رابط الفندق: ${window.location.href}
+\n
+\n
+
+أرغب بالتواصل بشكل عاجل لإتمام الحجز
+  `;
+	const url =
+		`https://wa.me/${globalData.value.mainPhone.replace("+", "")}`.replaceAll(" ", "") +
+		`?text=${encodeURIComponent(text)}`;
+	window.open(url, "_blank");
+};
 </script>

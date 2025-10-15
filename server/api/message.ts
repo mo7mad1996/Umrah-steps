@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
 
 			case "DELETE":
 				const { id } = getQuery(event);
+
 				if (!id) throw createError({ status: 400, message: "id query is required." });
 				return await messageService.delete(id as string);
 

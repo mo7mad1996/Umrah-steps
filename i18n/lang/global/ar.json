@@ -17,5 +17,10 @@
 	"delete": "حذف",
 	"reset": "إعادة تعيين",
 	"actions": "الإجراءات",
-	"icon": "الايقونة"
+	"icon": "الايقونة",
+	"trusted": "موثوق من",
+
+	"trusted_by": "موثوق من قبل وزارة التجارة ومركز الأعمال السعودي",
+	"commercial_registration": "السجل التجاري",
+	"commercial_registration_link": "رابط السجل التجاري"
 }

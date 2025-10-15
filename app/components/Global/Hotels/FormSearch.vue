@@ -5,11 +5,18 @@
 		<Form>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-end">
 				<InputsSelect
-					:title="$t('dashboard.destination')"
+					name="location.city"
+					rules="required"
 					icon="bi:flag-fill"
-					:fetch="useCity"
-					:placeholder="$t('dashboard.destination')"
-					name="city"
+					:title="$t('dashboard.destination')"
+					:items="
+					(cities || []).map((c: any) => ({
+						value: c._id,
+						title: c[locale],
+					}))
+				"
+					:status="citiesStatus"
+					:placeholder="$t('dashboard.hotel.city_placeholder')"
 				/>
 
 				<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4">
@@ -52,4 +59,6 @@
 
 <script setup lang="ts">
 import { Form } from "vee-validate";
+const { locale } = useI18n();
+const { refresh: refreshCities, cities, status: citiesStatus } = useCity();
 </script>

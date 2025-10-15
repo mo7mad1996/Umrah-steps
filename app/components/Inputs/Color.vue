@@ -5,7 +5,7 @@
 				<template v-slot:activator="{ props }">
 					<div class="h-7 w-12 color-value rounded shadow cursor-pointer" v-bind="props"></div>
 
-					<h3 class="" v-bind="props">
+					<h3 class="dark:text-gray-300" v-bind="props">
 						{{ title }}
 					</h3>
 				</template>
