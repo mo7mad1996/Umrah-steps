@@ -1,10 +1,13 @@
 <template>
-	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950">
+	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950" v-if="'success' == PageContentStatus">
 		<!-- Background Image -->
-		<GlobalImageMask src="/logo/light.png" />
+		<GlobalImageMask :src="pageContent.content.image || `/logo/light.png`" />
 
 		<!-- Page Header -->
-		<GlobalPageTitle :title="$t('about.title')" :subTitle="$t('about.subtitle')" />
+		<GlobalPageTitle
+			:title="pageContent.content.heading[locale] || $t('about.title')"
+			:subTitle="pageContent.content.subheading[locale] || $t('about.subtitle')"
+		/>
 
 		<!-- Main Content -->
 		<div class="container mx-auto px-6 py-16">
@@ -13,57 +16,15 @@
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 					<div class="order-2 lg:order-1">
 						<div class="bg-white dark:!bg-gray-800 rounded-3xl p-8 shadow-xl">
-							<h2 class="text-3xl font-bold text-primary dark:text-primary-dark mb-6">
-								{{ $t("about.who_we_are") }}
-							</h2>
-							<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-								{{ $t("about.description") }}
-							</p>
-							<p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-								{{ $t("about.detailed_description") }}
-							</p>
-
-							<!-- Key Features -->
-							<div class="space-y-4">
-								<div class="flex items-center gap-4">
-									<div
-										class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center"
-									>
-										<Icon name="mdi:check-circle" class="text-primary text-xl" />
-									</div>
-									<span class="text-gray-700 dark:text-gray-300 font-medium">
-										{{ $t("about.features.experience") }}
-									</span>
-								</div>
-								<div class="flex items-center gap-4">
-									<div
-										class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center"
-									>
-										<Icon name="mdi:check-circle" class="text-primary text-xl" />
-									</div>
-									<span class="text-gray-700 dark:text-gray-300 font-medium">
-										{{ $t("about.features.team") }}
-									</span>
-								</div>
-								<div class="flex items-center gap-4">
-									<div
-										class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center"
-									>
-										<Icon name="mdi:check-circle" class="text-primary text-xl" />
-									</div>
-									<span class="text-gray-700 dark:text-gray-300 font-medium">
-										{{ $t("about.features.support") }}
-									</span>
-								</div>
-							</div>
+							<pre>{{ pageContent.content.body[locale] }}</pre>
 						</div>
 					</div>
 
 					<div class="order-1 lg:order-2">
 						<div class="relative">
 							<NuxtImg
-								src="/logo/light-finger.png"
-								alt="خدمات الحج والعمرة"
+								:src="pageContent.content.image || `/logo/light.png`"
+								:alt="$t('global.site_name')"
 								class="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
 							/>
 							<div
@@ -160,56 +121,26 @@
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<div
+						v-for="value in services"
+						:key="value.title"
 						class="bg-white dark:!bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group"
 					>
 						<div
 							class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
 						>
-							<Icon name="ri:hotel-bed-fill" class="text-primary text-2xl" />
+							<Icon :name="value.icon" class="text-primary text-2xl" />
 						</div>
 						<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
-							{{ $t("about.services.hotels.title") }}
+							{{ $t(value.title) }}
 						</h3>
 						<p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-							{{ $t("about.services.hotels.description") }}
-						</p>
-					</div>
-
-					<div
-						class="bg-white dark:!bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group"
-					>
-						<div
-							class="w-16 h-16 bg-harmony1/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-						>
-							<Icon name="mdi:car-multiple" class="text-harmony1 text-2xl" />
-						</div>
-						<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
-							{{ $t("about.services.transport.title") }}
-						</h3>
-						<p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-							{{ $t("about.services.transport.description") }}
-						</p>
-					</div>
-
-					<div
-						class="bg-white dark:!bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group"
-					>
-						<div
-							class="w-16 h-16 bg-harmony2/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-						>
-							<Icon name="mdi:account-group" class="text-harmony2 text-2xl" />
-						</div>
-						<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
-							{{ $t("about.services.guidance.title") }}
-						</h3>
-						<p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-							{{ $t("about.services.guidance.description") }}
+							{{ $t(value.description) }}
 						</p>
 					</div>
 				</div>
 			</section>
-
 			<!-- Team Section -->
+			<!--
 			<section class="mb-20">
 				<div class="text-center mb-12">
 					<h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
@@ -266,7 +197,7 @@
 						</p>
 					</div>
 				</div>
-			</section>
+			</section> -->
 
 			<!-- Call to Action -->
 			<section class="text-center">
@@ -297,25 +228,55 @@
 			</section>
 		</div>
 	</div>
+	<GlobalLoading v-else class="min-h-screen" />
 </template>
 
 <script setup lang="ts">
+const { locale } = useI18n();
 // SEO
 usePageTitle("about.title");
+const { data: pageContent, status: PageContentStatus } = useAsyncData("about-page-content", () =>
+	useApi()
+		.get("/page-content/about")
+		.then((d) => d.data),
+);
 
 useHead({
 	meta: [
 		{
 			name: "description",
 			content:
-				"تعرف على حجوزات المعتمر، الشركة الرائدة في خدمات الحج والعمرة مع خبرة تزيد عن 15 سنة في خدمة ضيوف الرحمن",
+				PageContentStatus.value == "success"
+					? pageContent.value.seo.description[locale.value]
+					: "حجوزات المعتمر , العمرة, فنادق مكة, فنادق المدينة, خدمات المعتمرين",
 		},
 		{
 			name: "keywords",
-			content: "حجوزات المعتمر, الحج, العمرة, فنادق مكة, فنادق المدينة, خدمات الحجاج",
+			content:
+				PageContentStatus.value == "success"
+					? pageContent.value.seo.keywords[locale.value]
+					: "حجوزات المعتمر, العمرة, فنادق مكة, فنادق المدينة, خدمات المعتمرين",
 		},
 	],
 });
+
+const services = [
+	{
+		icon: "ri:hotel-bed-fill",
+		title: "about.services.hotels.title",
+		description: "about.services.hotels.description",
+	},
+	{
+		icon: "mdi:car-multiple",
+		title: "about.services.transport.title",
+		description: "about.services.transport.description",
+	},
+	{
+		icon: "mdi:account-group",
+		title: "about.services.guidance.title",
+		description: "about.services.guidance.description",
+	},
+];
 </script>
 
 <style scoped>

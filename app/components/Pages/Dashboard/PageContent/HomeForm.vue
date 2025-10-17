@@ -88,35 +88,29 @@
 				>
 					<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
 						<Icon name="solar:search-bold" class="text-xl" />
-						{{ $t("dashboard.site_settings.content.title") }}
+						{{ $t("dashboard.site_settings.title") }}
 					</h4>
 					<Form v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }">
 						<div class="grid md:grid-cols-2 gap-6 my-6">
 							<InputsText
 								name="content.heading.ar"
-								:title="$t('dashboard.site_settings.content.heading_ar')"
+								:title="$t('dashboard.site_settings.heading_ar')"
 							/>
 							<InputsText
 								name="content.heading.en"
-								:title="$t('dashboard.site_settings.content.heading_en')"
+								:title="$t('dashboard.site_settings.heading_en')"
 							/>
 
 							<InputsText
 								name="content.subheading.ar"
-								:title="$t('dashboard.site_settings.content.subheading_ar')"
+								:title="$t('dashboard.site_settings.subheading_ar')"
 							/>
 							<InputsText
 								name="content.subheading.en"
-								:title="$t('dashboard.site_settings.content.subheading_en')"
+								:title="$t('dashboard.site_settings.subheading_en')"
 							/>
-							<InputsText
-								name="content.body.ar"
-								:title="$t('dashboard.site_settings.content.body_ar')"
-							/>
-							<InputsText
-								name="content.body.en"
-								:title="$t('dashboard.site_settings.content.body_en')"
-							/>
+							<InputsText name="content.body.ar" :title="$t('dashboard.site_settings.body_ar')" />
+							<InputsText name="content.body.en" :title="$t('dashboard.site_settings.body_en')" />
 						</div>
 						<div class="mt-4">
 							<InputsSubmit :title="$t('global.save')" class="w-full" :loading="isSubmitting" />

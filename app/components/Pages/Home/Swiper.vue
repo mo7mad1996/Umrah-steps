@@ -1,7 +1,7 @@
 <template>
-	<div class="container mx-auto px-4 md:px-6">
+	<div class="container mx-auto px-4 md:px-6" v-if="contentStatus == 'success'">
 		<h1 class="text-2xl md:text-4xl lg:text-6xl text-center my-16 md:my-24 lg:my-32 leading-tight">
-			{{ $t("home.swiper.headline") }}
+			{{ pageContent.content.body[locale] }}
 		</h1>
 
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-4" v-if="status == 'pending'">
@@ -81,6 +81,8 @@
 		<GlobalError class="col-span-2" :error="error" :status="status" :refresh="refresh" />
 		<hr class="container mx-auto my-12 md:my-20" />
 	</div>
+
+	<GlobalLoading class="my-4" v-else />
 </template>
 
 <script setup lang="ts">
@@ -122,5 +124,12 @@ watch(
 		update();
 	},
 	{ immediate: true },
+);
+
+// Get Page Content
+const { data: pageContent, status: contentStatus } = useAsyncData("home-page-content", () =>
+	useApi()
+		.get("/page-content/home")
+		.then((d) => d.data),
 );
 </script>

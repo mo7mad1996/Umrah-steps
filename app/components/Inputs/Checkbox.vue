@@ -1,13 +1,12 @@
 <template>
 	<div>
-		<v-checkbox
+		<v-switch
 			v-model="modelValue"
-			class="checkbox"
 			:id="id || name"
 			:ripple="false"
 			:true-value="value || 'yes'"
 			:false-value="value ? undefined : 'no'"
-			color="primary"
+			:color="dark ? `secondary` : `primary`"
 		>
 			<template v-slot:label>
 				<div
@@ -16,7 +15,7 @@
 					{{ title }}
 				</div>
 			</template>
-		</v-checkbox>
+		</v-switch>
 
 		<ErrorMessage :name="name" />
 	</div>
@@ -24,6 +23,8 @@
 
 <script setup>
 import { useField, ErrorMessage } from "vee-validate";
+const theme = useTheme();
+const dark = computed(() => theme.name.value == "dark");
 
 const props = defineProps({
 	name: { type: String, default: "checkbox" },

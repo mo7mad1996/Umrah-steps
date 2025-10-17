@@ -2,10 +2,10 @@
 	<div
 		class="w-full relative bg-neutral-100 dark:!bg-indigo-950 rounded-2xl px-4 md:px-6 py-4 shadow"
 	>
-		<Form>
+		<Form v-bind="{ onSubmit: submit, initialValues: search_data }">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-end">
 				<InputsSelect
-					name="location.city"
+					name="city"
 					rules="required"
 					icon="bi:flag-fill"
 					:title="$t('dashboard.destination')"
@@ -24,7 +24,7 @@
 						:title="$t('dashboard.number_of_rooms')"
 						inputmode="numeric"
 						type="number"
-						name="number_of_rooms"
+						name="rooms"
 						:placeholder="$t('dashboard.number_of_rooms')"
 						icon="mdi-bed"
 					/>
@@ -32,7 +32,7 @@
 						inputmode="numeric"
 						type="number"
 						:title="$t('dashboard.number_of_people')"
-						name="number_of_people"
+						name="people"
 						:placeholder="$t('dashboard.number_of_people')"
 						icon="mdi-account"
 					/>
@@ -41,14 +41,10 @@
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:col-span-2 lg:col-span-1 md:gap-4">
 					<InputsDate
 						:title="$t('dashboard.arrival_date')"
-						name="dashboard.arrival_date"
+						name="arrival_date"
 						format="yyyy-MM-dd"
 					/>
-					<InputsDate
-						:title="$t('dashboard.return_date')"
-						name="dashboard.return_date"
-						format="yyyy-MM-dd"
-					/>
+					<InputsDate :title="$t('dashboard.return_date')" name="return_date" format="yyyy-MM-dd" />
 				</div>
 
 				<InputsSubmit class="pt-2 md:pt-4 col-span-1" :text="$t('global.search')" />
@@ -61,4 +57,16 @@
 import { Form } from "vee-validate";
 const { locale } = useI18n();
 const { refresh: refreshCities, cities, status: citiesStatus } = useCity();
+const search_data = useState("search_data", () => ({
+	city: "",
+	people: 0,
+	rooms: 0,
+	arrival_date: "",
+	return_date: "",
+}));
+const router = useRouter();
+const submit = (data: any) => {
+	search_data.value = data;
+	router.push("/hotels");
+};
 </script>

@@ -24,7 +24,18 @@
 			</p>
 
 			<div :class="filters.viewMode === 'grid' ? 'hotel-card-grid' : 'hotel-card-list'">
-				<GlobalHotelsItem :hotel="hotel" v-for="hotel in hotels" :key="hotel.id" />
+				<GlobalInfinityTable
+					:data="hotels"
+					:refresh="refresh"
+					:page="page"
+					:finished="finished"
+					:error="error"
+					:status="status"
+				>
+					<template #default="{ item }">
+						<GlobalHotelsItem :hotel="item" />
+					</template>
+				</GlobalInfinityTable>
 			</div>
 		</section>
 	</div>
@@ -35,13 +46,37 @@
 const filters = reactive({
 	price: [0, Infinity],
 	rate: [0, 5],
-	distance: [0, Infinity],
+	distance: undefined,
 	viewMode: "grid" as "list" | "grid",
 	search: "",
 });
-
+const search_data = useState("search_data", () => ({
+	city: "",
+	people: 0,
+	rooms: 0,
+	arrival_date: "",
+	return_date: "",
+}));
 // Fetch hotels data
-const { data: hotels, status, error, refresh, page, count, finished } = useHotels();
+const {
+	data: hotels,
+	status,
+	error,
+	refresh,
+	page,
+	count,
+	finished,
+} = useHotels({
+	location: { city: search_data.value.city },
+	price: {
+		$lt: filters.price[1],
+		$gt: filters.price[0],
+	},
+	rate: {
+		$lt: filters.rate[1],
+		$gt: filters.rate[0],
+	},
+});
 
 // SEO
 usePageTitle("hotels.title");

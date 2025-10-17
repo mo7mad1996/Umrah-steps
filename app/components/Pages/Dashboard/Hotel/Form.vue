@@ -235,6 +235,17 @@ const createCity = async (data: any) => {
 					icon="mdi:map-marker"
 					rules="required"
 				/>
+
+				<InputsSelect
+					:title="$t('hotels.distance.title')"
+					name="distance"
+					:items="[
+						{ value: 0, title: $t('hotels.distance.not_required') },
+						{ value: 1, title: $t('hotels.distance.walking') },
+						{ value: 2, title: $t('hotels.distance.near') },
+						{ value: 3, title: $t('hotels.distance.medium') },
+					]"
+				/>
 			</div>
 		</section>
 

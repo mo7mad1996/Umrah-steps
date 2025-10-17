@@ -9,6 +9,7 @@ export interface IHotelRequest {
 		address: { ar: string; en: string };
 	};
 	amenities: string[];
+	distance?: number;
 	img?: string;
 	images?: string[];
 	rate: number;
@@ -24,6 +25,7 @@ export interface IHotelResponse {
 	img: string;
 	images: string[];
 	status: string;
+	distance?: number;
 	rate: number;
 	amenities: IAmenity[];
 	createdAt: Date;
@@ -43,6 +45,7 @@ export interface IHotelResponseWithMultiLang {
 	rate: number;
 	status: string;
 	price: number;
+	distance?: number;
 	amenities: IAmenity[];
 	createdAt: Date;
 	updatedAt: Date;

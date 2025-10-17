@@ -18,7 +18,7 @@
 
 					<template v-if="modelValue">
 						<NuxtTime
-							class="flex-1"
+							class="flex-1 text-sm"
 							:datetime="modelValue"
 							day="numeric"
 							month="long"
@@ -66,6 +66,7 @@ const date = ref("");
 const modelValue = defineModel();
 
 if (field.value.value) date.value = field.value.value;
+if (field.value.value) modelValue.value = field.value.value;
 
 watch(date, (v) => {
 	isOpen.value = false;

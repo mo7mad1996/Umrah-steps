@@ -4,7 +4,6 @@
 	"search": "Search for hotel",
 	"book": "Book Now",
 	"rating": "Rating",
-	"distance": "Distance from Haram",
 	"priceRange": "Price Range",
 	"viewMode": "View mode",
 	"got": "We found",
@@ -18,5 +17,27 @@
 		"add": "Add City",
 		"name_en": "City Name (English)",
 		"name_ar": "City Name (Arabic)"
+	},
+
+	"price_range": {
+		"not_required": "Not Required",
+		"economy": "Economy (Less than 500 SAR)",
+		"medium": "Medium (500 - 1000 SAR)",
+		"luxury": "Luxury (More than 1000 SAR)"
+	},
+
+	"stars": {
+		"not_required": "Not Required",
+		"3_plus": "3 Stars or More",
+		"4_plus": "4 Stars or More",
+		"5_only": "5 Stars"
+	},
+
+	"distance": {
+		"title": "Distance from Haram",
+		"not_required": "Not Required",
+		"walking": "Walking (Less than 500m)",
+		"near": "Near (500m - 1km)",
+		"medium": "Medium (1km - 2km)"
 	}
 }

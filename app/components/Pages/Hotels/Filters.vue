@@ -18,10 +18,10 @@
 						<InputsSelect
 							v-model="filters.price"
 							:items="[
-								{ value: [0, Infinity], title: 'لا يشترط' },
-								{ value: [0, 500], title: 'اقتصادي (أقل من 500 ريال)' },
-								{ value: [500, 1000], title: 'متوسط (500 - 1000 ريال)' },
-								{ value: [1000, Infinity], title: 'فاخر (أكثر من 1000 ريال)' },
+								{ value: [0, Infinity], title: $t('hotels.price_range.not_required') },
+								{ value: [0, 500], title: $t('hotels.price_range.economy') },
+								{ value: [500, 1000], title: $t('hotels.price_range.medium') },
+								{ value: [1000, Infinity], title: $t('hotels.price_range.luxury') },
 							]"
 						/>
 					</div>
@@ -34,10 +34,10 @@
 						<InputsSelect
 							v-model="filters.rate"
 							:items="[
-								{ value: [0, 5], title: 'لا يشترط' },
-								{ value: [3, 5], title: '3 نجوم فأكثر' },
-								{ value: [4, 5], title: '4 نجوم فأكثر' },
-								{ value: [5, 5], title: '5 نجوم' },
+								{ value: [0, 5], title: $t('hotels.stars.not_required') },
+								{ value: [3, 5], title: $t('hotels.stars.3_plus') },
+								{ value: [4, 5], title: $t('hotels.stars.4_plus') },
+								{ value: [5, 5], title: $t('hotels.stars.5_only') },
 							]"
 						/>
 					</div>
@@ -45,15 +45,15 @@
 					<!-- Distance -->
 					<div class="min-w-0">
 						<span class="text-xs md:text-sm mb-2 block text-gray-600 dark:text-gray-400">
-							{{ $t("hotels.distance") }}:
+							{{ $t("hotels.distance.title") }}:
 						</span>
 						<InputsSelect
 							v-model="filters.distance"
 							:items="[
-								{ value: [0, Infinity], title: 'لا يشترط' },
-								{ value: [0, 500], title: 'مشي (أقل من 500م)' },
-								{ value: [500, 1000], title: 'قريب (500م - 1كم) ' },
-								{ value: [1000, 2000], title: 'متوسط (1كم - 2كم) ' },
+								{ value: undefined, title: $t('hotels.distance.not_required') },
+								{ value: 1, title: $t('hotels.distance.walking') },
+								{ value: 2, title: $t('hotels.distance.near') },
+								{ value: 3, title: $t('hotels.distance.medium') },
 							]"
 						/>
 					</div>
@@ -87,7 +87,7 @@ const props = defineProps<{
 	filters: {
 		price: number[];
 		rate: number[];
-		distance: number[];
+		distance?: number;
 		viewMode: "list" | "grid";
 	};
 }>();
