@@ -67,7 +67,7 @@ export class HotelService {
 			const hotel = await Hotel.findOne({ _id: id })
 				.populate(query.includes || "")
 				.exec();
-			if (query.useLang == "true") return hotel.lang(lang);
+			if (query.useLang == "true") return hotel?.lang(lang);
 			return hotel;
 		} catch (err) {
 			return err;

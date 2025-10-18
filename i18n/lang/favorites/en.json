@@ -1,13 +1,30 @@
 {
-  "title": "Favorites",
-  "empty": "No hotels in favorites",
-  "browse_hotels": "Browse Hotels",
-  "count": "{count} hotel(s) in favorites",
-  "clear_all": "Clear All",
-  "confirm_clear": "Do you want to remove all hotels from favorites?",
-  "confirm_clear_message": "You won't be able to revert this action",
-  "cleared": "All hotels removed from favorites",
-  "added": "Hotel added to favorites",
-  "removed": "Hotel removed from favorites",
-  "error": "Error loading favorites"
+	"title": "Favorites",
+	"subtitle": "All your favorite hotels in one place",
+	"empty": "No hotels in favorites",
+	"empty_description": "Start adding hotels to your favorites list for quick access later",
+	"browse_hotels": "Browse Hotels",
+	"my_hotels": "My Hotels",
+	"count": "{count} hotel(s) in favorites",
+	"clear_all": "Clear All",
+	"confirm_clear": "Do you want to remove all hotels from favorites?",
+	"confirm_clear_message": "You won't be able to revert this action",
+	"cleared": "All hotels removed from favorites",
+	"added": "Hotel added to favorites",
+	"removed": "Hotel removed from favorites",
+	"error": "Error loading favorites",
+	"showing": "Showing",
+	"hotels_count": "Hotels Count",
+	"stats": {
+		"title": "Favorites Statistics",
+		"total_hotels": "Total Hotels",
+		"total_value": "Total Value",
+		"avg_price": "Average Price",
+		"avg_rating": "Average Rating"
+	},
+	"cta": {
+		"title": "Start Exploring",
+		"description": "You haven't added any favorite hotels yet.",
+		"explore": "Explore Hotels"
+	}
 }

@@ -146,4 +146,13 @@ const goToWhatsapp = () => {
 		`?text=${encodeURIComponent(text)}`;
 	window.open(url, "_blank");
 };
+
+useSeoMeta({
+	ogImage: () => hotel.value?.image,
+	ogImageUrl: () => hotel.value?.image,
+	twitterImage: () => hotel.value?.image,
+	twitterDescription: () => hotel.value?.description,
+	description: () => hotel.value?.description,
+	keywords: () => hotel.value?.name,
+});
 </script>

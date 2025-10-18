@@ -31,7 +31,7 @@
 						accept="image/*"
 						path="backgrounds"
 					/>
-					<InputsSubmit :title="$t('global.save')" class="w-full" :loading="isSubmitting" />
+					<InputsSubmit :title="$t('global.save')" class="w-full" :is-loading="isSubmitting" />
 				</div>
 			</Form>
 		</div>
@@ -44,7 +44,10 @@
 				<Icon name="solar:search-bold" class="text-xl" />
 				{{ $t("dashboard.site_settings.favorites.seo_settings") }}
 			</h4>
-			<Form v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }">
+			<Form
+				v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }"
+				v-slot="{ isSubmitting }"
+			>
 				<div class="grid md:grid-cols-2 gap-6">
 					<InputsText
 						name="seo.keywords.ar"
@@ -68,13 +71,13 @@
 					/>
 				</div>
 				<div class="mt-4">
-					<InputsSubmit :title="$t('global.save')" class="w-full" />
+					<InputsSubmit :title="$t('global.save')" class="w-full" :is-loading="isSubmitting" />
 				</div>
 			</Form>
 		</div>
 	</section>
 	<section>
-		<div class="grid md:grid-cols-2 gap-6 my-6">
+		<div class="grid md:grid-cols-2 gap-6 my-6" v-if="PageContentStatus == 'success'">
 			<Form
 				v-bind="{
 					onSubmit: updatePageContent,
@@ -113,7 +116,7 @@
 							<InputsText name="content.body.en" :title="$t('dashboard.site_settings.body_en')" />
 						</div>
 						<div class="mt-4">
-							<InputsSubmit :title="$t('global.save')" class="w-full" :loading="isSubmitting" />
+							<InputsSubmit :title="$t('global.save')" class="w-full" :is-loading="isSubmitting" />
 						</div>
 					</Form>
 				</div>

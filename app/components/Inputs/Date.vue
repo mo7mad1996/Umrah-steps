@@ -14,11 +14,11 @@
 						'!bg-neutral-200 cursor-not-allowed  !text-neutral-400': disabled,
 					}"
 				>
-					<v-icon icon="mdi-calendar-outline" />
+					<v-icon icon="mdi-calendar-outline" class="!opacity-60" />
 
 					<template v-if="modelValue">
 						<NuxtTime
-							class="flex-1 text-sm"
+							class="flex-1 text-xs"
 							:datetime="modelValue"
 							day="numeric"
 							month="long"
@@ -38,14 +38,14 @@
 					</div>
 				</div>
 			</template>
-
-			<v-date-picker v-if="!disabled" elevation="24" v-model="date"></v-date-picker>
+			<v-date-picker show-adjacent-months v-if="!disabled" v-model="date" />
 		</v-menu>
 		<ErrorMessage :name="name" />
 	</div>
 </template>
 
 <script setup>
+const theme = useTheme();
 import { format } from "date-fns";
 import { useField, ErrorMessage } from "vee-validate";
 const { locale } = useI18n();

@@ -21,6 +21,7 @@
 					},
 					initialValues: pageContent,
 				}"
+				v-slot="{ isSubmitting }"
 			>
 				<div class="space-y-4">
 					<InputsFile
@@ -30,7 +31,7 @@
 						accept="image/*"
 						path="backgrounds"
 					/>
-					<InputsSubmit :title="$t('global.save')" class="w-full" />
+					<InputsSubmit :title="$t('global.save')" class="w-full" :is-loading="isSubmitting" />
 				</div>
 			</Form>
 		</div>
@@ -43,7 +44,10 @@
 				<Icon name="solar:search-bold" class="text-xl" />
 				{{ $t("dashboard.site_settings.favorites.seo_settings") }}
 			</h4>
-			<Form v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }">
+			<Form
+				v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }"
+				v-slot="{ isSubmitting }"
+			>
 				<div class="grid md:grid-cols-2 gap-6">
 					<InputsText
 						name="seo.keywords.ar"
@@ -67,7 +71,7 @@
 					/>
 				</div>
 				<div class="mt-4">
-					<InputsSubmit :title="$t('global.save')" class="w-full" />
+					<InputsSubmit :title="$t('global.save')" class="w-full" :is-loading="isSubmitting" />
 				</div>
 			</Form>
 		</div>

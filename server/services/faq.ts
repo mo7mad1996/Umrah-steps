@@ -5,7 +5,7 @@ export class FaqService {
 		try {
 			const res = await Faq.find();
 
-			return res.map((i) => i.lang(lang));
+			return res.map((i) => i?.lang(lang));
 		} catch (err) {
 			return err;
 		}

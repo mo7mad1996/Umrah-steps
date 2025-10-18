@@ -113,4 +113,9 @@ const { data: globalData, status: globalDataStatus } = useAsyncData("globalData"
 		.get("globalData")
 		.then((d) => d.data),
 );
+
+useSeoMeta({
+	description: () => pageContent.value?.seo?.description[locale.value],
+	keywords: () => pageContent.value?.seo?.keywords[locale.value],
+});
 </script>

@@ -99,6 +99,11 @@ export default defineNuxtConfig({
 	},
 	image: {
 		domains: [process.env.BOLB_URL || ""],
+		format: ["webp"],
+		quality: 70,
+		uploadcare: {
+			cdnURL: process.env.BOLB_URL,
+		},
 	},
 
 	fileStorage: {

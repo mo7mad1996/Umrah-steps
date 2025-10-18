@@ -241,23 +241,9 @@ const { data: pageContent, status: PageContentStatus } = useAsyncData("about-pag
 		.then((d) => d.data),
 );
 
-useHead({
-	meta: [
-		{
-			name: "description",
-			content:
-				PageContentStatus.value == "success"
-					? pageContent.value.seo.description[locale.value]
-					: "حجوزات المعتمر , العمرة, فنادق مكة, فنادق المدينة, خدمات المعتمرين",
-		},
-		{
-			name: "keywords",
-			content:
-				PageContentStatus.value == "success"
-					? pageContent.value.seo.keywords[locale.value]
-					: "حجوزات المعتمر, العمرة, فنادق مكة, فنادق المدينة, خدمات المعتمرين",
-		},
-	],
+useSeoMeta({
+	description: () => pageContent.value?.seo?.description[locale.value],
+	keywords: () => pageContent.value?.seo?.keywords[locale.value],
 });
 
 const services = [

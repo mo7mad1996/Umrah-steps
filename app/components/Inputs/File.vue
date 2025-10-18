@@ -44,7 +44,7 @@
 				class="flex gap-2 p-2 shadow-lg bg-white dark:!bg-white/30 rounded-lg flex-col relative z-10"
 			>
 				<div class="flex-shrink-0 rounded flex flex-col items-center justify-center">
-					<img :src="`${preview}`" class="h-32 w-32 rounded aspect-square object-cover block" />
+					<NuxtImg :src="`${preview}`" class="h-32 w-32 rounded aspect-square object-cover block" />
 				</div>
 
 				<div class="flex flex-1 w-full">

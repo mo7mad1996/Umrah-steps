@@ -4,8 +4,10 @@
 		<GlobalImageMask :src="pageContent?.content?.image || '/logo/light.png'" />
 
 		<!-- Page Header -->
-		<GlobalPageTitle :title="$t('favorites.title')" :subTitle="$t('favorites.subtitle')" />
-
+		<GlobalPageTitle
+			:title="pageContent?.content?.heading[locale]"
+			:subTitle="pageContent?.content?.subheading[locale]"
+		/>
 		<!-- Main Content -->
 		<div class="container mx-auto px-6 py-16">
 			<!-- Loading State -->
@@ -279,6 +281,11 @@ watch(
 	},
 	{ deep: true },
 );
+
+useSeoMeta({
+	description: () => pageContent.value?.seo?.description[locale.value],
+	keywords: () => pageContent.value?.seo?.keywords[locale.value],
+});
 
 onMounted(() => {
 	fetchFavoriteHotels();

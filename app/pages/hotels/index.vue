@@ -2,7 +2,7 @@
 	<div
 		class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative"
 	>
-		<GlobalImageMask src="/images/hotel2.jpeg" />
+		<GlobalImageMask :src="pageContent?.content?.image || `/images/hotel2.jpeg`" />
 		<GlobalPageTitle :title="$t('hotels.title')" :subTitle="$t('hotels.subtitle')" />
 
 		<div class="container mx-auto px-4 md:px-6 -mt-8 relative z-10">
@@ -50,6 +50,7 @@ const filters = reactive({
 	viewMode: "grid" as "list" | "grid",
 	search: "",
 });
+const { locale } = useI18n();
 const search_data = useState("search_data", () => ({
 	city: "",
 	people: 0,
@@ -80,6 +81,18 @@ const {
 
 // SEO
 usePageTitle("hotels.title");
+
+// SEO
+const { data: pageContent, status: PageContentStatus } = useAsyncData("hotels-page-content", () =>
+	useApi()
+		.get("/page-content/hotels")
+		.then((d) => d.data),
+);
+
+useSeoMeta({
+	description: () => pageContent.value?.seo?.description[locale.value],
+	keywords: () => pageContent.value?.seo?.keywords[locale.value],
+});
 </script>
 
 <style scoped>
