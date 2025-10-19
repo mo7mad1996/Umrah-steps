@@ -23,20 +23,20 @@
 				{{ $t("hotels.hotels") }}
 			</p>
 
-			<div :class="filters.viewMode === 'grid' ? 'hotel-card-grid' : 'hotel-card-list'">
-				<GlobalInfinityTable
-					:data="hotels"
-					:refresh="refresh"
-					:page="page"
-					:finished="finished"
-					:error="error"
-					:status="status"
-				>
-					<template #default="{ item }">
-						<GlobalHotelsItem :hotel="item" />
-					</template>
-				</GlobalInfinityTable>
-			</div>
+			<GlobalInfinityTable
+				class="gap-4 p-4 my-4 rounded-xl"
+				:class="filters.viewMode === 'grid' ? 'grid md:grid-cols-3' : 'flex flex-col'"
+				:data="hotels"
+				:refresh="refresh"
+				:page="page"
+				:finished="finished"
+				:error="error"
+				:status="status"
+			>
+				<template #default="{ item }">
+					<GlobalHotelsItem :hotel="item" />
+				</template>
+			</GlobalInfinityTable>
 		</section>
 	</div>
 </template>

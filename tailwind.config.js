@@ -19,6 +19,7 @@ export default {
 			transitionDuration: {
 				DEFAULT: "300ms",
 			},
+			dropShadow: "0 0 4px #00000044",
 			colors: {
 				// base color
 				primary: {

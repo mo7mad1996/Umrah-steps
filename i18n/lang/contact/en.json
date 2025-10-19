@@ -1,9 +1,13 @@
 {
 	"title": "Contact Us",
 	"subtitle": "Choose the most suitable way to contact us",
+
+	"emergency_call": "Emergency Call",
+
 	"methods": {
 		"title": "We are here to serve you",
-		"description": "Choose the most suitable way to contact us"
+		"description": "Choose the most suitable way to contact us",
+		"phone_desc": "You can contact us by phone"
 	},
 	"form": {
 		"title": "Send us a message",
@@ -30,6 +34,7 @@
 	"quick_links": {
 		"title": "Quick Links"
 	},
+
 	"social": {
 		"title": "Follow Us",
 		"social_media": "Social media",

@@ -1,61 +1,71 @@
 <template>
 	<NuxtLink
 		:to="`/hotels/${hotel.id}`"
-		class="flex flex-col relative shadow group rounded-xl h-full min-h-[300px] md:min-h-[400px] max-h-[700px] aspect-[2/3] overflow-hidden bg-white *:!transition-all border-white border-4 md:border-8 hover:shadow-xl transition-all duration-300"
+		class="block group h-[620px] relative border border-solid border-white/40 rounded-2xl overflow-hidden"
 	>
-		<NuxtImg
-			:src="hotel.img || '/logo/vertical.png'"
-			class="object-cover w-full h-full absolute inset-0 group-hover:scale-105 transition-transform duration-500"
-		/>
-
-		<div class="block rounded-3xl relative flex-1">
-			<div
-				class="flex justify-between items-center py-2 md:py-3 px-3 md:px-5 text-lg md:text-2xl"
-				@click.prevent
-			>
-				<div class="flex items-center gap-2">
-					<button
-						class="aspect-square w-8 md:w-9 rounded-full backdrop-blur-md flex items-center justify-center transition hover:scale-110"
-						:class="{
-							'text-red-400 hover:bg-red-200/50': is_fav,
-							'text-primary hover:bg-emerald-100/50': !is_fav,
-						}"
-						@click="handleFavoriteClick"
-					>
-						<Transition name="fav">
-							<Icon v-if="is_fav" name="solar:heart-bold" />
-							<Icon v-else name="material-symbols:favorite-outline-rounded" />
-						</Transition>
-					</button>
-				</div>
-				<div>
-					<div class="flex gap-1 md:gap-2 items-center text-sm md:text-base">
-						<Icon name="material-symbols-light:location-on" />
-					</div>
-					<div class="flex gap-0 justify-end">
-						<Icon
-							class="text-yellow-400 text-sm md:text-base"
-							name="ic:baseline-star-border"
-							v-for="i in hotel.rate"
-							:key="i"
-						/>
-					</div>
-				</div>
-			</div>
-
-			<NuxtImg
-				:src="hotel.img || '/logo/vertical.png'"
-				class="object-cover w-full h-full opacity-0"
-			/>
+		<div class="w-full h-full p-1 absolute bg-purple-400 dark:bg-purple-600">
+			<div class="w-full h-full rounded-xl rounded-tr-[100px] rounded-br-[40px] bg-[#222]"></div>
 		</div>
 
 		<div
-			class="relative transition-all translate-y-full group-hover:translate-y-0 bg-white/95 backdrop-blur-sm custume-br p-4 md:p-6"
+			class="w-full h-full flex items-center justify-center relative backdrop-blur-lg rounded-2xl"
 		>
-			<h3 v-if="hotel.name" class="text-lg md:text-xl font-semibold mb-2">{{ hotel.name }}</h3>
-			<p class="opacity-70 text-sm md:text-base line-clamp-3" v-if="hotel.description">
-				{{ hotel.description }}
-			</p>
+			<div
+				class="w-32 absolute h-32 rounded-full bg-gradient-to-tr from-purple-500 dark:from-purple-800 to-orange-300 animate-spin"
+				style="animation-duration: 12s"
+			></div>
+			<nuxt-img
+				class="w-full h-full object-cover block relative group-hover:scale-105 rounded-lg transition-transform"
+				:src="hotel.img"
+			/>
+		</div>
+
+		<div class="w-full h-full p-2 flex gap-2 justify-between absolute inset-0">
+			<div
+				class="w-3/4 opacity-0 group-hover:!opacity-100 transition-opacity px-3 py-4 flex flex-col rounded-lg shadow-lg backdrop-blur-lg bg-gray-700/30 text-gray-200 font-medium font-mono"
+			>
+				<h1 class="text-xl font-medium">{{ hotel.name }}</h1>
+				<p class="text-md leading-6 !text-cairo text-blue-300">
+					{{ hotel.description }}
+				</p>
+				<div class="w-full mt-auto flex items-center justify-center">
+					<span class="text-xs text-gray-400 flex items-center">
+						<Icon
+							name="ic:sharp-star-rate"
+							v-for="n in hotel.rate"
+							:key="n"
+							class="text-yellow-500 text-3xl drop-shadow-lg shadow-black"
+						/>
+					</span>
+				</div>
+			</div>
+			<div class="h-full flex flex-col justify-between items-end text-white/50" @click.prevent.stop>
+				<div>
+					<div
+						class="p-2 flex gap-2 w-min items-center flex-row-reverse backdrop-blur-lg bg-gray-500/70 rounded-md"
+					>
+						<span class="text-center leading-6 text-blue-100">
+							<Icon class="text-xl" name="material-symbols:location-on"
+						/></span>
+						<span class="text-xs leading-3 text-end">{{ hotel.location.city }}</span>
+					</div>
+				</div>
+
+				<button
+					@click="handleFavoriteClick"
+					class="w-10 h-10 text-lg flex shadow-lg items-center m-2 justify-center rounded-full backdrop-blur-lg bg-gradient-to-tr from-purple-500/50 dark:from-purple-800/70 cursor-pointer transition-all duration-300 hover:bg-red-500/30"
+					:class="{
+						'text-red-500  to-red-800/60': is_fav,
+						'to-orange-500/40 ': !is_fav,
+					}"
+				>
+					<Transition name="fav">
+						<Icon v-if="is_fav" name="solar:heart-bold" />
+						<Icon v-else name="ic:sharp-favorite" />
+					</Transition>
+					<!-- <Icon class="font-serif text-white/80" /> -->
+				</button>
+			</div>
 		</div>
 	</NuxtLink>
 </template>
@@ -65,19 +75,17 @@ import type { IHotelResponse } from "~/types/hotel";
 
 const props = defineProps<{ hotel: IHotelResponse }>();
 const { toggleFavorite, isFavorite } = useFavorites();
-const showToast = useToast();
+
 const { t } = useI18n();
 
 const is_fav = computed(() => isFavorite(props.hotel.id));
-
-const loading = ref(false);
 
 const handleFavoriteClick = (event: Event) => {
 	event.preventDefault();
 	event.stopPropagation();
 	const added = toggleFavorite(props.hotel.id);
-	if (added) showToast.success(t("favorites.added"));
-	else showToast.info(t("favorites.removed"));
+	if (added) useToast().success(t("favorites.added"));
+	else useToast().info(t("favorites.removed"));
 };
 </script>
 

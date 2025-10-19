@@ -16,7 +16,7 @@
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 					<div class="order-2 lg:order-1">
 						<div class="bg-white dark:!bg-gray-800 rounded-3xl p-8 shadow-xl">
-							<pre>{{ pageContent.content.body[locale] }}</pre>
+							<pre v-html="pageContent.content.body[locale]"></pre>
 						</div>
 					</div>
 

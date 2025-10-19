@@ -67,12 +67,12 @@
 						</h2>
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
 							<div class="text-center">
-								<Icon name="solar:buildings-2-bold" class="text-5xl mb-3 mx-auto" />
+								<Icon name="solar:buildings-2-bold" class="text-3xl mb-3 mx-auto" />
 								<div class="text-4xl font-bold mb-2">{{ favoriteHotels.length }}</div>
-								<div class="text-white/80">{{ $t("favorites.stats.total_hotels") }}</div>
+								<div class="text-white/40">{{ $t("favorites.stats.total_hotels") }}</div>
 							</div>
 							<div class="text-center">
-								<Icon name="solar:wallet-money-bold" class="text-5xl mb-3 mx-auto" />
+								<Icon name="solar:wallet-money-bold" class="text-3xl mb-3 mx-auto" />
 								<div class="text-4xl font-bold mb-2">
 									{{
 										new Intl.NumberFormat(`${locale}-SA`, {
@@ -83,10 +83,10 @@
 										}).format(totalValue)
 									}}
 								</div>
-								<div class="text-white/80">{{ $t("favorites.stats.total_value") }}</div>
+								<div class="text-white/40">{{ $t("favorites.stats.total_value") }}</div>
 							</div>
 							<div class="text-center">
-								<Icon name="solar:wallet-money-bold" class="text-5xl mb-3 mx-auto" />
+								<Icon name="solar:wallet-money-bold" class="text-3xl mb-3 mx-auto" />
 								<div class="text-4xl font-bold mb-2">
 									{{
 										new Intl.NumberFormat(`${locale}-SA`, {
@@ -97,12 +97,12 @@
 										}).format(averagePrice)
 									}}
 								</div>
-								<div class="text-white/80">{{ $t("favorites.stats.avg_price") }}</div>
+								<div class="text-white/40">{{ $t("favorites.stats.avg_price") }}</div>
 							</div>
 							<div class="text-center">
-								<Icon name="solar:star-bold" class="text-5xl mb-3 mx-auto" />
+								<Icon name="solar:star-bold" class="text-3xl mb-3 mx-auto" />
 								<div class="text-4xl font-bold mb-2">{{ averageRating.toFixed(1) }}</div>
-								<div class="text-white/80">{{ $t("favorites.stats.avg_rating") }}</div>
+								<div class="text-white/40">{{ $t("favorites.stats.avg_rating") }}</div>
 							</div>
 						</div>
 					</div>
