@@ -12,6 +12,7 @@ export class GlobalDataService {
 		const newData = await GlobalData.create({
 			mainPhone: "",
 			mainEmail: "",
+			mainWhatsapp: "",
 			commercial_registration_link: "",
 			commercial_registration: "",
 		});

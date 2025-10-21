@@ -72,11 +72,19 @@
 				</Form>
 			</div>
 		</section>
+
 		<div class="grid md:grid-cols-2 gap-6">
+			<!-- global data -->
 			<Form
 				v-if="globalDataStatus == 'success'"
-				v-slot="{ isSubmitting }"
-				v-bind="{ onSubmit: updateMainPhone, initialValues: globalData }"
+				v-slot="{ isSubmitting, values }"
+				v-bind="{
+					onSubmit: async (v) => {
+						v.commercial_registration = (await commercial_registrationRef.uploadFiles?.call())[0];
+						await updateMainPhone(v);
+					},
+					initialValues: globalData,
+				}"
 				class="backdrop-blur-xl rounded-lg bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-4 gap-4 flex flex-col shadow-xl"
 			>
 				<h2
@@ -88,6 +96,11 @@
 					name="mainEmail"
 					:placeholder="$t('dashboard.site_settings.contact.main_email')"
 					:title="$t('dashboard.site_settings.contact.main_email')"
+				/>
+				<InputsEmail
+					name="mainWhatsapp"
+					:placeholder="$t('dashboard.site_settings.contact.main_whatsapp')"
+					:title="$t('dashboard.site_settings.contact.main_whatsapp')"
 				/>
 				<h3 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 					{{ $t("dashboard.site_settings.contact.main_phone") }}
@@ -106,10 +119,13 @@
 				/>
 
 				<InputsFile
+					path="commercial_registration"
 					accept="image/*"
 					name="commercial_registration"
+					ref="commercial_registrationRef"
 					:title="$t('global.commercial_registration')"
 				/>
+
 				<InputsSubmit :loading="isSubmitting" />
 			</Form>
 			<div
@@ -501,8 +517,12 @@
 								month="short"
 							/>
 						</div>
-						<pre
-							class="md:col-span-4 hidden has-[:checked]:block has-[:checked]:!bg-neutral-50 p-4 rounded shadow">{{ item.message }}<input class="hidden" type="checkbox" /></pre>
+						<div
+							class="md:col-span-4 hidden has-[:checked]:block has-[:checked]:!bg-neutral-50 p-4 rounded shadow"
+						>
+							<pre>{{ item.message }}</pre>
+							<input class="hidden" type="checkbox" />
+						</div>
 					</label>
 				</template>
 			</global-infinity-table>
@@ -514,6 +534,7 @@
 import { Icon } from "#components";
 import { Form } from "vee-validate";
 
+const commercial_registrationRef = ref<any>();
 const { t, locale } = useI18n();
 
 // Update Main Phone
@@ -650,6 +671,6 @@ const deleteMessages = async (id: number) => {
 	await useApi().delete(`message?id=${id}`);
 	useToast().success(t("dashboard.site_settings.success_delete"));
 
-	await refreshWorkHours();
+	await refreshMessages();
 };
 </script>

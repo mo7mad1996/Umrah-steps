@@ -15,6 +15,7 @@
 		<div class="editor-container" v-if="editor">
 			<div class="tools">
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleBold().run()"
 					:disabled="!editor.can().chain().focus().toggleBold().run()"
 					:class="{ 'is-active': editor.isActive('bold') }"
@@ -22,6 +23,7 @@
 					<v-icon icon="mdi-format-bold" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleItalic().run()"
 					:disabled="!editor.can().chain().focus().toggleItalic().run()"
 					:class="{ 'is-active': editor.isActive('italic') }"
@@ -29,6 +31,7 @@
 					<v-icon icon="mdi-format-italic" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleStrike().run()"
 					:disabled="!editor.can().chain().focus().toggleStrike().run()"
 					:class="{ 'is-active': editor.isActive('strike') }"
@@ -36,6 +39,7 @@
 					<v-icon icon="mdi-format-strikethrough" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleCode().run()"
 					:disabled="!editor.can().chain().focus().toggleCode().run()"
 					:class="{ 'is-active': editor.isActive('code') }"
@@ -45,15 +49,16 @@
 
 				<div class="spacer"></div>
 
-				<button @click="editor.chain().focus().unsetAllMarks().run()">
+				<button type="button" @click="editor.chain().focus().unsetAllMarks().run()">
 					<v-icon icon="mdi-format-clear" />
 				</button>
 
-				<button @click="editor.chain().focus().clearNodes().run()">
+				<button type="button" @click="editor.chain().focus().clearNodes().run()">
 					<v-icon icon="mdi-filter-off-outline" />
 				</button>
 
 				<button
+					type="button"
 					@click="editor.chain().focus().setParagraph().run()"
 					:class="{ 'is-active': editor.isActive('paragraph') }"
 				>
@@ -63,6 +68,7 @@
 				<div class="spacer"></div>
 
 				<button
+					type="button"
 					v-for="level in 6"
 					:key="level"
 					:class="{ 'is-active': editor.isActive('heading', { level }) }"
@@ -73,12 +79,14 @@
 				<div class="spacer"></div>
 
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleBulletList().run()"
 					:class="{ 'is-active': editor.isActive('bulletList') }"
 				>
 					<v-icon icon="mdi-format-list-bulleted" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleOrderedList().run()"
 					:class="{ 'is-active': editor.isActive('orderedList') }"
 				>
@@ -87,32 +95,36 @@
 				<div class="spacer"></div>
 
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleCodeBlock().run()"
 					:class="{ 'is-active': editor.isActive('codeBlock') }"
 				>
 					<v-icon icon="mdi-code-array" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().toggleBlockquote().run()"
 					:class="{ 'is-active': editor.isActive('blockquote') }"
 				>
 					<v-icon icon="mdi-format-quote-open" />
 				</button>
-				<button @click="editor.chain().focus().setHardBreak().run()">
+				<button type="button" @click="editor.chain().focus().setHardBreak().run()">
 					<v-icon icon="mdi-math-norm-box" />
 				</button>
-				<button @click="editor.chain().focus().setHorizontalRule().run()">
+				<button type="button" @click="editor.chain().focus().setHorizontalRule().run()">
 					<v-icon icon="mdi-ray-end-arrow" />
 				</button>
 				<div class="spacer"></div>
 
 				<button
+					type="button"
 					@click="editor.chain().focus().undo().run()"
 					:disabled="!editor.can().chain().focus().undo().run()"
 				>
 					<Icon name="ci:undo" />
 				</button>
 				<button
+					type="button"
 					@click="editor.chain().focus().redo().run()"
 					:disabled="!editor.can().chain().focus().redo().run()"
 				>

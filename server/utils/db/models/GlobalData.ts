@@ -5,6 +5,7 @@ const GlobalDataSchema = new mongoose.Schema(
 	{
 		mainPhone: { type: String, default: "" },
 		mainEmail: { type: String, default: "" },
+		mainWhatsapp: { type: String, default: "" },
 		commercial_registration: { type: String, default: "" },
 		commercial_registration_link: { type: String, default: "" },
 	},
