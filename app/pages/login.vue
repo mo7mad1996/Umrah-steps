@@ -6,7 +6,7 @@
 			<nuxtLink to="/">
 				<NuxtImg
 					src="/logo/vertical.png"
-					alt="Almotamer logo"
+					alt="motamer logo"
 					class="aspect-square object-contain w-12 md:w-20 block"
 				/>
 			</nuxtLink>

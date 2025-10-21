@@ -52,7 +52,7 @@ export default defineNuxtConfig({
 			meta: [
 				{
 					name: "description",
-					content: "موقع حجوزات المعتمر يقدم خدمات التوصيل وحجز الفنادق للمعتمرين",
+					content: "موقع حجوزات معتمر يقدم خدمات التوصيل وحجز الفنادق للمعتمرين",
 				},
 				{
 					name: "google-site-verification",

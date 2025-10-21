@@ -97,7 +97,8 @@
 					:placeholder="$t('dashboard.site_settings.contact.main_email')"
 					:title="$t('dashboard.site_settings.contact.main_email')"
 				/>
-				<InputsEmail
+				<InputsText
+					rules="url"
 					name="mainWhatsapp"
 					:placeholder="$t('dashboard.site_settings.contact.main_whatsapp')"
 					:title="$t('dashboard.site_settings.contact.main_whatsapp')"

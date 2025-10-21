@@ -1,5 +1,5 @@
 {
-	"site_name": "Khatwat Al-Mu'tamir",
+	"site_name": "Hagouzat Mu'tamir",
 	"select": "Select one",
 	"add": "Add",
 	"save": "Save",
@@ -16,7 +16,7 @@
 	"cancel": "Cancel",
 	"icon": "Icon",
 	"trusted": "Trusted by",
-
+	"whatsapp": "Contact via WhatsApp",
 	"trusted_by": "Trusted by the Ministry of Commerce and the Saudi Business Center",
 	"commercial_registration": "Commercial Registration",
 	"commercial_registration_link": "Commercial Registration Link"

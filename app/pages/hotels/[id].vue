@@ -131,7 +131,7 @@ const goToWhatsapp = () => {
 
 	const text = `السلام عليكم
 	\n
-كنت أتصفح موقع ${t("global.siteName")} \n
+كنت أتصفح موقع ${t("global.site_name")} \n
 وأعجبني هذا الفندق:
  ${hotel.value.name}
 \n

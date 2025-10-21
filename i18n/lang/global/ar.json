@@ -1,5 +1,5 @@
 {
-	"site_name": "حجوزات المعتمر",
+	"site_name": "حجوزات معتمر",
 	"select": "اختر",
 	"more": "المزيد",
 	"add": "اضافة",
@@ -19,7 +19,7 @@
 	"actions": "الإجراءات",
 	"icon": "الايقونة",
 	"trusted": "موثوق من",
-
+	"whatsapp": "تواصل عبر واتساب",
 	"trusted_by": "موثوق من قبل وزارة التجارة ومركز الأعمال السعودي",
 	"commercial_registration": "السجل التجاري",
 	"commercial_registration_link": "رابط السجل التجاري"

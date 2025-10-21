@@ -133,6 +133,20 @@
 		>
 			<Icon name="mdi:chevron-up" class="text-lg md:text-xl text-white" />
 		</button>
+		<!-- WhatsApp Button -->
+		<a
+			v-if="globalData?.mainWhatsapp"
+			:href="globalData?.mainWhatsapp"
+			target="_blank"
+			class="fixed bottom-4 md:bottom-6 ltr:left-4 ltr:md:left-6 rtl:right-4 rtl:md:right-6 gap-4 p-3 group bg-green-400/50 hover:bg-green-400/90 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 focus-within:scale-110 z-50"
+		>
+			<Icon name="logos:whatsapp-icon" class="text-4xl" />
+
+			<span
+				class="text-gray-800 text-sm absolute group-hover:relative w-0 opacity-0 group-hover:!w-auto group-hover:!opacity-100"
+				>{{ $t("global.whatsapp") }}</span
+			>
+		</a>
 	</footer>
 </template>
 
