@@ -127,9 +127,5 @@ watch(
 );
 
 // Get Page Content
-const { data: pageContent, status: contentStatus } = useAsyncData("home-page-content", () =>
-	useApi()
-		.get("/page-content/home")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: contentStatus } = usePageContent(PagesEnum.HOME);
 </script>

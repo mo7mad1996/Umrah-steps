@@ -10,11 +10,7 @@
 usePageTitle("home.title");
 
 const { locale } = useI18n();
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-home", () =>
-	useApi()
-		.get("/page-content/home")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOME);
 
 useSeoMeta({
 	description: () => pageContent.value?.seo?.description[locale.value],

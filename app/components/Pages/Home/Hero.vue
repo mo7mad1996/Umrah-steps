@@ -30,9 +30,5 @@
 
 <script lang="ts" setup>
 const { locale } = useI18n();
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-about", () =>
-	useApi()
-		.get("/page-content/home")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.ABOUT);
 </script>

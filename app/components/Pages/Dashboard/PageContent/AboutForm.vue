@@ -107,12 +107,7 @@ import { Form } from "vee-validate";
 const imgRef = ref<any>();
 const { t } = useI18n();
 
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-about", () =>
-	useApi()
-		.get("/page-content/about")
-		.then((d) => d.data),
-);
-
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.ABOUT);
 const updatePageContent = async (values: any) => {
 	try {
 		await useApi().put("/page-content/about", values);

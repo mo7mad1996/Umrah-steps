@@ -128,12 +128,5 @@ const { data: globalData, status: globalDataStatus } = useAsyncData("globalData"
 );
 
 // Get Page Content for main phone
-const { data: pageContent } = useAsyncData(
-	"contact-page-content-methods",
-	() =>
-		useApi()
-			.get("/page-content/contact")
-			.then((d) => d.data),
-	{ watch: [locale] },
-);
+const { data: pageContent } = usePageContent(PagesEnum.ABOUT);
 </script>

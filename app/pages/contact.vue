@@ -89,15 +89,7 @@ usePageTitle("contact.title");
 const { locale } = useI18n();
 
 // Get Page Content
-const { data: pageContent } = useAsyncData(
-	"contact-page-content",
-	() =>
-		useApi()
-			.get("/page-content/contact")
-			.then((d) => d.data),
-	{ watch: [locale] },
-);
-
+const { data: pageContent } = usePageContent(PagesEnum.CONTACT);
 // Get Work Hours
 const { data: workHours, status: workHoursStatus } = useAsyncData(
 	"workHours",

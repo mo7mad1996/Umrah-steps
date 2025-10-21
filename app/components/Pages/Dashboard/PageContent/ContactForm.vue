@@ -559,12 +559,7 @@ const addContactInfo = async (data: any) => {
 	useToast().success(t("dashboard.site_settings.success_update"));
 };
 
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-contact", () =>
-	useApi()
-		.get("/page-content/contact")
-		.then((d) => d.data),
-);
-
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.CONTACT);
 // faqs
 const {
 	data: faqs,

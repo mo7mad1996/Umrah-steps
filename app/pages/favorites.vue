@@ -133,7 +133,7 @@
 					</div>
 
 					<!-- Hotels Grid with Animation -->
-					<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+					<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 						<div
 							v-for="(hotel, index) in favoriteHotels"
 							:key="hotel.id"
@@ -215,14 +215,7 @@ const showToast = useToast();
 usePageTitle("favorites.title");
 
 // Get Page Content
-const { data: pageContent } = useAsyncData(
-	"favorites-page-content",
-	() =>
-		useApi()
-			.get("/page-content/favorites")
-			.then((d) => d.data),
-	{ watch: [locale] },
-);
+const { data: pageContent } = usePageContent(PagesEnum.FAVORITES);
 
 const loading = ref(true);
 const favoriteHotels = ref<any[]>([]);

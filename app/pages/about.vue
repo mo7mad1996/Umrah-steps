@@ -235,11 +235,7 @@
 const { locale } = useI18n();
 // SEO
 usePageTitle("about.title");
-const { data: pageContent, status: PageContentStatus } = useAsyncData("about-page-content", () =>
-	useApi()
-		.get("/page-content/about")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.ABOUT);
 
 useSeoMeta({
 	description: () => pageContent.value?.seo?.description[locale.value],

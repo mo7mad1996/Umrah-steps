@@ -81,11 +81,7 @@ import { Form } from "vee-validate";
 const imgRef = ref<any>();
 const { t } = useI18n();
 
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-favorites", () =>
-	useApi()
-		.get("/page-content/favorites")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.FAVORITES);
 
 const updatePageContent = async (values: any) => {
 	try {

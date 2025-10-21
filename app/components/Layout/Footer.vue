@@ -22,7 +22,7 @@
 						</p>
 					</div>
 					<!-- Social Links -->
-					<LazyPagesContactSocialMedia />
+					<LazyPagesContactSocialMedia class="!bg-transparent dark:!bg-transparent !shadow-none" />
 				</div>
 
 				<!-- Quick Links -->
@@ -167,11 +167,7 @@ onUnmounted(() => {
 	if (import.meta.client) window.removeEventListener("scroll", handleScroll);
 });
 
-const { data: pageContent, status: PageContentStatus } = useAsyncData("pageContent-home", () =>
-	useApi()
-		.get("/page-content/home")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOME);
 
 // Global Data
 const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>

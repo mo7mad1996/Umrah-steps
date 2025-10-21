@@ -83,11 +83,7 @@ const {
 usePageTitle("hotels.title");
 
 // SEO
-const { data: pageContent, status: PageContentStatus } = useAsyncData("hotels-page-content", () =>
-	useApi()
-		.get("/page-content/hotels")
-		.then((d) => d.data),
-);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOTELS);
 
 useSeoMeta({
 	description: () => pageContent.value?.seo?.description[locale.value],
