@@ -113,6 +113,24 @@
 				/>
 
 				<InputsText
+					name="commercial_registration_number"
+					:title="$t('global.commercial_registration_number')"
+					:placeholder="$t('global.commercial_registration_number')"
+					icon="streamline:computer-storage-hard-disk-device-disc-drive-computer-disk-electronics-platter-turntable-raid"
+				/>
+				<InputsText
+					name="tax_number"
+					:title="$t('global.tax_number')"
+					:placeholder="$t('global.tax_number')"
+					icon="material-symbols:monetization-on-outline-rounded"
+				/>
+				<InputsText
+					name="license_number"
+					:title="$t('global.license_number')"
+					:placeholder="$t('global.license_number')"
+					icon="pajamas:license-sm"
+				/>
+				<InputsText
 					name="commercial_registration_link"
 					:title="$t('global.commercial_registration_link')"
 					:placeholder="$t('global.commercial_registration_link')"

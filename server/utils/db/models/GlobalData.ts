@@ -8,6 +8,9 @@ const GlobalDataSchema = new mongoose.Schema(
 		mainWhatsapp: { type: String, default: "" },
 		commercial_registration: { type: String, default: "" },
 		commercial_registration_link: { type: String, default: "" },
+		tax_number: { type: String, default: "" },
+		commercial_registration_number: { type: String, default: "" },
+		license_number: { type: String, default: "" },
 	},
 	{
 		timestamps: true,

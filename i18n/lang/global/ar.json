@@ -21,6 +21,10 @@
 	"trusted": "موثوق من",
 	"whatsapp": "تواصل عبر واتساب",
 	"trusted_by": "موثوق من قبل وزارة التجارة ومركز الأعمال السعودي",
+	"license_number": "رقم الترخيص",
+	"commercial_registration_number": "رقم السجل التجاري",
+	"verification_link": "رابط التوثيق",
+	"tax_number": "الرقم الضريبي",
 	"commercial_registration": "السجل التجاري",
 	"commercial_registration_link": "رابط السجل التجاري"
 }

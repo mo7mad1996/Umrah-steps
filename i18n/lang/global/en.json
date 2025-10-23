@@ -18,6 +18,10 @@
 	"trusted": "Trusted by",
 	"whatsapp": "Contact via WhatsApp",
 	"trusted_by": "Trusted by the Ministry of Commerce and the Saudi Business Center",
+	"license_number": "License Number",
+	"commercial_registration_number": "Commercial Registration Number",
+	"verification_link": "Verification Link",
+	"tax_number": "Tax Number",
 	"commercial_registration": "Commercial Registration",
 	"commercial_registration_link": "Commercial Registration Link"
 }

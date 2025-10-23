@@ -15,6 +15,9 @@ export class GlobalDataService {
 			mainWhatsapp: "",
 			commercial_registration_link: "",
 			commercial_registration: "",
+			license_number: "",
+			tax_number: "",
+			commercial_registration_number: "",
 		});
 		newData.save();
 	}

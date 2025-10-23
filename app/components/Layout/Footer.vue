@@ -65,7 +65,27 @@
 						:to="globalData.commercial_registration_link"
 						class="block w-full p-2 my-2"
 					>
-						<NuxtImg class="w-full block" :src="globalData.commercial_registration" />
+						<NuxtImg class="w-24 block" :src="globalData.commercial_registration" />
+					</NuxtLink>
+
+					<div
+						v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
+						:key="i"
+					>
+						<div v-if="globalData[i]" class="my-2">
+							<h1 class="!opacity-60">{{ $t("global." + i) }}</h1>
+							<p class="ps-4">
+								{{ globalData[i] }}
+							</p>
+						</div>
+					</div>
+
+					<NuxtLink
+						class="text-blue-800 underline hover:no-underline"
+						external
+						v-if="globalData.commercial_registration_link"
+						:to="globalData.commercial_registration_link"
+						>{{ $t("global.verification_link") }}
 					</NuxtLink>
 				</div>
 
