@@ -21,20 +21,11 @@
 		</div>
 
 		<div class="p-4 md:!p-8">
-			<Form @submit="onSubmit">
-				<InputsEmail
-					autofocus
-					v-model="credentials.email"
-					rules="required|email"
-					:placeholder="$t('auth.email')"
-				/>
-				<InputsPassword
-					v-model="credentials.password"
-					rules="required"
-					:placeholder="$t('auth.password')"
-				/>
+			<Form v-bind="{ onSubmit }" v-slot="{ isSubmitting }">
+				<InputsEmail autofocus rules="required|email" :placeholder="$t('auth.email')" />
+				<InputsPassword rules="required" :placeholder="$t('auth.password')" />
 				<!-- Submit Button -->
-				<InputsSubmit :text="$t('auth.login')" :isLoading="isLoading" />
+				<InputsSubmit :text="$t('auth.login')" :isLoading="isSubmitting" />
 			</Form>
 		</div>
 	</div>
@@ -45,19 +36,12 @@ import type { User_credentials } from "~/types/user";
 import { Form } from "vee-validate";
 
 // data
-const isLoading = ref(false);
-const credentials = ref<User_credentials>({
-	email: "",
-	password: "",
-});
-
 const onSubmit: any = async (payload: User_credentials) => {
 	try {
-		isLoading.value = true;
-		const res = await useApi().post("/login", payload);
+		await useApi().post("/login", payload);
 		await navigateTo("/dashboard");
-	} finally {
-		isLoading.value = false;
+	} catch (err) {
+		console.error(err);
 	}
 };
 

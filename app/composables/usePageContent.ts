@@ -4,6 +4,9 @@ export enum PagesEnum {
 	ABOUT = "about",
 	CONTACT = "contact",
 	FAVORITES = "favorites",
+	PRIVACY_POLICY = "privacy_policy",
+	USER_AGREEMENT = "user_agreement",
+	TERMS_CONDITIONS = "terms_conditions",
 }
 
 export const usePageContent = (page: PagesEnum) => {

@@ -26,5 +26,17 @@
 	"verification_link": "رابط التوثيق",
 	"tax_number": "الرقم الضريبي",
 	"commercial_registration": "السجل التجاري",
-	"commercial_registration_link": "رابط السجل التجاري"
+	"commercial_registration_link": "رابط السجل التجاري",
+	"privacy_policy": {
+		"title": "سياسة الخصوصية",
+		"subtitle": "خصوصيتك تهمنا — تعرّف على كيفية حماية معلوماتك الشخصية."
+	},
+	"terms_conditions": {
+		"title": "الشروط والأحكام",
+		"subtitle": "يرجى قراءة هذه الشروط بعناية قبل استخدام خدماتنا."
+	},
+	"user_agreement": {
+		"title": "اتفاقية الاستخدام",
+		"subtitle": "افهم حقوقك ومسؤولياتك كمستخدم لمنصتنا."
+	}
 }

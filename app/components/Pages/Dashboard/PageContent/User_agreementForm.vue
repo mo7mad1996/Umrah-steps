@@ -1,7 +1,7 @@
 <template>
 	<div class="space-y-8">
 		<h3 class="between-lines text-gray-700 dark:text-gray-300 text-3xl my-6 text-center font-bold">
-			{{ $t("dashboard.site_settings.favorites.title") }}
+			{{ $t("global.user_agreement.title") }}
 		</h3>
 
 		<section class="grid md:grid-cols-2 gap-6" v-if="PageContentStatus == 'success'">
@@ -73,6 +73,30 @@
 				</Form>
 			</div>
 		</section>
+
+		<section
+			v-if="PageContentStatus == 'success'"
+			class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 my-4 dark:border-gray-700/20 p-6 shadow-xl"
+		>
+			<Form
+				v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }"
+				v-slot="{ isSubmitting }"
+			>
+				<div class="grid gap-4 md:grid-cols-2">
+					<InputsContentEditor
+						name="content.body.ar"
+						:title="$t('dashboard.site_settings.body_ar')"
+						:placeholder="$t('dashboard.site_settings.body_ar')"
+					/>
+					<InputsContentEditor
+						name="content.body.en"
+						:title="$t('dashboard.site_settings.body_en')"
+						:placeholder="$t('dashboard.site_settings.body_en')"
+					/>
+				</div>
+				<InputsSubmit :is-loading="isSubmitting" />
+			</Form>
+		</section>
 	</div>
 </template>
 
@@ -81,11 +105,11 @@ import { Form } from "vee-validate";
 const imgRef = ref<any>();
 const { t } = useI18n();
 
-const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.FAVORITES);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.USER_AGREEMENT);
 
 const updatePageContent = async (values: any) => {
 	try {
-		await useApi().put("/page-content/favorites", values);
+		await useApi().put("/page-content/user_agreement", values);
 		useToast().success(t("dashboard.site_settings.success_update"));
 	} catch (error) {
 		useToast().error(t("dashboard.site_settings.error"));

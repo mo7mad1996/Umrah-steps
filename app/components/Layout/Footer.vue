@@ -54,39 +54,35 @@
 					<div class="space-y-2 md:space-y-3">
 						{{ $t("global.site_name") }} {{ $t("global.trusted_by") }}
 					</div>
+					<template v-if="globalDataStatus == 'success'" class="my-2">
+						<NuxtLink
+							external
+							:to="globalData.commercial_registration_link"
+							class="block w-full p-2 my-2"
+						>
+							<NuxtImg class="w-24 block" :src="globalData.commercial_registration" />
+						</NuxtLink>
 
-					<NuxtLink
-						v-if="
-							globalDataStatus == 'success' &&
-							globalData.commercial_registration &&
-							globalData.commercial_registration_link
-						"
-						external
-						:to="globalData.commercial_registration_link"
-						class="block w-full p-2 my-2"
-					>
-						<NuxtImg class="w-24 block" :src="globalData.commercial_registration" />
-					</NuxtLink>
-
-					<div
-						v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
-						:key="i"
-					>
-						<div v-if="globalData[i]" class="my-2">
-							<h1 class="!opacity-60">{{ $t("global." + i) }}</h1>
-							<p class="ps-4">
-								{{ globalData[i] }}
-							</p>
+						<div
+							v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
+							:key="i"
+						>
+							<div>
+								<h1 class="!opacity-60">{{ $t("global." + i) }}</h1>
+								<p class="ps-4">
+									{{ globalData[i] }}
+								</p>
+							</div>
 						</div>
-					</div>
 
-					<NuxtLink
-						class="text-blue-800 underline hover:no-underline"
-						external
-						v-if="globalData.commercial_registration_link"
-						:to="globalData.commercial_registration_link"
-						>{{ $t("global.verification_link") }}
-					</NuxtLink>
+						<NuxtLink
+							class="text-blue-800 underline hover:no-underline"
+							external
+							v-if="globalData.commercial_registration_link"
+							:to="globalData.commercial_registration_link"
+							>{{ $t("global.verification_link") }}
+						</NuxtLink>
+					</template>
 				</div>
 
 				<!-- Contact Info -->
@@ -107,7 +103,7 @@
 							<div class="text-white/80 text-xs md:text-sm">{{ globalData.mainEmail }}</div>
 						</div>
 
-						<div class="flex items-start gap-3" v-if="'success' == workHoursStatus">
+						<div class="flex items-start gap-3" v-if="workHoursStatus == 'success'">
 							<Icon
 								name="mdi:clock"
 								class="text-secondary mt-1 flex-shrink-0 text-sm md:text-base"
@@ -131,15 +127,14 @@
 					</div>
 
 					<div class="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs md:text-sm">
-						<a href="#" class="text-white/80 hover:text-white transition-colors duration-300">
-							سياسة الخصوصية
-						</a>
-						<a href="#" class="text-white/80 hover:text-white transition-colors duration-300">
-							الشروط والأحكام
-						</a>
-						<a href="#" class="text-white/80 hover:text-white transition-colors duration-300">
-							اتفاقية الاستخدام
-						</a>
+						<nuxt-link
+							v-for="i in page"
+							:to="i"
+							:key="i"
+							class="text-white/80 hover:text-white transition-colors duration-300"
+						>
+							{{ $t("global." + i + ".title") }}
+						</nuxt-link>
 					</div>
 				</div>
 			</div>
@@ -180,14 +175,9 @@ const pages = [
 ];
 
 const showBackToTop = ref(false);
-
-const goto = useGoTo({
-	duration: 500,
-});
-
-const scrollToTop = () => {
-	goto(0);
-};
+const page = ["privacy_policy", "terms_conditions", "user_agreement"];
+const goto = useGoTo({ duration: 500 });
+const scrollToTop = () => goto(0);
 
 const handleScroll = () => {
 	showBackToTop.value = window.scrollY > 300;
@@ -211,12 +201,7 @@ const { data: globalData, status: globalDataStatus } = useAsyncData("globalData"
 );
 
 // Work Hours
-const {
-	data: workHours,
-	status: workHoursStatus,
-	error: workHoursError,
-	refresh: refreshWorkHours,
-} = useAsyncData(
+const { data: workHours, status: workHoursStatus } = useAsyncData(
 	"workHours",
 	() =>
 		useApi()

@@ -39,7 +39,16 @@ const pageContentSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
-			enum: ["home", "hotels", "about", "contact", "favorites"],
+			enum: [
+				"home",
+				"hotels",
+				"about",
+				"contact",
+				"favorites",
+				"privacy_policy",
+				"terms_conditions",
+				"user_agreement",
+			],
 		},
 		seo: {
 			type: seoSchema,

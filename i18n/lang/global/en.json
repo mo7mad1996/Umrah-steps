@@ -23,5 +23,17 @@
 	"verification_link": "Verification Link",
 	"tax_number": "Tax Number",
 	"commercial_registration": "Commercial Registration",
-	"commercial_registration_link": "Commercial Registration Link"
+	"commercial_registration_link": "Commercial Registration Link",
+	"privacy_policy": {
+		"title": "Privacy Policy",
+		"subtitle": "Your privacy matters — learn how we protect your personal information."
+	},
+	"terms_conditions": {
+		"title": "Terms and Conditions",
+		"subtitle": "Please read these terms carefully before using our services."
+	},
+	"user_agreement": {
+		"title": "User Agreement",
+		"subtitle": "Understand your rights and responsibilities as a user of our platform."
+	}
 }

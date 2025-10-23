@@ -24,6 +24,9 @@ import HotelsForm from "~/components/Pages/Dashboard/PageContent/HotelsForm.vue"
 import AboutForm from "~/components/Pages/Dashboard/PageContent/AboutForm.vue";
 import ContactForm from "~/components/Pages/Dashboard/PageContent/ContactForm.vue";
 import FavoritesForm from "~/components/Pages/Dashboard/PageContent/FavoritesForm.vue";
+import Privacy_policyForm from "~/components/Pages/Dashboard/PageContent/Privacy_policyForm.vue";
+import Terms_conditionsForm from "~/components/Pages/Dashboard/PageContent/Terms_conditionsForm.vue";
+import User_agreementForm from "~/components/Pages/Dashboard/PageContent/User_agreementForm.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -66,6 +69,24 @@ const tabs = [
 		value: "favorites",
 		icon: "mdi:heart",
 		component: FavoritesForm,
+	},
+	{
+		title: "global.terms_conditions.title",
+		value: "terms_conditions",
+		icon: "mdi:hea3rt",
+		component: Terms_conditionsForm,
+	},
+	{
+		title: "global.user_agreement.title",
+		value: "user_agreement",
+		icon: "mdi:hea2rt",
+		component: User_agreementForm,
+	},
+	{
+		title: "global.privacy_policy.title",
+		value: "privacy_policy",
+		icon: "mdi:hea1rt",
+		component: Privacy_policyForm,
 	},
 ];
 
