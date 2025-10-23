@@ -80,7 +80,7 @@
 		<div class="grid md:grid-cols-2 gap-6 my-6" v-if="PageContentStatus == 'success'">
 			<Form
 				v-bind="{
-					onSubmit: updatePageContent,
+					onSubmit: () => updatePageContent,
 					initialValues: pageContent,
 				}"
 				v-slot="{ isSubmitting }"

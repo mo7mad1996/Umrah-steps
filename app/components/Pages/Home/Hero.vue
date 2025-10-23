@@ -30,5 +30,5 @@
 
 <script lang="ts" setup>
 const { locale } = useI18n();
-const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.ABOUT);
+const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOME);
 </script>
