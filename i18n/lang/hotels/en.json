@@ -46,5 +46,6 @@
 	"location": "Location",
 	"book_now": "Book now",
 	"best_price": "Best price",
-	"best_price_desc": "We guarantee you the best possible price"
+	"best_price_desc": "We guarantee you the best possible price",
+	"gallery": "Gallery"
 }
