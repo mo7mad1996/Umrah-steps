@@ -194,11 +194,7 @@ onUnmounted(() => {
 const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOME);
 
 // Global Data
-const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
-	useApi()
-		.get("/globalData")
-		.then((d) => d.data),
-);
+const { data: globalData, status: globalDataStatus } = useGlobalData();
 
 // Work Hours
 const { data: workHours, status: workHoursStatus } = useAsyncData(

@@ -100,12 +100,7 @@ const { data: workHours, status: workHoursStatus } = useAsyncData(
 	{ watch: [locale] },
 );
 
-const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
-	useApi()
-		.get("globalData")
-		.then((d) => d.data),
-);
-
+const { data: globalData, status: globalDataStatus } = useGlobalData();
 useSeoMeta({
 	description: () => pageContent.value?.seo?.description[locale.value],
 	keywords: () => pageContent.value?.seo?.keywords[locale.value],

@@ -121,11 +121,7 @@ const { data: contactInfos, status: contactInfosStatus } = useAsyncData(
 			.then((d) => d.data),
 	{ watch: [locale] },
 );
-const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
-	useApi()
-		.get("globalData")
-		.then((d) => d.data),
-);
+const { data: globalData, status: globalDataStatus } = useGlobalData();
 
 // Get Page Content for main phone
 const { data: pageContent } = usePageContent(PagesEnum.ABOUT);

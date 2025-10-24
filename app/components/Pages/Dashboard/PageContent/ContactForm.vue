@@ -567,11 +567,8 @@ const updateMainPhone = async (values: any) => {
 };
 
 // Global Data
-const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
-	useApi()
-		.get("/globalData")
-		.then((d) => d.data),
-);
+const { data: globalData, status: globalDataStatus } = useGlobalData();
+
 // Contact Info
 const {
 	data: contactInfos,

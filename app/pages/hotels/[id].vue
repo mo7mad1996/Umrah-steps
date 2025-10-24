@@ -2,104 +2,164 @@
 	<div>
 		<GlobalLoading v-if="status == 'pending'" />
 		<GlobalError :status="status" :error="error" :refresh="refresh" />
-		<div v-if="status == 'success'">
+
+		<template v-if="status == 'success'">
 			<GlobalImageMask :src="hotel.img" />
 			<GlobalPageTitle :title="hotel.name" :sub-title="hotel.location.city" />
 
-			<div class="container mx-auto">
-				<nuxt-img
-					:src="hotel.img"
-					:alt="hotel.name"
-					class="w-full md:!w-3/4 mx-auto relative z-10 aspect-video block rounded-2xl shadow-2xl"
-				/>
+			<div class="container mx-auto px-4 relative z-30">
+				<NuxtImg :src="hotel.img" class="container mx-auto max-w-screen-md shadow-lg my-4" />
 
-				<div class="sticky top-32 bottom-4 z-50 grid container mx-auto my-4 md:grid-cols-4">
-					<InputsBtn
-						:text="$t('hotels.book')"
-						@click="goToWhatsapp"
-						icon="material-symbols:whatsapp"
-					/>
+				<div class="bg-white dark:!bg-slate-700 rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
+					<h1 class="mb-8 text-3xl opacity-80 text-center font-bold">{{ hotel.name }}</h1>
+					<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+						<div>
+							<p class="text-gray-600 dark:text-gray-400 text-sm mb-2">
+								{{ $t("dashboard.hotel.min_price") }}
+							</p>
+							<p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">
+								{{
+									new Intl.NumberFormat(`${locale}-SA`, {
+										style: "currency",
+										currency: "SAR",
+									}).format(hotel.price)
+								}}
+							</p>
+							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+								{{ $t("hotels.per_night") || "لكل ليلة" }}
+							</p>
+						</div>
+
+						<InputsBtn
+							:text="$t('hotels.book')"
+							@click="goToWhatsapp"
+							icon="material-symbols:whatsapp"
+							class="w-full md:w-auto text-lg px-8 py-4"
+						/>
+					</div>
 				</div>
-				<!-- ok here -->
 
-				<div class="flex flex-col gap-2 w-fit text-md max-md:text-sm z-50 my-4 mx-auto">
-					<div
-						class="cursor-default flex items-center justify-between w-full rounded-lg bg-slate-700 dark:bg-slate-900 px-4 py-1"
-					>
-						<div class="flex gap-2 items-center">
-							<div
-								class="text-emerald-500 dark:bg-white/5 backdrop-blur-xl p-2 rounded-lg flex justify-center items-center"
-							>
-								<Icon name="material-symbols:location-on-outline" class="text-3xl" />
+				<div class="grid md:grid-cols-3 gap-8 mb-12 relative">
+					<div class="md:col-span-2 space-y-8">
+						<section class="bg-white dark:!bg-slate-700 rounded-lg shadow p-6">
+							<h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+								{{ $t("dashboard.hotel.description_section") }}
+							</h2>
+							<p class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+								{{ hotel.description }}
+							</p>
+						</section>
+
+						<section class="bg-white dark:!bg-white/30 rounded-lg shadow p-6">
+							<h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+								{{ $t("hotels.amenities") }}
+							</h2>
+							<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+								<div
+									v-for="amenity in hotel.amenities"
+									:key="amenity.id"
+									class="flex items-center gap-3 p-4 rounded bg-teal-600/20 shadow-lg dark:!bg-white/10 hover:bg-emerald-500/60 dark:hover:bg-emerald-900/20 transition-colors"
+								>
+									<div
+										class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400"
+									>
+										<Icon :name="amenity.icon" class="text-xl" />
+									</div>
+									<span class="text-gray-700 dark:text-gray-300 text-sm font-medium">{{
+										amenity[locale]
+									}}</span>
+								</div>
 							</div>
-							<div>
-								<p class="text-white">{{ hotel.location.city }}</p>
-								<p class="text-gray-500 p-1">{{ hotel.location.address }}</p>
+						</section>
+
+						<section
+							v-if="hotel.content"
+							class="bg-white dark:!bg-neutral-800 rounded-lg shadow p-6 prose dark:prose-invert max-w-none"
+							v-html="hotel.content"
+						></section>
+					</div>
+
+					<div class="space-y-6 sticky top-4">
+						<div class="bg-white dark:!bg-violet-950 rounded-lg shadow p-6">
+							<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+								{{ $t("hotels.location") || "الموقع" }}
+							</h3>
+							<div class="space-y-4">
+								<div class="flex items-start gap-3">
+									<div
+										class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400"
+									>
+										<Icon name="material-symbols:location-on" class="text-xl" />
+									</div>
+									<div>
+										<p class="font-medium text-gray-800 dark:text-gray-100">
+											{{ hotel.location.city }}
+										</p>
+										<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+											{{ hotel.location.address }}
+										</p>
+									</div>
+								</div>
+
+								<div
+									class="bg-gradient-to-br from-cyan-500/60 to-emerald-600 dark:from-violet-800 dark:to-teal-500 rounded p-4 text-white"
+								>
+									<h3 class="text-xl font-bold mb-3">
+										{{ $t("hotels.best_price") }}
+									</h3>
+									<p class="text-emerald-50 text-sm">
+										{{ $t("hotels.best_price_desc") }}
+									</p>
+								</div>
+
+								<div class="pt-4 border-t border-gray-200 dark:border-neutral-800">
+									<InputsBtn
+										:text="$t('hotels.book_now')"
+										@click="goToWhatsapp"
+										icon="material-symbols:whatsapp"
+										class="w-full"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<section class="gap-2 md:grid-cols-2 grid my-12">
-					<div class="p-6 bg-white dark:!bg-neutral-100/10 shadow-xl rounded-lg">
-						<h3 class="text-xl opacity-70 dark:text-gray-400">
-							{{ $t("dashboard.hotel.description_section") }}
-						</h3>
-						<p class="opacity-70 text-ellipsis overflow-hidden my-6 dark:text-gray-50">
-							{{ hotel.description }}
-						</p>
-					</div>
-					<div class="p-6 bg-white dark:!bg-neutral-100/10 shadow-xl rounded-lg">
-						<h3 class="text-xl opacity-70 dark:text-gray-400">
-							{{ $t("dashboard.hotel.min_price") }}
-						</h3>
-						<div class="text-3xl text-center my-24 dark:text-gray-50">
-							{{
-								new Intl.NumberFormat(`${locale}-SA`, {
-									style: "currency",
-									currency: "SAR",
-								}).format(hotel.price)
-							}}
-							<div class="flex items-center justify-center my-4">
-								<Icon
-									name="material-symbols:star"
-									v-for="i in 5"
-									:key="i"
-									class="text-lg"
-									:class="{
-										'text-yellow-400': hotel.rate >= i,
-										'text-gray-400': hotel.rate < i,
-									}"
-								/>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section class="p-6 rounded-lg flex gap-6 justify-center wrap">
-					<div
-						v-for="amenity in hotel.amenities"
-						:key="amenity.id"
-						class="flex items-center rounded-3xl p-1 px-4 gap-3 bg-indigo-600/10 dark:bg-indigo-100/70 text-indigo-600"
-					>
-						<Icon :name="amenity.icon" class="text-xl font-bold" />
-						<span>{{ amenity[locale] }}</span>
-					</div>
-				</section>
-				<section
-					class="p-6 bg-white dark:!bg-neutral-100/10 mb-24"
-					v-html="hotel.content"
-				></section>
+				<Swiper
+					v-if="hotel.images && hotel.images.length > 0"
+					:modules="[Autoplay, EffectFade, Pagination]"
+					:slides-per-view="3"
+					:loop="true"
+					:effect="'fade'"
+					:autoplay="{
+						delay: 4000,
+						disableOnInteraction: false,
+					}"
+					:pagination="{
+						clickable: true,
+					}"
+					class="h-full w-full"
+				>
+					<SwiperSlide v-for="(image, index) in hotel.images" :key="index">
+						<nuxt-img
+							:src="image"
+							:alt="`${hotel.name} - صورة ${index + 1}`"
+							class="w-full h-full object-cover"
+						/>
+					</SwiperSlide>
+				</Swiper>
 			</div>
-		</div>
+		</template>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+
 const route = useRoute();
 const { locale, t } = useI18n();
 const id = route.params.id as string;
-
 const {
 	data: hotel,
 	status,
@@ -113,17 +173,11 @@ const {
 			.then((d) => d.data),
 	{ watch: [locale] },
 );
-
-// Global Data
-const { data: globalData, status: globalDataStatus } = useAsyncData("globalData", () =>
-	useApi()
-		.get("/globalData")
-		.then((d) => d.data),
-);
+const { data: globalData, status: globalDataStatus } = useGlobalData();
 
 usePageTitle("hotels.hotel_details");
+
 const goToWhatsapp = () => {
-	console.log(globalData?.value?.mainPhone, hotel.value.name);
 	if (!globalData?.value?.mainPhone || !hotel?.value?.name) {
 		console.error("Hotel data or phone number is missing");
 		return;
@@ -142,7 +196,7 @@ const goToWhatsapp = () => {
 أرغب بالتواصل بشكل عاجل لإتمام الحجز
   `;
 	const url =
-		`https://wa.me/${globalData.value.mainPhone.replace("+", "")}`.replaceAll(" ", "") +
+		`${globalData.value.mainWhasapp.replace("+", "")}`.replaceAll(" ", "") +
 		`?text=${encodeURIComponent(text)}`;
 	window.open(url, "_blank");
 };
@@ -156,3 +210,30 @@ useSeoMeta({
 	keywords: () => hotel.value?.name,
 });
 </script>
+
+<style>
+.swiper-pagination-bullet {
+	@apply bg-white/70 w-3 h-3;
+}
+
+.swiper-pagination-bullet-active {
+	@apply bg-white;
+}
+
+.prose img {
+	@apply rounded-lg shadow-lg;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+	@apply text-gray-800 dark:text-gray-100;
+}
+
+.prose p {
+	@apply text-gray-600 dark:text-gray-300;
+}
+</style>

@@ -39,5 +39,12 @@
 		"walking": "Walking (Less than 500m)",
 		"near": "Near (500m - 1km)",
 		"medium": "Medium (1km - 2km)"
-	}
+	},
+
+	"per_night": "Per night",
+	"amenities": "Amenities",
+	"location": "Location",
+	"book_now": "Book now",
+	"best_price": "Best price",
+	"best_price_desc": "We guarantee you the best possible price"
 }
