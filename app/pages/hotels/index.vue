@@ -58,26 +58,22 @@ const search_data = useState("search_data", () => ({
 	arrival_date: "",
 	return_date: "",
 }));
+
+const computedQuery = computed(() => ({
+	query: {
+		location: { city: search_data.value.city || undefined },
+		price: {
+			$lte: filters.price[1] === Infinity ? undefined : filters.price[1],
+			$gte: filters.price[0] === 0 ? undefined : filters.price[0],
+		},
+		rate: {
+			$lte: filters.rate[1] || undefined,
+			$gte: filters.rate[0] || undefined,
+		},
+	},
+}));
 // Fetch hotels data
-const {
-	data: hotels,
-	status,
-	error,
-	refresh,
-	page,
-	count,
-	finished,
-} = useHotels({
-	location: { city: search_data.value.city },
-	price: {
-		$lt: filters.price[1],
-		$gt: filters.price[0],
-	},
-	rate: {
-		$lt: filters.rate[1],
-		$gt: filters.rate[0],
-	},
-});
+const { data: hotels, status, error, refresh, page, count, finished } = useHotels(computedQuery);
 
 // SEO
 usePageTitle("hotels.title");

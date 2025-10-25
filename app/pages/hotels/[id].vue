@@ -90,6 +90,22 @@
 					<div class="space-y-6">
 						<div class="bg-white dark:!bg-violet-950 rounded-lg shadow p-6 sticky top-4">
 							<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+								{{ $t("dashboard.hotel.rate") }}
+							</h3>
+							<div class="py-2 flex justify-center items-center">
+								<span class="text-xs text-gray-400 flex items-center">
+									<Icon
+										name="ic:sharp-star-rate"
+										v-for="n in 5"
+										:key="n"
+										:class="hotel.rate >= n ? 'text-yellow-500' : 'text-gray-400'"
+										class="text-3xl drop-shadow-lg shadow-black"
+									/>
+								</span>
+							</div>
+
+							<hr class="my-2" />
+							<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
 								{{ $t("hotels.location") }}
 							</h3>
 							<div class="space-y-4">
@@ -352,7 +368,7 @@ const goToWhatsapp = () => {
 \n
 
 أرغب بالتواصل بشكل عاجل لإتمام الحجز
-  `;
+`;
 	const url =
 		`${globalData.value.mainWhasapp.replace("+", "")}`.replaceAll(" ", "") +
 		`?text=${encodeURIComponent(text)}`;

@@ -1,15 +1,15 @@
-import { Query } from "~/types/Query";
+import { getQuery } from "#imports";
 import { IHotelRequest } from "~/types/hotel";
 import { HotelService } from "~~/server/services/hotel";
-
 const hotelService = new HotelService();
+
 export default defineEventHandler(async (event) => {
 	try {
-		const query = getQuery<Query>(event);
+		const query = getQuery(event);
 		const lang = (getCookie(event, "i18n_redirected") as "ar" | "en") || "ar";
-
 		switch (event.method) {
 			case "GET":
+				// @ts-ignore
 				return await hotelService.list(query, lang);
 
 			case "POST":

@@ -54,7 +54,7 @@ const onSubmit = async (...attr: any[]) => {
 	try {
 		isLoading.value = true;
 		emit("submit", ...attr);
-		console.log(dialog.value.animateClick());
+		dialog.value.animateClick();
 
 		attr[1].resetForm();
 		opened.value = false;
