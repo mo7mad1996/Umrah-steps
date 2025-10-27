@@ -38,7 +38,7 @@
 							>
 								<Icon
 									name="mdi:chevron-right"
-									class="text-xs md:text-sm group-hover:translate-x-1 transition-transform rtl:rotate-180"
+									class="text-xs md:text-sm group-hover:-translate-x-1 group-hover:scale-110 transition-transform rtl:rotate-180"
 								/>
 								{{ $t(link.title) }}
 							</NuxtLink>
@@ -153,14 +153,11 @@
 			v-if="globalData?.mainWhatsapp"
 			:href="globalData?.mainWhatsapp"
 			target="_blank"
-			class="fixed bottom-4 md:bottom-6 ltr:left-4 ltr:md:left-6 rtl:right-4 rtl:md:right-6 gap-4 p-3 group bg-green-400/50 hover:bg-green-400/90 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 focus-within:scale-110 z-50"
+			class="fixed bottom-4 md:bottom-6 ltr:left-4 ltr:md:left-6 rtl:right-4 rtl:md:right-6 gap-4 p-3 bg-green-400/50 hover:bg-green-400/90 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 focus-within:scale-110 z-50"
 		>
 			<Icon name="logos:whatsapp-icon" class="text-4xl" />
 
-			<span
-				class="text-gray-800 text-sm absolute group-hover:relative w-0 opacity-0 group-hover:!w-auto group-hover:!opacity-100"
-				>{{ $t("global.whatsapp") }}</span
-			>
+			<span class="text-gray-800 text-sm relative w-auto">{{ $t("global.whatsapp") }}</span>
 		</a>
 	</footer>
 </template>

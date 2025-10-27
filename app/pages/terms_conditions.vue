@@ -1,8 +1,5 @@
 <template>
 	<div class="min-h-screen bg-neutral-50 dark:bg-zinc-950">
-		<!-- Dynamic Background Image -->
-		<GlobalImageMask :src="pageContent?.content?.image || '/images/hotel.jpg'" />
-
 		<!-- Page Header -->
 		<GlobalPageTitle
 			:title="$t('global.terms_conditions.title')"

@@ -4,38 +4,31 @@
 			{{ $t("global.user_agreement.title") }}
 		</h3>
 
-		<section class="grid md:grid-cols-2 gap-6" v-if="PageContentStatus == 'success'">
-			<!-- Hero Image Section -->
-			<div
-				class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl"
+		<section
+			v-if="PageContentStatus == 'success'"
+			class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 my-4 dark:border-gray-700/20 p-6 shadow-xl"
+		>
+			<Form
+				v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }"
+				v-slot="{ isSubmitting }"
 			>
-				<h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-					<Icon name="solar:gallery-bold" class="text-xl" />
-					{{ $t("dashboard.site_settings.favorites.hero_image") }}
-				</h4>
-				<Form
-					v-bind="{
-						onSubmit: async (d) => {
-							const url = await imgRef.uploadFiles?.call();
-							d.content.image = url[0];
-							await updatePageContent(d);
-						},
-						initialValues: pageContent,
-					}"
-				>
-					<div class="space-y-4">
-						<InputsFile
-							ref="imgRef"
-							name="content.image"
-							:title="$t('dashboard.site_settings.favorites.hero_image')"
-							accept="image/*"
-							path="backgrounds"
-						/>
-						<InputsSubmit :title="$t('global.save')" class="w-full" />
-					</div>
-				</Form>
-			</div>
+				<div class="grid gap-4 md:grid-cols-2">
+					<InputsContentEditor
+						name="content.body.ar"
+						:title="$t('dashboard.site_settings.body_ar')"
+						:placeholder="$t('dashboard.site_settings.body_ar')"
+					/>
+					<InputsContentEditor
+						name="content.body.en"
+						:title="$t('dashboard.site_settings.body_en')"
+						:placeholder="$t('dashboard.site_settings.body_en')"
+					/>
+				</div>
+				<InputsSubmit :is-loading="isSubmitting" />
+			</Form>
+		</section>
 
+		<section v-if="PageContentStatus == 'success'">
 			<!-- SEO Settings -->
 			<div
 				class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/20 p-6 shadow-xl"
@@ -72,30 +65,6 @@
 					</div>
 				</Form>
 			</div>
-		</section>
-
-		<section
-			v-if="PageContentStatus == 'success'"
-			class="rounded-lg backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 my-4 dark:border-gray-700/20 p-6 shadow-xl"
-		>
-			<Form
-				v-bind="{ onSubmit: updatePageContent, initialValues: pageContent }"
-				v-slot="{ isSubmitting }"
-			>
-				<div class="grid gap-4 md:grid-cols-2">
-					<InputsContentEditor
-						name="content.body.ar"
-						:title="$t('dashboard.site_settings.body_ar')"
-						:placeholder="$t('dashboard.site_settings.body_ar')"
-					/>
-					<InputsContentEditor
-						name="content.body.en"
-						:title="$t('dashboard.site_settings.body_en')"
-						:placeholder="$t('dashboard.site_settings.body_en')"
-					/>
-				</div>
-				<InputsSubmit :is-loading="isSubmitting" />
-			</Form>
 		</section>
 	</div>
 </template>

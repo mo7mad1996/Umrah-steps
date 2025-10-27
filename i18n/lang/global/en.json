@@ -16,7 +16,7 @@
 	"cancel": "Cancel",
 	"icon": "Icon",
 	"trusted": "Trusted by",
-	"whatsapp": "Contact via WhatsApp",
+	"whatsapp": "For booking and inquiries",
 	"trusted_by": "Trusted by the Ministry of Commerce and the Saudi Business Center",
 	"license_number": "License Number",
 	"commercial_registration_number": "Commercial Registration Number",
@@ -33,7 +33,7 @@
 		"subtitle": "Please read these terms carefully before using our services."
 	},
 	"user_agreement": {
-		"title": "User Agreement",
-		"subtitle": "Understand your rights and responsibilities as a user of our platform."
+		"title": "Cancellation Policy",
+		"subtitle": "Learn how cancellations work, including your options, conditions, and refund eligibility."
 	}
 }
