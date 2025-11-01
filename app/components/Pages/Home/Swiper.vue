@@ -93,7 +93,7 @@ import "swiper/css";
 
 // setup
 const { locale, localeProperties } = useI18n();
-const { data: hotels, status, error, refresh } = useHotels({ per_page: 5 });
+const { data: hotels, status, error, refresh } = useHotels(ref({ per_page: 15 }));
 
 // data
 const swiperRef = ref<SwiperType>();

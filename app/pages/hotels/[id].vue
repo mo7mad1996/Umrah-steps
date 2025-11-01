@@ -361,17 +361,16 @@ const goToWhatsapp = () => {
 	\n
 كنت أتصفح موقع ${t("global.site_name")} \n
 وأعجبني هذا الفندق:
- ${hotel.value.name}
+ ${hotel.value?.name}
 \n
-رابط الفندق: ${window.location.href}
+رابط الفندق: ${window?.location?.href}
 \n
 \n
 
 أرغب بالتواصل بشكل عاجل لإتمام الحجز
 `;
 	const url =
-		`${globalData.value.mainWhasapp.replace("+", "")}`.replaceAll(" ", "") +
-		`?text=${encodeURIComponent(text)}`;
+		`${globalData.value.mainWhatsapp}`.replaceAll(" ", "") + `?text=${encodeURIComponent(text)}`;
 	window.open(url, "_blank");
 };
 

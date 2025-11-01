@@ -20,15 +20,9 @@
 			/>
 		</div>
 
-		<div class="w-full h-full p-2 flex gap-2 justify-between absolute inset-0">
-			<div
-				class="w-3/4 opacity-0 group-hover:!opacity-100 transition-opacity px-3 py-4 flex flex-col rounded-lg shadow-lg backdrop-blur-lg bg-gray-700/30 text-gray-200 font-medium font-mono"
-			>
-				<h1 class="text-xl font-medium">{{ hotel.name }}</h1>
-				<p class="text-md leading-6 !text-cairo text-blue-300">
-					{{ hotel.description }}
-				</p>
-				<div class="w-full mt-auto flex items-center justify-center">
+		<div class="w-full h-full p-2 flex flex-col gap-2 justify-between absolute inset-0">
+			<div class="flex gap-2 justify-between">
+				<div class="flex items-center justify-center">
 					<span class="text-xs text-gray-400 flex items-center">
 						<Icon
 							name="ic:sharp-star-rate"
@@ -38,18 +32,21 @@
 						/>
 					</span>
 				</div>
-			</div>
-			<div class="h-full flex flex-col justify-between items-end text-white/50" @click.prevent.stop>
-				<div>
-					<div
-						class="p-2 flex gap-2 w-min items-center flex-row-reverse backdrop-blur-lg bg-gray-500/70 rounded-md"
-					>
-						<span class="text-center leading-6 text-blue-100">
-							<Icon class="text-xl" name="material-symbols:location-on"
-						/></span>
-						<span class="text-xs leading-3 text-end">{{ hotel.location.city }}</span>
-					</div>
+
+				<div
+					class="p-2 flex gap-2 items-center flex-row-reverse backdrop-blur-lg bg-gray-500/70 rounded-md"
+				>
+					<span class="text-center text-blue-100 dark:text-blue-300">
+						<Icon class="text-xl" name="material-symbols:location-on" />
+					</span>
+					<span class="text-xs leading-3 text-end">{{ hotel.location.city }}</span>
 				</div>
+			</div>
+
+			<div
+				class="transition-opacity px-3 py-4 flex justify-between rounded-lg shadow-lg backdrop-blur-lg bg-gray-700/30 text-gray-200 font-medium font-mono"
+			>
+				<h1 class="text-xl font-medium">{{ hotel.name }}</h1>
 
 				<button
 					@click="handleFavoriteClick"
@@ -71,6 +68,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useFavorites } from "#imports";
 import type { IHotelResponse } from "~/types/hotel";
 
 const props = defineProps<{ hotel: IHotelResponse }>();

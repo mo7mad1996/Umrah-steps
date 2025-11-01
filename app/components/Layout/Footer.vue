@@ -54,35 +54,43 @@
 					<div class="space-y-2 md:space-y-3">
 						{{ $t("global.site_name") }} {{ $t("global.trusted_by") }}
 					</div>
-					<template v-if="globalDataStatus == 'success'" class="my-2">
-						<NuxtLink
-							external
-							:to="globalData.commercial_registration_link"
-							class="block w-full p-2 my-2"
-						>
-							<NuxtImg class="w-24 block" :src="globalData.commercial_registration" />
-						</NuxtLink>
-
-						<div
-							v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
-							:key="i"
-						>
-							<div>
-								<h1 class="!opacity-60">{{ $t("global." + i) }}</h1>
-								<p class="ps-4">
-									{{ globalData[i] }}
-								</p>
+					<div v-if="globalDataStatus == 'success'" class="my-2 flex gap-4">
+						<div class="flex-1">
+							<div
+								v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
+								:key="i"
+							>
+								<div
+									class="px-2 mb-4 border-s-2 border-transparent hover:border-primary hover:bg-primary/10"
+									v-if="globalData[i]"
+								>
+									<h1 class="!opacity-60 flex items-center">
+										{{ $t("global." + i) }}
+									</h1>
+									<p class="my-1">{{ globalData[i] }}</p>
+								</div>
 							</div>
+
+							<NuxtLink
+								class="text-blue-800 dark:text-blue-400 underline hover:no-underline"
+								external
+								v-if="globalData.commercial_registration_link"
+								:to="globalData.commercial_registration_link"
+								>{{ $t("global.verification_link") }}
+							</NuxtLink>
 						</div>
 
 						<NuxtLink
-							class="text-blue-800 underline hover:no-underline"
 							external
-							v-if="globalData.commercial_registration_link"
 							:to="globalData.commercial_registration_link"
-							>{{ $t("global.verification_link") }}
+							class="block w-32 my-2"
+						>
+							<NuxtImg
+								class="w-full block shadow-lg rounded"
+								:src="globalData.commercial_registration"
+							/>
 						</NuxtLink>
-					</template>
+					</div>
 				</div>
 
 				<!-- Contact Info -->
