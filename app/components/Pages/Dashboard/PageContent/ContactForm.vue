@@ -116,7 +116,7 @@
 					name="commercial_registration_number"
 					:title="$t('global.commercial_registration_number')"
 					:placeholder="$t('global.commercial_registration_number')"
-					icon="streamline:computer-storage-hard-disk-device-disc-drive-computer-disk-electronics-platter-turntable-raid"
+					icon="material-symbols:category"
 				/>
 				<InputsText
 					name="tax_number"

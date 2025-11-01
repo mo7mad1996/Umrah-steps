@@ -66,7 +66,7 @@
 								:key="i"
 							>
 								<div
-									class="px-2 mb-4 border-s-2 border-transparent hover:border-primary hover:bg-primary/10"
+									class="px-2 mb-4 border-s-2 border-transparent hover:border-primary hover:dark:border-white hover:bg-primary/10 hover:dark:bg-white/10"
 									v-if="globalData[i]"
 								>
 									<h1 class="!opacity-60 flex items-center">
