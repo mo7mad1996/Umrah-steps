@@ -46,7 +46,7 @@
 			<div
 				class="transition-opacity px-3 py-4 flex justify-between rounded-lg shadow-lg backdrop-blur-lg bg-gray-700/30 text-gray-200 font-medium font-mono"
 			>
-				<h1 class="text-xl font-medium">{{ hotel.name }}</h1>
+				<h1 class="text-2xl font-bold">{{ hotel.name }}</h1>
 
 				<button
 					@click="handleFavoriteClick"
@@ -60,7 +60,6 @@
 						<Icon v-if="is_fav" name="solar:heart-bold" />
 						<Icon v-else name="ic:sharp-favorite" />
 					</Transition>
-					<!-- <Icon class="font-serif text-white/80" /> -->
 				</button>
 			</div>
 		</div>

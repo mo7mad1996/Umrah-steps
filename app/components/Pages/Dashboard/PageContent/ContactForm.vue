@@ -136,6 +136,12 @@
 					:placeholder="$t('global.commercial_registration_link')"
 					icon="material-symbols:link-rounded"
 				/>
+				<InputsText
+					name="activity_category"
+					:title="$t('global.activity_category')"
+					:placeholder="$t('global.activity_category')"
+					icon="material-symbols:link-rounded"
+				/>
 
 				<InputsFile
 					path="commercial_registration"

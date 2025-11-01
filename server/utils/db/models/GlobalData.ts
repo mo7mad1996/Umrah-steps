@@ -10,6 +10,7 @@ const GlobalDataSchema = new mongoose.Schema(
 		commercial_registration_link: { type: String, default: "" },
 		tax_number: { type: String, default: "" },
 		commercial_registration_number: { type: String, default: "" },
+		activity_category: { type: String, default: "" },
 		license_number: { type: String, default: "" },
 	},
 	{

@@ -6,7 +6,7 @@
 		<GlobalPageTitle class="mt-0" :title="$t('hotels.title')" :subTitle="$t('hotels.subtitle')" />
 
 		<section class="py-8 md:py-12 container mx-auto px-4 md:px-6">
-			<h1 class="text-5xl my-24 max-md:text-3xl my-12 text-gray-800 dark:text-gray-200">
+			<h1 class="text-5xl my-24 max-md:text-3xl max-md:my-12 text-gray-800 dark:text-gray-200">
 				{{ $t("hotels.title") }}:
 			</h1>
 
@@ -38,13 +38,6 @@ const filters = reactive({
 	search: "",
 });
 const { locale } = useI18n();
-const search_data = useState("search_data", () => ({
-	city: "",
-	people: 0,
-	rooms: 0,
-	arrival_date: "",
-	return_date: "",
-}));
 
 // Fetch hotels data
 const { data: hotels, status, error, refresh, page, count, finished } = useHotels();

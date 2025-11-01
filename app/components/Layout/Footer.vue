@@ -57,7 +57,12 @@
 					<div v-if="globalDataStatus == 'success'" class="my-2 flex gap-4">
 						<div class="flex-1">
 							<div
-								v-for="i in ['license_number', 'commercial_registration_number', 'tax_number']"
+								v-for="i in [
+									'license_number',
+									'commercial_registration_number',
+									'tax_number',
+									'activity_category',
+								]"
 								:key="i"
 							>
 								<div
@@ -111,7 +116,10 @@
 							<div class="text-white/80 text-xs md:text-sm">{{ globalData.mainEmail }}</div>
 						</div>
 
-						<div class="flex items-start gap-3" v-if="workHoursStatus == 'success'">
+						<div
+							class="flex items-start gap-3"
+							v-if="workHoursStatus == 'success' && workHours.length"
+						>
 							<Icon
 								name="mdi:clock"
 								class="text-secondary mt-1 flex-shrink-0 text-sm md:text-base"

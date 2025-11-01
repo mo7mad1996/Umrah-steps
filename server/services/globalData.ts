@@ -18,6 +18,7 @@ export class GlobalDataService {
 			license_number: "",
 			tax_number: "",
 			commercial_registration_number: "",
+			activity_category: "",
 		});
 		newData.save();
 	}
