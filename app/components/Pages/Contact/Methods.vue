@@ -33,7 +33,7 @@
 				:key="info.id"
 				:href="info.url"
 				target="_blank"
-				class="bg-white w-40 dark:!bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group block"
+				class="bg-white w-52 dark:!bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group block"
 			>
 				<div
 					class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform"
