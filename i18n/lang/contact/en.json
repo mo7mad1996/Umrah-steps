@@ -7,7 +7,12 @@
 	"methods": {
 		"title": "We are here to serve you",
 		"description": "Choose the most suitable way to contact us",
-		"phone_desc": "You can contact us by phone"
+		"whatsapp": "WhatsApp",
+		"phone_desc": "Call us directly",
+		"whatsapp_desc": "Quick and direct communication",
+		"email_desc": "Contact us by email",
+		"address_desc": "Visit us at our office",
+		"address_value": "Coming soon"
 	},
 	"form": {
 		"title": "Send us a message",

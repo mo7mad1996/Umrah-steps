@@ -10,7 +10,7 @@
 			<!-- Phone -->
 			<a
 				:href="`tel:${globalData.mainPhone}`"
-				v-if="globalData.mainPhone"
+				v-if="globalData?.mainPhone"
 				class="bg-white w-52 dark:!bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group"
 			>
 				<div

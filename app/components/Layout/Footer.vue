@@ -104,7 +104,7 @@
 						{{ $t("contact.title") }}
 					</h3>
 					<div class="space-y-3 md:space-y-4" v-if="globalDataStatus == 'success'">
-						<div class="flex items-center gap-3" v-if="globalData.mainPhone">
+						<div class="flex items-center gap-3" v-if="globalData?.mainPhone">
 							<Icon name="mdi:phone" class="text-secondary flex-shrink-0 text-sm md:text-base" />
 							<div class="text-white/80 text-xs md:text-sm" dir="ltr">
 								{{ globalData.mainPhone }}
