@@ -5,7 +5,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 	const route = useRoute();
 	const router = useRouter();
 	const config = useRuntimeConfig();
-
 	const baseURL = config.public.baseUrl || "/api";
 
 	const api = axios.create({
