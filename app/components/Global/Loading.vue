@@ -1,5 +1,5 @@
 <template>
-	<div class="hint text-center p-5 ltr my-24">{{ $t("global.loading") }}...</div>
+	<div class="hint text-center p-5 ltr py-40">{{ $t("global.loading") }}...</div>
 </template>
 
 <style scoped>
