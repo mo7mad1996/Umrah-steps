@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="mx-auto max-w-4xl text-center bg-white dark:!bg-rose-800/10 shadow rounded-2xl p-4"
+		class="mx-auto my-40 max-w-4xl w-full text-center bg-white dark:!bg-rose-800/10 shadow rounded-2xl p-4"
 		v-if="error && status == 'error'"
 	>
 		<v-icon icon="mdi-alert-circle-outline" class="text-red-500 mb-3" size="100" />
@@ -8,6 +8,7 @@
 			{{ $t("global.error") }}
 		</h3>
 		<p class="text-sm text-zinc-700 dark:text-zinc-400 my-4">{{ error?.message }}</p>
+		<pre class="text-sm text-zinc-700 dark:text-zinc-400 my-4">{{ error }}</pre>
 		<button
 			v-if="refresh"
 			class="flex gap-2 dark:text-gray-200 items-center rounded-md bg-rose-50 dark:bg-rose-900/70 hover:brightness-90 shadow px-4 py-2 mx-auto my-4"
