@@ -24,11 +24,17 @@
 				<GlobalHotelsFormSearch />
 			</div>
 		</div>
-		<GlobalLoading v-else />
+		<GlobalLoading v-if="'pending' == PageContentStatus" />
+		<GlobalError :error="error" :refresh="refresh" :status="PageContentStatus" />
 	</div>
 </template>
 
 <script lang="ts" setup>
 const { locale } = useI18n();
-const { data: pageContent, status: PageContentStatus } = usePageContent(PagesEnum.HOME);
+const {
+	data: pageContent,
+	status: PageContentStatus,
+	error,
+	refresh,
+} = usePageContent(PagesEnum.HOME);
 </script>
