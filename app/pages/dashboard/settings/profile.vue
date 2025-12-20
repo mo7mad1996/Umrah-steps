@@ -104,6 +104,10 @@
 							/>
 						</Form>
 					</section>
+
+					<template #fallback>
+						<div></div>
+					</template>
 				</ClientOnly>
 
 				<hr />

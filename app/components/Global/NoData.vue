@@ -19,6 +19,10 @@
 					</div>
 				</div>
 			</div>
+
+			<template #fallback>
+				<div></div>
+			</template>
 		</ClientOnly>
 	</div>
 </template>

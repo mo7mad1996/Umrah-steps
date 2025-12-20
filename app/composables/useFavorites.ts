@@ -1,22 +1,20 @@
-// @ts-nocheck
-import { getData, setData } from "nuxt-storage/session-storage";
-
 export const useFavorites = () => {
 	const favorites = useState<string[]>("favorites", () => []);
 
 	const loadFavorites = () => {
 		if (import.meta.client) {
 			try {
-				favorites.value = getData("hotel_favorites");
+				favorites.value = JSON.parse(localStorage.getItem("hotel_favorites") || "[]");
 			} catch (error) {
 				console.error("Error loading favorites:", error);
 				favorites.value = [];
 			}
-		}
+			return [];
+		} else return [];
 	};
 
 	const saveFavorites = () => {
-		setData("hotel_favorites", favorites.value);
+		localStorage.setItem("hotel_favorites", JSON.stringify(favorites.value));
 	};
 
 	const addToFavorites = (hotelId: string) => {
@@ -25,6 +23,7 @@ export const useFavorites = () => {
 			saveFavorites();
 			return true;
 		}
+
 		return false;
 	};
 
@@ -57,7 +56,6 @@ export const useFavorites = () => {
 		saveFavorites();
 	};
 
-	console.log("here");
 	if (import.meta.client && favorites.value.length === 0) {
 		loadFavorites();
 	}

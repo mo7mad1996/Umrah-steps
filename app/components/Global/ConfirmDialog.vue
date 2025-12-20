@@ -21,6 +21,7 @@
 			>
 				{{ content }}
 			</p>
+			<p v-else class="m-0"></p>
 			<hr />
 			<div @click.prevent.stop class="flex gap-3 p-3">
 				<v-spacer />

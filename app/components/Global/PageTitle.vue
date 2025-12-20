@@ -15,8 +15,14 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-	title: string;
-	subTitle?: string;
-}>();
+withDefaults(
+	defineProps<{
+		title?: string;
+		subTitle?: string;
+	}>(),
+	{
+		title: "",
+		subTitle: "",
+	},
+);
 </script>

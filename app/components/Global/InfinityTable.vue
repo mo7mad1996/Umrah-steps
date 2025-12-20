@@ -27,11 +27,17 @@
 				</slot>
 			</template>
 		</div>
+		<div v-else></div>
+
 		<GlobalLoading v-if="status == 'pending'" />
 		<div v-else-if="!finished" v-intersect="getData" class="p-1"></div>
 
 		<GlobalError :error="error" :status="status" :refresh="refresh" />
 		<GlobalNoData :data="data" :status="status" />
+
+		<template #fallback>
+			<div></div>
+		</template>
 	</ClientOnly>
 </template>
 

@@ -19,7 +19,9 @@
 				{{ $t("global.reload") }}
 			</span>
 		</button>
+		<div v-else></div>
 	</div>
+	<div v-else></div>
 </template>
 
 <script setup>

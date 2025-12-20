@@ -16,6 +16,8 @@ export const useApi = () => {
 			put: (url: string, body?: any, options?: any) =>
 				wrapFetch(url, { method: "PUT", body, ...options }),
 			delete: (url: string, options?: any) => wrapFetch(url, { method: "DELETE", ...options }),
+			patch: (url: string, body?: any, options?: any) =>
+				wrapFetch(url, { method: "PATCH", body, ...options }),
 		};
 	}
 
