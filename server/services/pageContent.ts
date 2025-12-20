@@ -2,6 +2,7 @@ import PageContent from "../utils/db/models/PageContent";
 
 export const getPageContent = async (page: string) => {
 	try {
+		console.log(page);
 		let content = await PageContent.findOne({ page });
 
 		if (!content) content = await PageContent.create({ page });
