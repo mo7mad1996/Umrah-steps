@@ -13,7 +13,7 @@ export async function connectDB() {
 		}
 
 		console.log("❕ Connecting to database...");
-
+		console.log(config.db_uri);
 		conn = await mongoose.connect(config.db_uri);
 		console.log("✔ Database connected successfully");
 
