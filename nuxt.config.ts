@@ -85,7 +85,7 @@ export default defineNuxtConfig({
 
 	runtimeConfig: {
 		baseUrl: process.env.NUXT_API_URL,
-		db_uri: process.env.NUXT_DB_URI,
+		db_uri: process.env.MONGODB_URI,
 		mount: process.env.NUXT_MOUNT,
 
 		public: {

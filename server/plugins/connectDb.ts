@@ -8,7 +8,7 @@ export async function connectDB() {
 		if (conn) return conn;
 
 		if (!config.db_uri) {
-			console.warn("⚠️  NUXT_DB_URI is not set. Database connection skipped.");
+			console.warn("⚠️  MONGODB_URI is not set. Database connection skipped.");
 			return null;
 		}
 

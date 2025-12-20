@@ -57,6 +57,7 @@
 		"@iconify-json/solar": "^1.2.4",
 		"@types/jsonwebtoken": "^9.0.10",
 		"@types/qs": "^6.14.0",
+		"baseline-browser-mapping": "^2.9.11",
 		"nuxt-file-storage": "^0.3.0",
 		"sass-embedded": "^1.91.0"
 	}
