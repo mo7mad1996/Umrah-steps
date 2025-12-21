@@ -88,7 +88,7 @@
 					</div>
 
 					<div class="space-y-6">
-						<div class="bg-white dark:!bg-violet-950 rounded-lg shadow p-6 sticky top-4">
+						<div class="bg-white dark:!bg-violet-950 rounded-lg shadow p-6 sticky bottom-4">
 							<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
 								{{ $t("dashboard.hotel.rate") }}
 							</h3>
