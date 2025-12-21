@@ -24,9 +24,7 @@
 				<GlobalHotelsFormSearch />
 			</div>
 		</div>
-		<div v-else class="relative flex-1 flex flex-col"></div>
 		<GlobalLoading v-if="'pending' == PageContentStatus" />
-		<div v-else></div>
 		<GlobalError :error="error" :refresh="refresh" :status="PageContentStatus" />
 	</div>
 </template>
