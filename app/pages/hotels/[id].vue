@@ -208,7 +208,7 @@
 						>
 							<SwiperSlide v-for="(image, index) in hotel.images" :key="index">
 								<div
-									class="aspect-video overflow-hidden cursor-pointer border-transparent ring-emerald-800 transition-all"
+									class="thumb-item aspect-video overflow-hidden cursor-pointer rounded border-2 border-transparent transition-all"
 								>
 									<NuxtImg
 										:src="image"
@@ -390,7 +390,6 @@ useSeoMeta({
 
 <style scoped>
 .thumbs-swiper {
-	height: 100px;
 	box-sizing: border-box;
 }
 
@@ -401,6 +400,14 @@ useSeoMeta({
 
 .thumbs-swiper :deep(.swiper-slide-thumb-active) {
 	opacity: 1;
+}
+
+/* mark the thumbnail matching the slide currently shown in the main swiper.
+   the border sits inside the box and the ring is inset, so neither is clipped
+   by the swiper container's overflow: hidden */
+.thumbs-swiper :deep(.swiper-slide-thumb-active .thumb-item) {
+	border-color: #059669;
+	box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.65);
 }
 
 :deep(.swiper-button-next),
