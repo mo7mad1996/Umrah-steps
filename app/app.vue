@@ -10,7 +10,6 @@
 				<LayoutPageBorders>
 					<v-app>
 						<v-main class="flex flex-col min-h-dvh bg-neutral-100 dark:bg-zinc-700 font-cairo">
-							<SpeedInsights />
 							<NuxtLayout>
 								<NuxtPage />
 							</NuxtLayout>
@@ -24,7 +23,6 @@
 
 <script setup lang="ts">
 import { updateGlobalOptions, globalOptions } from "vue3-toastify";
-import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 
 const { localeProperties, locale, t } = useI18n();
 const { current } = useLocale();
